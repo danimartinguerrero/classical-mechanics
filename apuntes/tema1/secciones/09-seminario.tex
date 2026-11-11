@@ -44,11 +44,11 @@ cilíndricas.
   \item \emph{Cilíndricas: derivadas de la base}. Por \eqref{eq:dcil}
   dividido por $\dd t$:
   \[
-    \dot{\erho}=\dot\varphi\,\ef,\qquad \dot{\ef}=-\dot\varphi\,\erho,\qquad \dot{\kk}=\vb{0}.
+    \duv{e}{\rho}=\dot\varphi\,\ef,\qquad \duv{e}{\varphi}=-\dot\varphi\,\erho,\qquad \dot{\kk}=\vb{0}.
   \]
   \item \emph{Cilíndricas: velocidad}. De $\vb{r}=\rho\,\erho+z\,\kk$,
   \[
-    \vb{v}=\dot\rho\,\erho+\rho\,\dot{\erho}+\dot z\,\kk
+    \vb{v}=\dot\rho\,\erho+\rho\,\duv{e}{\rho}+\dot z\,\kk
     =\dot\rho\,\erho+\rho\dot\varphi\,\ef+\dot z\,\kk .
   \]
   \item \emph{Cilíndricas: aceleración}. Derivando cada término (regla del producto):
@@ -64,12 +64,12 @@ cilíndricas.
   \item \emph{Esféricas: derivadas de la base}. Por \eqref{eq:desf}, o con
   $\vb{\Omega}=\dot\varphi\,\kk+\dot\theta\,\ef$ y $\kk=\cos\theta\,\er-\sin\theta\,\et$:
   \[
-    \dot{\er}=\dot\theta\,\et+\dot\varphi\sin\theta\,\ef,\quad
-    \dot{\et}=-\dot\theta\,\er+\dot\varphi\cos\theta\,\ef,\quad
-    \dot{\ef}=-\dot\varphi\,(\sin\theta\,\er+\cos\theta\,\et).
+    \duv{e}{r}=\dot\theta\,\et+\dot\varphi\sin\theta\,\ef,\quad
+    \duv{e}{\theta}=-\dot\theta\,\er+\dot\varphi\cos\theta\,\ef,\quad
+    \duv{e}{\varphi}=-\dot\varphi\,(\sin\theta\,\er+\cos\theta\,\et).
   \]
   \item \emph{Esféricas: velocidad}. De $\vb{r}=r\,\er$:
-  $\vb{v}=\dot r\,\er+r\,\dot{\er}=\dot r\,\er+r\dot\theta\,\et+r\sin\theta\,\dot\varphi\,\ef$.
+  $\vb{v}=\dot r\,\er+r\,\duv{e}{r}=\dot r\,\er+r\dot\theta\,\et+r\sin\theta\,\dot\varphi\,\ef$.
 
   \item \emph{Esféricas: aceleración}. Tres términos:
   \begin{align*}
