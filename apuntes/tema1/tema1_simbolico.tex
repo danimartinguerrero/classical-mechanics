@@ -1,0 +1,511 @@
+% =====================================================================
+%  Mecánica I · Tema 1 — Desarrollo simbólico (teoría y seminario)
+%  Sólo los desarrollos, para leer los apuntes y copiar las cuentas.
+%  Compilar:  latexmk -lualatex tema1_simbolico.tex
+% =====================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{estilo-oscuro}
+
+\renewcommand{\cabeceraimpar}{Tema 1 · Desarrollo simbólico}
+\renewcommand{\cabecerapar}{Mecánica I}
+\hypersetup{pdftitle={Tema 1. Cinemática de una partícula en el espacio: desarrollo simbólico},
+  pdfauthor={Daniel Martín Guerrero},pdfsubject={Mecánica I}}
+
+% ----- formato propio: secciones «1.» en violeta, pasos «1.» en cian -----
+\titleformat{\section}
+  {\needspace{7\baselineskip}\normalfont\large\bfseries\color{violeta}}
+  {\thesection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{4.2ex plus 1ex}{1.8ex}
+\newcounter{paso}[section]
+\newcommand{\paso}[1]{\par\addvspace{2.2ex}\needspace{4\baselineskip}%
+  \refstepcounter{paso}\noindent{\color{cian}\bfseries\thepaso.\ \ #1}\quad\ignorespaces}
+\newcommand{\prob}[2]{\par\addvspace{3ex}\needspace{5\baselineskip}%
+  \noindent{\color{cian}\bfseries Problema #1.}\ \ {\color{tenue}#2}\nopagebreak}
+\setlength{\parindent}{0pt}
+\allowdisplaybreaks
+
+\begin{document}
+\thispagestyle{plain}
+
+\begin{center}
+{\Large\bfseries Cinemática de una partícula en el espacio\par}
+\vspace{1.2mm}
+{\small\color{tenue}Mecánica I · Tema 1 · \textsc{Desarrollo simbólico}\par}
+\vspace{2mm}
+{\color{regla}\rule{0.35\textwidth}{0.4pt}}
+\end{center}
+
+% =====================================================================
+\section{Coordenadas y base local}
+% =====================================================================
+
+\paso{Levi-Civita y producto mixto.}
+\begin{gather}
+  (\vb{b}\times\vb{c})_{i}=\varepsilon_{ijk}b_{j}c_{k},\qquad
+  \vb{a}\cdot(\vb{b}\times\vb{c})=\varepsilon_{ijk}a_{i}b_{j}c_{k}
+  =\det\begin{pmatrix}a_{1}&a_{2}&a_{3}\\ b_{1}&b_{2}&b_{3}\\ c_{1}&c_{2}&c_{3}\end{pmatrix}\\
+  \resultado{\varepsilon_{kij}\,\varepsilon_{kmn}=\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm}}\\
+  [\vb{a}\times(\vb{b}\times\vb{c})]_{i}=\varepsilon_{kij}\varepsilon_{kmn}a_{j}b_{m}c_{n}
+  =(\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm})a_{j}b_{m}c_{n}\\
+  \Longrightarrow\ \vb{a}\times(\vb{b}\times\vb{c})=\vb{b}(\vb{a}\cdot\vb{c})-\vb{c}(\vb{a}\cdot\vb{b})
+\end{gather}
+
+\paso{Factores de escala.} $\vb{r}=\vb{r}(q^{1},q^{2},q^{3})$:
+\begin{gather}
+  h_{i}=\norm{\pd{\vb{r}}{q^{i}}},\qquad \uv{e}_{i}=\frac{1}{h_{i}}\pd{\vb{r}}{q^{i}},\qquad
+  \uv{e}_{i}\cdot\uv{e}_{j}=\delta_{ij},\qquad \uv{e}_{1}\times\uv{e}_{2}=\uv{e}_{3}\\
+  \dd\vb{r}=\sum_{i}\pd{\vb{r}}{q^{i}}\dd q^{i}=\sum_{i}h_{i}\,\dd q^{i}\,\uv{e}_{i}
+  \ \Longrightarrow\
+  \resultado{\dd s^{2}=h_{1}^{2}(\dd q^{1})^{2}+h_{2}^{2}(\dd q^{2})^{2}+h_{3}^{2}(\dd q^{3})^{2}}
+\end{gather}
+
+\paso{Elementos diferenciales.} $(i,j,k)$ cíclica:
+\begin{gather}
+  \dd\vb{l}_{i}=h_{i}\dd q^{i}\,\uv{e}_{i},\qquad
+  \dd\vb{S}_{i}=\dd\vb{l}_{j}\times\dd\vb{l}_{k}=h_{j}h_{k}\,\dd q^{j}\dd q^{k}\,\uv{e}_{i}\\
+  \dd V=(\dd\vb{l}_{1}\times\dd\vb{l}_{2})\cdot\dd\vb{l}_{3}=h_{1}h_{2}h_{3}\,\dd q^{1}\dd q^{2}\dd q^{3}\\
+  J=\frac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}
+  =\pd{\vb{r}}{q^{1}}\cdot\Bigl(\pd{\vb{r}}{q^{2}}\times\pd{\vb{r}}{q^{3}}\Bigr)\notag\\
+  =h_{1}h_{2}h_{3}\,\uv{e}_{1}\cdot(\uv{e}_{2}\times\uv{e}_{3})=h_{1}h_{2}h_{3}
+\end{gather}
+
+\paso{Cilíndricas.} $x=\rho\cos\varphi$, $y=\rho\sin\varphi$, $z=z$:
+\begin{gather}
+  \pd{\vb{r}}{\rho}=\cos\varphi\,\ii+\sin\varphi\,\jj,\qquad
+  \pd{\vb{r}}{\varphi}=\rho(-\sin\varphi\,\ii+\cos\varphi\,\jj),\qquad
+  \pd{\vb{r}}{z}=\kk\\
+  \resultado{h=(1,\rho,1),\quad \erho=\cos\varphi\,\ii+\sin\varphi\,\jj,\quad \ef=-\sin\varphi\,\ii+\cos\varphi\,\jj}\\
+  \vb{r}=\rho\,\erho+z\,\kk,\qquad
+  \dd\vb{r}=\dd\rho\,\erho+\rho\,\dd\varphi\,\ef+\dd z\,\kk,\qquad
+  \dd V=\rho\,\dd\rho\,\dd\varphi\,\dd z\\
+  \dd\vb{S}_{\rho}=\rho\,\dd\varphi\,\dd z\,\erho,\qquad
+  \dd\vb{S}_{\varphi}=\dd z\,\dd\rho\,\ef,\qquad
+  \dd\vb{S}_{z}=\rho\,\dd\rho\,\dd\varphi\,\kk
+\end{gather}
+
+\paso{Esféricas.} $x=r\sin\theta\cos\varphi$, $y=r\sin\theta\sin\varphi$, $z=r\cos\theta$:
+\begin{gather}
+  \pd{\vb{r}}{r}=\er,\qquad \pd{\vb{r}}{\theta}=r\,\et,\qquad \pd{\vb{r}}{\varphi}=r\sin\theta\,\ef\\
+  \begin{aligned}
+  \er&=\sin\theta\cos\varphi\,\ii+\sin\theta\sin\varphi\,\jj+\cos\theta\,\kk\\
+  \et&=\cos\theta\cos\varphi\,\ii+\cos\theta\sin\varphi\,\jj-\sin\theta\,\kk\\
+  \ef&=-\sin\varphi\,\ii+\cos\varphi\,\jj
+  \end{aligned}
+  \qquad \resultado{h=(1,\,r,\,r\sin\theta)}\\
+  \vb{r}=r\,\er,\qquad
+  \dd\vb{r}=\dd r\,\er+r\,\dd\theta\,\et+r\sin\theta\,\dd\varphi\,\ef,\qquad
+  \dd V=r^{2}\sin\theta\,\dd r\,\dd\theta\,\dd\varphi\\
+  \dd\vb{S}_{r}=r^{2}\sin\theta\,\dd\theta\,\dd\varphi\,\er,\qquad
+  \dd\vb{S}_{\theta}=r\sin\theta\,\dd\varphi\,\dd r\,\et,\qquad
+  \dd\vb{S}_{\varphi}=r\,\dd r\,\dd\theta\,\ef
+\end{gather}
+
+\paso{Derivadas de la base.}
+\begin{gather}
+  \dd\erho=\dd\varphi(-\sin\varphi\,\ii+\cos\varphi\,\jj)=\dd\varphi\,\ef,\qquad
+  \dd\ef=-\dd\varphi(\cos\varphi\,\ii+\sin\varphi\,\jj)=-\dd\varphi\,\erho\\
+  \dd\er=\dd\theta\,\et+\sin\theta\,\dd\varphi\,\ef,\qquad
+  \dd\et=-\dd\theta\,\er+\cos\theta\,\dd\varphi\,\ef\\
+  \dd\ef=-\dd\varphi(\sin\theta\,\er+\cos\theta\,\et)\\
+  \resultado{\dd\uv{e}_{i}=\dd\vb{\Omega}\times\uv{e}_{i},\qquad
+  \dd\vb{\Omega}_{\text{cil}}=\dd\varphi\,\kk,\qquad
+  \dd\vb{\Omega}_{\text{esf}}=\dd\varphi\,\kk+\dd\theta\,\ef}\\
+  \kk=\cos\theta\,\er-\sin\theta\,\et
+\end{gather}
+
+% =====================================================================
+\section{Cinemática}
+% =====================================================================
+
+\paso{Base móvil.}
+\begin{equation}
+  \vb{A}=\sum_{i}A_{i}\uv{e}_{i}\ \Longrightarrow\
+  \od{\vb{A}}{t}=\sum_{i}\dot A_{i}\,\uv{e}_{i}+\sum_{i}A_{i}\,\duv{e}{i},\qquad
+  \duv{e}{i}=\vb{\Omega}\times\uv{e}_{i}
+\end{equation}
+
+\paso{Cilíndricas.} $\duv{e}{\rho}=\dot\varphi\,\ef$, $\duv{e}{\varphi}=-\dot\varphi\,\erho$:
+\begin{gather}
+  \vb{v}=\od{}{t}(\rho\,\erho+z\,\kk)=\dot\rho\,\erho+\rho\dot\varphi\,\ef+\dot z\,\kk\\
+  \vb{a}=\ddot\rho\,\erho+\dot\rho\dot\varphi\,\ef+(\dot\rho\dot\varphi+\rho\ddot\varphi)\ef-\rho\dot\varphi^{2}\erho+\ddot z\,\kk\\
+  \resultado{\vb{a}=(\ddot\rho-\rho\dot\varphi^{2})\,\erho+(\rho\ddot\varphi+2\dot\rho\dot\varphi)\,\ef+\ddot z\,\kk,
+  \qquad a_{\varphi}=\frac{1}{\rho}\od{}{t}(\rho^{2}\dot\varphi)}
+\end{gather}
+
+\paso{Esféricas.} $\duv{e}{r}=\dot\theta\,\et+\dot\varphi\sin\theta\,\ef$,
+$\duv{e}{\theta}=-\dot\theta\,\er+\dot\varphi\cos\theta\,\ef$,
+$\duv{e}{\varphi}=-\dot\varphi(\sin\theta\,\er+\cos\theta\,\et)$:
+\begin{gather}
+  \vb{v}=\dot r\,\er+r\,\duv{e}{r}=\dot r\,\er+r\dot\theta\,\et+r\sin\theta\,\dot\varphi\,\ef\\
+  \resultado{
+  \begin{aligned}
+  a_{r}&=\ddot r-r\dot\theta^{2}-r\sin^{2}\theta\,\dot\varphi^{2}\\
+  a_{\theta}&=r\ddot\theta+2\dot r\dot\theta-r\sin\theta\cos\theta\,\dot\varphi^{2}
+           =\tfrac1r\tfrac{\dd}{\dd t}(r^{2}\dot\theta)-r\sin\theta\cos\theta\,\dot\varphi^{2}\\
+  a_{\varphi}&=r\sin\theta\,\ddot\varphi+2\dot r\dot\varphi\sin\theta+2r\dot\theta\dot\varphi\cos\theta
+           =\tfrac{1}{r\sin\theta}\tfrac{\dd}{\dd t}(r^{2}\sin^{2}\theta\,\dot\varphi)
+  \end{aligned}}
+\end{gather}
+
+% =====================================================================
+\section{Triedro de Frenet}
+% =====================================================================
+
+\paso{Longitud de arco.}
+\begin{equation}
+  s(t)=\int_{t_{0}}^{t}\norm{\dot{\vb{r}}}\,\dd t'=\int_{t_{0}}^{t}\sqrt{\dot x^{2}+\dot y^{2}+\dot z^{2}}\,\dd t',
+  \qquad \od{s}{t}=v,\qquad \dd s^{2}=\dd\vb{r}\cdot\dd\vb{r}
+\end{equation}
+
+\paso{Triedro.}
+\begin{equation}
+  \utau=\od{\vb{r}}{s},\qquad \kappa=\norm{\od{\utau}{s}},\qquad \un=\frac{1}{\kappa}\od{\utau}{s},\qquad
+  \ub=\utau\times\un,\qquad \rho_{c}=\frac{1}{\kappa}
+\end{equation}
+
+\paso{Vector unitario.}
+\begin{equation}
+  \uv{a}\cdot\uv{a}=1\ \Longrightarrow\ 0=\od{}{s}(\uv{a}\cdot\uv{a})=2\,\uv{a}\cdot\od{\uv{a}}{s}
+  \ \Longrightarrow\ \uv{a}\perp\uv{a}'
+\end{equation}
+
+\paso{Frenet--Serret.}
+\begin{gather}
+  \ub'=\utau'\times\un+\utau\times\un'=\kappa\,\un\times\un+\utau\times\un'=\utau\times\un'
+  \ \perp\ \utau,\ \ub\ \Longrightarrow\ \ub'=-\tors\,\un\\
+  \utau\cdot\un'=(\utau\cdot\un)'-\utau'\cdot\un=-\kappa,\qquad
+  \un\cdot\un'=0,\qquad
+  \ub\cdot\un'=(\ub\cdot\un)'-\ub'\cdot\un=\tors\\
+  \resultado{\od{}{s}\begin{pmatrix}\utau\\ \un\\ \ub\end{pmatrix}
+  =\begin{pmatrix}0&\kappa&0\\ -\kappa&0&\tors\\ 0&-\tors&0\end{pmatrix}
+  \begin{pmatrix}\utau\\ \un\\ \ub\end{pmatrix},\qquad
+  \od{\uv{u}}{s}=\vb{\omega}\times\uv{u},\quad \vb{\omega}=\tors\,\utau+\kappa\,\ub}
+\end{gather}
+
+\paso{Componentes intrínsecas.}
+\begin{equation}
+  \vb{v}=\od{\vb{r}}{s}\od{s}{t}=v\,\utau,\qquad
+  \vb{a}=\dot v\,\utau+v\od{\utau}{s}\od{s}{t}
+  \ \Longrightarrow\
+  \resultado{\vb{a}=\dot v\,\utau+\kappa v^{2}\,\un,\qquad a_{T}=\dot v,\quad a_{N}=\frac{v^{2}}{\rho_{c}}}
+\end{equation}
+
+\paso{Parámetro arbitrario.}
+\begin{gather}
+  \vb{v}\times\vb{a}=v\,\utau\times(\dot v\,\utau+\kappa v^{2}\,\un)=\kappa v^{3}\,\ub,\qquad
+  \vb{v}\cdot\vb{a}=v\dot v\\
+  \dot{\vb{a}}=(\cdots)\utau+(\cdots)\un+\kappa v^{2}\,\dot{\un},\qquad \dot{\un}\cdot\ub=v\,\tors
+  \ \Longrightarrow\ (\vb{v}\times\vb{a})\cdot\dot{\vb{a}}=\kappa^{2}v^{6}\,\tors\\
+  \resultado{
+  \begin{gathered}
+  \utau=\frac{\vb{v}}{v},\quad
+  \ub=\frac{\vb{v}\times\vb{a}}{\norm{\vb{v}\times\vb{a}}},\quad
+  \un=\ub\times\utau,\\
+  \kappa=\frac{\norm{\vb{v}\times\vb{a}}}{v^{3}},\quad
+  \tors=\frac{(\vb{v}\times\vb{a})\cdot\dot{\vb{a}}}{\norm{\vb{v}\times\vb{a}}^{2}},\quad
+  a_{T}=\frac{\vb{v}\cdot\vb{a}}{v},\quad
+  a_{N}=\frac{\norm{\vb{v}\times\vb{a}}}{v}
+  \end{gathered}}
+\end{gather}
+
+\paso{Circunferencia.} $\theta=s/R$:
+\begin{gather}
+  \vb{r}=R\bigl(\cos\tfrac{s}{R},\sin\tfrac{s}{R}\bigr),\quad
+  \utau=\bigl(-\sin\tfrac{s}{R},\cos\tfrac{s}{R}\bigr),\quad
+  \od{\utau}{s}=-\frac{1}{R}\bigl(\cos\tfrac{s}{R},\sin\tfrac{s}{R}\bigr)\\
+  \Longrightarrow\ \kappa=\frac1R,\qquad a_{N}=\frac{v^{2}}{R}
+\end{gather}
+
+% =====================================================================
+\section{Gradiente y Taylor}
+% =====================================================================
+
+\paso{Diferencial y gradiente.}
+\begin{equation}
+  \dd\Phi=\pd{\Phi}{x}\dd x+\pd{\Phi}{y}\dd y+\pd{\Phi}{z}\dd z=\grad\Phi\cdot\dd\vb{r},
+  \qquad \grad\Phi=\partial_{x}\Phi\,\ii+\partial_{y}\Phi\,\jj+\partial_{z}\Phi\,\kk
+\end{equation}
+
+\paso{Taylor.}
+\begin{gather}
+  f(\vb{q})=\sum_{n=0}^{r}\frac{1}{n!}\Bigl[\Bigl(\sum_{i}\Delta q^{i}\pd{}{q^{i}}\Bigr)^{n}f\Bigr]_{\vb{q}_{0}}
+  +O(\norm{\Delta\vb{q}}^{r+1})\\
+  \sin x\sin y=0+x\cdot0+y\cdot0+\tfrac12\bigl[0+2xy\cos0\cos0+0\bigr]+O(3)=xy+O(3)\\
+  (x-\tfrac{x^{3}}{6}+\cdots)(y-\tfrac{y^{3}}{6}+\cdots)=xy-\tfrac16(x^{3}y+xy^{3})+\cdots
+\end{gather}
+
+\paso{Derivada direccional.} $\dd\vb{r}=\uv{u}\,\dd s$:
+\begin{equation}
+  \od{\Phi}{s}\Big|_{\uv{u}}=\grad\Phi\cdot\uv{u}=\norm{\grad\Phi}\cos\alpha\ \le\ \norm{\grad\Phi},
+  \qquad \Phi=\text{const}\Rightarrow\grad\Phi\cdot\dd\vb{r}=0\Rightarrow\grad\Phi\perp\{\Phi=c\}
+\end{equation}
+
+\paso{Gradiente curvilíneo.}
+\begin{gather}
+  \dd\Phi=\sum_{i}\pd{\Phi}{q^{i}}\dd q^{i}
+  =\grad\Phi\cdot\dd\vb{r}=\sum_{i}G_{i}\,h_{i}\,\dd q^{i}
+  \ \Longrightarrow\ G_{i}=\frac{1}{h_{i}}\pd{\Phi}{q^{i}}\\
+  \resultado{\grad\Phi=\sum_{i}\frac{1}{h_{i}}\pd{\Phi}{q^{i}}\uv{e}_{i}}\\
+  \grad\Phi=\partial_{\rho}\Phi\,\erho+\tfrac{1}{\rho}\partial_{\varphi}\Phi\,\ef+\partial_{z}\Phi\,\kk
+  =\partial_{r}\Phi\,\er+\tfrac1r\partial_{\theta}\Phi\,\et+\tfrac{1}{r\sin\theta}\partial_{\varphi}\Phi\,\ef\\
+  \grad f(r)=f'(r)\,\er=f'(r)\,\frac{\vb{r}}{r}
+\end{gather}
+
+% =====================================================================
+\section{Divergencia, rotacional y laplaciano}
+% =====================================================================
+
+\paso{Continuidad.}
+\begin{gather}
+  \pd{m}{t}=\bigl[(\rho v_{x})(x)-(\rho v_{x})(x+\dd x)\bigr]\dd y\,\dd z+\cdots
+  =-\Bigl[\pd{(\rho v_{x})}{x}+\pd{(\rho v_{y})}{y}+\pd{(\rho v_{z})}{z}\Bigr]\dd V\\
+  m=\rho\,\dd V\ \Longrightarrow\ \resultado{\pd{\rho}{t}+\div(\rho\vb{v})=0}
+\end{gather}
+
+\paso{Divergencia curvilínea.} $\div\vb{A}=\lim\frac{1}{\Delta V}\oint\vb{A}\cdot\dd\vb{S}$:
+\begin{gather}
+  \dd\Phi_{q^{1}}+\dd\Phi_{q^{1}+\dd q^{1}}
+  =-[A_{1}h_{2}h_{3}]_{q^{1}}\dd q^{2}\dd q^{3}
+   +\Bigl\{[A_{1}h_{2}h_{3}]_{q^{1}}+\pd{}{q^{1}}[A_{1}h_{2}h_{3}]\dd q^{1}\Bigr\}\dd q^{2}\dd q^{3}\notag\\
+  =\frac{1}{h_{1}h_{2}h_{3}}\pd{(A_{1}h_{2}h_{3})}{q^{1}}\,\dd V\\
+  \resultado{\div\vb{A}=\frac{1}{h_{1}h_{2}h_{3}}\Bigl[\pd{(A_{1}h_{2}h_{3})}{q^{1}}+\pd{(A_{2}h_{3}h_{1})}{q^{2}}+\pd{(A_{3}h_{1}h_{2})}{q^{3}}\Bigr]}\\
+  \div\vb{A}=\tfrac1\rho\partial_{\rho}(\rho A_{\rho})+\tfrac1\rho\partial_{\varphi}A_{\varphi}+\partial_{z}A_{z}\\
+  \div\vb{A}=\tfrac{1}{r^{2}}\partial_{r}(r^{2}A_{r})+\tfrac{1}{r\sin\theta}\partial_{\theta}(\sin\theta A_{\theta})+\tfrac{1}{r\sin\theta}\partial_{\varphi}A_{\varphi}
+\end{gather}
+
+\paso{Rotacional cartesiano.} Rectángulo $P(x,y)$, $R(x{+}\dd x,y)$, $Q(x{+}\dd x,y{+}\dd y)$, $S(x,y{+}\dd y)$:
+\begin{gather}
+  C_{PRQ}=A_{x}\dd x+\bigl[A_{y}+\partial_{x}A_{y}\dd x\bigr]\dd y,\qquad
+  C_{PSQ}=A_{y}\dd y+\bigl[A_{x}+\partial_{y}A_{x}\dd y\bigr]\dd x\\
+  C_{PRQ}-C_{PSQ}=(\partial_{x}A_{y}-\partial_{y}A_{x})\,\dd x\,\dd y=(\rot\vb{A})\cdot(\dd x\,\dd y\,\kk)\\
+  \resultado{\rot\vb{A}=\begin{vmatrix}\ii&\jj&\kk\\ \partial_{x}&\partial_{y}&\partial_{z}\\ A_{x}&A_{y}&A_{z}\end{vmatrix},
+  \qquad (\rot\vb{A})_{i}=\varepsilon_{ijk}\partial_{j}A_{k}}
+\end{gather}
+
+\paso{Rotacional curvilíneo.}
+\begin{gather}
+  C_{PRQ}-C_{PSQ}=\Bigl[\pd{(A_{2}h_{2})}{q^{1}}-\pd{(A_{1}h_{1})}{q^{2}}\Bigr]\dd q^{1}\dd q^{2}
+  =\frac{1}{h_{1}h_{2}}\Bigl[\pd{(h_{2}A_{2})}{q^{1}}-\pd{(h_{1}A_{1})}{q^{2}}\Bigr]h_{1}h_{2}\,\dd q^{1}\dd q^{2}\\
+  \resultado{\rot\vb{A}=\frac{1}{h_{1}h_{2}h_{3}}
+  \begin{vmatrix}h_{1}\uv{e}_{1}&h_{2}\uv{e}_{2}&h_{3}\uv{e}_{3}\\ \partial_{1}&\partial_{2}&\partial_{3}\\ h_{1}A_{1}&h_{2}A_{2}&h_{3}A_{3}\end{vmatrix}}\\
+  \rot\vb{A}=\frac1\rho\begin{vmatrix}\erho&\rho\,\ef&\kk\\ \partial_{\rho}&\partial_{\varphi}&\partial_{z}\\ A_{\rho}&\rho A_{\varphi}&A_{z}\end{vmatrix},
+  \qquad
+  \rot\vb{A}=\frac{1}{r^{2}\sin\theta}\begin{vmatrix}\er&r\,\et&r\sin\theta\,\ef\\ \partial_{r}&\partial_{\theta}&\partial_{\varphi}\\ A_{r}&rA_{\theta}&r\sin\theta A_{\varphi}\end{vmatrix}
+\end{gather}
+
+\paso{Rotación rígida.} $\vb{v}=\vb{\omega}\times\vb{r}$, $v_{i}=\varepsilon_{ijk}\omega_{j}x_{k}$:
+\begin{gather}
+  \div\vb{v}=\varepsilon_{ijk}\omega_{j}\delta_{ik}=0,\qquad
+  (\rot\vb{v})_{i}=\varepsilon_{kij}\varepsilon_{kmn}\omega_{m}\delta_{jn}=(\delta_{im}\delta_{jj}-\delta_{ij}\delta_{jm})\omega_{m}=3\omega_{i}-\omega_{i}\\
+  \resultado{\rot\vb{v}=2\vb{\omega}}
+\end{gather}
+
+\paso{Laplaciano.} $A_{i}=h_{i}^{-1}\partial_{i}\Phi$ en la divergencia:
+\begin{gather}
+  \resultado{\lap\Phi=\frac{1}{h_{1}h_{2}h_{3}}\sum_{\text{cícl.}}\pd{}{q^{1}}\Bigl(\frac{h_{2}h_{3}}{h_{1}}\pd{\Phi}{q^{1}}\Bigr)}\\
+  \lap\Phi=\tfrac1\rho\partial_{\rho}(\rho\,\partial_{\rho}\Phi)+\tfrac{1}{\rho^{2}}\partial^{2}_{\varphi}\Phi+\partial^{2}_{z}\Phi\\
+  \lap\Phi=\tfrac{1}{r^{2}}\partial_{r}(r^{2}\partial_{r}\Phi)+\tfrac{1}{r^{2}\sin\theta}\partial_{\theta}(\sin\theta\,\partial_{\theta}\Phi)+\tfrac{1}{r^{2}\sin^{2}\theta}\partial^{2}_{\varphi}\Phi,
+  \qquad \lap f(r)=f''+\tfrac{2}{r}f'
+\end{gather}
+
+\paso{Identidades nulas.} Schwarz: $\partial_{i}\partial_{j}=\partial_{j}\partial_{i}$:
+\begin{equation}
+  \div(\rot\vb{A})=\varepsilon_{ijk}\partial_{i}\partial_{j}A_{k}=0,\qquad
+  [\rot(\grad\Phi)]_{i}=\varepsilon_{ijk}\partial_{j}\partial_{k}\Phi=0
+\end{equation}
+
+% =====================================================================
+\section{Integrales y teoremas}
+% =====================================================================
+
+\paso{Integral de línea.}
+\begin{equation}
+  \int_{C}\vb{A}\cdot\dd\vb{r}=\int_{t_{0}}^{t_{1}}\vb{A}(\vb{r}(t))\cdot\dot{\vb{r}}\,\dd t
+  =\int_{P}^{Q}\bigl(A_{1}h_{1}\dd q^{1}+A_{2}h_{2}\dd q^{2}+A_{3}h_{3}\dd q^{3}\bigr)
+\end{equation}
+
+\paso{Circulación.} $\vb{A}=r\sin\theta\,\er+2r\,\ef$, $r=1$, $\theta=\pi/2$:
+\begin{equation}
+  \dd\vb{r}=r\,\dd\varphi\,\ef\ \Longrightarrow\ \vb{A}\cdot\dd\vb{r}=2r^{2}\dd\varphi
+  \ \Longrightarrow\ \Gamma=\int_{0}^{2\pi}2r^{2}\dd\varphi=4\pi
+\end{equation}
+
+\paso{Longitud.} $x=A\cos\omega t$, $y=A\sin\omega t$, $z=vt$:
+\begin{equation}
+  l=\int_{0}^{2\pi}\sqrt{\dot x^{2}+\dot y^{2}+\dot z^{2}}\,\dd t=\int_{0}^{2\pi}\sqrt{(A\omega)^{2}+v^{2}}\,\dd t=2\pi\sqrt{(A\omega)^{2}+v^{2}}
+\end{equation}
+
+\paso{Flujo.}
+\begin{equation}
+  \int_{S}\vb{A}\cdot\dd\vb{S}=\iint_{D}\vb{A}\cdot\Bigl(\pd{\vb{r}}{u}\times\pd{\vb{r}}{v}\Bigr)\dd u\,\dd v,
+  \qquad q^{3}=\text{const}:\ \Phi=\int\!\!\int[A_{3}h_{1}h_{2}]\,\dd q^{1}\dd q^{2}
+\end{equation}
+
+\paso{Cuadrante.}
+\begin{equation}
+  S=\int_{0}^{1}\dd y\int_{0}^{\sqrt{1-y^{2}}}\dd x=\int_{0}^{\pi/2}\cos^{2}u\,\dd u=\frac\pi4,
+  \qquad S=\int_{0}^{1}\dd\rho\int_{0}^{\pi/2}\rho\,\dd\varphi=\frac\pi4
+\end{equation}
+
+\paso{Semiesfera.}
+\begin{gather}
+  V=\int_{0}^{R}r^{2}\dd r\int_{0}^{\pi/2}\sin\theta\,\dd\theta\int_{0}^{2\pi}\dd\varphi=\frac{R^{3}}{3}\cdot1\cdot2\pi=\frac{2\pi}{3}R^{3}\\
+  V=4\int_{0}^{R}\dd x\int_{0}^{a}\sqrt{a^{2}-y^{2}}\,\dd y\notag\\
+  =4\int_{0}^{R}\frac{\pi a^{2}}{4}\dd x=\pi\int_{0}^{R}(R^{2}-x^{2})\,\dd x=\frac{2\pi}{3}R^{3},
+  \qquad a=\sqrt{R^{2}-x^{2}}
+\end{gather}
+
+\paso{Gauss y Stokes.}
+\begin{equation}
+  \resultado{\oint_{\partial V}\vb{A}\cdot\dd\vb{S}=\int_{V}\div\vb{A}\,\dd V,\qquad
+  \oint_{\partial S}\vb{A}\cdot\dd\vb{r}=\int_{S}(\rot\vb{A})\cdot\dd\vb{S}}
+\end{equation}
+
+\paso{Conservativos.}
+\begin{gather}
+  \vb{A}=\grad\Phi\ \Longrightarrow\ \int_{P}^{Q}\vb{A}\cdot\dd\vb{r}=\int_{P}^{Q}\dd\Phi=\Phi(Q)-\Phi(P),\qquad \rot\vb{A}=\rot\grad\Phi=\vb{0}\\
+  \Phi(\vb{r})=\int_{P_{0}}^{\vb{r}}\vb{A}\cdot\dd\vb{r}'\ \Longrightarrow\ \dd\Phi=\vb{A}\cdot\dd\vb{r}\ \Longrightarrow\ \vb{A}=\grad\Phi\\
+  \rot\vb{A}=\vb{0},\ D\ \text{simpl. conexo}:\ \oint_{C}\vb{A}\cdot\dd\vb{r}=\int_{S}(\rot\vb{A})\cdot\dd\vb{S}=0\\
+  \text{Contraejemplo: }\vb{A}=\frac{\ef}{\rho},\quad \rot\vb{A}=\frac{1}{\rho}\partial_{\rho}(\rho A_{\varphi})\,\kk=\vb{0},\quad
+  \oint_{\rho=1}\vb{A}\cdot\dd\vb{r}=\int_{0}^{2\pi}\frac1\rho\,\rho\,\dd\varphi=2\pi
+\end{gather}
+
+\paso{Potencial por la poligonal.}
+\begin{equation}
+  \Phi(x,y,z)=\int_{0}^{x}A_{x}(s,0,0)\,\dd s+\int_{0}^{y}A_{y}(x,s,0)\,\dd s+\int_{0}^{z}A_{z}(x,y,s)\,\dd s
+\end{equation}
+
+% =====================================================================
+\section{Seminario}
+% =====================================================================
+
+\prob{1}{$\vb{v}$ y $\vb{a}$ en cartesianas, cilíndricas y esféricas}
+\begin{gather}
+  \vb{v}=\dot x\,\ii+\dot y\,\jj+\dot z\,\kk,\qquad \vb{a}=\ddot x\,\ii+\ddot y\,\jj+\ddot z\,\kk\\
+  \od{}{t}(\dot\rho\,\erho)=\ddot\rho\,\erho+\dot\rho\dot\varphi\,\ef,\quad
+  \od{}{t}(\rho\dot\varphi\,\ef)=(\dot\rho\dot\varphi+\rho\ddot\varphi)\ef-\rho\dot\varphi^{2}\erho,\quad
+  \od{}{t}(\dot z\,\kk)=\ddot z\,\kk\\
+  \resultado{\vb{v}=\dot\rho\,\erho+\rho\dot\varphi\,\ef+\dot z\,\kk,\qquad
+  \vb{a}=(\ddot\rho-\rho\dot\varphi^{2})\erho+(\rho\ddot\varphi+2\dot\rho\dot\varphi)\ef+\ddot z\,\kk}\\
+  \begin{aligned}
+  \od{}{t}(\dot r\,\er)&=\ddot r\,\er+\dot r\dot\theta\,\et+\dot r\dot\varphi\sin\theta\,\ef\\
+  \od{}{t}(r\dot\theta\,\et)&=(\dot r\dot\theta+r\ddot\theta)\et-r\dot\theta^{2}\er+r\dot\theta\dot\varphi\cos\theta\,\ef\\
+  \od{}{t}(r\sin\theta\,\dot\varphi\,\ef)&=(\dot r\sin\theta\,\dot\varphi+r\cos\theta\,\dot\theta\dot\varphi+r\sin\theta\,\ddot\varphi)\ef
+    -r\sin\theta\,\dot\varphi^{2}(\sin\theta\,\er+\cos\theta\,\et)
+  \end{aligned}\\
+  \resultado{
+  \begin{gathered}
+  \vb{v}=\dot r\,\er+r\dot\theta\,\et+r\sin\theta\,\dot\varphi\,\ef\\
+  \vb{a}=(\ddot r-r\dot\theta^{2}-r\sin^{2}\theta\,\dot\varphi^{2})\er
+  +(r\ddot\theta+2\dot r\dot\theta-r\sin\theta\cos\theta\,\dot\varphi^{2})\et\\
+  +(r\sin\theta\,\ddot\varphi+2\dot r\dot\varphi\sin\theta+2r\dot\theta\dot\varphi\cos\theta)\ef
+  \end{gathered}}
+\end{gather}
+
+\prob{2}{Funciones radiales}
+\begin{gather}
+  r^{2}=x^{2}+y^{2}+z^{2}\Rightarrow 2r\,\partial_{x}r=2x\Rightarrow\grad r=\frac{\vb{r}}{r}\\
+  \resultado{\grad f(r)=f'(r)\grad r=\frac{\vb{r}}{r}\od{f}{r}},\qquad
+  \resultado{\grad r^{n}=n\,r^{n-1}\frac{\vb{r}}{r}=n\,r^{n-2}\,\vb{r}}\\
+  \lap\ln r=\frac{1}{r^{2}}\od{}{r}\Bigl(r^{2}\cdot\frac1r\Bigr)=\frac{1}{r^{2}}\\
+  \div\Bigl(\frac{\vb{r}}{r^{2}}\Bigr)=\frac{\div\vb{r}}{r^{2}}+\vb{r}\cdot\bigl(-2r^{-4}\vb{r}\bigr)=\frac{3}{r^{2}}-\frac{2}{r^{2}}=\resultado{\frac{1}{r^{2}}}
+\end{gather}
+
+\prob{3}{Tobogán $\vb{r}=2t\,\ii+(3-\tfrac12t^{2})\kk$}
+\begin{gather}
+  \resultado{\vb{v}=2\,\ii-t\,\kk,\qquad \vb{a}=-\kk},\qquad v=\sqrt{4+t^{2}}\\
+  t=1:\ \uv{T}=\frac{2\,\ii-\kk}{\sqrt5},\qquad a_{T}=\frac{\vb{v}\cdot\vb{a}}{v}=\frac{t}{\sqrt{4+t^{2}}}=\frac{1}{\sqrt5}\\
+  a_{N}\uv{N}=\vb{a}-a_{T}\uv{T}=-\kk-\frac{2\,\ii-\kk}{5}=-\frac25\,\ii-\frac45\,\kk\notag\\
+  \Longrightarrow\ a_{N}=\frac{2}{\sqrt5},\quad \resultado{\uv{N}=-\frac{\ii+2\,\kk}{\sqrt5}},\quad \uv{B}=\jj\\
+  \vb{v}\times\vb{a}=\begin{vmatrix}\ii&\jj&\kk\\2&0&-t\\0&0&-1\end{vmatrix}=2\,\jj\notag\\
+  \resultado{\kappa=\frac{2}{(4+t^{2})^{3/2}},\quad \kappa(1)=\frac{2}{5\sqrt5},\quad R_{c}(1)=\frac{5\sqrt5}{2}\simeq5{,}59}\\
+  \resultado{a_{T}=\frac{t}{\sqrt{4+t^{2}}},\qquad a_{N}=\kappa v^{2}=\frac{2}{\sqrt{4+t^{2}}}},\qquad a_{T}^{2}+a_{N}^{2}=1=\norm{\vb{a}}^{2}
+\end{gather}
+
+\prob{4}{Cilíndricas parabólicas $x=\tfrac12(u^{2}-v^{2})$, $y=uv$, $z=z$}
+\begin{gather}
+  \pd{\vb{r}}{u}=u\,\ii+v\,\jj,\qquad \pd{\vb{r}}{v}=-v\,\ii+u\,\jj,\qquad \pd{\vb{r}}{z}=\kk,\qquad
+  \partial_{u}\vb{r}\cdot\partial_{v}\vb{r}=-uv+vu=0\\
+  \resultado{h_{u}=h_{v}=\sqrt{u^{2}+v^{2}},\quad h_{z}=1},\qquad
+  \uv{e}_{u}=\frac{u\,\ii+v\,\jj}{\sqrt{u^{2}+v^{2}}},\quad \uv{e}_{v}=\frac{-v\,\ii+u\,\jj}{\sqrt{u^{2}+v^{2}}}\\
+  \resultado{\grad=\frac{1}{\sqrt{u^{2}+v^{2}}}\bigl(\uv{e}_{u}\,\partial_{u}+\uv{e}_{v}\,\partial_{v}\bigr)+\kk\,\partial_{z}}\\
+  \dd\vb{l}_{u}=\sqrt{u^{2}+v^{2}}\,\dd u\,\uv{e}_{u},\quad
+  \dd\vb{l}_{v}=\sqrt{u^{2}+v^{2}}\,\dd v\,\uv{e}_{v},\quad
+  \dd\vb{l}_{z}=\dd z\,\kk\\
+  \dd\vb{S}_{u}=\sqrt{u^{2}+v^{2}}\,\dd v\,\dd z\,\uv{e}_{u},\quad
+  \dd\vb{S}_{v}=\sqrt{u^{2}+v^{2}}\,\dd z\,\dd u\,\uv{e}_{v},\quad
+  \dd\vb{S}_{z}=(u^{2}+v^{2})\,\dd u\,\dd v\,\kk\\
+  \resultado{\dd V=(u^{2}+v^{2})\,\dd u\,\dd v\,\dd z},\qquad
+  \frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}u&-v\\ v&u\end{vmatrix}=u^{2}+v^{2}
+\end{gather}
+
+\prob{5}{Potencial de $\vb{A}=2xy\,\ii+(x^{2}+2yz^{3})\jj+3y^{2}z^{2}\kk$}
+\begin{gather}
+  \rot\vb{A}=(6yz^{2}-6yz^{2})\ii+(0-0)\jj+(2x-2x)\kk=\vb{0}\\
+  \partial_{x}\Phi=2xy\Rightarrow\Phi=x^{2}y+g(y,z),\qquad
+  x^{2}+\partial_{y}g=x^{2}+2yz^{3}\Rightarrow g=y^{2}z^{3}+h(z),\qquad
+  h'(z)=0\\
+  \resultado{\Phi=x^{2}y+y^{2}z^{3}+C},\qquad
+  \int_{0}^{x}0\,\dd s+\int_{0}^{y}x^{2}\,\dd s+\int_{0}^{z}3y^{2}s^{2}\,\dd s=x^{2}y+y^{2}z^{3}
+\end{gather}
+
+\prob{6}{Identidades nulas}
+\begin{gather}
+  \div(\rot\vb{A})=\partial_{i}(\varepsilon_{ijk}\partial_{j}A_{k})=\varepsilon_{ijk}\partial_{i}\partial_{j}A_{k}=S,\qquad
+  S\overset{i\leftrightarrow j}{=}\varepsilon_{jik}\partial_{j}\partial_{i}A_{k}=-S\ \Rightarrow\ \resultado{S=0}\\
+  \partial_{x}(\partial_{y}A_{z}-\partial_{z}A_{y})+\partial_{y}(\partial_{z}A_{x}-\partial_{x}A_{z})+\partial_{z}(\partial_{x}A_{y}-\partial_{y}A_{x})=0\\
+  [\rot(\grad\Phi)]_{i}=\varepsilon_{ijk}\partial_{j}\partial_{k}\Phi=0,\qquad
+  [\rot(\grad\Phi)]_{x}=\partial_{y}\partial_{z}\Phi-\partial_{z}\partial_{y}\Phi=0
+\end{gather}
+
+\prob{7}{Hélice $\vb{r}=A\cos\theta\,\ii+A\sin\theta\,\jj+\tfrac{b}{2\pi}\theta\,\kk$, $c=b/2\pi$}
+\begin{gather}
+  \vb{v}=\dot\theta\,(-A\sin\theta,\,A\cos\theta,\,c),\qquad v=\dot\theta\sqrt{A^{2}+c^{2}}\\
+  \resultado{\vb{a}=\ddot\theta\,(-A\sin\theta\,\ii+A\cos\theta\,\jj+c\,\kk)-A\dot\theta^{2}(\cos\theta\,\ii+\sin\theta\,\jj)}\\
+  a_{T}=\ddot\theta\sqrt{A^{2}+c^{2}},\qquad a_{N}=A\dot\theta^{2}=\kappa v^{2}\ \Rightarrow\ \kappa=\frac{A}{A^{2}+c^{2}},\qquad \un=-\erho\\
+  \resultado{s(\theta)=\int_{0}^{\theta}\Bigl\lVert\od{\vb{r}}{\theta'}\Bigr\rVert\dd\theta'=\theta\sqrt{A^{2}+\frac{b^{2}}{4\pi^{2}}},
+  \qquad s_{\text{vuelta}}=\sqrt{(2\pi A)^{2}+b^{2}}}
+\end{gather}
+
+\prob{8}{Espiral cónica $\vb{r}=\e^{t}(\cos t,\sin t,1)$, $0\le t\le2$}
+\begin{gather}
+  \dot x=\e^{t}(\cos t-\sin t),\quad \dot y=\e^{t}(\sin t+\cos t),\quad \dot z=\e^{t}\\
+  \dot x^{2}+\dot y^{2}=\e^{2t}\bigl[(\cos t-\sin t)^{2}+(\sin t+\cos t)^{2}\bigr]=2\e^{2t}
+  \ \Rightarrow\ \norm{\dot{\vb{r}}}=\sqrt3\,\e^{t}\\
+  \resultado{s=\int_{0}^{2}\sqrt3\,\e^{t}\,\dd t=\sqrt3\,(\e^{2}-1)\simeq11{,}07}\\
+  \rho=z=\e^{t},\ \varphi=t:\ \dot s^{2}=\dot\rho^{2}+\rho^{2}\dot\varphi^{2}+\dot z^{2}=3\e^{2t}
+\end{gather}
+
+\prob{9}{Triedro de Frenet: circunferencia, elipse, hélice}
+\begin{gather}
+  \vb{r}=R(\cos t,\sin t,0),\qquad \vb{v}\times\vb{a}=R^{2}\kk\\
+  \resultado{\utau=(-\sin t,\cos t,0),\ \un=-(\cos t,\sin t,0),\ \ub=\kk,\ \kappa=\tfrac1R,\ \tors=0}\\[1mm]
+  \vb{r}=(a\cos t,b\sin t,0),\qquad \vb{v}=(-a\sin t,b\cos t,0)\\
+  \vb{a}=(-a\cos t,-b\sin t,0),\qquad \vb{v}\times\vb{a}=ab\,\kk\\
+  \sigma=\sqrt{a^{2}\sin^{2}t+b^{2}\cos^{2}t}\\
+  \resultado{\utau=\frac{(-a\sin t,\,b\cos t,\,0)}{\sigma},\ \un=-\frac{(b\cos t,\,a\sin t,\,0)}{\sigma},\ \ub=\kk,\ \kappa=\frac{ab}{\sigma^{3}},\ \tors=0}\\[1mm]
+  \vb{r}=(R\cos t,R\sin t,ct),\qquad c=\tfrac{b}{2\pi},\qquad L=\sqrt{R^{2}+c^{2}}\\
+  \vb{v}\times\vb{a}=\begin{vmatrix}\ii&\jj&\kk\\-R\sin t&R\cos t&c\\-R\cos t&-R\sin t&0\end{vmatrix}=(Rc\sin t,-Rc\cos t,R^{2})\\
+  \norm{\vb{v}\times\vb{a}}=RL,\qquad (\vb{v}\times\vb{a})\cdot\dot{\vb{a}}=(\vb{v}\times\vb{a})\cdot(R\sin t,-R\cos t,0)=R^{2}c\\
+  \resultado{
+  \begin{gathered}
+  \utau=\frac{(-R\sin t,\,R\cos t,\,c)}{L},\quad \un=-(\cos t,\,\sin t,\,0),\\ \ub=\frac{(c\sin t,\,-c\cos t,\,R)}{L},\\
+  \kappa=\frac{R}{R^{2}+c^{2}}=\frac{4\pi^{2}R}{4\pi^{2}R^{2}+b^{2}},\qquad \tors=\frac{c}{R^{2}+c^{2}}=\frac{2\pi b}{4\pi^{2}R^{2}+b^{2}}
+  \end{gathered}}
+\end{gather}
+
+\prob{10}{Gradientes}
+\begin{gather}
+  \resultado{\grad(x^{2}+y^{2}+z^{2})=2\vb{r}},\qquad
+  \resultado{\grad\frac1r=-\frac{\er}{r^{2}}=-\frac{\vb{r}}{r^{3}}}\\
+  \resultado{\grad(x\cos x+xyz)=(\cos x-x\sin x+yz)\,\ii+xz\,\jj+xy\,\kk}
+\end{gather}
+
+\prob{11}{Factores de escala}
+\begin{gather}
+  \dd x^{2}+\dd y^{2}=(\cos\varphi\,\dd\rho-\rho\sin\varphi\,\dd\varphi)^{2}+(\sin\varphi\,\dd\rho+\rho\cos\varphi\,\dd\varphi)^{2}=\dd\rho^{2}+\rho^{2}\dd\varphi^{2}\\
+  \norm{\partial_{r}\vb{r}}=1,\qquad \norm{\partial_{\theta}\vb{r}}=r,\qquad \norm{\partial_{\varphi}\vb{r}}=r\sin\theta\\
+  \resultado{h_{\text{cart}}=(1,1,1),\qquad h_{\text{cil}}=(1,\rho,1),\qquad h_{\text{esf}}=(1,r,r\sin\theta)}
+\end{gather}
+
+\end{document}
