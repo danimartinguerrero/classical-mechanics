@@ -78,9 +78,12 @@
 \begin{gather}
   h_{i}=\norm{\pd{\vb{r}}{q^{i}}},\qquad \uv{e}_{i}=\frac{1}{h_{i}}\pd{\vb{r}}{q^{i}},\qquad
   \uv{e}_{i}\cdot\uv{e}_{j}=\delta_{ij},\qquad \uv{e}_{1}\times\uv{e}_{2}=\uv{e}_{3}\\
-  \dd\vb{r}=\sum_{i}\pd{\vb{r}}{q^{i}}\dd q^{i}=\sum_{i}h_{i}\,\dd q^{i}\,\uv{e}_{i}
-  \ \Longrightarrow\
-  \resultado{\dd s^{2}=h_{1}^{2}(\dd q^{1})^{2}+h_{2}^{2}(\dd q^{2})^{2}+h_{3}^{2}(\dd q^{3})^{2}}
+  \dd\vb{r}=\sum_{i}\pd{\vb{r}}{q^{i}}\dd q^{i}=\sum_{i}h_{i}\,\dd q^{i}\,\uv{e}_{i}\\
+  \dd s^{2}=\Bigl(\sum_{i}h_{i}\,\dd q^{i}\,\uv{e}_{i}\Bigr)\cdot\Bigl(\sum_{j}h_{j}\,\dd q^{j}\,\uv{e}_{j}\Bigr)
+  =\sum_{i,j}h_{i}h_{j}\,\dd q^{i}\dd q^{j}\,\underbrace{\uv{e}_{i}\cdot\uv{e}_{j}}_{\delta_{ij}}
+  =\sum_{i}h_{i}^{2}(\dd q^{i})^{2}\\
+  \resultado{\dd s^{2}=h_{1}^{2}(\dd q^{1})^{2}+h_{2}^{2}(\dd q^{2})^{2}+h_{3}^{2}(\dd q^{3})^{2}}\\
+  \text{no ortogonal: }\dd s^{2}=g_{ij}\,\dd q^{i}\dd q^{j},\ g_{ij}=\partial_{i}\vb{r}\cdot\partial_{j}\vb{r}
 \end{gather}
 
 \paso{Elementos diferenciales.} $(i,j,k)$ cíclica:

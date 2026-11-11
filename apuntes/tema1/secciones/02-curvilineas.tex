@@ -38,11 +38,40 @@ En un sistema ortogonal,
 \end{proposicion}
 
 \begin{proof}
-Por la regla de la cadena,
-$\dd\vb{r}=\sum_{i}\pd{\vb{r}}{q^{i}}\dd q^{i}=\sum_{i}h_{i}\dd q^{i}\uv{e}_{i}$
-por \eqref{eq:escala}. Al multiplicar escalarmente, los términos cruzados se
-anulan por ortogonalidad.
+\begin{enumerate}
+  \item \emph{Desplazamiento}. Por la regla de la cadena y \eqref{eq:escala},
+  $\dd\vb{r}=\sum_{i}\pd{\vb{r}}{q^{i}}\dd q^{i}=\sum_{i}h_{i}\,\dd q^{i}\,\uv{e}_{i}$.
+  \item \emph{Índices distintos en cada factor} (el índice de suma es mudo):
+  \[
+    \dd\vb{r}=\sum_{i=1}^{3}h_{i}\,\dd q^{i}\,\uv{e}_{i},\qquad
+    \dd\vb{r}=\sum_{j=1}^{3}h_{j}\,\dd q^{j}\,\uv{e}_{j}.
+  \]
+  \item \emph{Producto escalar} (bilinealidad: suma doble de $3\times3=9$ términos):
+  \[
+    \dd s^{2}=\Bigl(\sum_{i=1}^{3}h_{i}\,\dd q^{i}\,\uv{e}_{i}\Bigr)\cdot\Bigl(\sum_{j=1}^{3}h_{j}\,\dd q^{j}\,\uv{e}_{j}\Bigr)
+    =\sum_{i=1}^{3}\sum_{j=1}^{3}h_{i}h_{j}\,\dd q^{i}\dd q^{j}\,(\uv{e}_{i}\cdot\uv{e}_{j}).
+  \]
+  \item \emph{Ortogonalidad}: $\uv{e}_{i}\cdot\uv{e}_{j}=\delta_{ij}$, luego
+  $\dd s^{2}=\sum_{i=1}^{3}\sum_{j=1}^{3}h_{i}h_{j}\,\dd q^{i}\dd q^{j}\,\delta_{ij}$.
+  \item \emph{La delta elimina una suma}: para cada $i$ sólo sobrevive $j=i$
+  (los 6 términos con $i\neq j$ se anulan),
+  \[
+    \dd s^{2}=\sum_{i=1}^{3}h_{i}h_{i}\,\dd q^{i}\dd q^{i}=\sum_{i=1}^{3}h_{i}^{2}\,(\dd q^{i})^{2}
+    =h_{1}^{2}(\dd q^{1})^{2}+h_{2}^{2}(\dd q^{2})^{2}+h_{3}^{2}(\dd q^{3})^{2}.\qedhere
+  \]
+\end{enumerate}
 \end{proof}
+
+\begin{observacion}[Caso no ortogonal: tensor métrico]
+Sin ortogonalidad el paso 3 se queda en
+\[
+  \dd s^{2}=\sum_{i=1}^{3}\sum_{j=1}^{3}g_{ij}\,\dd q^{i}\dd q^{j},\qquad
+  g_{ij}\defeq\pd{\vb{r}}{q^{i}}\cdot\pd{\vb{r}}{q^{j}}=h_{i}h_{j}\,(\uv{e}_{i}\cdot\uv{e}_{j}),
+\]
+con términos cruzados $\dd q^{i}\dd q^{j}$. Un sistema es ortogonal si y sólo
+si la métrica es diagonal, $g_{ij}=h_{i}^{2}\,\delta_{ij}$: por eso basta ver
+que $\dd s^{2}$ no tiene términos cruzados (\cref{prob:11}).
+\end{observacion}
 
 \begin{clave}{Dos maneras de obtener los $h_{i}$}
 \begin{enumerate}[leftmargin=1.4em]
