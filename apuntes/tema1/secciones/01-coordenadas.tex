@@ -61,6 +61,100 @@ $(q^{1}_{P},q^{2}_{P},q^{3}_{P})$.
 \end{itemize}
 \end{definicion}
 
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+% ---------------- (a) espacio de parámetros  ->  (b) espacio físico ----
+\begin{tikzpicture}[scale=1.0]
+  \def\Fs{1.4}   % escala vertical de q^2 en el panel (a)
+  % ---- (a) U ----
+  \foreach \u in {0.5,1.0,1.5,2.0,2.5}{\draw[rosa!75,line width=0.5pt] (\u,0) -- (\u,{\Fs*1.5708});}
+  \foreach \v in {0,0.3927,0.7854,1.1781,1.5708}{\draw[cian!75,line width=0.5pt] (0,{\Fs*\v}) -- (2.5,{\Fs*\v});}
+  \fill[violeta,opacity=0.35] (1.5,{\Fs*0.3927}) rectangle (2.0,{\Fs*0.7854});
+  \draw[eje] (0,0) -- (3.0,0) node[anchor=north,etiq,inner sep=3pt]{$q^{1}$};
+  \draw[eje] (0,0) -- (0,2.65) node[anchor=east,etiq,inner sep=3pt]{$q^{2}$};
+  \draw[vec,cian] (1.5,{\Fs*0.3927}) -- (2.0,{\Fs*0.3927});
+  \draw[vec,rosa] (1.5,{\Fs*0.3927}) -- (1.5,{\Fs*0.7854});
+  \node[punto] at (1.5,{\Fs*0.3927}) {};
+  \node[etiq,anchor=north east,inner sep=1.5pt,fill=fondo] at (1.5,{\Fs*0.3927}) {$P$};
+  \node[peq,anchor=north,inner sep=3pt] at (1.75,0) {$\dd q^{1}$};
+  \node[peq,anchor=west,inner sep=3pt] at (2.5,{\Fs*0.589}) {$\dd q^{2}$};
+  \node[etiq,anchor=south] at (1.25,2.95) {(a) Parámetros $(q^{1},q^{2})\in U$};
+  % ---- flecha r ----
+  \draw[texto!80,line width=0.6pt,-{Stealth[length=6pt]}] (3.3,1.55) to[bend left=25]
+     node[midway,anchor=south,etiq,inner sep=3pt]{$\vb{r}(q^{1},q^{2})$} (5.3,1.55);
+  % ---- (b) D (polares: q^1=rho, q^2=phi) ----
+  \begin{scope}[xshift=5.9cm]
+    \foreach \u in {0.5,1.0,1.5,2.0,2.5}{
+      \draw[rosa!75,line width=0.5pt] (0:\u) arc[start angle=0,end angle=90,radius=\u];}
+    \foreach \v in {0,22.5,45,67.5,90}{\draw[cian!75,line width=0.5pt] (0,0) -- (\v:2.5);}
+    \fill[violeta,opacity=0.35] (22.5:1.5) arc[start angle=22.5,end angle=45,radius=1.5]
+       -- (45:2.0) arc[start angle=45,end angle=22.5,radius=2.0] -- cycle;
+    \draw[eje] (0,0) -- (3.0,0) node[anchor=north,etiq,inner sep=3pt]{$x$};
+    \draw[eje] (0,0) -- (0,2.65) node[anchor=east,etiq,inner sep=3pt]{$y$};
+    \coordinate (P) at (22.5:1.5);
+    \draw[vec,cian] (P) -- ++(22.5:0.95) node[anchor=west,etiq,inner sep=2pt]{$\partial\vb{r}/\partial q^{1}$};
+    \draw[vec,rosa] (P) -- ++(112.5:0.95) node[anchor=south east,etiq,inner sep=1pt,fill=fondo]{$\partial\vb{r}/\partial q^{2}$};
+    \node[punto] at (P) {};
+    \node[etiq,anchor=north,inner sep=3pt,fill=fondo] at (P) {$P$};
+    \draw[ambar,line width=0.7pt,fill=fondo] (0,0) circle (2.2pt);
+    \node[ambar,font=\footnotesize,anchor=north east,inner sep=3pt] at (0,0) {$J=0$};
+    \node[etiq,anchor=south] at (1.25,2.95) {(b) Puntos $\vb{r}\in D$};
+  \end{scope}
+\end{tikzpicture}
+
+\vspace{5mm}
+% ---------------- (c) superficies y curvas coordenadas (cilíndricas) ----
+\tdplotsetmaincoords{60}{118}
+\begin{tikzpicture}[tdplot_main_coords,scale=1.3]
+  \def\rr{1.7}\def\fp{75}\def\zz{1.3}\def\R{2.8}\def\H{2.6}\def\fa{-5}\def\fb{125}
+  % ejes
+  \draw[eje] (0,0,0) -- (3.3,0,0) node[anchor=north east,peq,inner sep=1pt]{$x$};
+  \draw[eje] (0,0,0) -- (0,3.4,0) node[anchor=north west,peq,inner sep=1pt]{$y$};
+  % superficie z = z0 (sector)
+  \fill[ambar,opacity=0.07] (0,0,\zz) -- plot[domain=\fa:\fb,samples=40] ({\R*cos(\x)},{\R*sin(\x)},\zz) -- cycle;
+  \draw[ambar!45!fondo,line width=0.45pt] (0,0,\zz) -- plot[domain=\fa:\fb,samples=40] ({\R*cos(\x)},{\R*sin(\x)},\zz) -- cycle;
+  % superficie rho = rho0 (porción de cilindro)
+  \fill[cian,opacity=0.07] plot[domain=\fa:\fb,samples=40] ({\rr*cos(\x)},{\rr*sin(\x)},0)
+     -- plot[domain=\fb:\fa,samples=40] ({\rr*cos(\x)},{\rr*sin(\x)},\H) -- cycle;
+  \draw[cian!45!fondo,line width=0.45pt] plot[domain=\fa:\fb,samples=40] ({\rr*cos(\x)},{\rr*sin(\x)},0)
+     -- plot[domain=\fb:\fa,samples=40] ({\rr*cos(\x)},{\rr*sin(\x)},\H) -- cycle;
+  % superficie phi = phi0 (semiplano)
+  \fill[violeta,opacity=0.10] (0,0,0) -- ({\R*cos(\fp)},{\R*sin(\fp)},0) -- ({\R*cos(\fp)},{\R*sin(\fp)},\H) -- (0,0,\H) -- cycle;
+  \draw[violeta!50!fondo,line width=0.45pt] (0,0,0) -- ({\R*cos(\fp)},{\R*sin(\fp)},0) -- ({\R*cos(\fp)},{\R*sin(\fp)},\H) -- (0,0,\H);
+  % eje z
+  \draw[eje] (0,0,0) -- (0,0,3.4) node[anchor=south,peq]{$z$};
+  % curvas coordenadas por P (intersecciones dos a dos)
+  \coordinate (P) at ({\rr*cos(\fp)},{\rr*sin(\fp)},\zz);
+  \draw[cian,line width=1.2pt] (0,0,\zz) -- ({\R*cos(\fp)},{\R*sin(\fp)},\zz);
+  \draw[rosa,line width=1.2pt] plot[domain=\fa:\fb,samples=50] ({\rr*cos(\x)},{\rr*sin(\x)},\zz);
+  \draw[ambar,line width=1.2pt] ({\rr*cos(\fp)},{\rr*sin(\fp)},0) -- ({\rr*cos(\fp)},{\rr*sin(\fp)},\H);
+  % tangentes en P
+  \draw[vec,texto,line width=1.0pt] (P) -- ++({0.8*cos(\fp)},{0.8*sin(\fp)},0);
+  \draw[vec,texto,line width=1.0pt] (P) -- ++({-0.8*sin(\fp)},{0.8*cos(\fp)},0);
+  \draw[vec,texto,line width=1.0pt] (P) -- ++(0,0,0.8);
+  \node[punto,pin={[etiq,pin distance=7mm,pin edge={tenue,line width=0.4pt}]-62:{$P$}}] at (P) {};
+  % rótulos de las superficies, en sus bordes libres
+  \node[cian,font=\footnotesize,anchor=south,inner sep=2pt] at ({\rr*cos(\fb)},{\rr*sin(\fb)},\H) {$\rho=\rho_{0}$};
+  \node[violeta,font=\footnotesize,anchor=south west,inner sep=2pt] at ({\R*cos(\fp)},{\R*sin(\fp)},\H) {$\varphi=\varphi_{0}$};
+  \node[ambar,font=\footnotesize,anchor=north,inner sep=3pt] at ({\R*cos(\fa)},{\R*sin(\fa)},\zz) {$z=z_{0}$};
+\end{tikzpicture}
+\caption{El sistema de coordenadas como aplicación. (a)$\to$(b): polares
+$x=q^{1}\cos q^{2}$, $y=q^{1}\sin q^{2}$. La rejilla recta de $U$ se
+transforma en la rejilla curvilínea de $D$: las rectas $q^{2}=\text{const}$
+(cian) son las \emph{curvas $q^{1}$} y las rectas $q^{1}=\text{const}$
+(rosa), las \emph{curvas $q^{2}$}. La celda $\dd q^{1}\dd q^{2}$ (violeta)
+pasa a tener área $\abs{J}\,\dd q^{1}\dd q^{2}$, y sus lados en $P$ son los
+vectores tangentes $\partial\vb{r}/\partial q^{i}$. En el origen todas las
+curvas $q^{2}$ degeneran en un punto: $J=q^{1}=0$ y la asignación deja de ser
+unívoca. (c) En el espacio (cilíndricas): $P$ es la intersección de las tres
+superficies coordenadas $\rho=\rho_{0}$, $\varphi=\varphi_{0}$, $z=z_{0}$; cada
+par se corta en una curva coordenada (radial en cian, circunferencia en rosa,
+vertical en ámbar), y sus tangentes en $P$ (blancas) forman la base local.}
+\label{fig:def-coordenadas}
+\end{figure}
+% ---------------------------------------------------------------------
+
 \begin{ejemplo}[Cartesianas]
 El punto de coordenadas $(1,2,3)$ es la intersección de los planos $x=1$,
 $y=2$, $z=3$; las curvas coordenadas son rectas paralelas a los ejes y los

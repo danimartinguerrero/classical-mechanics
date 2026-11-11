@@ -64,9 +64,14 @@
   \dd\vb{l}_{i}=h_{i}\dd q^{i}\,\uv{e}_{i},\qquad
   \dd\vb{S}_{i}=\dd\vb{l}_{j}\times\dd\vb{l}_{k}=h_{j}h_{k}\,\dd q^{j}\dd q^{k}\,\uv{e}_{i}\\
   \dd V=(\dd\vb{l}_{1}\times\dd\vb{l}_{2})\cdot\dd\vb{l}_{3}=h_{1}h_{2}h_{3}\,\dd q^{1}\dd q^{2}\dd q^{3}\\
-  J=\frac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}
-  =\pd{\vb{r}}{q^{1}}\cdot\Bigl(\pd{\vb{r}}{q^{2}}\times\pd{\vb{r}}{q^{3}}\Bigr)\notag\\
-  =h_{1}h_{2}h_{3}\,\uv{e}_{1}\cdot(\uv{e}_{2}\times\uv{e}_{3})=h_{1}h_{2}h_{3}
+  \partial_{1}\vb{r}\cdot(\partial_{2}\vb{r}\times\partial_{3}\vb{r})
+  =\begin{vmatrix}\partial_{1}x&\partial_{1}y&\partial_{1}z\\ \partial_{2}x&\partial_{2}y&\partial_{2}z\\ \partial_{3}x&\partial_{3}y&\partial_{3}z\end{vmatrix}
+  =\begin{vmatrix}\partial_{1}x&\partial_{2}x&\partial_{3}x\\ \partial_{1}y&\partial_{2}y&\partial_{3}y\\ \partial_{1}z&\partial_{2}z&\partial_{3}z\end{vmatrix}
+  =\frac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}\\
+  \resultado{J=\partial_{1}\vb{r}\cdot(\partial_{2}\vb{r}\times\partial_{3}\vb{r})
+  =h_{1}h_{2}h_{3}\,\uv{e}_{1}\cdot(\uv{e}_{2}\times\uv{e}_{3})=h_{1}h_{2}h_{3}}\\
+  J_{\text{cil}}=\begin{vmatrix}\cos\varphi&-\rho\sin\varphi&0\\ \sin\varphi&\rho\cos\varphi&0\\ 0&0&1\end{vmatrix}=\rho,\qquad
+  J_{\text{esf}}=\er\cdot(r\,\et\times r\sin\theta\,\ef)=r^{2}\sin\theta
 \end{gather}
 
 \paso{Cilíndricas.} $x=\rho\cos\varphi$, $y=\rho\sin\varphi$, $z=z$:

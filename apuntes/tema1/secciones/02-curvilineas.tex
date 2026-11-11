@@ -82,11 +82,47 @@ $J=\dfrac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}=h_{1}h_{2}h_{3}$.
 
 \begin{proof}
 \eqref{eq:dS} y \eqref{eq:dV} son productos vectoriales y mixtos de
-\eqref{eq:dl}, con $\uv{e}_{j}\times\uv{e}_{k}=\uv{e}_{i}$. Para $J$: sus
-columnas son $\partial\vb{r}/\partial q^{i}=h_{i}\uv{e}_{i}$, luego, por
-\eqref{eq:mixto},
-$J=h_{1}h_{2}h_{3}\,\uv{e}_{1}\cdot(\uv{e}_{2}\times\uv{e}_{3})=h_{1}h_{2}h_{3}$.
+\eqref{eq:dl}, con $\uv{e}_{j}\times\uv{e}_{k}=\uv{e}_{i}$. Para $J$:
+\begin{enumerate}
+  \item \emph{Columnas = tangentes.} La columna $i$ de la matriz jacobiana es
+  $\partial_{i}\vb{r}=(\partial_{i}x,\partial_{i}y,\partial_{i}z)$, con
+  $\partial_{i}\equiv\partial/\partial q^{i}$.
+  \item \emph{Producto mixto = determinante} \eqref{eq:mixto}, y
+  $\det M^{\mathsf T}=\det M$:
+  \[
+    \partial_{1}\vb{r}\cdot(\partial_{2}\vb{r}\times\partial_{3}\vb{r})
+    =\det\begin{pmatrix}\partial_{1}x&\partial_{1}y&\partial_{1}z\\
+    \partial_{2}x&\partial_{2}y&\partial_{2}z\\
+    \partial_{3}x&\partial_{3}y&\partial_{3}z\end{pmatrix}
+    =\det\begin{pmatrix}\partial_{1}x&\partial_{2}x&\partial_{3}x\\
+    \partial_{1}y&\partial_{2}y&\partial_{3}y\\
+    \partial_{1}z&\partial_{2}z&\partial_{3}z\end{pmatrix}
+    =\frac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}=J .
+  \]
+  En índices, ambos son $\varepsilon_{jkl}\,\partial_{1}x_{j}\,\partial_{2}x_{k}\,\partial_{3}x_{l}$
+  (fórmula de Leibniz del determinante).
+  \item \emph{Sistema ortogonal.} Con $\partial_{i}\vb{r}=h_{i}\uv{e}_{i}$ y la
+  multilinealidad del producto mixto,
+  $J=h_{1}h_{2}h_{3}\,\uv{e}_{1}\cdot(\uv{e}_{2}\times\uv{e}_{3})=h_{1}h_{2}h_{3}$.
+  \item \emph{Lectura geométrica.} La celda $\dd q^{1}\dd q^{2}\dd q^{3}$ se
+  transforma en el paralelepípedo de aristas $\partial_{i}\vb{r}\,\dd q^{i}$, de
+  volumen $\abs{(\partial_{1}\vb{r}\,\dd q^{1})\cdot(\partial_{2}\vb{r}\,\dd q^{2}\times\partial_{3}\vb{r}\,\dd q^{3})}
+  =\abs{J}\,\dd q^{1}\dd q^{2}\dd q^{3}$.\qedhere
+\end{enumerate}
 \end{proof}
+
+\begin{ejemplo}[Jacobiano de cilíndricas y esféricas, por las dos vías]
+\[
+  \frac{\partial(x,y,z)}{\partial(\rho,\varphi,z)}=
+  \begin{vmatrix}\cos\varphi&-\rho\sin\varphi&0\\ \sin\varphi&\rho\cos\varphi&0\\ 0&0&1\end{vmatrix}
+  =\rho(\cos^{2}\varphi+\sin^{2}\varphi)=\rho
+  =\erho\cdot(\rho\,\ef\times\kk),
+\]
+\[
+  \frac{\partial(x,y,z)}{\partial(r,\theta,\varphi)}
+  =\er\cdot\bigl(r\,\et\times r\sin\theta\,\ef\bigr)=r^{2}\sin\theta\;\er\cdot\er=r^{2}\sin\theta .
+\]
+\end{ejemplo}
 
 % ---------------------------------------------------------------------
 \begin{figure}[ht]
