@@ -110,8 +110,37 @@ $J=\dfrac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}=h_{1}h_{2}h_{3}$.
 \end{proposicion}
 
 \begin{proof}
-\eqref{eq:dS} y \eqref{eq:dV} son productos vectoriales y mixtos de
-\eqref{eq:dl}, con $\uv{e}_{j}\times\uv{e}_{k}=\uv{e}_{i}$. Para $J$:
+\emph{Superficie.} Se usa $\uv{e}_{j}\times\uv{e}_{k}=\sum_{l}\varepsilon_{jkl}\,\uv{e}_{l}$
+(base ortonormal dextrógira, \cref{prop:cruz}).
+\begin{enumerate}
+  \item \emph{Escalares fuera} ($j,k$ fijos, sin suma):
+  \[
+    \dd\vb{l}_{j}\times\dd\vb{l}_{k}
+    =(h_{j}\,\dd q^{j}\,\uv{e}_{j})\times(h_{k}\,\dd q^{k}\,\uv{e}_{k})
+    =h_{j}h_{k}\,\dd q^{j}\dd q^{k}\sum_{l=1}^{3}\varepsilon_{jkl}\,\uv{e}_{l}.
+  \]
+  \item \emph{Sólo sobrevive $l=i$}: con $j\neq k$, el único $l$ con
+  $\varepsilon_{jkl}\neq0$ es el tercer índice, y $\varepsilon_{jki}=\varepsilon_{ijk}$:
+  \[
+    \dd\vb{l}_{j}\times\dd\vb{l}_{k}=\varepsilon_{ijk}\,h_{j}h_{k}\,\dd q^{j}\dd q^{k}\,\uv{e}_{i}.
+  \]
+  \item \emph{Signo}: $(i,j,k)$ cíclica $\Rightarrow\varepsilon_{ijk}=+1$, que da
+  \eqref{eq:dS}. Explícitamente,
+  $\dd\vb{S}_{1}=\varepsilon_{231}h_{2}h_{3}\dd q^{2}\dd q^{3}\uv{e}_{1}$,
+  $\dd\vb{S}_{2}=\varepsilon_{312}h_{3}h_{1}\dd q^{3}\dd q^{1}\uv{e}_{2}$,
+  $\dd\vb{S}_{3}=\varepsilon_{123}h_{1}h_{2}\dd q^{1}\dd q^{2}\uv{e}_{3}$, con los
+  tres $\varepsilon=+1$. En forma compacta,
+  $\dd\vb{S}_{i}=\tfrac12\sum_{j,k}\varepsilon_{ijk}\,\dd\vb{l}_{j}\times\dd\vb{l}_{k}$.
+\end{enumerate}
+\noindent\emph{Volumen.} Para cualquier orden $(a,b,c)$ de los tres elementos,
+\[
+  (\dd\vb{l}_{a}\times\dd\vb{l}_{b})\cdot\dd\vb{l}_{c}
+  =h_{1}h_{2}h_{3}\,\dd q^{1}\dd q^{2}\dd q^{3}\,(\uv{e}_{a}\times\uv{e}_{b})\cdot\uv{e}_{c}
+  =h_{1}h_{2}h_{3}\,\dd q^{1}\dd q^{2}\dd q^{3}\,\varepsilon_{abc},
+\]
+y con $(a,b,c)=(1,2,3)$, $\varepsilon_{123}=1$, se obtiene \eqref{eq:dV}.
+
+\noindent\emph{Jacobiano.}
 \begin{enumerate}
   \item \emph{Columnas = tangentes.} La columna $i$ de la matriz jacobiana es
   $\partial_{i}\vb{r}=(\partial_{i}x,\partial_{i}y,\partial_{i}z)$, con
@@ -139,6 +168,19 @@ $J=\dfrac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}=h_{1}h_{2}h_{3}$.
   =\abs{J}\,\dd q^{1}\dd q^{2}\dd q^{3}$.\qedhere
 \end{enumerate}
 \end{proof}
+
+\begin{observacion}[¿Importa el orden en $\dd V$?]
+Sólo su paridad. Por la última igualdad, cualquier orden \emph{cíclico}
+—$(1,2,3)$, $(2,3,1)$, $(3,1,2)$— da $\varepsilon=+1$; por ejemplo,
+$(\dd\vb{l}_{2}\times\dd\vb{l}_{3})\cdot\dd\vb{l}_{1}$ (la forma de las
+transparencias) da lo mismo. Un orden \emph{anticíclico} —$(2,1,3)$,
+$(1,3,2)$, $(3,2,1)$— da $\varepsilon=-1$. Además
+$\vb{a}\cdot(\vb{b}\times\vb{c})=(\vb{a}\times\vb{b})\cdot\vb{c}$ (ambos valen
+$\varepsilon_{ijk}a_{i}b_{j}c_{k}$), así que el punto y el aspa pueden
+intercambiarse. Como un volumen es positivo, la forma segura es
+$\dd V=\abs{J}\,\dd q^{1}\dd q^{2}\dd q^{3}$, que no depende del orden ni de que
+el sistema sea dextrógiro.
+\end{observacion}
 
 \begin{ejemplo}[Jacobiano de cilíndricas y esféricas, por las dos vías]
 \[
