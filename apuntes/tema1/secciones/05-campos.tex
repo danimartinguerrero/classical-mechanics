@@ -1,0 +1,184 @@
+% =====================================================================
+\section{Campos escalares y vectoriales}
+\label{sec:campos}
+% =====================================================================
+
+\subsection{Campos, diferencial y gradiente}
+
+\begin{definicion}[Campos]
+Un \emph{campo escalar} es una función $\Phi\colon D\subseteq\R^{3}\to\R$,
+$\vb{r}\mapsto\Phi(\vb{r})$; sus \emph{superficies de nivel}
+(equipotenciales) son $\Phi(x,y,z)=\text{const}$. Un \emph{campo vectorial}
+es una aplicación $\vb{A}\colon D\to\R^{3}$; sus \emph{líneas de corriente}
+son las curvas tangentes a $\vb{A}$ en cada punto:
+\begin{equation}
+  \dd\vb{r}\times\vb{A}=\vb{0}
+  \qquad\Longleftrightarrow\qquad
+  \frac{\dd x}{A_{x}}=\frac{\dd y}{A_{y}}=\frac{\dd z}{A_{z}} .
+  \label{eq:lineas-corriente}
+\end{equation}
+\end{definicion}
+
+La \emph{diferencial} de $\Phi$ es la variación entre dos puntos próximos
+$P=\vb{r}$ y $Q=\vb{r}+\dd\vb{r}$. Recorriendo $P\to A\to B\to Q$ paralelamente a
+los ejes y aplicando en cada tramo la definición de derivada parcial,
+\begin{equation}
+  \dd\Phi=\Phi(Q)-\Phi(P)
+  =\Bigl(\pd{\Phi}{x}\Bigr)_{\!y,z}\dd x+\Bigl(\pd{\Phi}{y}\Bigr)_{\!x,z}\dd y+\Bigl(\pd{\Phi}{z}\Bigr)_{\!x,y}\dd z .
+  \label{eq:diferencial}
+\end{equation}
+
+\begin{definicion}[Gradiente]
+\label{def:gradiente}
+El \emph{gradiente} de $\Phi\in\C^{1}(D)$ es el único campo vectorial
+$\grad\Phi$ tal que, para todo desplazamiento $\dd\vb{r}$,
+\begin{equation}
+  \resultado{\dd\Phi=\grad\Phi\cdot\dd\vb{r}} ,
+  \qquad\text{en cartesianas}\qquad
+  \grad\Phi=\pd{\Phi}{x}\ii+\pd{\Phi}{y}\jj+\pd{\Phi}{z}\kk .
+  \label{eq:grad-def}
+\end{equation}
+\end{definicion}
+
+La definición \eqref{eq:grad-def} es \emph{intrínseca}: no depende de las
+coordenadas, y es la que permite escribir $\grad$ en cualquier sistema
+(\cref{subsec:grad-curv}).
+
+\subsection{Teorema de Taylor en varias variables}
+
+\begin{teorema}[Taylor]
+\label{teo:taylor}
+Sea $f\colon\R^{3}\to\R$ de clase $\C^{r}$ en un entorno de
+$\vb{q}_{0}=(q^{1}_{0},q^{2}_{0},q^{3}_{0})$ y $\Delta q^{i}=q^{i}-q^{i}_{0}$.
+Entonces
+\begin{equation}
+  f(\vb{q})=\sum_{n=0}^{r}\frac{1}{n!}
+  \biggl[\Bigl(\sum_{i=1}^{3}\Delta q^{i}\,\pd{}{q^{i}}\Bigr)^{\!n}f\biggr]_{\vb{q}_{0}}
+  +O\bigl(\norm{\Delta\vb{q}}^{r+1}\bigr).
+  \label{eq:taylor}
+\end{equation}
+Vale para cualquier número de variables y, para campos vectoriales,
+componente a componente. El término $n=1$ es la diferencial
+\eqref{eq:diferencial}: $f(\vb{q})\simeq f(\vb{q}_{0})+\grad f\cdot\Delta\vb{q}$.
+\end{teorema}
+
+\begin{ejemplo}[$f(x,y)=\sin x\sin y$ hasta orden 2 en $(0,0)$]
+\begin{align*}
+  f(x,y)&=f(0,0)+x\,f_{x}(0,0)+y\,f_{y}(0,0)
+  +\tfrac{1}{2!}\bigl[x^{2}f_{xx}+2xy\,f_{xy}+y^{2}f_{yy}\bigr]_{(0,0)}+O(3)\\
+  &=0+x\underbrace{\cos0\sin0}_{0}+y\underbrace{\sin0\cos0}_{0}
+  +\tfrac{1}{2}\bigl[0+2xy\cos0\cos0+0\bigr]+O(3)=xy+O(3).
+\end{align*}
+\emph{Comprobación}: con $\sin u=u-\tfrac{u^{3}}{6}+\cdots$,
+$f=(x-\tfrac{x^{3}}{6}+\cdots)(y-\tfrac{y^{3}}{6}+\cdots)=xy-\tfrac{1}{6}(x^{3}y+xy^{3})+\cdots$:
+el primer término no nulo es $xy$ y el siguiente es de orden 4.
+\end{ejemplo}
+
+\subsection{Interpretación geométrica del gradiente}
+
+\begin{proposicion}[Geometría del gradiente]
+\label{prop:geom-grad}
+Sea $\Phi\in\C^{1}$ con $\grad\Phi\neq\vb{0}$ en $P$ y $\uv{u}$ un vector
+unitario. La \emph{derivada direccional} es
+\begin{equation}
+  \od{\Phi}{s}\Big|_{\uv{u}}\defeq\lim_{s\to0}\frac{\Phi(\vb{r}+s\uv{u})-\Phi(\vb{r})}{s}
+  =\grad\Phi\cdot\uv{u}=\norm{\grad\Phi}\cos\alpha ,
+  \label{eq:direccional}
+\end{equation}
+con $\alpha=\angle(\grad\Phi,\uv{u})$. En consecuencia:
+\begin{casos}
+  \item $\grad\Phi$ es \emph{perpendicular} a la superficie de nivel que pasa por $P$;
+  \item $\grad\Phi$ apunta en el sentido en que $\Phi$ \emph{crece};
+  \item $\norm{\grad\Phi}=\max_{\uv{u}}\,\dd\Phi/\dd s$: es la máxima variación de
+        $\Phi$ por unidad de longitud, alcanzada para $\uv{u}\parallel\grad\Phi$.
+\end{casos}
+\end{proposicion}
+
+\begin{proof}
+\eqref{eq:direccional} es \eqref{eq:grad-def} con $\dd\vb{r}=\uv{u}\,\dd s$.
+(i) Si $P,Q$ están en la misma superficie de nivel, $\dd\Phi=0$ y
+$\grad\Phi\cdot\dd\vb{r}=0$ para todo $\dd\vb{r}$ tangente.
+(ii) $\dd\Phi>0\iff\grad\Phi\cdot\uv{u}>0$.
+(iii) $\cos\alpha\le1$, con igualdad sólo si $\alpha=0$.
+\end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=6.4cm,height=6.4cm,axis equal image,
+  xmin=-2.4,xmax=2.4,ymin=-1.9,ymax=1.9,
+  xlabel={$x$},ylabel={$y$},xtick={-2,-1,0,1,2},ytick={-1,0,1},
+  title={(a) $\Phi=x^{2}+2y^{2}$ y $\grad\Phi$}]
+  \foreach \cc/\col in {0.25/azul,1/cian,2.25/verde,4/ambar}{
+    \edef\temp{\noexpand\addplot[\col,line width=0.9pt,domain=0:360,samples=120,smooth]
+      ({sqrt(\cc)*cos(x)},{sqrt(\cc/2)*sin(x)});}\temp}
+  \foreach \t in {0,30,...,330}{
+    \edef\temp{\noexpand\draw[vec,rosa,line width=0.7pt]
+      (axis cs:{cos(\t)},{sin(\t)/sqrt(2)}) --
+      (axis cs:{cos(\t)+0.22*2*cos(\t)},{sin(\t)/sqrt(2)+0.22*4*sin(\t)/sqrt(2)});}\temp}
+\end{axis}
+\end{tikzpicture}\hspace{6mm}%
+\begin{tikzpicture}[scale=1.05]
+  % nivel Phi = c y vector gradiente
+  \draw[cian,line width=1pt] plot[domain=-2.2:2.2,samples=60,smooth] (\x,{0.12*\x*\x});
+  \draw[verde,line width=1pt] plot[domain=-2.4:2.4,samples=60,smooth] (\x,{0.12*\x*\x+1.25});
+  \node[cian,font=\small,anchor=west] at (2.25,0.58) {$\Phi=c$};
+  \node[verde,font=\small,anchor=west] at (2.45,1.95) {$\Phi=c+\dd\Phi$};
+  \coordinate (P) at (0,0);
+  \draw[vec,rosa] (P) -- (0,2.0) node[anchor=south,etiq,inner sep=2pt]{$\grad\Phi$};
+  \draw[vec,ambar] (P) -- (1.55,1.3) node[anchor=west,etiq,inner sep=2pt]{$\uv{u}$};
+  \draw[aux] (-1.6,0) -- (1.6,0);
+  \coordinate (U) at (1.55,1.3); \coordinate (G) at (0,2.0);
+  \pic[draw=texto!80,line width=0.5pt,angle radius=0.65cm,"$\alpha$",
+       angle eccentricity=1.45,font=\small] {angle = U--P--G};
+  \node[punto] at (P) {};
+  \node[etiq,anchor=north,inner sep=3pt] at (P) {$P$};
+  \node[peq,anchor=north] at (-1.25,-0.05) {tangente};
+  \node[etiq,anchor=south] at (0,2.75) {(b) Derivada direccional};
+\end{tikzpicture}
+\caption{(a) Curvas de nivel de $\Phi=x^{2}+2y^{2}$ ($\Phi=\tfrac14,1,\tfrac94,4$)
+y el gradiente $\grad\Phi=(2x,4y)$ sobre la curva $\Phi=1$: siempre normal a
+ella y hacia valores crecientes. (b) Entre dos superficies de nivel
+próximas, $\dd\Phi/\dd s=\norm{\grad\Phi}\cos\alpha$ es máxima en la
+dirección de $\grad\Phi$ y nula en la tangente.}
+\label{fig:gradiente}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\subsection{Gradiente en coordenadas curvilíneas}
+\label{subsec:grad-curv}
+
+\begin{proposicion}[Gradiente en un sistema ortogonal]
+\label{prop:grad-curv}
+\begin{equation}
+  \resultado{\grad\Phi=\frac{1}{h_{1}}\pd{\Phi}{q^{1}}\uv{e}_{1}
+  +\frac{1}{h_{2}}\pd{\Phi}{q^{2}}\uv{e}_{2}
+  +\frac{1}{h_{3}}\pd{\Phi}{q^{3}}\uv{e}_{3}} .
+  \label{eq:grad-curv}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+Por la regla de la cadena,
+$\dd\Phi=\sum_{i}\pd{\Phi}{q^{i}}\dd q^{i}$. Por \eqref{eq:grad-def} y
+\eqref{eq:metrica}, con $\grad\Phi=\sum_{i}G_{i}\uv{e}_{i}$,
+$\dd\Phi=\grad\Phi\cdot\dd\vb{r}=\sum_{i}G_{i}h_{i}\dd q^{i}$. Igualando los
+coeficientes de los $\dd q^{i}$ (independientes), $G_{i}=h_{i}^{-1}\partial\Phi/\partial q^{i}$.
+\end{proof}
+
+Con \cref{tab:sistemas}:
+\begin{align}
+  \text{cilíndricas:}\quad
+  \grad\Phi&=\pd{\Phi}{\rho}\erho+\frac{1}{\rho}\pd{\Phi}{\varphi}\ef+\pd{\Phi}{z}\kk,
+  \label{eq:grad-cil}\\
+  \text{esféricas:}\quad
+  \grad\Phi&=\pd{\Phi}{r}\er+\frac{1}{r}\pd{\Phi}{\theta}\et+\frac{1}{r\sin\theta}\pd{\Phi}{\varphi}\ef .
+  \label{eq:grad-esf}
+\end{align}
+
+\begin{corolario}[Campos radiales]
+\label{cor:radial}
+Si $\Phi=f(r)$, entonces $\grad f(r)=f'(r)\,\er=f'(r)\,\dfrac{\vb{r}}{r}$.
+En particular $\grad r=\er$ y $\grad r^{n}=n\,r^{n-2}\,\vb{r}$.
+\end{corolario}

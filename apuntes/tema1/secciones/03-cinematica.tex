@@ -1,0 +1,85 @@
+% =====================================================================
+\section{Cinemática de la partícula}
+\label{sec:cinematica}
+% =====================================================================
+
+\subsection{Derivada de un vector y vector tangente}
+
+\begin{definicion}[Vector tangente]
+Sea $\vb{r}=\vb{r}(\lambda)$, $\lambda\in I$, una curva de clase $\C^{1}$. El
+\emph{vector tangente} en $\lambda$ es
+\begin{equation}
+  \vb{t}(\lambda)\defeq\lim_{\Delta\lambda\to0}\frac{\vb{r}(\lambda+\Delta\lambda)-\vb{r}(\lambda)}{\Delta\lambda}
+  =\od{\vb{r}}{\lambda}.
+\end{equation}
+En la base fija, la derivada actúa componente a componente:
+$\od{\vb{r}}{\lambda}=\od{x}{\lambda}\ii+\od{y}{\lambda}\jj+\od{z}{\lambda}\kk$.
+\end{definicion}
+
+Con $\lambda=t$ el vector tangente es la velocidad; con $\lambda=s$ (longitud
+de arco, \cref{sec:frenet}) es unitario, $\utau=\dd\vb{r}/\dd s=\vb{v}/v$.
+
+\begin{clave}{Regla operativa}
+En una base \emph{móvil} la derivada actúa también sobre los vectores de la
+base: si $\vb{A}=\sum_{i}A_{i}\uv{e}_{i}$,
+\begin{equation}
+  \od{\vb{A}}{t}=\sum_{i}\dot A_{i}\,\uv{e}_{i}+\sum_{i}A_{i}\,\dot{\uv{e}}_{i},
+  \qquad \dot{\uv{e}}_{i}=\vb{\Omega}\times\uv{e}_{i},\quad
+  \vb{\Omega}=\od{\vb{\Omega}}{t}\ \text{de \eqref{eq:omega-base}}.
+  \label{eq:derivada-movil}
+\end{equation}
+\end{clave}
+
+\subsection{Velocidad y aceleración en las tres bases}
+
+\begin{proposicion}[Velocidad y aceleración]
+\label{prop:va}
+Para una partícula de trayectoria $\vb{r}(t)$:
+\begin{enumerate}[label=\textcolor{cian}{(\roman*)},leftmargin=2em]
+  \item \emph{Cartesianas}:
+  \begin{equation}
+    \vb{v}=\dot x\,\ii+\dot y\,\jj+\dot z\,\kk,\qquad
+    \vb{a}=\ddot x\,\ii+\ddot y\,\jj+\ddot z\,\kk .
+  \end{equation}
+  \item \emph{Cilíndricas}:
+  \begin{equation}
+    \vb{v}=\dot\rho\,\erho+\rho\dot\varphi\,\ef+\dot z\,\kk,\qquad
+    \vb{a}=(\ddot\rho-\rho\dot\varphi^{2})\,\erho
+    +(\rho\ddot\varphi+2\dot\rho\dot\varphi)\,\ef+\ddot z\,\kk .
+    \label{eq:va-cil}
+  \end{equation}
+  \item \emph{Esféricas}:
+  \begin{equation}
+    \begin{aligned}
+    \vb{v}&=\dot r\,\er+r\dot\theta\,\et+r\sin\theta\,\dot\varphi\,\ef,\\
+    \vb{a}&=\bigl(\ddot r-r\dot\theta^{2}-r\sin^{2}\!\theta\,\dot\varphi^{2}\bigr)\er
+     +\bigl(r\ddot\theta+2\dot r\dot\theta-r\sin\theta\cos\theta\,\dot\varphi^{2}\bigr)\et\\
+     &\quad+\bigl(r\sin\theta\,\ddot\varphi+2\dot r\dot\varphi\sin\theta+2r\dot\theta\dot\varphi\cos\theta\bigr)\ef .
+    \end{aligned}
+    \label{eq:va-esf}
+  \end{equation}
+\end{enumerate}
+\end{proposicion}
+
+La demostración es el \cref{prob:1} del seminario
+(\cref{sec:seminario}); conviene rehacerla hasta que sea automática.
+
+\begin{observacion}[Forma «de momento angular»]
+Las componentes azimutales se compactan como derivadas totales:
+\begin{equation}
+  a_{\varphi}^{\text{cil}}=\frac{1}{\rho}\od{}{t}\bigl(\rho^{2}\dot\varphi\bigr),
+  \qquad
+  a_{\theta}^{\text{esf}}=\frac{1}{r}\od{}{t}\bigl(r^{2}\dot\theta\bigr)-r\sin\theta\cos\theta\,\dot\varphi^{2},
+  \qquad
+  a_{\varphi}^{\text{esf}}=\frac{1}{r\sin\theta}\od{}{t}\bigl(r^{2}\sin^{2}\!\theta\,\dot\varphi\bigr).
+\end{equation}
+Si $a_{\varphi}=0$ (fuerza central), $\rho^{2}\dot\varphi$ se conserva: es la
+semilla de la ley de las áreas (Tema 4).
+\end{observacion}
+
+\begin{observacion}[Interpretación de cada término]
+En \eqref{eq:va-cil}: $-\rho\dot\varphi^{2}$ es la aceleración
+\emph{centrípeta}, $\rho\ddot\varphi$ la \emph{angular} y
+$2\dot\rho\dot\varphi$ la de \emph{Coriolis}, que aparece porque al moverse
+radialmente cambia el radio de giro.
+\end{observacion}

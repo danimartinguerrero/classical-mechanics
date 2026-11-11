@@ -1,0 +1,314 @@
+% =====================================================================
+%  estilo-oscuro.sty — apuntes formalizados (versión oscura)
+%  Compilar con LuaLaTeX.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{estilo-oscuro}[2026/11/11 Apuntes formalizados, tema oscuro]
+
+% ---------------------------------------------------------------------
+%  Idioma, fuentes y microtipografía
+% ---------------------------------------------------------------------
+\RequirePackage[spanish,es-nodecimaldot,es-noshorthands,es-tabla]{babel}
+\RequirePackage{fontspec}            % Latin Modern (por defecto en LuaLaTeX)
+\RequirePackage{microtype}
+\RequirePackage{csquotes}
+
+% ---------------------------------------------------------------------
+%  Página
+% ---------------------------------------------------------------------
+\RequirePackage[a4paper,left=27mm,right=27mm,top=30mm,bottom=28mm,
+                headheight=14pt,headsep=12mm,footskip=12mm]{geometry}
+\RequirePackage{setspace}
+\setstretch{1.07}
+\setlength{\parindent}{1.4em}
+\setlength{\parskip}{0.25ex plus 0.2ex}
+\RequirePackage{xcolor}
+
+% ---------------------------------------------------------------------
+%  Paleta
+% ---------------------------------------------------------------------
+\definecolor{fondo}{HTML}{000000}
+\definecolor{caja}{HTML}{0E1014}
+\definecolor{texto}{HTML}{ECECEC}
+\definecolor{tenue}{HTML}{9CA0A8}
+\definecolor{regla}{HTML}{2E3036}
+\definecolor{rejilla}{HTML}{1C1F24}
+\definecolor{cian}{HTML}{20B4CE}
+\definecolor{violeta}{HTML}{A48BFA}
+\definecolor{rosa}{HTML}{F472B6}
+\definecolor{ambar}{HTML}{FBBF24}
+\definecolor{verde}{HTML}{4ADE80}
+\definecolor{naranja}{HTML}{FB923C}
+\definecolor{azul}{HTML}{60A5FA}
+
+\pagecolor{fondo}
+\color{texto}
+\AtBeginDocument{\pagecolor{fondo}\color{texto}}
+
+% ---------------------------------------------------------------------
+%  Matemáticas
+% ---------------------------------------------------------------------
+\RequirePackage{amsmath,amssymb,mathtools,amsthm}
+\RequirePackage{bm}
+\RequirePackage{esint}                 % \oint, \oiint
+\numberwithin{equation}{section}
+
+% vectores y operadores
+\newcommand{\vb}[1]{\bm{#1}}                          % vector
+\newcommand{\uv}[1]{\hat{\bm{#1}}}                    % vector unitario
+\newcommand{\ii}{\uv{\imath}}                         % î
+\newcommand{\jj}{\uv{\jmath}}                         % ĵ
+\newcommand{\kk}{\uv{k}}                              % k̂
+\newcommand{\er}{\uv{e}_{r}}
+\newcommand{\et}{\uv{e}_{\theta}}
+\newcommand{\ef}{\uv{e}_{\varphi}}
+\newcommand{\erho}{\uv{e}_{\rho}}
+\newcommand{\utau}{\hat{\bm{\tau}}}
+\newcommand{\un}{\uv{n}}
+\newcommand{\ub}{\uv{b}}
+\newcommand{\tors}{\mathcal{T}}                       % torsión
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\od}[2]{\frac{\dd #1}{\dd #2}}
+\newcommand{\nablab}{\bm{\nabla}}
+\newcommand{\grad}{\nablab}
+\renewcommand{\div}{\nablab\cdot}
+\newcommand{\rot}{\nablab\times}
+\newcommand{\lap}{\nabla^{2}}
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\defeq}{\stackrel{\text{def}}{=}}
+\newcommand{\e}{\mathrm{e}}
+
+% ---------------------------------------------------------------------
+%  Títulos de sección
+% ---------------------------------------------------------------------
+\RequirePackage{titlesec}
+\RequirePackage{needspace}
+\titleformat{\section}
+  {\needspace{9\baselineskip}\normalfont\Large\bfseries}
+  {\textcolor{cian}{\thesection}}{0.9em}{}
+  [\vspace{0.6ex}{\color{regla}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{5.2ex plus 1ex minus .4ex}{2.6ex}
+\titleformat{\subsection}
+  {\needspace{6\baselineskip}\normalfont\large\bfseries}
+  {\textcolor{cian}{\thesubsection}}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{3.6ex plus .8ex minus .3ex}{1.6ex}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}
+  {\textcolor{cian}{\thesubsubsection}}{0.7em}{}
+
+% ---------------------------------------------------------------------
+%  Cabeceras
+% ---------------------------------------------------------------------
+\RequirePackage{fancyhdr}
+\newcommand{\cabeceraimpar}{}
+\newcommand{\cabecerapar}{}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RO]{\small\color{tenue}\thepage}
+\fancyhead[LO]{\small\color{tenue}\textsc{\cabeceraimpar}}
+\fancyhead[LE]{\small\color{tenue}\thepage}
+\fancyhead[RE]{\small\color{tenue}\textsc{\cabecerapar}}
+\renewcommand{\headrule}{{\color{regla}\hrule height 0.4pt\vspace{-0.4pt}}}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrule}{}%
+  \fancyfoot[C]{\small\color{tenue}\thepage}}
+
+% ---------------------------------------------------------------------
+%  Listas
+% ---------------------------------------------------------------------
+\RequirePackage{enumitem}
+\setlist{itemsep=0.35ex,topsep=0.6ex}
+\setlist[enumerate,1]{label=\textcolor{cian}{\arabic*.},leftmargin=1.6em}
+\setlist[enumerate,2]{label=\textcolor{cian}{(\alph*)},leftmargin=1.8em}
+\setlist[itemize,1]{label=\textcolor{cian}{\scriptsize$\blacktriangleright$},leftmargin=1.5em}
+\newlist{casos}{enumerate}{1}
+\setlist[casos]{label=\textcolor{cian}{(\roman*)},leftmargin=2em,itemsep=0.4ex}
+
+% ---------------------------------------------------------------------
+%  Figuras y leyendas
+% ---------------------------------------------------------------------
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\DeclareCaptionFont{tenue}{\color{tenue}}
+\DeclareCaptionFont{cian}{\color{cian}}
+\DeclareCaptionLabelFormat{sc}{\textsc{#1}~#2}
+\captionsetup{font={small,tenue},labelfont={cian},labelformat=sc,
+  labelsep=period,width=0.9\textwidth,skip=8pt}
+\captionsetup[table]{position=top,skip=6pt}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\RequirePackage{booktabs,array,tabularx}
+\renewcommand{\arraystretch}{1.25}
+\newcommand{\tabrule}{\arrayrulecolor{regla}}
+\RequirePackage{colortbl}
+\arrayrulecolor{regla}
+
+% ---------------------------------------------------------------------
+%  TikZ / pgfplots: estilo oscuro común
+% ---------------------------------------------------------------------
+\RequirePackage{tikz}
+\RequirePackage{tikz-3dplot}
+\usetikzlibrary{arrows.meta,calc,decorations.markings,patterns,
+  positioning,shapes.geometric,angles,quotes,3d,backgrounds,intersections}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween,groupplots,colormaps}
+
+\tikzset{
+  >={Stealth[length=5pt,width=3.6pt]},
+  vec/.style={-{Stealth[length=6pt,width=4.2pt]},line width=0.95pt},
+  eje/.style={-{Stealth[length=4.5pt,width=3pt]},line width=0.45pt,color=tenue},
+  aux/.style={line width=0.4pt,color=tenue,dash pattern=on 2pt off 2pt},
+  etiq/.style={font=\small,text=texto},
+  peq/.style={font=\footnotesize,text=tenue},
+  punto/.style={circle,fill=texto,inner sep=1.2pt},
+  every picture/.append style={line cap=round,line join=round},
+}
+
+\pgfplotscreateplotcyclelist{oscura}{%
+  {cian,line width=1.1pt},{rosa,line width=1.1pt},
+  {ambar,line width=1.1pt},{violeta,line width=1.1pt},
+  {verde,line width=1.1pt},{naranja,line width=1.1pt}}
+
+\pgfplotsset{
+  oscuro/.style={
+    axis line style={tenue!70,line width=0.4pt},
+    every tick/.style={tenue!70,line width=0.4pt},
+    tick label style={font=\scriptsize,text=tenue},
+    label style={font=\small,text=texto},
+    title style={font=\small,text=texto,yshift=-0.4ex},
+    grid=major,
+    major grid style={rejilla,line width=0.35pt},
+    legend style={fill=caja,draw=regla,text=texto,font=\scriptsize,
+                  rounded corners=1pt,inner sep=2pt},
+    legend cell align=left,
+    cycle list name=oscura,
+    axis background/.style={fill=fondo},
+    tick align=outside,
+    tick style={major tick length=2.5pt},
+    every axis plot/.append style={line join=round},
+  },
+  oscuro3d/.style={
+    oscuro, grid=none, axis lines=center,
+    axis line style={tenue!80,line width=0.4pt,-{Stealth[length=4pt]}},
+    ticks=none,
+  },
+  colormap={arcoiris}{rgb255=(96,165,250) rgb255=(32,180,206)
+    rgb255=(74,222,128) rgb255=(251,191,36) rgb255=(251,146,60)
+    rgb255=(244,114,182) rgb255=(164,139,250)},
+}
+
+% ---------------------------------------------------------------------
+%  Enlaces y referencias cruzadas
+% ---------------------------------------------------------------------
+\RequirePackage{aliascnt}
+\RequirePackage[hidelinks,bookmarksnumbered,pdfencoding=auto]{hyperref}
+\hypersetup{colorlinks=true,linkcolor=cian,citecolor=ambar,urlcolor=cian}
+\RequirePackage[spanish,noabbrev]{cleveref}
+\crefname{table}{tabla}{tablas}\Crefname{table}{Tabla}{Tablas}
+\crefname{figure}{figura}{figuras}\Crefname{figure}{Figura}{Figuras}
+\crefname{section}{sección}{secciones}\crefname{subsection}{apartado}{apartados}
+
+% ---------------------------------------------------------------------
+%  Entornos tipo teorema (tcolorbox)
+% ---------------------------------------------------------------------
+\RequirePackage[most]{tcolorbox}
+\newcounter{thm}[section]
+\renewcommand{\thethm}{\thesection.\arabic{thm}}
+
+\tcbset{
+  base/.style={enhanced,breakable,colback=caja,coltext=texto,
+    boxrule=0.6pt,arc=2pt,outer arc=2pt,
+    left=9pt,right=9pt,top=10pt,bottom=7pt,
+    before skip=3.2ex plus 1ex,after skip=2.6ex plus 1ex,
+    attach boxed title to top left={xshift=6pt,yshift*=-\tcboxedtitleheight/2},
+    boxed title style={boxrule=0pt,arc=2pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt},
+    fonttitle=\sffamily\bfseries\small},
+  definicion/.style={base,colframe=cian,
+    boxed title style={colback=cian},coltitle=black},
+  teorema/.style={base,colframe=violeta,
+    boxed title style={colback=violeta},coltitle=black,fontupper=\itshape},
+  problema/.style={base,colframe=cian!55!regla,
+    boxed title style={colback=caja,colframe=cian,boxrule=0.6pt},coltitle=cian},
+}
+
+% \declararcaja{entorno}{Nombre}{estilo}{nombre-cref}{plural-cref}
+\newcommand{\declararcaja}[5]{%
+  \newaliascnt{#1}{thm}%
+  \crefname{#1}{#4}{#5}\Crefname{#1}{\MakeUppercase #4}{\MakeUppercase #5}%
+  \NewDocumentEnvironment{#1}{o}{%
+    \refstepcounter{#1}%
+    \begin{tcolorbox}[#3,title={#2~\thethm\IfValueT{##1}{\ \mdseries(##1)}}]}%
+    {\end{tcolorbox}}}
+
+\declararcaja{definicion}{Definición}{definicion}{definición}{definiciones}
+\declararcaja{teorema}{Teorema}{teorema}{teorema}{teoremas}
+\declararcaja{proposicion}{Proposición}{teorema}{proposición}{proposiciones}
+\declararcaja{lema}{Lema}{teorema}{lema}{lemas}
+\declararcaja{corolario}{Corolario}{teorema}{corolario}{corolarios}
+
+% entornos «en línea» (sin caja), numerados con el mismo contador
+% \declararlinea{entorno}{Nombre}{formato del nombre}{cref}{plural}
+\newcommand{\declararlinea}[5]{%
+  \newaliascnt{#1}{thm}%
+  \crefname{#1}{#4}{#5}%
+  \NewDocumentEnvironment{#1}{o}{%
+    \par\addvspace{1.6ex}\refstepcounter{#1}%
+    \noindent{#3{#2~\thethm}}\IfValueT{##1}{\ {\color{tenue}(##1)}}.\enspace\ignorespaces}%
+    {\par\addvspace{1.4ex}}}
+
+\declararlinea{ejemplo}{Ejemplo}{\color{cian}\bfseries}{ejemplo}{ejemplos}
+\declararlinea{observacion}{Observación}{\color{violeta}\bfseries\itshape}{observación}{observaciones}
+\declararlinea{notacion}{Notación}{\color{cian}\bfseries}{notación}{notaciones}
+
+% caja de idea clave / método: barra lateral
+\NewDocumentEnvironment{clave}{O{cian}m}{%
+  \begin{tcolorbox}[enhanced,breakable,colback=caja,coltext=texto,
+    frame hidden,boxrule=0pt,arc=0pt,left=10pt,right=10pt,top=7pt,bottom=7pt,
+    before skip=2.4ex,after skip=2.4ex,
+    borderline west={2.2pt}{0pt}{#1}]
+  {\sffamily\bfseries\small\color{#1}#2.}\enspace\ignorespaces}%
+  {\end{tcolorbox}}
+
+% enunciado de problema
+\newcounter{problema}
+\crefname{problema}{problema}{problemas}
+% \begin{problema}{n.º de la hoja}[título]
+\NewDocumentEnvironment{problema}{m o}{%
+  \setcounter{problema}{#1}\addtocounter{problema}{-1}%
+  \refstepcounter{problema}%
+  \begin{tcolorbox}[problema,title={Problema~\theproblema\IfValueT{#2}{\ \mdseries(#2)}}]}%
+  {\end{tcolorbox}}
+
+% demostración y resolución
+\renewcommand{\qedsymbol}{\textcolor{tenue}{\rule{0.62em}{0.62em}}}
+\addto\captionsspanish{\renewcommand{\proofname}{\textcolor{texto}{\bfseries\itshape Demostración}}}
+\NewDocumentEnvironment{resolucion}{}{%
+  \begin{proof}[\textcolor{cian}{\bfseries\itshape Resolución}]}{\end{proof}}
+
+% resultado enmarcado
+\newcommand{\resultado}[1]{%
+  {\setlength{\fboxsep}{5pt}\fcolorbox{tenue}{caja}{$\displaystyle #1$}}}
+
+% etiqueta pequeña sobre llaves
+\newcommand{\nota}[1]{\text{\scriptsize\color{tenue}#1}}
+
+% ---------------------------------------------------------------------
+%  Índice
+% ---------------------------------------------------------------------
+\RequirePackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\Large\bfseries}
+\renewcommand{\cftsecfont}{\bfseries}
+\renewcommand{\cftsecpagefont}{\bfseries\color{cian}}
+\renewcommand{\cftsubsecfont}{\small}
+\renewcommand{\cftsubsecpagefont}{\small\color{tenue}}
+\renewcommand{\cftsecleader}{\color{regla}\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsecleader}{\color{regla}\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{1.2ex}
+\addto\captionsspanish{\renewcommand{\contentsname}{Índice}}
+
+\endinput

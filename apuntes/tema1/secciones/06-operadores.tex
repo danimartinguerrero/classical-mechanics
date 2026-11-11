@@ -1,0 +1,332 @@
+% =====================================================================
+\section{Divergencia, rotacional y laplaciano}
+\label{sec:operadores}
+% =====================================================================
+
+Aplicando el operador $\grad$ a campos escalares y vectoriales se obtienen
+los cuatro operadores diferenciales de la física:
+\begin{equation}
+  \grad\Phi=\operatorname{grad}\Phi,\qquad
+  \div\vb{A}=\operatorname{div}\vb{A},\qquad
+  \rot\vb{A}=\operatorname{rot}\vb{A},\qquad
+  \lap\Phi=\div(\grad\Phi)=\Delta\Phi .
+\end{equation}
+
+\subsection{Flujo, divergencia y ecuación de continuidad}
+
+\begin{definicion}[Flujo]
+El flujo de $\vb{A}$ a través de una superficie orientada $S$ es
+\begin{equation}
+  \Phi_{S}=\int_{S}\vb{A}\cdot\dd\vb{S},\qquad \dd\vb{S}=\un\,\dd S .
+\end{equation}
+\end{definicion}
+
+\paragraph{Motivación física.} Sea $\vb{v}$ el campo de velocidades de un
+fluido de densidad $\rho$ y $\dd V=\dd x\,\dd y\,\dd z$ un paralelepípedo
+\emph{fijo}. Por la cara $x$ entra el caudal $(\rho v_{x})(x)\,\dd y\,\dd z$ y por
+la cara $x+\dd x$ sale $(\rho v_{x})(x+\dd x)\,\dd y\,\dd z$. Desarrollando a
+primer orden (\cref{teo:taylor}) y sumando las tres parejas de caras,
+\begin{equation}
+  \pd{m}{t}=-\Bigl[\pd{(\rho v_{x})}{x}+\pd{(\rho v_{y})}{y}+\pd{(\rho v_{z})}{z}\Bigr]\dd V
+  =-\div(\rho\vb{v})\,\dd V .
+\end{equation}
+Como $m=\rho\,\dd V$ con $\dd V$ constante, $\partial m/\partial t=(\partial\rho/\partial t)\,\dd V$, y
+\begin{equation}
+  \resultado{\pd{\rho}{t}+\div(\rho\vb{v})=0}
+  \qquad\text{(ecuación de continuidad).}
+  \label{eq:continuidad}
+\end{equation}
+
+\begin{definicion}[Divergencia]
+\label{def:div}
+\begin{equation}
+  \div\vb{A}(\vb{r})\defeq\lim_{\Delta V\to0}\frac{1}{\Delta V}\oint_{\partial(\Delta V)}\vb{A}\cdot\dd\vb{S};
+  \label{eq:div-def}
+\end{equation}
+en cartesianas, $\div\vb{A}=\partial_{x}A_{x}+\partial_{y}A_{y}+\partial_{z}A_{z}$.
+Es el flujo neto saliente por unidad de volumen: si $\div\vb{v}>0$ el punto
+es una \emph{fuente}, si $\div\vb{v}<0$ un \emph{sumidero}, y si $\div\vb{v}=0$
+entra tanto como sale (flujo localmente incompresible; en una tubería, las
+líneas de corriente son paralelas).
+\end{definicion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=3 by 1,horizontal sep=7mm},
+  oscuro,width=5.0cm,height=5.0cm,axis equal image,
+  xmin=-1.35,xmax=1.35,ymin=-1.35,ymax=1.35,
+  xtick={-1,0,1},ytick={-1,0,1},grid=none,
+  view={0}{90}]
+  \nextgroupplot[title={(a) $\vb{v}=\vb{r}$: fuente},ylabel={$y$},xlabel={$x$}]
+    \draw[aux,violeta] (axis cs:0,0) circle[radius=0.55];
+    \addplot3[cian,line width=0.6pt,-{Stealth[length=3.2pt,width=2.6pt]},
+      quiver={u={x},v={y},w=0,scale arrows=0.22},
+      samples=9,domain=-1.1:1.1,domain y=-1.1:1.1] (x,y,0);
+  \nextgroupplot[title={(b) $\vb{v}=-\vb{r}$: sumidero},xlabel={$x$},yticklabels={}]
+    \draw[aux,violeta] (axis cs:0,0) circle[radius=0.55];
+    \addplot3[rosa,line width=0.6pt,-{Stealth[length=3.2pt,width=2.6pt]},
+      quiver={u={-x},v={-y},w=0,scale arrows=0.22},
+      samples=9,domain=-1.1:1.1,domain y=-1.1:1.1] ({x},{y},0);
+  \nextgroupplot[title={(c) $\vb{v}=\vb{\omega}\times\vb{r}$: giro},xlabel={$x$},yticklabels={}]
+    \draw[aux,violeta] (axis cs:0,0) circle[radius=0.55];
+    \addplot3[ambar,line width=0.6pt,-{Stealth[length=3.2pt,width=2.6pt]},
+      quiver={u={-y},v={x},w=0,scale arrows=0.22},
+      samples=9,domain=-1.1:1.1,domain y=-1.1:1.1] (x,y,0);
+\end{groupplot}
+\end{tikzpicture}
+\caption{Tres campos planos y una superficie de control (violeta).
+(a) $\div\vb{v}=2>0$: flujo neto saliente. (b) $\div\vb{v}=-2<0$: entrante.
+(c) Rotación rígida $\vb{\omega}=\omega\kk$: $\div\vb{v}=0$ (entra tanto como
+sale) pero $\rot\vb{v}=2\vb{\omega}\neq\vb{0}$: la circulación a lo largo de
+la circunferencia es $2\pi\omega R^{2}$.}
+\label{fig:div-rot}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\subsection{Divergencia en coordenadas curvilíneas}
+\label{sec:div-curv}
+
+\begin{proposicion}[Divergencia en un sistema ortogonal]
+\label{prop:div-curv}
+Con $\vb{A}=\sum_{i}A_{i}\uv{e}_{i}$,
+\begin{equation}
+  \resultado{\div\vb{A}=\frac{1}{h_{1}h_{2}h_{3}}
+  \left[\pd{(A_{1}h_{2}h_{3})}{q^{1}}+\pd{(A_{2}h_{3}h_{1})}{q^{2}}+\pd{(A_{3}h_{1}h_{2})}{q^{3}}\right]} .
+  \label{eq:div-curv}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+Se aplica \eqref{eq:div-def} al paralelepípedo de la \cref{fig:caja}. Por la
+cara $q^{1}$ (normal saliente $-\uv{e}_{1}$, área $h_{2}h_{3}\dd q^{2}\dd q^{3}$)
+el flujo es $-[A_{1}h_{2}h_{3}](q^{1})\,\dd q^{2}\dd q^{3}$; por la cara
+$q^{1}+\dd q^{1}$, por Taylor,
+\[
+  [A_{1}h_{2}h_{3}](q^{1}+\dd q^{1})\,\dd q^{2}\dd q^{3}
+  =\Bigl\{[A_{1}h_{2}h_{3}](q^{1})+\pd{}{q^{1}}[A_{1}h_{2}h_{3}]\,\dd q^{1}\Bigr\}\dd q^{2}\dd q^{3}.
+\]
+La suma es $\pd{}{q^{1}}[A_{1}h_{2}h_{3}]\,\dd q^{1}\dd q^{2}\dd q^{3}
+=\dfrac{1}{h_{1}h_{2}h_{3}}\pd{}{q^{1}}[A_{1}h_{2}h_{3}]\,\dd V$.
+Sumando las otras dos parejas y dividiendo por $\dd V$ se obtiene
+\eqref{eq:div-curv}.
+\end{proof}
+
+\begin{observacion}
+Los $h$ van \emph{dentro} de la derivada: aunque $A_{1}$ sea constante, el
+área de la cara cambia al pasar de $q^{1}$ a $q^{1}+\dd q^{1}$. Por eso
+$\div\er=2/r\neq0$.
+\end{observacion}
+
+\begin{align}
+  \text{cilíndricas:}\quad
+  \div\vb{A}&=\frac{1}{\rho}\pd{(\rho A_{\rho})}{\rho}+\frac{1}{\rho}\pd{A_{\varphi}}{\varphi}+\pd{A_{z}}{z},
+  \label{eq:div-cil}\\
+  \text{esféricas:}\quad
+  \div\vb{A}&=\frac{1}{r^{2}}\pd{(r^{2}A_{r})}{r}+\frac{1}{r\sin\theta}\pd{(\sin\theta\,A_{\theta})}{\theta}
+  +\frac{1}{r\sin\theta}\pd{A_{\varphi}}{\varphi}.
+  \label{eq:div-esf}
+\end{align}
+
+\subsection{Circulación y rotacional}
+
+\begin{definicion}[Circulación]
+La circulación de $\vb{A}$ a lo largo de una curva $C$ de $P$ a $Q$ es
+el límite de las sumas $\sum_{i}\vb{A}\cdot\Delta\vb{r}_{i}$:
+\begin{equation}
+  C_{PQ}=\int_{P}^{Q}\vb{A}\cdot\dd\vb{r},\qquad
+  \Gamma_{C}=\oint_{C}\vb{A}\cdot\dd\vb{r}\ \ (C\text{ cerrada}).
+\end{equation}
+Generaliza el \emph{trabajo} de una fuerza a lo largo de un camino.
+\end{definicion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.15]
+  \def\W{4.2}\def\H{2.6}
+  \fill[violeta,opacity=0.08] (0,0) rectangle (\W,\H);
+  % camino PRQ
+  \draw[cian,line width=1pt,postaction={decorate},
+    decoration={markings,mark=at position 0.55 with {\arrow{Stealth[length=6pt]}}}] (0,0) -- (\W,0);
+  \draw[cian,line width=1pt,postaction={decorate},
+    decoration={markings,mark=at position 0.55 with {\arrow{Stealth[length=6pt]}}}] (\W,0) -- (\W,\H);
+  % camino PSQ
+  \draw[rosa,line width=1pt,postaction={decorate},
+    decoration={markings,mark=at position 0.55 with {\arrow{Stealth[length=6pt]}}}] (0,0) -- (0,\H);
+  \draw[rosa,line width=1pt,postaction={decorate},
+    decoration={markings,mark=at position 0.55 with {\arrow{Stealth[length=6pt]}}}] (0,\H) -- (\W,\H);
+  % vértices
+  \foreach \p/\lab/\anc/\co in {(0,0)/P/north east/{(q^{1},q^{2})},
+      (\W,0)/R/north west/{(q^{1}{+}\dd q^{1},q^{2})},
+      (\W,\H)/Q/south west/{(q^{1}{+}\dd q^{1},q^{2}{+}\dd q^{2})},
+      (0,\H)/S/south east/{(q^{1},q^{2}{+}\dd q^{2})}}{
+    \node[punto] at \p {};
+    \node[etiq,anchor=\anc,inner sep=3pt,align=center] at \p {$\lab$\ \ {\color{tenue}\footnotesize$\co$}};}
+  % elementos de línea
+  \node[peq,anchor=north,inner sep=4pt] at (\W/2,0) {$h_{1}\dd q^{1}\,\uv{e}_{1}$};
+  \node[peq,anchor=south,inner sep=4pt] at (\W/2,\H) {$h_{1}\dd q^{1}\,\uv{e}_{1}$};
+  \node[peq,anchor=west,inner sep=4pt] at (\W,\H/2) {$h_{2}\dd q^{2}\,\uv{e}_{2}$};
+  \node[peq,anchor=east,inner sep=4pt] at (0,\H/2) {$h_{2}\dd q^{2}\,\uv{e}_{2}$};
+  \node[violeta,font=\small] at (\W/2,\H/2) {$\dd\vb{S}_{3}=h_{1}h_{2}\dd q^{1}\dd q^{2}\,\uv{e}_{3}$};
+\end{tikzpicture}
+\caption{Circuito elemental en la superficie $q^{3}=\text{const}$. La
+circulación cerrada es $C_{PRQ}-C_{PSQ}$ (cian menos rosa); dividida por el
+área $\dd S_{3}$ da la componente $3$ del rotacional.}
+\label{fig:circuito}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{definicion}[Rotacional]
+\label{def:rot}
+Para cada dirección $\un$, con $\Delta S$ una superficie plana pequeña de
+normal $\un$ y borde orientado por la regla de la mano derecha,
+\begin{equation}
+  (\rot\vb{A})\cdot\un\defeq\lim_{\Delta S\to0}\frac{1}{\Delta S}\oint_{\partial(\Delta S)}\vb{A}\cdot\dd\vb{r} .
+  \label{eq:rot-def}
+\end{equation}
+Es la circulación por unidad de área. En cartesianas,
+\begin{equation}
+  \rot\vb{A}=\begin{vmatrix}\ii&\jj&\kk\\ \partial_{x}&\partial_{y}&\partial_{z}\\ A_{x}&A_{y}&A_{z}\end{vmatrix}
+  =\Bigl(\pd{A_{z}}{y}-\pd{A_{y}}{z}\Bigr)\ii+\Bigl(\pd{A_{x}}{z}-\pd{A_{z}}{x}\Bigr)\jj
+  +\Bigl(\pd{A_{y}}{x}-\pd{A_{x}}{y}\Bigr)\kk ,
+  \label{eq:rot-cart}
+\end{equation}
+es decir, $(\rot\vb{A})_{i}=\varepsilon_{ijk}\,\partial_{j}A_{k}$.
+\end{definicion}
+
+\paragraph{Derivación de \eqref{eq:rot-cart}.} En el rectángulo de vértices
+$P=(x,y)$, $R=(x+\dd x,y)$, $Q=(x+\dd x,y+\dd y)$, $S=(x,y+\dd y)$
+(\cref{fig:circuito} con $h_{1}=h_{2}=1$):
+\begin{align*}
+  C_{PRQ}&=A_{x}(x,y)\,\dd x+A_{y}(x+\dd x,y)\,\dd y
+  =A_{x}\dd x+\Bigl[A_{y}+\pd{A_{y}}{x}\dd x\Bigr]\dd y,\\
+  C_{PSQ}&=A_{y}(x,y)\,\dd y+A_{x}(x,y+\dd y)\,\dd x
+  =A_{y}\dd y+\Bigl[A_{x}+\pd{A_{x}}{y}\dd y\Bigr]\dd x,
+\end{align*}
+y la circulación cerrada es
+$C_{PRQ}-C_{PSQ}=\bigl(\partial_{x}A_{y}-\partial_{y}A_{x}\bigr)\dd x\,\dd y
+=(\rot\vb{A})\cdot(\dd x\,\dd y\,\kk)$.
+
+\begin{proposicion}[Rotación rígida]
+\label{prop:rigida}
+Si $\vb{v}=\vb{\omega}\times\vb{r}$ con $\vb{\omega}$ constante, entonces
+$\div\vb{v}=0$ y $\rot\vb{v}=2\vb{\omega}$.
+\end{proposicion}
+
+\begin{proof}
+$\div\vb{v}=\partial_{i}(\varepsilon_{ijk}\omega_{j}x_{k})=\varepsilon_{ijk}\omega_{j}\delta_{ik}=\varepsilon_{iji}\omega_{j}=0$.
+Por el \cref{lem:epsdelta},
+$(\rot\vb{v})_{i}=\varepsilon_{ijk}\partial_{j}(\varepsilon_{kmn}\omega_{m}x_{n})
+=\varepsilon_{kij}\varepsilon_{kmn}\omega_{m}\delta_{jn}
+=(\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm})\omega_{m}\delta_{jn}
+=3\omega_{i}-\omega_{i}=2\omega_{i}$.
+\end{proof}
+
+Así, en un fluido $\rot\vb{v}$ mide la \emph{rotación local}: su dirección es
+el eje de giro y su módulo el doble de la velocidad angular local. Si las
+líneas de campo son perpendiculares a $\dd\vb{r}$ en todo el circuito la
+circulación es nula; si las líneas «rotan», no.
+
+\subsection{Rotacional en coordenadas curvilíneas}
+
+\begin{proposicion}[Rotacional en un sistema ortogonal]
+\label{prop:rot-curv}
+\begin{equation}
+  \resultado{\rot\vb{A}=\frac{1}{h_{1}h_{2}h_{3}}
+  \begin{vmatrix}h_{1}\uv{e}_{1}&h_{2}\uv{e}_{2}&h_{3}\uv{e}_{3}\\[1mm]
+  \pd{}{q^{1}}&\pd{}{q^{2}}&\pd{}{q^{3}}\\[2mm]
+  h_{1}A_{1}&h_{2}A_{2}&h_{3}A_{3}\end{vmatrix}} ,
+  \label{eq:rot-curv}
+\end{equation}
+es decir,
+$(\rot\vb{A})_{3}=\dfrac{1}{h_{1}h_{2}}\Bigl[\pd{(h_{2}A_{2})}{q^{1}}-\pd{(h_{1}A_{1})}{q^{2}}\Bigr]$
+y permutaciones cíclicas.
+\end{proposicion}
+
+\begin{proof}
+En el circuito de la \cref{fig:circuito},
+$\vb{A}\cdot\dd\vb{r}=A_{1}h_{1}\dd q^{1}$ en los lados horizontales y
+$A_{2}h_{2}\dd q^{2}$ en los verticales. Como en el caso cartesiano,
+\begin{align*}
+  C_{PRQ}&=(A_{1}h_{1})(q^{1},q^{2})\dd q^{1}+\Bigl[(A_{2}h_{2})+\pd{(A_{2}h_{2})}{q^{1}}\dd q^{1}\Bigr]\dd q^{2},\\
+  C_{PSQ}&=(A_{2}h_{2})(q^{1},q^{2})\dd q^{2}+\Bigl[(A_{1}h_{1})+\pd{(A_{1}h_{1})}{q^{2}}\dd q^{2}\Bigr]\dd q^{1},
+\end{align*}
+de donde
+\[
+  C_{PRQ}-C_{PSQ}=\frac{1}{h_{1}h_{2}}\Bigl[\pd{(A_{2}h_{2})}{q^{1}}-\pd{(A_{1}h_{1})}{q^{2}}\Bigr]
+  \underbrace{h_{1}h_{2}\,\dd q^{1}\dd q^{2}}_{\dd S_{3}}
+  =(\rot\vb{A})\cdot\dd\vb{S}_{3}.
+\]
+Repitiendo con $\dd\vb{S}_{1},\dd\vb{S}_{2}$ (permutaciones cíclicas) se
+obtienen las otras dos componentes, que son el desarrollo de
+\eqref{eq:rot-curv} por la primera fila.
+\end{proof}
+
+\begin{align}
+  \text{cilíndricas:}\quad
+  \rot\vb{A}&=\frac{1}{\rho}
+  \begin{vmatrix}\erho&\rho\,\ef&\kk\\ \partial_{\rho}&\partial_{\varphi}&\partial_{z}\\ A_{\rho}&\rho A_{\varphi}&A_{z}\end{vmatrix},
+  \label{eq:rot-cil}\\[1mm]
+  \text{esféricas:}\quad
+  \rot\vb{A}&=\frac{1}{r^{2}\sin\theta}
+  \begin{vmatrix}\er&r\,\et&r\sin\theta\,\ef\\ \partial_{r}&\partial_{\theta}&\partial_{\varphi}\\ A_{r}&rA_{\theta}&r\sin\theta\,A_{\varphi}\end{vmatrix}.
+  \label{eq:rot-esf}
+\end{align}
+
+\subsection{Laplaciano e identidades}
+
+Combinando \eqref{eq:grad-curv} y \eqref{eq:div-curv} con
+$A_{i}=h_{i}^{-1}\partial\Phi/\partial q^{i}$:
+\begin{equation}
+  \resultado{\lap\Phi=\frac{1}{h_{1}h_{2}h_{3}}\left[
+  \pd{}{q^{1}}\Bigl(\frac{h_{2}h_{3}}{h_{1}}\pd{\Phi}{q^{1}}\Bigr)+
+  \pd{}{q^{2}}\Bigl(\frac{h_{3}h_{1}}{h_{2}}\pd{\Phi}{q^{2}}\Bigr)+
+  \pd{}{q^{3}}\Bigl(\frac{h_{1}h_{2}}{h_{3}}\pd{\Phi}{q^{3}}\Bigr)\right]} ,
+  \label{eq:lap-curv}
+\end{equation}
+\begin{align}
+  \text{cilíndricas:}\quad
+  \lap\Phi&=\frac{1}{\rho}\pd{}{\rho}\Bigl(\rho\pd{\Phi}{\rho}\Bigr)+\frac{1}{\rho^{2}}\pd{^{2}\Phi}{\varphi^{2}}+\pd{^{2}\Phi}{z^{2}},\\
+  \text{esféricas:}\quad
+  \lap\Phi&=\frac{1}{r^{2}}\pd{}{r}\Bigl(r^{2}\pd{\Phi}{r}\Bigr)
+  +\frac{1}{r^{2}\sin\theta}\pd{}{\theta}\Bigl(\sin\theta\pd{\Phi}{\theta}\Bigr)
+  +\frac{1}{r^{2}\sin^{2}\theta}\pd{^{2}\Phi}{\varphi^{2}}.
+  \label{eq:lap-esf}
+\end{align}
+Para un campo radial $f(r)$, \eqref{eq:lap-esf} da
+$\lap f=f''+\tfrac{2}{r}f'$.
+
+\begin{teorema}[Identidades nulas]
+\label{teo:nulas}
+Si $\Phi\in\C^{2}$ y $\vb{A}\in\C^{2}$, entonces
+\begin{equation}
+  \resultado{\rot(\grad\Phi)=\vb{0},\qquad \div(\rot\vb{A})=0 .}
+  \label{eq:nulas}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Ver \cref{prob:6}: es la antisimetría de $\varepsilon_{ijk}$ frente a la
+simetría de las derivadas cruzadas (teorema de Schwarz).
+\end{proof}
+
+\begin{table}[ht]
+\centering
+\caption{Identidades vectoriales de uso frecuente ($f,g$ escalares; $\vb{A},\vb{B}$ vectoriales).}
+\label{tab:identidades}
+\small
+\begin{tabular}{@{}l l@{}}
+\toprule
+\color{cian}Producto & \color{cian}Identidad\\
+\midrule
+gradiente de un producto & $\grad(fg)=f\,\grad g+g\,\grad f$\\
+divergencia de $f\vb{A}$ & $\div(f\vb{A})=f\,\div\vb{A}+\vb{A}\cdot\grad f$\\
+rotacional de $f\vb{A}$ & $\rot(f\vb{A})=f\,\rot\vb{A}+\grad f\times\vb{A}$\\
+divergencia de $\vb{A}\times\vb{B}$ & $\div(\vb{A}\times\vb{B})=\vb{B}\cdot(\rot\vb{A})-\vb{A}\cdot(\rot\vb{B})$\\
+doble rotacional & $\rot(\rot\vb{A})=\grad(\div\vb{A})-\lap\vb{A}$\\
+vector de posición & $\div\vb{r}=3,\quad \rot\vb{r}=\vb{0},\quad (\vb{A}\cdot\grad)\vb{r}=\vb{A}$\\
+\bottomrule
+\end{tabular}
+\end{table}

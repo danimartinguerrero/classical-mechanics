@@ -1,0 +1,216 @@
+% =====================================================================
+\section{La partícula en el espacio}
+\label{sec:particula}
+% =====================================================================
+
+La mecánica newtoniana describe una partícula (punto material) mediante su
+\emph{vector de posición} $\vb{r}(t)$ respecto de un origen $O$. La
+\emph{cinemática} estudia $\vb{r}(t)$ y sus derivadas sin preguntar por las
+causas del movimiento. Este tema reúne las herramientas geométricas que se
+usarán en todo el curso: sistemas de coordenadas adaptados al problema
+(\cref{sec:curvilineas}), geometría de curvas (\cref{sec:frenet}) y análisis
+vectorial (\cref{sec:campos,sec:operadores,sec:integrales}).
+
+\subsection{Trayectoria y órbita}
+
+\begin{definicion}[Trayectoria, órbita]
+Sea $I\subseteq\R$ un intervalo. Una \emph{trayectoria} es una aplicación
+$\vb{r}\colon I\to\R^{3}$, $t\mapsto\vb{r}(t)$, de clase $\C^{2}(I)$. Su imagen
+$\Gamma=\vb{r}(I)\subset\R^{3}$ es la \emph{órbita} (trayectoria geométrica).
+Se definen la \emph{velocidad} y la \emph{aceleración}
+\begin{equation}
+  \vb{v}(t)\defeq\od{\vb{r}}{t}=\dot{\vb{r}},\qquad
+  \vb{a}(t)\defeq\od{\vb{v}}{t}=\ddot{\vb{r}} .
+  \label{eq:va-def}
+\end{equation}
+\end{definicion}
+
+\begin{observacion}[Trayectoria frente a órbita]
+Una misma órbita admite infinitas trayectorias: basta reparametrizar,
+$\vb{r}=\vb{r}(\lambda)$ con $\lambda=\lambda(t)$. Por la regla de la cadena,
+\begin{equation}
+  \vb{v}=\od{\vb{r}}{\lambda}\,\od{\lambda}{t}.
+  \label{eq:reparam}
+\end{equation}
+La \emph{órbita} contiene la información geométrica (curvatura, torsión;
+\cref{sec:frenet}); la \emph{trayectoria} añade la ley horaria $s=s(t)$.
+\end{observacion}
+
+\subsection{Coordenadas, superficies y curvas coordenadas}
+
+\begin{definicion}[Sistema de coordenadas]
+\label{def:coordenadas}
+Un \emph{sistema de coordenadas} en una región $D\subseteq\R^{3}$ es una
+aplicación biyectiva de clase $\C^{1}$
+\[
+  (q^{1},q^{2},q^{3})\in U\subseteq\R^{3}\ \longmapsto\
+  \vb{r}(q^{1},q^{2},q^{3})\in D,
+  \qquad
+  J\defeq\frac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}\neq0,
+\]
+que asigna a cada punto $P$, de forma \emph{unívoca}, una terna
+$(q^{1}_{P},q^{2}_{P},q^{3}_{P})$.
+\begin{itemize}
+  \item \emph{Superficies coordenadas}: $q^{i}=\text{const}$.
+  \item \emph{Curvas coordenadas}: intersección de dos superficies
+        coordenadas; a lo largo de la curva $q^{i}$ sólo varía $q^{i}$.
+        Su vector tangente es $\partial\vb{r}/\partial q^{i}$.
+  \item El sistema es \emph{ortogonal} si
+        $\pd{\vb{r}}{q^{i}}\cdot\pd{\vb{r}}{q^{j}}=0$ para $i\neq j$ en todo
+        punto.
+\end{itemize}
+\end{definicion}
+
+\begin{ejemplo}[Cartesianas]
+El punto de coordenadas $(1,2,3)$ es la intersección de los planos $x=1$,
+$y=2$, $z=3$; las curvas coordenadas son rectas paralelas a los ejes y los
+vectores tangentes, $(\ii,\jj,\kk)$, no dependen del punto.
+\end{ejemplo}
+
+\begin{clave}{Motivación}
+En un campo de fuerzas centrales la aceleración depende sólo de la distancia
+al origen, $r$: una única función en esféricas frente a tres en
+cartesianas. Elegir coordenadas \emph{adaptadas a la simetría} reduce el
+número de variables efectivas del problema.
+\end{clave}
+
+% ---------------------------------------------------------------------
+\begin{figure}[t]
+\centering
+% ----------------------------- cilíndricas ---------------------------
+\tdplotsetmaincoords{60}{118}
+\begin{tikzpicture}[tdplot_main_coords,scale=1.22]
+  \def\rP{2}\def\fP{78}\def\zP{2.1}
+  % ejes
+  \draw[eje] (0,0,0) -- (3.3,0,0) node[anchor=north east,peq,inner sep=1pt]{$x$};
+  \draw[eje] (0,0,0) -- (0,3.1,0) node[anchor=north west,peq,inner sep=1pt]{$y$};
+  \draw[eje] (0,0,0) -- (0,0,3.4) node[anchor=south,peq]{$z$};
+  % cilindro rho = rP
+  \draw[regla!80!tenue,line width=0.5pt] plot[domain=0:360,samples=90,smooth]
+       ({\rP*cos(\x)},{\rP*sin(\x)},0);
+  \draw[regla!80!tenue,line width=0.5pt] plot[domain=0:360,samples=90,smooth]
+       ({\rP*cos(\x)},{\rP*sin(\x)},\zP);
+  \draw[regla!80!tenue,line width=0.5pt] ({\rP*cos(28)},{\rP*sin(28)},0) -- ({\rP*cos(28)},{\rP*sin(28)},\zP);
+  \draw[regla!80!tenue,line width=0.5pt] ({\rP*cos(208)},{\rP*sin(208)},0) -- ({\rP*cos(208)},{\rP*sin(208)},\zP);
+  % proyección y ángulos
+  \coordinate (O) at (0,0,0);
+  \coordinate (Pp) at ({\rP*cos(\fP)},{\rP*sin(\fP)},0);
+  \coordinate (P) at ({\rP*cos(\fP)},{\rP*sin(\fP)},\zP);
+  \draw[aux] (O) -- (Pp) -- (P);
+  \draw[aux] (0,0,\zP) -- (P);
+  \draw[violeta,line width=0.6pt,->] plot[domain=0:\fP,samples=30]
+       ({0.75*cos(\x)},{0.75*sin(\x)},0);
+  \node[violeta,font=\small] at ({1.05*cos(\fP/2)},{1.05*sin(\fP/2)},0) {$\varphi$};
+  \node[peq,anchor=north] at ($(O)!0.55!(Pp)$) {$\rho$};
+  \node[peq,anchor=east] at (0,0,\zP) {$z$};
+  % base local
+  \draw[vec,cian] (P) -- ++({cos(\fP)},{sin(\fP)},0)
+      node[anchor=north west,etiq,inner sep=1pt]{$\erho$};
+  \draw[vec,violeta] (P) -- ++({-sin(\fP)},{cos(\fP)},0)
+      node[anchor=west,etiq,inner sep=2pt]{$\ef$};
+  \draw[vec,rosa] (P) -- ++(0,0,1)
+      node[anchor=south,etiq,inner sep=1pt]{$\kk$};
+  \node[punto] at (P) {};
+  \node[etiq,anchor=south,inner sep=4pt] at (P) {$P$};
+  \node[punto,fill=tenue,inner sep=0.9pt] at (Pp) {};
+\end{tikzpicture}\hspace{4mm}%
+% ----------------------------- esféricas -----------------------------
+\tdplotsetmaincoords{60}{118}
+\begin{tikzpicture}[tdplot_main_coords,scale=1.22]
+  \def\rr{2.6}\def\tP{52}\def\fP{160}
+  \pgfmathsetmacro{\px}{\rr*sin(\tP)*cos(\fP)}
+  \pgfmathsetmacro{\py}{\rr*sin(\tP)*sin(\fP)}
+  \pgfmathsetmacro{\pz}{\rr*cos(\tP)}
+  \draw[eje] (0,0,0) -- (3.3,0,0) node[anchor=north east,peq,inner sep=1pt]{$x$};
+  \draw[eje] (0,0,0) -- (0,3.1,0) node[anchor=north west,peq,inner sep=1pt]{$y$};
+  \draw[eje] (0,0,0) -- (0,0,3.4) node[anchor=south,peq]{$z$};
+  % silueta, ecuador y meridiano por P
+  \draw[tdplot_screen_coords,regla!80!tenue,line width=0.5pt] (0,0) circle (\rr);
+  \draw[regla!80!tenue,line width=0.5pt] plot[domain=0:360,samples=90,smooth]
+       ({\rr*cos(\x)},{\rr*sin(\x)},0);
+  \draw[regla!80!tenue,line width=0.5pt] plot[domain=0:180,samples=60,smooth]
+       ({\rr*sin(\x)*cos(\fP)},{\rr*sin(\x)*sin(\fP)},{\rr*cos(\x)});
+  \coordinate (O) at (0,0,0);
+  \coordinate (P) at (\px,\py,\pz);
+  \coordinate (Pp) at (\px,\py,0);
+  \draw[texto,line width=0.6pt] (O) -- (P);
+  \draw[aux] (O) -- (Pp) -- (P);
+  % ángulos
+  \draw[violeta,line width=0.6pt,->] plot[domain=0:\fP,samples=30]
+       ({0.7*cos(\x)},{0.7*sin(\x)},0);
+  \node[violeta,font=\small] at ({1.0*cos(\fP/2)},{1.0*sin(\fP/2)},0) {$\varphi$};
+  \draw[cian,line width=0.6pt,->] plot[domain=0:\tP,samples=30]
+       ({1.1*sin(\x)*cos(\fP)},{1.1*sin(\x)*sin(\fP)},{1.1*cos(\x)});
+  \node[cian,font=\small] at ({1.42*sin(\tP/2)*cos(\fP)},{1.42*sin(\tP/2)*sin(\fP)},{1.42*cos(\tP/2)}) {$\theta$};
+  \node[peq,anchor=north west,inner sep=1.5pt] at ($(O)!0.6!(P)$) {$r$};
+  % base local
+  \draw[vec,cian] (P) -- ++({sin(\tP)*cos(\fP)},{sin(\tP)*sin(\fP)},{cos(\tP)})
+      node[anchor=south west,etiq,inner sep=1pt]{$\er$};
+  \draw[vec,rosa] (P) -- ++({cos(\tP)*cos(\fP)},{cos(\tP)*sin(\fP)},{-sin(\tP)})
+      node[anchor=north west,etiq,inner sep=1pt]{$\et$};
+  \draw[vec,violeta] (P) -- ++({-sin(\fP)},{cos(\fP)},0)
+      node[anchor=south east,etiq,inner sep=1pt]{$\ef$};
+  \node[punto] at (P) {};
+  \node[etiq,anchor=south,inner sep=4pt] at (P) {$P$};
+\end{tikzpicture}
+\caption{Coordenadas cilíndricas $(\rho,\varphi,z)$ (izquierda) y esféricas
+$(r,\theta,\varphi)$ (derecha). En cada punto $P$ la base local está formada
+por los vectores unitarios tangentes a las tres curvas coordenadas que pasan
+por $P$; cambia de un punto a otro.}
+\label{fig:cil-esf}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\subsection{Producto mixto y símbolo de Levi-Civita}
+
+\begin{definicion}[Símbolo de Levi-Civita]
+Para $i,j,k\in\{1,2,3\}$,
+\begin{equation}
+  \varepsilon_{ijk}=
+  \begin{cases}
+    +1, & (i,j,k)\ \text{permutación par de }(1,2,3),\\
+    -1, & (i,j,k)\ \text{permutación impar de }(1,2,3),\\
+    \ \ 0, & \text{si dos índices coinciden},
+  \end{cases}
+  \qquad \varepsilon_{123}=+1 .
+\end{equation}
+Se adopta el \emph{convenio de suma de Einstein}: los índices repetidos se suman
+de $1$ a $3$.
+\end{definicion}
+
+Con él, $(\vb{b}\times\vb{c})_{i}=\varepsilon_{ijk}b_{j}c_{k}$ y el producto
+mixto es un determinante:
+\begin{equation}
+  \vb{a}\cdot(\vb{b}\times\vb{c})=\varepsilon_{ijk}\,a_{i}b_{j}c_{k}
+  =\det\begin{pmatrix}a_{1}&a_{2}&a_{3}\\ b_{1}&b_{2}&b_{3}\\ c_{1}&c_{2}&c_{3}\end{pmatrix},
+  \qquad
+  V_{\text{paralelepípedo}}=\abs{\vb{a}\cdot(\vb{b}\times\vb{c})}.
+  \label{eq:mixto}
+\end{equation}
+
+\begin{lema}[Contracción $\varepsilon$--$\delta$]
+\label{lem:epsdelta}
+$\varepsilon_{ijk}\,\varepsilon_{imn}=\delta_{jm}\delta_{kn}-\delta_{jn}\delta_{km}$.
+\end{lema}
+
+\begin{proof}
+Ambos miembros son nulos si $j=k$ o $m=n$. Si $j\neq k$, el único $i$ que
+contribuye es el tercer índice, y $\varepsilon_{ijk}\varepsilon_{imn}\neq0$
+sólo si $\{m,n\}=\{j,k\}$: vale $+1$ si $(m,n)=(j,k)$ y $-1$ si
+$(m,n)=(k,j)$, exactamente lo que da el miembro derecho.
+\end{proof}
+
+\begin{corolario}[Doble producto vectorial]
+\label{cor:bac}
+$\vb{a}\times(\vb{b}\times\vb{c})=\vb{b}\,(\vb{a}\cdot\vb{c})-\vb{c}\,(\vb{a}\cdot\vb{b})$.
+\end{corolario}
+
+\begin{proof}
+Por el \cref{lem:epsdelta}, con $\varepsilon_{ijk}=\varepsilon_{kij}$,
+\[
+[\vb{a}\times(\vb{b}\times\vb{c})]_{i}
+=\varepsilon_{kij}\varepsilon_{kmn}\,a_{j}b_{m}c_{n}
+=(\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm})\,a_{j}b_{m}c_{n}
+=b_{i}(\vb{a}\cdot\vb{c})-c_{i}(\vb{a}\cdot\vb{b}).\qedhere
+\]
+\end{proof}

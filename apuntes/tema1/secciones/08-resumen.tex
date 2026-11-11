@@ -1,0 +1,66 @@
+% =====================================================================
+\section{Resumen operativo}
+\label{sec:resumen}
+% =====================================================================
+
+\begin{table}[ht]
+\centering
+\caption{Operadores diferenciales en los tres sistemas ortogonales.}
+\label{tab:operadores}
+\small
+\renewcommand{\arraystretch}{2.05}
+\begin{tabular}{@{}l l@{}}
+\toprule
+\multicolumn{2}{@{}l}{\color{cian}\bfseries Sistema general $(q^{1},q^{2},q^{3})$, factores $h_{i}$}\\
+\midrule
+$\grad\Phi$ & $\displaystyle\sum_{i}\frac{1}{h_{i}}\pd{\Phi}{q^{i}}\,\uv{e}_{i}$\\
+$\div\vb{A}$ & $\displaystyle\frac{1}{h_{1}h_{2}h_{3}}\sum_{\text{cícl.}}\pd{(A_{1}h_{2}h_{3})}{q^{1}}$\\
+$\rot\vb{A}$ & $\displaystyle\frac{1}{h_{1}h_{2}h_{3}}\det\bigl(h_{i}\uv{e}_{i};\ \partial_{i};\ h_{i}A_{i}\bigr)$\\
+$\lap\Phi$ & $\displaystyle\frac{1}{h_{1}h_{2}h_{3}}\sum_{\text{cícl.}}\pd{}{q^{1}}\Bigl(\frac{h_{2}h_{3}}{h_{1}}\pd{\Phi}{q^{1}}\Bigr)$\\
+\midrule
+\multicolumn{2}{@{}l}{\color{cian}\bfseries Cilíndricas $(\rho,\varphi,z)$, $h=(1,\rho,1)$}\\
+\midrule
+$\grad\Phi$ & $\partial_{\rho}\Phi\,\erho+\rho^{-1}\partial_{\varphi}\Phi\,\ef+\partial_{z}\Phi\,\kk$\\
+$\div\vb{A}$ & $\rho^{-1}\partial_{\rho}(\rho A_{\rho})+\rho^{-1}\partial_{\varphi}A_{\varphi}+\partial_{z}A_{z}$\\
+$\rot\vb{A}$ & $\bigl(\rho^{-1}\partial_{\varphi}A_{z}-\partial_{z}A_{\varphi}\bigr)\erho
+  +\bigl(\partial_{z}A_{\rho}-\partial_{\rho}A_{z}\bigr)\ef
+  +\rho^{-1}\bigl(\partial_{\rho}(\rho A_{\varphi})-\partial_{\varphi}A_{\rho}\bigr)\kk$\\
+$\lap\Phi$ & $\rho^{-1}\partial_{\rho}(\rho\,\partial_{\rho}\Phi)+\rho^{-2}\partial^{2}_{\varphi}\Phi+\partial^{2}_{z}\Phi$\\
+\midrule
+\multicolumn{2}{@{}l}{\color{cian}\bfseries Esféricas $(r,\theta,\varphi)$, $h=(1,r,r\sin\theta)$}\\
+\midrule
+$\grad\Phi$ & $\partial_{r}\Phi\,\er+r^{-1}\partial_{\theta}\Phi\,\et+(r\sin\theta)^{-1}\partial_{\varphi}\Phi\,\ef$\\
+$\div\vb{A}$ & $r^{-2}\partial_{r}(r^{2}A_{r})+(r\sin\theta)^{-1}\partial_{\theta}(\sin\theta A_{\theta})+(r\sin\theta)^{-1}\partial_{\varphi}A_{\varphi}$\\
+$\rot\vb{A}$ & $\dfrac{\partial_{\theta}(\sin\theta A_{\varphi})-\partial_{\varphi}A_{\theta}}{r\sin\theta}\er
+  +\dfrac{1}{r}\Bigl(\dfrac{\partial_{\varphi}A_{r}}{\sin\theta}-\partial_{r}(rA_{\varphi})\Bigr)\et
+  +\dfrac{\partial_{r}(rA_{\theta})-\partial_{\theta}A_{r}}{r}\ef$\\
+$\lap\Phi$ & $r^{-2}\partial_{r}(r^{2}\partial_{r}\Phi)+(r^{2}\sin\theta)^{-1}\partial_{\theta}(\sin\theta\,\partial_{\theta}\Phi)+(r\sin\theta)^{-2}\partial^{2}_{\varphi}\Phi$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{clave}{Cinemática en una línea}
+\vspace{-1.5ex}
+\begin{gather*}
+  \vb{v}=\dot\rho\,\erho+\rho\dot\varphi\,\ef+\dot z\,\kk
+  =\dot r\,\er+r\dot\theta\,\et+r\sin\theta\,\dot\varphi\,\ef
+  =v\,\utau,\qquad
+  \vb{a}=\dot v\,\utau+\kappa v^{2}\,\un,\\
+  \kappa=\frac{\norm{\vb{v}\times\vb{a}}}{v^{3}},\qquad
+  \tors=\frac{(\vb{v}\times\vb{a})\cdot\dot{\vb{a}}}{\norm{\vb{v}\times\vb{a}}^{2}},\qquad
+  s=\int\norm{\dot{\vb{r}}}\,\dd t,\qquad
+  \dd\uv{e}_{i}=\dd\vb{\Omega}\times\uv{e}_{i}.
+\end{gather*}
+\end{clave}
+
+\begin{clave}[violeta]{Errores típicos}
+\begin{itemize}[leftmargin=1.3em]
+  \item Derivar $\erho,\er,\dots$ como si fueran constantes: en $\vb{r}=r\er$,
+        $\dot{\vb{r}}\neq\dot r\,\er$.
+  \item Olvidar los $h_{i}$ \emph{dentro} de las derivadas en $\div$ y $\rot$,
+        o el factor $1/h_{i}$ del gradiente.
+  \item Confundir $\kappa=\norm{\dd\utau/\dd s}$ con $\norm{\dd\utau/\dd t}=\kappa v$.
+  \item Usar $\rot\vb{A}=\vb{0}\Rightarrow$ conservativo en un dominio con agujeros.
+  \item Escribir $\vb{r}=\sum q^{i}\uv{e}_{i}$ fuera de cartesianas.
+\end{itemize}
+\end{clave}

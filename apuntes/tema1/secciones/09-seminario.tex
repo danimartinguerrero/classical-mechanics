@@ -1,0 +1,665 @@
+% =====================================================================
+\section{Seminario de problemas}
+\label{sec:seminario}
+% =====================================================================
+
+Los once problemas de la hoja se agrupan en cinco tipos. Para cada tipo hay
+un método fijo; la tabla indica cuál y dónde está la teoría.
+
+\begin{table}[ht]
+\centering
+\caption{Mapa de métodos del seminario.}
+\label{tab:mapa}
+\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\color{cian}Tipo & \color{cian}Problemas & \color{cian}Herramienta clave\\
+\midrule
+A. Base móvil y cinemática & 1, 7 & $\dd\uv{e}_{i}=\dd\vb{\Omega}\times\uv{e}_{i}$, \cref{prop:dbase}\\
+B. Factores de escala y elementos & 4, 11 & $h_{i}=\norm{\partial_{i}\vb{r}}$ o lectura de $\dd s^{2}$, \cref{prop:elementos}\\
+C. Geometría de curvas & 3, 7, 8, 9 & \cref{prop:formulas-t} y \eqref{eq:arco}\\
+D. Gradiente, laplaciano, identidades & 2, 6, 10 & \eqref{eq:grad-curv}, \eqref{eq:lap-curv}, $\varepsilon_{ijk}$\\
+E. Campos conservativos & 5 & \cref{teo:conservativo} y método del potencial\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+\subsection{Tipo A · Base móvil: velocidad y aceleración}
+% =====================================================================
+
+\begin{problema}{1}[Velocidad y aceleración en las tres bases]
+\label{prob:1}
+Obtener la forma de los vectores velocidad $\vb{v}=\dd\vb{r}/\dd t$ y
+aceleración $\vb{a}=\dd\vb{v}/\dd t$ en coordenadas cartesianas, esféricas y
+cilíndricas.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Cartesianas}. La base es fija: se derivan las componentes,
+  $\vb{v}=\dot x\,\ii+\dot y\,\jj+\dot z\,\kk$,
+  $\vb{a}=\ddot x\,\ii+\ddot y\,\jj+\ddot z\,\kk$.
+
+  \item \emph{Cilíndricas: derivadas de la base}. Por \eqref{eq:dcil}
+  dividido por $\dd t$:
+  \[
+    \dot{\erho}=\dot\varphi\,\ef,\qquad \dot{\ef}=-\dot\varphi\,\erho,\qquad \dot{\kk}=\vb{0}.
+  \]
+  \item \emph{Cilíndricas: velocidad}. De $\vb{r}=\rho\,\erho+z\,\kk$,
+  \[
+    \vb{v}=\dot\rho\,\erho+\rho\,\dot{\erho}+\dot z\,\kk
+    =\dot\rho\,\erho+\rho\dot\varphi\,\ef+\dot z\,\kk .
+  \]
+  \item \emph{Cilíndricas: aceleración}. Derivando cada término (regla del producto):
+  \begin{align*}
+    \od{}{t}(\dot\rho\,\erho)&=\ddot\rho\,\erho+\dot\rho\dot\varphi\,\ef,\\
+    \od{}{t}(\rho\dot\varphi\,\ef)&=(\dot\rho\dot\varphi+\rho\ddot\varphi)\,\ef-\rho\dot\varphi^{2}\,\erho,\\
+    \od{}{t}(\dot z\,\kk)&=\ddot z\,\kk,
+  \end{align*}
+  y agrupando,
+  \[
+    \resultado{\vb{a}=(\ddot\rho-\rho\dot\varphi^{2})\,\erho+(\rho\ddot\varphi+2\dot\rho\dot\varphi)\,\ef+\ddot z\,\kk .}
+  \]
+  \item \emph{Esféricas: derivadas de la base}. Por \eqref{eq:desf}, o con
+  $\vb{\Omega}=\dot\varphi\,\kk+\dot\theta\,\ef$ y $\kk=\cos\theta\,\er-\sin\theta\,\et$:
+  \[
+    \dot{\er}=\dot\theta\,\et+\dot\varphi\sin\theta\,\ef,\quad
+    \dot{\et}=-\dot\theta\,\er+\dot\varphi\cos\theta\,\ef,\quad
+    \dot{\ef}=-\dot\varphi\,(\sin\theta\,\er+\cos\theta\,\et).
+  \]
+  \item \emph{Esféricas: velocidad}. De $\vb{r}=r\,\er$:
+  $\vb{v}=\dot r\,\er+r\,\dot{\er}=\dot r\,\er+r\dot\theta\,\et+r\sin\theta\,\dot\varphi\,\ef$.
+
+  \item \emph{Esféricas: aceleración}. Tres términos:
+  \begin{align*}
+    \od{}{t}(\dot r\,\er)&=\ddot r\,\er+\dot r\dot\theta\,\et+\dot r\dot\varphi\sin\theta\,\ef,\\
+    \od{}{t}(r\dot\theta\,\et)&=(\dot r\dot\theta+r\ddot\theta)\,\et-r\dot\theta^{2}\,\er+r\dot\theta\dot\varphi\cos\theta\,\ef,\\
+    \od{}{t}(r\sin\theta\,\dot\varphi\,\ef)&=(\dot r\sin\theta\,\dot\varphi+r\cos\theta\,\dot\theta\dot\varphi+r\sin\theta\,\ddot\varphi)\,\ef
+      -r\sin\theta\,\dot\varphi^{2}(\sin\theta\,\er+\cos\theta\,\et).
+  \end{align*}
+  Agrupando por vectores de la base se obtiene \eqref{eq:va-esf}:
+  \[
+    \resultado{
+    \begin{aligned}
+      a_{r}&=\ddot r-r\dot\theta^{2}-r\sin^{2}\theta\,\dot\varphi^{2},\\
+      a_{\theta}&=r\ddot\theta+2\dot r\dot\theta-r\sin\theta\cos\theta\,\dot\varphi^{2},\\
+      a_{\varphi}&=r\sin\theta\,\ddot\varphi+2\dot r\dot\varphi\sin\theta+2r\dot\theta\dot\varphi\cos\theta .
+    \end{aligned}}
+  \]
+  \item \emph{Comprobación}. Con $\theta=\pi/2$ ($\dot\theta=0$, movimiento en el plano $XY$)
+  se recupera la parte plana de las cilíndricas con $\rho=r$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+\begin{clave}[violeta]{Consejo}
+No memorices \eqref{eq:va-esf}: memoriza $\vb{\Omega}$ y deriva. El orden de
+trabajo (base $\to$ velocidad $\to$ aceleración $\to$ agrupar) evita
+olvidar términos. Los términos «dobles» $2\dot r\dot\theta$, $2\dot\rho\dot\varphi$
+aparecen siempre porque cada producto contribuye dos veces.
+\end{clave}
+
+% =====================================================================
+\subsection{Tipo B · Factores de escala y elementos diferenciales}
+% =====================================================================
+
+\begin{problema}{11}[Factores de escala usuales]
+\label{prob:11}
+Hallar los parámetros de escala $h_{i}$ para las coordenadas cartesianas,
+esféricas y cilíndricas.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Cartesianas}. $\partial_{x}\vb{r}=\ii$, $\partial_{y}\vb{r}=\jj$,
+  $\partial_{z}\vb{r}=\kk$: $h_{x}=h_{y}=h_{z}=1$.
+  \item \emph{Cilíndricas (por $\dd s^{2}$)}. $\dd x=\cos\varphi\,\dd\rho-\rho\sin\varphi\,\dd\varphi$,
+  $\dd y=\sin\varphi\,\dd\rho+\rho\cos\varphi\,\dd\varphi$. Al sumar los cuadrados, los
+  términos cruzados $\mp2\rho\sin\varphi\cos\varphi\,\dd\rho\,\dd\varphi$ se cancelan:
+  \[
+    \dd s^{2}=\dd\rho^{2}+\rho^{2}\dd\varphi^{2}+\dd z^{2}
+    \quad\Longrightarrow\quad h_{\rho}=1,\ h_{\varphi}=\rho,\ h_{z}=1 .
+  \]
+  \item \emph{Esféricas (por definición)}.
+  \begin{align*}
+    \norm{\partial_{r}\vb{r}}&=\norm{(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)}=1,\\
+    \norm{\partial_{\theta}\vb{r}}&=r\,\norm{(\cos\theta\cos\varphi,\cos\theta\sin\varphi,-\sin\theta)}=r,\\
+    \norm{\partial_{\varphi}\vb{r}}&=r\sin\theta\,\norm{(-\sin\varphi,\cos\varphi,0)}=r\sin\theta .
+  \end{align*}
+  \item \emph{Resultado}: \cref{tab:sistemas}:
+  $\resultado{(1,1,1),\quad(1,\rho,1),\quad(1,r,r\sin\theta).}$\qedhere
+\end{enumerate}
+\end{resolucion}
+
+\begin{problema}{4}[Coordenadas cilíndricas parabólicas]
+\label{prob:4}
+Considerar el sistema de coordenadas dado por $\vb{r}=x\ii+y\jj+z\kk$ con
+$x=\tfrac12(u^{2}-v^{2})$, $y=uv$ y $z=z$, con $-\infty<u,z<\infty$, $v\ge0$.
+Hallar: (a) la expresión de los parámetros de escala $h_{i}$, $i=u,v,z$, y el
+operador gradiente $\grad$; (b) los elementos de línea, superficie y volumen,
+$\dd l_{i}$, $\dd S_{i}$, $\dd V$.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Vectores tangentes}.
+  \[
+    \pd{\vb{r}}{u}=u\,\ii+v\,\jj,\qquad
+    \pd{\vb{r}}{v}=-v\,\ii+u\,\jj,\qquad
+    \pd{\vb{r}}{z}=\kk .
+  \]
+  \item \emph{Ortogonalidad}. $\partial_{u}\vb{r}\cdot\partial_{v}\vb{r}=-uv+vu=0$ y
+  ambos son $\perp\kk$: el sistema es ortogonal.
+  \item \emph{Factores de escala y base}.
+  \[
+    \resultado{h_{u}=h_{v}=\sqrt{u^{2}+v^{2}},\qquad h_{z}=1,}\qquad
+    \uv{e}_{u}=\frac{u\,\ii+v\,\jj}{\sqrt{u^{2}+v^{2}}},\quad
+    \uv{e}_{v}=\frac{-v\,\ii+u\,\jj}{\sqrt{u^{2}+v^{2}}},\quad
+    \uv{e}_{z}=\kk,
+  \]
+  dextrógira: $\uv{e}_{u}\times\uv{e}_{v}=\frac{u^{2}+v^{2}}{u^{2}+v^{2}}\kk=\kk$.
+  \item \emph{Gradiente}, por \eqref{eq:grad-curv}:
+  \[
+    \resultado{\grad\Phi=\frac{1}{\sqrt{u^{2}+v^{2}}}\Bigl(\pd{\Phi}{u}\,\uv{e}_{u}+\pd{\Phi}{v}\,\uv{e}_{v}\Bigr)+\pd{\Phi}{z}\,\kk .}
+  \]
+  \item \emph{Elementos}, por \cref{prop:elementos}:
+  \begin{gather*}
+    \dd\vb{l}_{u}=\sqrt{u^{2}+v^{2}}\,\dd u\,\uv{e}_{u},\quad
+    \dd\vb{l}_{v}=\sqrt{u^{2}+v^{2}}\,\dd v\,\uv{e}_{v},\quad
+    \dd\vb{l}_{z}=\dd z\,\kk,\\
+    \dd s^{2}=(u^{2}+v^{2})(\dd u^{2}+\dd v^{2})+\dd z^{2},\\
+    \dd\vb{S}_{u}=\sqrt{u^{2}+v^{2}}\,\dd v\,\dd z\,\uv{e}_{u},\quad
+    \dd\vb{S}_{v}=\sqrt{u^{2}+v^{2}}\,\dd z\,\dd u\,\uv{e}_{v},\\
+    \dd\vb{S}_{z}=(u^{2}+v^{2})\,\dd u\,\dd v\,\kk,\\
+    \resultado{\dd V=(u^{2}+v^{2})\,\dd u\,\dd v\,\dd z .}
+  \end{gather*}
+  \item \emph{Comprobación con el jacobiano}:
+  $\dfrac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}u&-v\\ v&u\end{vmatrix}=u^{2}+v^{2}=h_{u}h_{v}$.
+  \item \emph{Superficies coordenadas} (\cref{fig:parabolicas}). Eliminando el otro parámetro:
+  $u=u_{0}$ da $x=\tfrac{u_{0}^{2}}{2}-\tfrac{y^{2}}{2u_{0}^{2}}$ (cilindros parabólicos abiertos hacia $-x$);
+  $v=v_{0}$ da $x=\tfrac{y^{2}}{2v_{0}^{2}}-\tfrac{v_{0}^{2}}{2}$ (abiertos hacia $+x$). Todos tienen el foco en el eje $z$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=7.6cm,height=7.6cm,axis equal image,
+  xmin=-2.6,xmax=2.6,ymin=-2.6,ymax=2.6,xlabel={$x$},ylabel={$y$},
+  grid=none,xtick={-2,-1,0,1,2},ytick={-2,-1,0,1,2},clip=true]
+  \foreach \u in {0.5,1,1.5,2}{
+    \edef\temp{\noexpand\addplot[cian,line width=0.75pt,domain=0:3,samples=60,smooth]
+      ({(\u*\u-x*x)/2},{\u*x});
+    \noexpand\addplot[cian,line width=0.75pt,domain=0:3,samples=60,smooth]
+      ({(\u*\u-x*x)/2},{-\u*x});}\temp}
+  \foreach \v in {0.5,1,1.5,2}{
+    \edef\temp{\noexpand\addplot[rosa,line width=0.75pt,domain=-3:3,samples=80,smooth]
+      ({(x*x-\v*\v)/2},{x*\v});}\temp}
+  \draw[vec,texto] (axis cs:0.625,1.5) -- (axis cs:{0.625+0.75*0.832},{1.5+0.75*0.555})
+     node[anchor=south west,inner sep=1pt,font=\small]{$\uv{e}_{u}$};
+  \draw[vec,texto] (axis cs:0.625,1.5) -- (axis cs:{0.625-0.75*0.555},{1.5+0.75*0.832})
+     node[anchor=south east,inner sep=1pt,font=\small]{$\uv{e}_{v}$};
+  \node[punto] at (axis cs:0.625,1.5) {};
+\end{axis}
+\end{tikzpicture}
+\caption{Coordenadas cilíndricas parabólicas en el plano $z=0$: curvas
+$u=\text{const}$ (cian; $u=\pm\tfrac12,\pm1,\pm\tfrac32,\pm2$) y
+$v=\text{const}$ (rosa; $v=\tfrac12,1,\tfrac32,2$). Se cortan en ángulo recto;
+en el punto $(u,v)=(\tfrac32,1)$ se muestra la base local.}
+\label{fig:parabolicas}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{clave}[violeta]{Consejo}
+$x+\mathrm{i}y=\tfrac12(u+\mathrm{i}v)^{2}$: el cambio es una
+transformación \emph{conforme} del plano complejo, y por eso $h_{u}=h_{v}$ y el
+sistema es automáticamente ortogonal. Como extra,
+$\lap\Phi=\dfrac{1}{u^{2}+v^{2}}\bigl(\partial_{u}^{2}\Phi+\partial_{v}^{2}\Phi\bigr)+\partial_{z}^{2}\Phi$,
+directamente de \eqref{eq:lap-curv}.
+\end{clave}
+
+% =====================================================================
+\subsection{Tipo C · Geometría de curvas}
+% =====================================================================
+
+\begin{problema}{3}[El tobogán]
+\label{prob:3}
+Un niño desciende por un tobogán cuya trayectoria en el plano vertical $xz$
+viene dada por
+\[
+  \vb{r}(t)=2t\,\ii+\Bigl(3-\tfrac12t^{2}\Bigr)\kk,\qquad 0\le t\le2\ \mathrm{s}.
+\]
+(a) Calcular los vectores velocidad y aceleración del niño. (b) Determinar
+el vector tangente unitario $\uv{T}$ y el vector normal $\uv{N}$ en $t=1$ s.
+(c) Calcular la curvatura $\kappa=\norm{\vb{v}\times\vb{a}}/\norm{\vb{v}}^{3}$ y el radio de
+curvatura $R_{c}=1/\kappa$. (d) Descomponer la aceleración en sus componentes
+tangencial y normal, $\vb{a}=a_{T}\uv{T}+a_{N}\uv{N}$, e interpretar
+físicamente cada una.
+\end{problema}
+
+\begin{notacion}
+Aquí $\uv{T}\equiv\utau$ y $\uv{N}\equiv\un$ (\cref{def:frenet}). Unidades SI.
+\end{notacion}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{(a) Velocidad y aceleración}.
+  \[
+    \resultado{\vb{v}=2\,\ii-t\,\kk,\qquad \vb{a}=-\kk,}\qquad v=\sqrt{4+t^{2}} .
+  \]
+  La aceleración es constante: es un tiro parabólico con $g_{\text{ef}}=1\ \mathrm{m/s^{2}}$.
+  \item \emph{(b) Tangente}. En $t=1$: $\vb{v}=(2,0,-1)$, $v=\sqrt5$,
+  $\uv{T}=\dfrac{2\,\ii-\kk}{\sqrt5}$.
+  \item \emph{(b) Normal}. Primero la componente tangencial,
+  $a_{T}=\dfrac{\vb{v}\cdot\vb{a}}{v}=\dfrac{t}{\sqrt{4+t^{2}}}\Big|_{t=1}=\dfrac{1}{\sqrt5}$; después
+  \[
+    a_{N}\uv{N}=\vb{a}-a_{T}\uv{T}=-\kk-\frac{2\,\ii-\kk}{5}=-\frac{2}{5}\,\ii-\frac45\,\kk,
+    \qquad a_{N}=\frac{2}{\sqrt5},\qquad
+    \resultado{\uv{N}=-\frac{\ii+2\,\kk}{\sqrt5}.}
+  \]
+  Comprobación: $\uv{T}\cdot\uv{N}=\tfrac{-2+2}{5}=0$, y $\uv{N}$ apunta hacia abajo, a la concavidad.
+  El binormal es $\uv{B}=\uv{T}\times\uv{N}=\jj$, constante (curva plana, $\tors=0$).
+  \item \emph{(c) Curvatura}. $\vb{v}\times\vb{a}=\begin{vmatrix}\ii&\jj&\kk\\2&0&-t\\0&0&-1\end{vmatrix}=2\,\jj$, luego
+  \[
+    \resultado{\kappa(t)=\frac{2}{(4+t^{2})^{3/2}},\qquad
+    \kappa(1)=\frac{2}{5\sqrt5}\simeq0{,}179\ \mathrm{m^{-1}},\qquad
+    R_{c}(1)=\frac{5\sqrt5}{2}\simeq5{,}59\ \mathrm{m}.}
+  \]
+  El centro de curvatura está en $P+R_{c}\uv{N}=(2;\,2{,}5)+\tfrac{5\sqrt5}{2}\cdot\tfrac{(-1,-2)}{\sqrt5}=(-0{,}5;\,-2{,}5)$.
+  \item \emph{(d) Componentes intrínsecas}. Para todo $t$,
+  \[
+    \resultado{a_{T}=\frac{t}{\sqrt{4+t^{2}}},\qquad a_{N}=\kappa v^{2}=\frac{2}{\sqrt{4+t^{2}}},}
+    \qquad a_{T}^{2}+a_{N}^{2}=1=\norm{\vb{a}}^{2}\ \checkmark
+  \]
+  En $t=1$: $a_{T}=1/\sqrt5\simeq0{,}447\ \mathrm{m/s^{2}}$ y $a_{N}=2/\sqrt5\simeq0{,}894\ \mathrm{m/s^{2}}$.
+  \item \emph{Interpretación}. $a_{T}>0$: el niño gana rapidez (la componente
+  del peso a lo largo de la pendiente); crece con $t$ porque el tobogán se
+  inclina más. $a_{N}$ curva la trayectoria hacia el centro de curvatura;
+  decrece porque el tobogán se endereza ($\kappa\downarrow$).\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=11.5cm,height=8cm,axis equal image,
+  xmin=-0.4,xmax=4.7,ymin=0,ymax=3.6,xlabel={$x$ (m)},ylabel={$z$ (m)},
+  xtick={0,1,2,3,4},ytick={0,1,2,3}]
+  \addplot[violeta,line width=0.6pt,dash pattern=on 3pt off 2pt,domain=38:78,samples=60]
+     ({-0.5+5.5902*cos(x)},{-2.5+5.5902*sin(x)});
+  \addplot[texto,line width=1.3pt,domain=0:2,samples=60,smooth] ({2*x},{3-x*x/2});
+  \node[punto,fill=tenue] at (axis cs:0,3) {};
+  \node[peq,anchor=south west,inner sep=2pt] at (axis cs:0,3) {$t=0$};
+  \node[punto,fill=tenue] at (axis cs:4,1) {};
+  \node[peq,anchor=south west,inner sep=2pt] at (axis cs:4,1) {$t=2$};
+  \draw[vec,cian] (axis cs:2,2.5) -- (axis cs:2.894,2.053)
+     node[anchor=south west,inner sep=1pt,font=\small,text=texto]{$\uv{T}$};
+  \draw[vec,rosa] (axis cs:2,2.5) -- (axis cs:1.553,1.606)
+     node[anchor=east,inner sep=2pt,font=\small,text=texto]{$\uv{N}$};
+  \draw[vec,verde] (axis cs:2,2.5) -- (axis cs:2,1.5)
+     node[anchor=north,inner sep=2pt,font=\small,text=texto]{$\vb{a}$};
+  \draw[aux] (axis cs:2,1.5) -- (axis cs:2.4,2.3);
+  \draw[aux] (axis cs:2,1.5) -- (axis cs:1.6,1.7);
+  \node[punto] at (axis cs:2,2.5) {};
+  \node[font=\small,anchor=south west,inner sep=3pt] at (axis cs:2,2.5) {$P\ (t=1)$};
+  \node[violeta,font=\footnotesize,anchor=north east,inner sep=2pt] at (axis cs:3.78,1.09) {osculatriz};
+\end{axis}
+\end{tikzpicture}
+\caption{Tobogán $z=3-x^{2}/8$. En $t=1$: tangente $\uv{T}$, normal $\uv{N}$
+(hacia la concavidad) y $\vb{a}=-\kk$, cuyas proyecciones (líneas de trazos)
+son $a_{T}=1/\sqrt5$ y $a_{N}=2/\sqrt5$. En violeta, un arco de la
+circunferencia osculatriz, de radio $R_{c}\simeq5{,}59$ m.}
+\label{fig:tobogan}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{7}[Hélice: aceleración y longitud]
+\label{prob:7}
+Una partícula describe una órbita helicoidal
+$\vb{r}=A\cos\theta\,\ii+A\sin\theta\,\jj+\dfrac{b}{2\pi}\,\theta\,\kk$ ($A,b>0$).
+Hallar (a) la expresión de la aceleración; (b) la expresión de la longitud
+de curva, $s$.
+\end{problema}
+
+\begin{resolucion}
+Sea $\theta=\theta(t)$ y $c\defeq b/2\pi$ (avance por radián).
+\begin{enumerate}
+  \item \emph{Velocidad}. Por la regla de la cadena,
+  $\vb{v}=\dot\theta\,(-A\sin\theta,\ A\cos\theta,\ c)$, con
+  $v=\dot\theta\,\sqrt{A^{2}+c^{2}}$.
+  \item \emph{(a) Aceleración}. Derivando de nuevo (producto $\dot\theta\cdot\vb{r}'(\theta)$):
+  \[
+    \resultado{\vb{a}=\ddot\theta\,\bigl(-A\sin\theta\,\ii+A\cos\theta\,\jj+c\,\kk\bigr)
+    -A\dot\theta^{2}\bigl(\cos\theta\,\ii+\sin\theta\,\jj\bigr).}
+  \]
+  \item \emph{Lectura intrínseca}. El primer término es $\dot v\,\utau$
+  ($a_{T}=\ddot\theta\sqrt{A^{2}+c^{2}}$); el segundo es $a_{N}\un$ con
+  $\un=-(\cos\theta,\sin\theta,0)=-\erho$ (hacia el eje) y $a_{N}=A\dot\theta^{2}$.
+  Como $a_{N}=\kappa v^{2}$, $\kappa=\dfrac{A}{A^{2}+c^{2}}$ (comparar con el \cref{prob:9}).
+  En cilíndricas ($\rho=A$, $\varphi=\theta$, $z=c\theta$) es directamente \eqref{eq:va-cil}.
+  Si el giro es uniforme ($\ddot\theta=0$), sólo queda la centrípeta horizontal $-A\omega^{2}\erho$.
+  \item \emph{(b) Longitud de arco}. Con $\theta$ como parámetro,
+  $\norm{\dd\vb{r}/\dd\theta}=\sqrt{A^{2}+c^{2}}$ es constante:
+  \[
+    \resultado{s(\theta)=\int_{0}^{\theta}\sqrt{A^{2}+\frac{b^{2}}{4\pi^{2}}}\,\dd\theta'
+    =\theta\,\sqrt{A^{2}+\frac{b^{2}}{4\pi^{2}}},\qquad
+    s_{\text{vuelta}}=\sqrt{(2\pi A)^{2}+b^{2}} .}
+  \]
+  \item \emph{Interpretación} (\cref{fig:helice-desarrollo}). Al desarrollar
+  el cilindro, una vuelta de hélice es la hipotenusa de un triángulo de
+  catetos $2\pi A$ (perímetro) y $b$ (paso).\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \def\L{5.6}\def\B{2.4}
+  \fill[cian,opacity=0.08] (0,0) rectangle (\L,\B);
+  \draw[regla!80!tenue,line width=0.5pt] (0,0) rectangle (\L,\B);
+  \draw[texto,line width=1.3pt] (0,0) -- node[pos=0.64,sloped,below,etiq,inner sep=5pt]
+     {$s_{\text{vuelta}}=\sqrt{(2\pi A)^{2}+b^{2}}$} (\L,\B);
+  \draw[aux] (\L,0) -- (\L,\B);
+  \draw[cian,line width=0.6pt,<->] (0,-0.35) -- (\L,-0.35);
+  \node[peq,anchor=north,inner sep=3pt] at (\L/2,-0.35) {$2\pi A$ (perímetro)};
+  \draw[cian,line width=0.6pt,<->] (\L+0.35,0) -- (\L+0.35,\B);
+  \node[peq,anchor=west,inner sep=3pt] at (\L+0.35,\B/2) {$b$ (paso)};
+  \coordinate (O) at (0,0); \coordinate (X) at (1,0); \coordinate (Q) at (\L,\B);
+  \pic[draw=violeta,line width=0.6pt,angle radius=0.9cm,"$\alpha$",angle eccentricity=1.35,font=\small,violeta]
+     {angle = X--O--Q};
+\end{tikzpicture}
+\caption{Desarrollo plano del cilindro de radio $A$: la hélice se convierte en
+una recta de pendiente $\tan\alpha=b/(2\pi A)$, ángulo constante con las
+generatrices horizontales; de ahí la longitud por vuelta.}
+\label{fig:helice-desarrollo}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{8}[Espiral cónica]
+\label{prob:8}
+Hallar la longitud de arco de la curva $x=\e^{t}\cos t$, $y=\e^{t}\sin t$,
+$z=\e^{t}$ desde $t=0$ hasta $t=2$.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Derivadas}.
+  $\dot x=\e^{t}(\cos t-\sin t)$, $\dot y=\e^{t}(\sin t+\cos t)$, $\dot z=\e^{t}$.
+  \item \emph{Módulo}. Los términos cruzados se cancelan:
+  $\dot x^{2}+\dot y^{2}=\e^{2t}\bigl[(\cos t-\sin t)^{2}+(\sin t+\cos t)^{2}\bigr]=2\e^{2t}$, luego
+  $\norm{\dot{\vb{r}}}=\sqrt{3}\,\e^{t}$.
+  \item \emph{Integral}, por \eqref{eq:arco}:
+  \[
+    \resultado{s=\int_{0}^{2}\sqrt3\,\e^{t}\,\dd t=\sqrt3\,(\e^{2}-1)\simeq11{,}07 .}
+  \]
+  \item \emph{Atajo en cilíndricas}. $\rho=\e^{t}$, $\varphi=t$, $z=\e^{t}$: la curva vive en
+  el cono $z=\rho$. Con $\dd s^{2}=\dd\rho^{2}+\rho^{2}\dd\varphi^{2}+\dd z^{2}$,
+  $\dot s^{2}=\e^{2t}+\e^{2t}+\e^{2t}=3\e^{2t}$, sin ningún seno ni coseno.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\tdplotsetmaincoords{60}{150}
+\begin{tikzpicture}[tdplot_main_coords,scale=0.55]
+  \def\Z{8.0}
+  % cono z = rho
+  \foreach \zz in {2.5,5,7.39}{
+    \draw[regla!85!tenue,line width=0.45pt] plot[domain=0:360,samples=90,smooth]
+      ({\zz*cos(\x)},{\zz*sin(\x)},\zz);}
+  \foreach \ang in {0,45,...,315}{
+    \draw[regla!85!tenue,line width=0.45pt] (0,0,0) -- ({7.39*cos(\ang)},{7.39*sin(\ang)},7.39);}
+  \draw[eje] (0,0,0) -- (0,0,10.2) node[anchor=south,peq]{$z$};
+  % espiral: continuación tenue y tramo pedido
+  \draw[texto!70,line width=0.8pt,dash pattern=on 2.5pt off 2pt] plot[domain=-5:0,samples=120,smooth]
+    ({exp(\x)*cos(deg(\x))},{exp(\x)*sin(deg(\x))},{exp(\x)});
+  \draw[cian,line width=1.5pt] plot[domain=0:2,samples=80,smooth]
+    ({exp(\x)*cos(deg(\x))},{exp(\x)*sin(deg(\x))},{exp(\x)});
+  \node[punto,pin={[peq,pin distance=9mm,pin edge={tenue,line width=0.4pt}]190:{$t=0$}}] at (1,0,1) {};
+  \pgfmathsetmacro{\ex}{exp(2)}
+  \node[punto,pin={[peq,pin distance=7mm,pin edge={tenue,line width=0.4pt}]-20:{$t=2$}}] at ({\ex*cos(deg(2))},{\ex*sin(deg(2))},\ex) {};
+\end{tikzpicture}
+\caption{Espiral cónica $\vb{r}(t)=\e^{t}(\cos t,\sin t,1)$ sobre el cono
+$z=\rho$ (semiángulo $45^{\circ}$). En cian el tramo $0\le t\le2$, de
+longitud $\sqrt3(\e^{2}-1)$; a trazos, la continuación para $t<0$, que se
+enrolla hacia el vértice con longitud finita, $\sqrt3$.}
+\label{fig:conica}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{9}[Triedro de Frenet de tres curvas]
+\label{prob:9}
+Hallar el triedro de Frenet para una partícula que describe una
+circunferencia de radio $R$. Repetir el cálculo para una elipse de semiejes
+$a,b>0$ y una hélice circular de radio $R$ y paso $b>0$, esto es, avanzando
+una distancia $b$ paralela al eje por cada vuelta completa.
+\end{problema}
+
+\begin{resolucion}
+Se aplica el método de la \cref{sec:frenet} (\cref{prop:formulas-t}).
+\begin{enumerate}
+  \item \emph{Circunferencia}, $\vb{r}=R(\cos t,\sin t,0)$.
+  $\vb{v}=R(-\sin t,\cos t,0)$, $v=R$; $\vb{a}=-R(\cos t,\sin t,0)$;
+  $\vb{v}\times\vb{a}=R^{2}\kk$.
+  \[
+    \resultado{\utau=(-\sin t,\cos t,0),\quad \un=-(\cos t,\sin t,0),\quad \ub=\kk,\quad
+    \kappa=\frac1R,\quad \tors=0 .}
+  \]
+  \item \emph{Elipse}, $\vb{r}=(a\cos t,\ b\sin t,\ 0)$. Sea
+  $\sigma(t)\defeq\sqrt{a^{2}\sin^{2}t+b^{2}\cos^{2}t}=v$.
+  \begin{itemize}
+    \item $\vb{v}=(-a\sin t,\ b\cos t,\ 0)$, $\vb{a}=(-a\cos t,\ -b\sin t,\ 0)$.
+    \item $\vb{v}\times\vb{a}=\bigl(ab\sin^{2}t+ab\cos^{2}t\bigr)\kk=ab\,\kk$: $\ub=\kk$.
+    \item $\un=\ub\times\utau=\kk\times\dfrac{(-a\sin t,\ b\cos t,0)}{\sigma}$, con
+    $\kk\times(X\ii+Y\jj)=-Y\ii+X\jj$.
+  \end{itemize}
+  \[
+    \resultado{\utau=\frac{(-a\sin t,\ b\cos t,\ 0)}{\sigma},\quad
+    \un=-\frac{(b\cos t,\ a\sin t,\ 0)}{\sigma},\quad
+    \ub=\kk,\quad \kappa=\frac{ab}{\sigma^{3}},\quad \tors=0 .}
+  \]
+  Si $a>b$: $\kappa_{\max}=a/b^{2}$ en los vértices $(\pm a,0)$ y
+  $\kappa_{\min}=b/a^{2}$ en $(0,\pm b)$ (\cref{fig:elipse}). Con $a=b=R$ se recupera la circunferencia.
+  \item \emph{Hélice}, $\vb{r}=(R\cos t,\ R\sin t,\ ct)$ con $c=b/2\pi$, $L\defeq\sqrt{R^{2}+c^{2}}=v$.
+  \begin{itemize}
+    \item $\vb{v}=(-R\sin t,\ R\cos t,\ c)$, $\vb{a}=(-R\cos t,\ -R\sin t,\ 0)$,
+          $\dot{\vb{a}}=(R\sin t,\ -R\cos t,\ 0)$.
+    \item $\vb{v}\times\vb{a}=\begin{vmatrix}\ii&\jj&\kk\\-R\sin t&R\cos t&c\\-R\cos t&-R\sin t&0\end{vmatrix}
+          =(Rc\sin t,\ -Rc\cos t,\ R^{2})$, de módulo $RL$.
+    \item $(\vb{v}\times\vb{a})\cdot\dot{\vb{a}}=R^{2}c\sin^{2}t+R^{2}c\cos^{2}t=R^{2}c$.
+  \end{itemize}
+  \[
+    \resultado{
+    \begin{gathered}
+    \utau=\frac{(-R\sin t,\ R\cos t,\ c)}{L},\qquad
+    \un=-(\cos t,\ \sin t,\ 0),\qquad
+    \ub=\frac{(c\sin t,\ -c\cos t,\ R)}{L},\\
+    \kappa=\frac{R}{R^{2}+c^{2}}=\frac{4\pi^{2}R}{4\pi^{2}R^{2}+b^{2}},\qquad
+    \tors=\frac{c}{R^{2}+c^{2}}=\frac{2\pi b}{4\pi^{2}R^{2}+b^{2}} .
+    \end{gathered}}
+  \]
+  \item \emph{Comprobaciones}. $\un\cdot\utau=0$; $\un$ apunta al eje
+  (\cref{fig:frenet}); $\kappa,\tors$ constantes; si $b\to0$, $\kappa\to1/R$ y
+  $\tors\to0$ (circunferencia); si $R\to0$, $\kappa\to0$ (recta).\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=10.5cm,height=6.4cm,axis equal image,
+  xmin=-2.9,xmax=2.9,ymin=-1.6,ymax=1.75,xlabel={$x$},ylabel={$y$},
+  xtick={-2,-1,0,1,2},ytick={-1,0,1},grid=none]
+  % circunferencias osculatrices
+  \addplot[violeta,line width=0.6pt,dash pattern=on 3pt off 2pt,domain=0:360,samples=80]
+    ({1.5+0.5*cos(x)},{0.5*sin(x)});
+  \addplot[violeta,line width=0.6pt,dash pattern=on 3pt off 2pt,domain=0:360,samples=80]
+    ({-1.5+0.5*cos(x)},{0.5*sin(x)});
+  \addplot[ambar,line width=0.6pt,dash pattern=on 3pt off 2pt,domain=62:118,samples=60]
+    ({4*cos(x)},{-3+4*sin(x)});
+  % elipse
+  \addplot[texto,line width=1.2pt,domain=0:360,samples=120,smooth] ({2*cos(x)},{sin(x)});
+  % normales
+  \foreach \t in {0,30,...,330}{
+    \edef\temp{\noexpand\draw[vec,rosa,line width=0.6pt]
+      (axis cs:{2*cos(\t)},{sin(\t)}) --
+      (axis cs:{2*cos(\t)-0.38*cos(\t)/sqrt(4*sin(\t)^2+cos(\t)^2)},
+               {sin(\t)-0.38*2*sin(\t)/sqrt(4*sin(\t)^2+cos(\t)^2)});}\temp}
+  \node[violeta,font=\footnotesize,anchor=south,inner sep=1pt] at (axis cs:2.2,0.55) {$\rho_{c}=b^{2}/a$};
+  \node[ambar,font=\footnotesize,anchor=south,inner sep=4pt] at (axis cs:0,1.0) {$\rho_{c}=a^{2}/b$};
+\end{axis}
+\end{tikzpicture}
+\caption{Elipse $a=2$, $b=1$ con sus normales principales $\un$ (rosa). En los
+vértices del eje mayor la curvatura es máxima ($\rho_{c}=b^{2}/a=\tfrac12$,
+circunferencias violetas); en los del menor, mínima ($\rho_{c}=a^{2}/b=4$,
+arco ámbar).}
+\label{fig:elipse}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{clave}[violeta]{Consejo}
+Para curvas planas en el plano $XY$, $\vb{v}\times\vb{a}$ sólo tiene
+componente $z$: $\ub=\pm\kk$ y $\tors=0$ sin calcular nada más, y
+$\kappa=\abs{\dot x\ddot y-\dot y\ddot x}/(\dot x^{2}+\dot y^{2})^{3/2}$.
+\end{clave}
+
+% =====================================================================
+\subsection{Tipo D · Gradiente, laplaciano e identidades}
+% =====================================================================
+
+\begin{problema}{2}[Gradientes y laplaciano de funciones radiales]
+\label{prob:2}
+Demostrar las siguientes igualdades:
+(a) $\grad r^{n}=n\,r^{n-2}\,\vb{r}$;\quad
+(b) $\grad f(r)=\dfrac{\vb{r}}{r}\dfrac{\dd f}{\dd r}$;\quad
+(c) $\lap(\ln r)=\dfrac{1}{r^{2}}$.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Lema: $\grad r=\vb{r}/r$}. De $r^{2}=x^{2}+y^{2}+z^{2}$,
+  $2r\,\partial_{x}r=2x$, luego $\partial_{x}r=x/r$ y análogamente: $\grad r=(x,y,z)/r=\vb{r}/r=\er$.
+  \item \emph{(b)}. Regla de la cadena: $\partial_{x}f(r)=f'(r)\,\partial_{x}r$, luego
+  $\grad f(r)=f'(r)\,\grad r=\dfrac{\vb{r}}{r}\dfrac{\dd f}{\dd r}$.
+  (En esféricas es inmediato: sólo sobrevive el término $\partial_{r}f\,\er$ de \eqref{eq:grad-esf}.)
+  \item \emph{(a)}. Caso $f=r^{n}$ de (b): $\grad r^{n}=n\,r^{n-1}\,\dfrac{\vb{r}}{r}=n\,r^{n-2}\,\vb{r}$.
+  \item \emph{(c), vía 1: laplaciano radial}. Por \eqref{eq:lap-esf},
+  $\lap f(r)=\dfrac{1}{r^{2}}\dfrac{\dd}{\dd r}\Bigl(r^{2}\dfrac{\dd f}{\dd r}\Bigr)$. Con $f=\ln r$,
+  $r^{2}f'=r$ y
+  \[
+    \resultado{\lap(\ln r)=\frac{1}{r^{2}}\od{r}{r}=\frac{1}{r^{2}} .}
+  \]
+  \item \emph{(c), vía 2: cartesianas}. Por (b), $\grad\ln r=\vb{r}/r^{2}$. Con
+  $\div(f\vb{A})=f\,\div\vb{A}+\vb{A}\cdot\grad f$ (\cref{tab:identidades}),
+  $\div\vb{r}=3$ y (a) con $n=-2$:
+  \[
+    \div\Bigl(\frac{\vb{r}}{r^{2}}\Bigr)=\frac{3}{r^{2}}+\vb{r}\cdot(-2\,r^{-4}\,\vb{r})=\frac{3}{r^{2}}-\frac{2}{r^{2}}=\frac{1}{r^{2}} .
+  \]
+  \item \emph{Observación}. El resultado depende de la dimensión: en el plano
+  ($r=\rho$), $\lap\ln\rho=\tfrac{1}{\rho}(\rho\cdot\tfrac{1}{\rho})'=0$; $\ln\rho$ es el potencial
+  de una línea cargada.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+\begin{problema}{6}[Identidades nulas]
+\label{prob:6}
+Demostrar que en general se cumple $\div(\rot\vb{A})=0$ y
+$\rot(\grad\Phi)=\vb{0}$.
+\end{problema}
+
+\begin{resolucion}
+Supondremos $\vb{A},\Phi\in\C^{2}$, de modo que, por el teorema de Schwarz,
+$\partial_{i}\partial_{j}=\partial_{j}\partial_{i}$.
+\begin{enumerate}
+  \item \emph{Primera, con índices}. $(\rot\vb{A})_{i}=\varepsilon_{ijk}\partial_{j}A_{k}$, luego
+  \[
+    \div(\rot\vb{A})=\partial_{i}\bigl(\varepsilon_{ijk}\partial_{j}A_{k}\bigr)
+    =\underbrace{\varepsilon_{ijk}}_{\text{antisim. en }ij}\ \underbrace{\partial_{i}\partial_{j}}_{\text{sim. en }ij}A_{k}=0,
+  \]
+  porque intercambiando los nombres mudos $i\leftrightarrow j$ la suma
+  $S=\varepsilon_{ijk}\partial_{i}\partial_{j}A_{k}$ cumple $S=\varepsilon_{jik}\partial_{j}\partial_{i}A_{k}=-S$.
+  \item \emph{Primera, explícita}.
+  \[
+    \partial_{x}(\partial_{y}A_{z}-\partial_{z}A_{y})+\partial_{y}(\partial_{z}A_{x}-\partial_{x}A_{z})+\partial_{z}(\partial_{x}A_{y}-\partial_{y}A_{x})=0,
+  \]
+  pues las seis derivadas cruzadas se cancelan dos a dos.
+  \item \emph{Segunda}. $[\rot(\grad\Phi)]_{i}=\varepsilon_{ijk}\partial_{j}\partial_{k}\Phi=0$ por el
+  mismo argumento ($\varepsilon$ antisimétrico en $jk$, $\partial_{j}\partial_{k}$ simétrico). Por
+  ejemplo, la componente $x$ es $\partial_{y}\partial_{z}\Phi-\partial_{z}\partial_{y}\Phi=0$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+\begin{clave}[violeta]{Consejo}
+«Antisimétrico contraído con simétrico da cero» resuelve en una línea
+cualquier identidad de este tipo. Física: los campos gradiente no tienen
+remolinos y los campos rotacionales no tienen fuentes.
+\end{clave}
+
+\begin{problema}{10}[Gradientes]
+\label{prob:10}
+Hallar el gradiente de las siguientes funciones:
+(a) $\Phi(x,y,z)=x^{2}+y^{2}+z^{2}$;\quad
+(b) $\Phi(x,y,z)=x\cos x+xyz$;\quad
+(c) $\Phi(r,\theta,\varphi)=1/r$.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{(a)}. $\grad\Phi=(2x,2y,2z)=\resultado{2\,\vb{r}}$; también, con $\Phi=r^{2}$ y el \cref{prob:2}(a), $2r^{0}\vb{r}$.
+  \item \emph{(b)}. Derivando parcialmente (producto en el primer término):
+  \[
+    \resultado{\grad\Phi=(\cos x-x\sin x+yz)\,\ii+xz\,\jj+xy\,\kk .}
+  \]
+  \item \emph{(c)}. En esféricas \eqref{eq:grad-esf}, sólo depende de $r$:
+  \[
+    \resultado{\grad\frac1r=-\frac{1}{r^{2}}\,\er=-\frac{\vb{r}}{r^{3}},}
+  \]
+  el campo coulombiano/gravitatorio de una carga puntual (salvo constantes).\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% =====================================================================
+\subsection{Tipo E · Campos conservativos}
+% =====================================================================
+
+\begin{problema}{5}[Potencial de un campo]
+\label{prob:5}
+Obtener el campo $\Phi(x,y,z)$ tal que, dado el vector
+$\vb{A}=2xy\,\ii+(x^{2}+2yz^{3})\,\jj+3y^{2}z^{2}\,\kk$, se cumpla
+$\vb{A}=\grad\Phi$. Verificar además que $\rot\vb{A}=\vb{0}$.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Rotacional}, por \eqref{eq:rot-cart}:
+  \[
+    \rot\vb{A}=
+    \bigl(\underbrace{6yz^{2}}_{\partial_{y}A_{z}}-\underbrace{6yz^{2}}_{\partial_{z}A_{y}}\bigr)\ii
+    +\bigl(\underbrace{0}_{\partial_{z}A_{x}}-\underbrace{0}_{\partial_{x}A_{z}}\bigr)\jj
+    +\bigl(\underbrace{2x}_{\partial_{x}A_{y}}-\underbrace{2x}_{\partial_{y}A_{x}}\bigr)\kk=\vb{0}.
+  \]
+  Como $\R^{3}$ es simplemente conexo, por el \cref{teo:conservativo} existe $\Phi$.
+  \item \emph{Integrar en $x$}. $\partial_{x}\Phi=2xy\Rightarrow\Phi=x^{2}y+g(y,z)$.
+  \item \emph{Imponer $\partial_{y}\Phi=A_{y}$}. $x^{2}+\partial_{y}g=x^{2}+2yz^{3}\Rightarrow
+  g=y^{2}z^{3}+h(z)$.
+  \item \emph{Imponer $\partial_{z}\Phi=A_{z}$}. $3y^{2}z^{2}+h'(z)=3y^{2}z^{2}\Rightarrow h=C$.
+  \[
+    \resultado{\Phi(x,y,z)=x^{2}y+y^{2}z^{3}+C .}
+  \]
+  \item \emph{Comprobación por la poligonal} \eqref{eq:poligonal}:
+  $\int_{0}^{x}0\,\dd s+\int_{0}^{y}x^{2}\,\dd s+\int_{0}^{z}3y^{2}s^{2}\,\dd s=x^{2}y+y^{2}z^{3}$. \checkmark
+  \item \emph{Verificación}. $\grad\Phi=(2xy,\ x^{2}+2yz^{3},\ 3y^{2}z^{2})=\vb{A}$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+\begin{clave}[violeta]{Consejo}
+Comprueba siempre $\rot\vb{A}=\vb{0}$ \emph{antes} de integrar: si falla, el
+método de integración sucesiva lleva a una contradicción (una «función de
+$z$» que depende de $x$). Consecuencia física: el trabajo de $\vb{A}$ entre
+dos puntos es $\Phi(Q)-\Phi(P)$, sin calcular ninguna integral de línea.
+\end{clave}

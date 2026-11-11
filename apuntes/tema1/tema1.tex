@@ -1,0 +1,77 @@
+% =====================================================================
+%  Mecánica I · Tema 1
+%  La Mecánica Newtoniana. Cinemática de una partícula en el espacio
+%  Compilar:  latexmk -lualatex tema1.tex
+% =====================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{estilo-oscuro}
+
+\renewcommand{\cabeceraimpar}{Tema 1 · Cinemática de una partícula en el espacio}
+\renewcommand{\cabecerapar}{Mecánica I}
+
+\hypersetup{pdftitle={Tema 1. La Mecánica Newtoniana. Cinemática de una partícula en el espacio},
+  pdfauthor={Daniel Martín Guerrero},pdfsubject={Mecánica I}}
+
+\begin{document}
+
+% =====================================================================
+%  PORTADA
+% =====================================================================
+\begin{titlepage}
+\newgeometry{left=27mm,right=27mm,top=20mm,bottom=20mm}
+\pagecolor{fondo}\color{texto}
+\centering
+\includegraphics[width=0.30\textwidth]{figs/logo_usal.png}\par
+\vspace{6mm}
+{\color{tenue!60}\rule{\textwidth}{0.4pt}}\par
+\vspace{4mm}
+{\small\color{tenue}\textls[180]{\textsc{Facultad de Ciencias}}\quad·\quad
+ \textls[180]{\textsc{Grado en Física}}}\par
+\vspace{13mm}
+{\color{cian}\textls[220]{\textsc{Mecánica I}}}\par
+\vspace{2.2mm}
+{\small\color{tenue}\textls[200]{\textsc{Tema 1}}}\par
+\vspace{9mm}
+{\fontsize{29}{31}\selectfont\bfseries Cinemática de una partícula\\[1mm] en el espacio\par}
+\vspace{7mm}
+{\color{tenue}\rule{0.22\textwidth}{0.4pt}}\par
+\vspace{5mm}
+{\itshape La Mecánica Newtoniana · Coordenadas curvilíneas, triedro intrínseco\\
+y análisis vectorial\par}
+\vfill
+\includegraphics[width=1.0\textwidth]{figs/portada.png}\par
+\vfill
+{\small
+$\displaystyle \vb{a}=\dot v\,\utau+\kappa v^{2}\,\un,\qquad
+\oint_{\partial S}\vb{A}\cdot\dd\vb{r}=\int_{S}(\rot\vb{A})\cdot\dd\vb{S}$\par}
+\vspace{9mm}
+{\color{tenue!60}\rule{\textwidth}{0.4pt}}\par
+\vspace{3mm}
+{\small
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r@{}}
+{\color{cian}\scriptsize\textls[200]{\textsc{Autor}}} &
+{\color{cian}\scriptsize\textls[200]{\textsc{Asignatura}}} &
+{\color{cian}\scriptsize\textls[200]{\textsc{Apuntes formalizados}}}\\[0.6mm]
+Daniel Martín Guerrero & Mecánica I (100810) & {\color{tenue}Salamanca, curso 2026/2027}\\
+ & {\color{tenue}Teoría y seminario de problemas} & \\
+\end{tabular*}}
+\restoregeometry
+\end{titlepage}
+
+% =====================================================================
+\setcounter{page}{2}
+\tableofcontents
+\clearpage
+
+\input{secciones/01-coordenadas}
+\input{secciones/02-curvilineas}
+\input{secciones/03-cinematica}
+\input{secciones/04-frenet}
+\input{secciones/05-campos}
+\input{secciones/06-operadores}
+\input{secciones/07-integrales}
+\input{secciones/08-resumen}
+\input{secciones/09-seminario}
+\input{secciones/10-referencias}
+
+\end{document}

@@ -1,0 +1,285 @@
+% =====================================================================
+\section{Integrales de línea, superficie y volumen}
+\label{sec:integrales}
+% =====================================================================
+
+\subsection{Integrales de línea: circulación y longitud}
+
+\begin{proposicion}[Cálculo de una integral de línea]
+\label{prop:linea}
+Si $C$ está parametrizada por $\vb{r}(t)$, $t\in[t_{0},t_{1}]$, de $P$ a $Q$,
+\begin{equation}
+  \int_{C}\vb{A}\cdot\dd\vb{r}=\int_{t_{0}}^{t_{1}}\vb{A}\bigl(\vb{r}(t)\bigr)\cdot\dot{\vb{r}}(t)\,\dd t
+  =\int_{P}^{Q}\bigl(A_{1}h_{1}\dd q^{1}+A_{2}h_{2}\dd q^{2}+A_{3}h_{3}\dd q^{3}\bigr),
+  \label{eq:linea}
+\end{equation}
+la última forma en un sistema ortogonal, usando \eqref{eq:metrica}. La
+integral \emph{depende del camino} salvo que $\vb{A}$ sea conservativo
+(\cref{subsec:conservativos}).
+\end{proposicion}
+
+\begin{ejemplo}[Circulación sobre una circunferencia]
+\label{ej:circulacion}
+Calcular la circulación de $\vb{A}=r\sin\theta\,\er+2r\,\ef$ a lo largo de
+la circunferencia $r=1$ del plano $XY$, recorrida en sentido antihorario.
+\begin{enumerate}
+  \item \emph{Desplazamiento}. En el plano $XY$ ($\theta=\pi/2$),
+        $\dd\vb{r}=\dd r\,\er+r\,\dd\theta\,\et+r\sin\theta\,\dd\varphi\,\ef$ con
+        $\dd r=\dd\theta=0$: $\dd\vb{r}=r\,\dd\varphi\,\ef$.
+  \item \emph{Integrando}. $\vb{A}\cdot\dd\vb{r}=2r\cdot r\,\dd\varphi=2r^{2}\dd\varphi$
+        (la componente radial no trabaja).
+  \item \emph{Integral}. $\Gamma=\displaystyle\int_{0}^{2\pi}2r^{2}\dd\varphi=4\pi r^{2}\big|_{r=1}=4\pi$.
+\end{enumerate}
+\end{ejemplo}
+
+\begin{proposicion}[Longitud de una curva]
+\begin{equation}
+  l_{PQ}=\int_{P}^{Q}\dd s=\int_{t_{0}}^{t_{1}}\sqrt{\dot x^{2}+\dot y^{2}+\dot z^{2}}\,\dd t
+  =\int_{t_{0}}^{t_{1}}\sqrt{\textstyle\sum_{i}h_{i}^{2}(\dot q^{i})^{2}}\,\dd t .
+  \label{eq:longitud}
+\end{equation}
+\end{proposicion}
+
+\begin{ejemplo}[Hélice]
+\label{ej:helice-longitud}
+$x=A\cos\omega t$, $y=A\sin\omega t$, $z=vt$, $t\in[0,2\pi]$. Entonces
+$\dot x^{2}+\dot y^{2}+\dot z^{2}=(A\omega)^{2}+v^{2}$, constante, y
+$l=\int_{0}^{2\pi}\sqrt{(A\omega)^{2}+v^{2}}\,\dd t=2\pi\sqrt{(A\omega)^{2}+v^{2}}$.
+\end{ejemplo}
+
+\subsection{Integrales de superficie: flujo}
+
+\begin{proposicion}[Cálculo de un flujo]
+\label{prop:flujo}
+Si $S$ está parametrizada por $\vb{r}(u,v)$, $(u,v)\in D$,
+\begin{equation}
+  \int_{S}\vb{A}\cdot\dd\vb{S}=\iint_{D}\vb{A}\cdot\Bigl(\pd{\vb{r}}{u}\times\pd{\vb{r}}{v}\Bigr)\dd u\,\dd v .
+\end{equation}
+Sobre una superficie coordenada $q^{3}=\text{const}$, por \eqref{eq:dS},
+$\dd\vb{S}=h_{1}h_{2}\dd q^{1}\dd q^{2}\uv{e}_{3}$ y el flujo es la integral doble
+\begin{equation}
+  \Phi=\int_{a}^{b}\dd q^{1}\int_{c(q^{1})}^{d(q^{1})}\dd q^{2}\,\bigl[A_{3}h_{1}h_{2}\bigr](q^{1},q^{2},q^{3}).
+\end{equation}
+\end{proposicion}
+
+\begin{teorema}[Fubini]
+Si el integrando es continuo y el dominio es regular, las integrales
+iteradas pueden calcularse en cualquier orden y coinciden con la integral
+múltiple.
+\end{teorema}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=2.3]
+  \fill[cian,opacity=0.08] (0,0) -- (1,0) arc[start angle=0,end angle=90,radius=1] -- cycle;
+  \draw[eje] (0,0) -- (1.25,0) node[anchor=north,peq]{$x$};
+  \draw[eje] (0,0) -- (0,1.2) node[anchor=east,peq]{$y$};
+  \draw[texto,line width=0.9pt] (1,0) arc[start angle=0,end angle=90,radius=1];
+  \pgfmathsetmacro{\yy}{0.55}\pgfmathsetmacro{\xx}{sqrt(1-\yy*\yy)}
+  \fill[cian,opacity=0.45] (0,\yy) rectangle (\xx,\yy+0.07);
+  \draw[cian,line width=0.5pt] (0,\yy) rectangle (\xx,\yy+0.07);
+  \node[peq,anchor=east,inner sep=2pt] at (0,\yy+0.035) {$\dd y$};
+  \draw[aux] (\xx,0) -- (\xx,\yy);
+  \node[peq,anchor=north,inner sep=2pt] at (\xx,0) {$\sqrt{1-y^{2}}$};
+  \node[peq,anchor=south west,inner sep=1pt] at ({cos(60)},{sin(60)}) {$x^{2}+y^{2}=1$};
+  \node[etiq,anchor=south] at (0.55,1.25) {(a) Cartesianas};
+\end{tikzpicture}\hspace{12mm}%
+\begin{tikzpicture}[scale=2.3]
+  \fill[violeta,opacity=0.08] (0,0) -- (1,0) arc[start angle=0,end angle=90,radius=1] -- cycle;
+  \draw[eje] (0,0) -- (1.25,0) node[anchor=north,peq]{$x$};
+  \draw[eje] (0,0) -- (0,1.2) node[anchor=east,peq]{$y$};
+  \draw[texto,line width=0.9pt] (1,0) arc[start angle=0,end angle=90,radius=1];
+  \def\ra{0.55}\def\rb{0.68}\def\fa{32}\def\fb{44}
+  \fill[violeta,opacity=0.5] ({\ra*cos(\fa)},{\ra*sin(\fa)}) arc[start angle=\fa,end angle=\fb,radius=\ra]
+     -- ({\rb*cos(\fb)},{\rb*sin(\fb)}) arc[start angle=\fb,end angle=\fa,radius=\rb] -- cycle;
+  \draw[aux] (0,0) -- ({\rb*cos(\fa)},{\rb*sin(\fa)});
+  \draw[aux] (0,0) -- ({\rb*cos(\fb)},{\rb*sin(\fb)});
+  \node[peq,anchor=north west,inner sep=1pt] at ({0.62*cos(\fa)},{0.62*sin(\fa)}) {$\dd\rho$};
+  \node[peq,anchor=south east,inner sep=1pt] at ({\rb*cos(\fb+2)},{\rb*sin(\fb+2)}) {$\rho\,\dd\varphi$};
+  \node[etiq,anchor=south] at (0.55,1.25) {(b) Polares};
+\end{tikzpicture}
+\caption{Área del cuadrante de círculo unidad. (a) Franjas horizontales de
+anchura $\sqrt{1-y^{2}}$ y espesor $\dd y$. (b) Elemento polar de lados
+$\dd\rho$ y $\rho\,\dd\varphi$, de área $\rho\,\dd\rho\,\dd\varphi$.}
+\label{fig:cuadrante}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{ejemplo}[Área del cuadrante, \cref{fig:cuadrante}]
+\label{ej:cuadrante}
+\emph{Cartesianas}: con el cambio $y=\sin u$,
+\[
+  S=\int_{0}^{1}\dd y\int_{0}^{\sqrt{1-y^{2}}}\dd x=\int_{0}^{1}\sqrt{1-y^{2}}\,\dd y
+  =\int_{0}^{\pi/2}\cos^{2}u\,\dd u=\frac{\pi}{4}.
+\]
+\emph{Polares} ($h_{\rho}h_{\varphi}=\rho$):
+$S=\displaystyle\int_{0}^{1}\dd\rho\int_{0}^{\pi/2}\rho\,\dd\varphi=\frac{\pi}{2}\int_{0}^{1}\rho\,\dd\rho=\frac{\pi}{4}$.
+Las coordenadas adaptadas a la frontera convierten los límites variables en constantes.
+\end{ejemplo}
+
+\subsection{Integrales de volumen}
+
+\begin{teorema}[Cambio de variables]
+\label{teo:cambio}
+Para un sistema ortogonal, por \cref{prop:elementos},
+\begin{equation}
+  \int_{V}\Phi\,\dd V=\int\!\!\int\!\!\int\dd q^{1}\dd q^{2}\dd q^{3}\,\bigl[\Phi\,h_{1}h_{2}h_{3}\bigr](q^{1},q^{2},q^{3}),
+\end{equation}
+y, por Fubini, el orden de integración puede intercambiarse.
+\end{teorema}
+
+\begin{ejemplo}[Volumen de una semiesfera de radio $R$]
+\emph{Esféricas} ($\dd V=r^{2}\sin\theta\,\dd r\,\dd\theta\,\dd\varphi$, límites constantes):
+\[
+  V=\int_{0}^{R}r^{2}\dd r\int_{0}^{\pi/2}\sin\theta\,\dd\theta\int_{0}^{2\pi}\dd\varphi
+  =\Bigl[\tfrac{r^{3}}{3}\Bigr]_{0}^{R}\bigl[-\cos\theta\bigr]_{0}^{\pi/2}\bigl[\varphi\bigr]_{0}^{2\pi}
+  =\frac{2\pi}{3}R^{3}.
+\]
+\emph{Cartesianas}: por simetría basta $\tfrac14$ de la semiesfera. Con
+$a\defeq\sqrt{R^{2}-x^{2}}$,
+\[
+  V=4\int_{0}^{R}\dd x\int_{0}^{a}\dd y\int_{0}^{\sqrt{a^{2}-y^{2}}}\dd z
+  =4\int_{0}^{R}\dd x\underbrace{\int_{0}^{a}\sqrt{a^{2}-y^{2}}\,\dd y}_{\pi a^{2}/4\ (\cref{ej:cuadrante})}
+  =\pi\int_{0}^{R}(R^{2}-x^{2})\,\dd x=\frac{2\pi}{3}R^{3}.
+\]
+\end{ejemplo}
+
+\subsection{Teoremas de Gauss y de Stokes}
+
+\begin{teorema}[Gauss--Ostrogradski, de la divergencia]
+\label{teo:gauss}
+Sea $V\subset\R^{3}$ una región acotada cuya frontera $\partial V$ es una
+superficie cerrada regular a trozos, orientada con la normal saliente, y
+$\vb{A}$ un campo de clase $\C^{1}$ en un abierto que contiene a $V$. Entonces
+\begin{equation}
+  \resultado{\oint_{\partial V}\vb{A}\cdot\dd\vb{S}=\int_{V}\div\vb{A}\,\dd V} .
+  \label{eq:gauss}
+\end{equation}
+\end{teorema}
+
+\begin{teorema}[Stokes]
+\label{teo:stokes}
+Sea $S$ una superficie orientable regular a trozos cuya frontera
+$C=\partial S$ es una curva cerrada, orientada con $S$ por la regla de la
+mano derecha, y $\vb{A}$ de clase $\C^{1}$ en un abierto que contiene a $S$. Entonces
+\begin{equation}
+  \resultado{\oint_{\partial S}\vb{A}\cdot\dd\vb{r}=\int_{S}(\rot\vb{A})\cdot\dd\vb{S}} .
+  \label{eq:stokes}
+\end{equation}
+\end{teorema}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % Stokes: casquete sobre una curva cerrada
+  \fill[violeta,opacity=0.10] (-2,0) arc[start angle=180,end angle=360,x radius=2,y radius=0.6]
+     .. controls (2,1.6) and (1,2.4) .. (0,2.4) .. controls (-1,2.4) and (-2,1.6) .. (-2,0);
+  \draw[texto!70,line width=0.5pt] (2,0) .. controls (2,1.6) and (1,2.4) .. (0,2.4)
+     .. controls (-1,2.4) and (-2,1.6) .. (-2,0);
+  \draw[cian,line width=0.6pt,dash pattern=on 2pt off 2pt] (2,0) arc[start angle=0,end angle=180,x radius=2,y radius=0.6];
+  \draw[cian,line width=1.1pt,postaction={decorate},
+    decoration={markings,mark=at position 0.5 with {\arrow{Stealth[length=7pt]}}}]
+    (-2,0) arc[start angle=180,end angle=360,x radius=2,y radius=0.6];
+  \node[cian,font=\small,anchor=north] at (0,-0.65) {$C=\partial S$};
+  \draw[vec,rosa] (0,2.4) -- (0,3.25) node[anchor=south,etiq,inner sep=1pt]{$\un$};
+  \draw[vec,rosa] (1.45,1.55) -- (2.1,2.1);
+  \draw[vec,rosa] (-1.45,1.55) -- (-2.1,2.1);
+  \node[violeta,font=\small] at (0,1.25) {$S$};
+  \node[etiq,anchor=south] at (0,3.75) {(a) Stokes};
+\end{tikzpicture}\hspace{14mm}%
+\begin{tikzpicture}[scale=1.0]
+  % Gauss: región cerrada con normales salientes
+  \path[fill=cian,opacity=0.10,draw=none]
+    plot[smooth cycle,tension=0.8] coordinates {(-2,0.4) (-1,1.9) (0.6,2.1) (2,1.2) (1.7,-0.3) (0,-0.6) (-1.5,-0.5)};
+  \draw[texto!75,line width=0.7pt]
+    plot[smooth cycle,tension=0.8] coordinates {(-2,0.4) (-1,1.9) (0.6,2.1) (2,1.2) (1.7,-0.3) (0,-0.6) (-1.5,-0.5)};
+  \draw[vec,rosa] (0.6,2.1) -- (0.65,2.95) node[anchor=south,etiq,inner sep=1pt]{$\dd\vb{S}=\un\,\dd S$};
+  \draw[vec,rosa] (2,1.2) -- (2.75,1.6);
+  \draw[vec,rosa] (1.7,-0.3) -- (2.3,-0.85);
+  \draw[vec,rosa] (-2,0.4) -- (-2.8,0.45);
+  \draw[vec,rosa] (0,-0.6) -- (0,-1.35);
+  \node[cian,font=\small] at (0,0.75) {$V$};
+  \node[texto!75,font=\small,anchor=south east] at (-1.1,1.95) {$\partial V$};
+  \node[etiq,anchor=south] at (0,3.75) {(b) Gauss};
+\end{tikzpicture}
+\caption{(a) Teorema de Stokes: la orientación de $C$ y la normal $\un$ de $S$
+están ligadas por la regla de la mano derecha; cualquier superficie con el
+mismo borde da el mismo flujo de $\rot\vb{A}$. (b) Teorema de Gauss: la
+frontera $\partial V$ se orienta con la normal \emph{saliente}.}
+\label{fig:gauss-stokes}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{observacion}[Lectura local]
+Aplicados a un volumen o a una superficie infinitesimales, \eqref{eq:gauss}
+y \eqref{eq:stokes} \emph{son} las definiciones \eqref{eq:div-def} y
+\eqref{eq:rot-def}: la divergencia es flujo por unidad de volumen y el
+rotacional, circulación por unidad de área.
+\end{observacion}
+
+\begin{observacion}[Las identidades nulas, vistas por Stokes y Gauss]
+Para una superficie \emph{cerrada} $\partial V$ no hay borde, luego
+$\oint_{\partial V}(\rot\vb{A})\cdot\dd\vb{S}=0$ y, por Gauss,
+$\int_{V}\div(\rot\vb{A})\,\dd V=0$ para todo $V$: de nuevo
+$\div(\rot\vb{A})=0$ (\cref{teo:nulas}).
+\end{observacion}
+
+\subsection{Campos conservativos}
+\label{subsec:conservativos}
+
+\begin{definicion}[Campo conservativo]
+$\vb{A}$ es \emph{conservativo} en $D$ si su circulación entre dos puntos
+no depende del camino:
+$\int_{P,C_{1}}^{Q}\vb{A}\cdot\dd\vb{r}=\int_{P,C_{2}}^{Q}\vb{A}\cdot\dd\vb{r}$
+para cualesquiera $C_{1},C_{2}$; equivalentemente, $\oint_{C}\vb{A}\cdot\dd\vb{r}=0$
+para toda curva cerrada $C=C_{1}\cup(-C_{2})$.
+\end{definicion}
+
+\begin{teorema}[Caracterización de los campos conservativos]
+\label{teo:conservativo}
+Sea $\vb{A}\in\C^{1}(D)$ con $D\subseteq\R^{3}$ abierto y conexo. Son
+equivalentes:
+\begin{casos}
+  \item $\vb{A}$ es conservativo;
+  \item existe $\Phi\in\C^{2}(D)$ (potencial) con $\vb{A}=\grad\Phi$.
+\end{casos}
+En tal caso $\rot\vb{A}=\vb{0}$. Si además $D$ es \emph{simplemente conexo},
+también $\rot\vb{A}=\vb{0}\ \Longrightarrow\ \vb{A}$ conservativo.
+\end{teorema}
+
+\begin{proof}
+(ii)$\Rightarrow$(i): $\int_{P}^{Q}\grad\Phi\cdot\dd\vb{r}=\int_{P}^{Q}\dd\Phi=\Phi(Q)-\Phi(P)$,
+independiente del camino. (i)$\Rightarrow$(ii): fijado $P_{0}$, se define
+$\Phi(\vb{r})=\int_{P_{0}}^{\vb{r}}\vb{A}\cdot\dd\vb{r}'$ (bien definida por (i)); entonces
+$\dd\Phi=\vb{A}\cdot\dd\vb{r}$ y, por \eqref{eq:grad-def}, $\vb{A}=\grad\Phi$.
+$\rot\vb{A}=\rot\grad\Phi=\vb{0}$ por \cref{teo:nulas}. Recíprocamente, si
+$D$ es simplemente conexo toda curva cerrada $C\subset D$ es borde de una
+superficie $S\subset D$ y, por Stokes,
+$\oint_{C}\vb{A}\cdot\dd\vb{r}=\int_{S}(\rot\vb{A})\cdot\dd\vb{S}=0$.
+\end{proof}
+
+\begin{observacion}[La hipótesis topológica importa]
+$\vb{A}=\dfrac{-y\,\ii+x\,\jj}{x^{2}+y^{2}}=\dfrac{\ef}{\rho}$ cumple
+$\rot\vb{A}=\vb{0}$ en $D=\R^{3}\setminus\{\text{eje }z\}$ (por \eqref{eq:rot-cil}:
+$\rho A_{\varphi}=1$ es constante), pero su circulación sobre la circunferencia
+$\rho=1$ es $\int_{0}^{2\pi}\tfrac{1}{\rho}\,\rho\,\dd\varphi=2\pi\neq0$: $D$ no es simplemente conexo.
+\end{observacion}
+
+\begin{clave}{Método: hallar el potencial de $\vb{A}$}
+\begin{enumerate}[leftmargin=1.4em]
+  \item \emph{Comprobar} $\rot\vb{A}=\vb{0}$ en un dominio simplemente conexo
+        (en $\R^{3}$ basta).
+  \item \emph{Integración sucesiva}: $\Phi=\int A_{x}\,\dd x+g(y,z)$; imponer
+        $\partial_{y}\Phi=A_{y}$ para hallar $g$ salvo $h(z)$; imponer
+        $\partial_{z}\Phi=A_{z}$ para hallar $h$ salvo constante.
+  \item \emph{Alternativa}: integrar por la poligonal
+        $(0,0,0)\to(x,0,0)\to(x,y,0)\to(x,y,z)$:
+        \begin{equation}
+          \Phi(x,y,z)=\int_{0}^{x}\!A_{x}(s,0,0)\dd s+\int_{0}^{y}\!A_{y}(x,s,0)\dd s+\int_{0}^{z}\!A_{z}(x,y,s)\dd s .
+          \label{eq:poligonal}
+        \end{equation}
+  \item \emph{Verificar} $\grad\Phi=\vb{A}$.
+\end{enumerate}
+\end{clave}

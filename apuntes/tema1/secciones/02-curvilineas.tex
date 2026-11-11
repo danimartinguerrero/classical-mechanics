@@ -1,0 +1,289 @@
+% =====================================================================
+\section{Coordenadas curvilíneas ortogonales}
+\label{sec:curvilineas}
+% =====================================================================
+
+Todo el problema de escribir magnitudes mecánicas en un sistema de
+coordenadas se reduce a dos datos: \emph{cuánto} se desplaza el punto al
+variar cada coordenada (los factores de escala $h_{i}$) y \emph{cómo gira}
+la base local de un punto a otro (las derivadas $\dd\uv{e}_{i}$).
+
+\subsection{Factores de escala y base local}
+
+\begin{definicion}[Factores de escala, base local]
+\label{def:escala}
+Sea $\vb{r}=\vb{r}(q^{1},q^{2},q^{3})$ un sistema de coordenadas
+(\cref{def:coordenadas}). Se definen los \emph{factores (parámetros) de
+escala} y los \emph{vectores unitarios} de la base local
+\begin{equation}
+  h_{i}\defeq\norm{\pd{\vb{r}}{q^{i}}},\qquad
+  \uv{e}_{i}\defeq\frac{1}{h_{i}}\pd{\vb{r}}{q^{i}},\qquad i=1,2,3
+  \quad(\text{sin suma}).
+  \label{eq:escala}
+\end{equation}
+El sistema es \emph{ortogonal} si $\uv{e}_{i}\cdot\uv{e}_{j}=\delta_{ij}$, y
+lo supondremos además \emph{dextrógiro}: $\uv{e}_{1}\times\uv{e}_{2}=\uv{e}_{3}$.
+\end{definicion}
+
+\begin{proposicion}[Desplazamiento y métrica]
+\label{prop:metrica}
+En un sistema ortogonal,
+\begin{equation}
+  \dd\vb{r}=\sum_{i=1}^{3}h_{i}\,\dd q^{i}\,\uv{e}_{i},
+  \qquad
+  \dd s^{2}\defeq\dd\vb{r}\cdot\dd\vb{r}
+  =h_{1}^{2}(\dd q^{1})^{2}+h_{2}^{2}(\dd q^{2})^{2}+h_{3}^{2}(\dd q^{3})^{2}.
+  \label{eq:metrica}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+Por la regla de la cadena,
+$\dd\vb{r}=\sum_{i}\pd{\vb{r}}{q^{i}}\dd q^{i}=\sum_{i}h_{i}\dd q^{i}\uv{e}_{i}$
+por \eqref{eq:escala}. Al multiplicar escalarmente, los términos cruzados se
+anulan por ortogonalidad.
+\end{proof}
+
+\begin{clave}{Dos maneras de obtener los $h_{i}$}
+\begin{enumerate}[leftmargin=1.4em]
+  \item \emph{Por definición}: derivar $\vb{r}$ (en cartesianas) respecto de
+        cada $q^{i}$ y tomar el módulo, \eqref{eq:escala}.
+  \item \emph{Leyéndolos en $\dd s^{2}$}: escribir $\dd x,\dd y,\dd z$ en
+        función de $\dd q^{i}$, desarrollar $\dd x^{2}+\dd y^{2}+\dd z^{2}$ y
+        comprobar que no hay términos cruzados $\dd q^{i}\dd q^{j}$ (ortogonalidad);
+        los coeficientes de $(\dd q^{i})^{2}$ son $h_{i}^{2}$.
+\end{enumerate}
+\end{clave}
+
+\begin{observacion}[El vector de posición]
+En general $\vb{r}\neq\sum_{i}q^{i}\uv{e}_{i}$: en esféricas
+$\vb{r}=r\,\er$ (no aparecen $\theta$ ni $\varphi$) y en cilíndricas
+$\vb{r}=\rho\,\erho+z\,\kk$. Lo que sí es universal es la forma
+\eqref{eq:metrica} del \emph{desplazamiento} $\dd\vb{r}$.
+\end{observacion}
+
+\subsection{Elementos de línea, superficie y volumen}
+
+\begin{proposicion}[Elementos diferenciales]
+\label{prop:elementos}
+En un sistema ortogonal dextrógiro, con $(i,j,k)$ permutación cíclica de
+$(1,2,3)$:
+\begin{align}
+  \dd\vb{l}_{i}&=h_{i}\,\dd q^{i}\,\uv{e}_{i},
+  &&\text{(línea)}\label{eq:dl}\\
+  \dd\vb{S}_{i}&=\dd\vb{l}_{j}\times\dd\vb{l}_{k}=h_{j}h_{k}\,\dd q^{j}\dd q^{k}\,\uv{e}_{i},
+  &&\text{(superficie)}\label{eq:dS}\\
+  \dd V&=(\dd\vb{l}_{1}\times\dd\vb{l}_{2})\cdot\dd\vb{l}_{3}=h_{1}h_{2}h_{3}\,\dd q^{1}\dd q^{2}\dd q^{3}.
+  &&\text{(volumen)}\label{eq:dV}
+\end{align}
+Además, el jacobiano del cambio de variables es
+$J=\dfrac{\partial(x,y,z)}{\partial(q^{1},q^{2},q^{3})}=h_{1}h_{2}h_{3}$.
+\end{proposicion}
+
+\begin{proof}
+\eqref{eq:dS} y \eqref{eq:dV} son productos vectoriales y mixtos de
+\eqref{eq:dl}, con $\uv{e}_{j}\times\uv{e}_{k}=\uv{e}_{i}$. Para $J$: sus
+columnas son $\partial\vb{r}/\partial q^{i}=h_{i}\uv{e}_{i}$, luego, por
+\eqref{eq:mixto},
+$J=h_{1}h_{2}h_{3}\,\uv{e}_{1}\cdot(\uv{e}_{2}\times\uv{e}_{3})=h_{1}h_{2}h_{3}$.
+\end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.15]
+  \def\W{3.2}\def\H{2.0}\def\dx{1.5}\def\dy{0.95}
+  % caras q^1 (izquierda) y q^1+dq^1 (derecha)
+  \fill[cian,opacity=0.10] (0,0) -- (\dx,\dy) -- (\dx,\H+\dy) -- (0,\H) -- cycle;
+  \fill[cian,opacity=0.22] (\W,0) -- (\W+\dx,\dy) -- (\W+\dx,\H+\dy) -- (\W,\H) -- cycle;
+  % aristas ocultas
+  \draw[aux] (0,0) -- (\dx,\dy) -- (\W+\dx,\dy);
+  \draw[aux] (\dx,\dy) -- (\dx,\H+\dy);
+  % aristas visibles
+  \draw[texto!75,line width=0.55pt] (0,0) rectangle (\W,\H);
+  \draw[texto!75,line width=0.55pt] (\W,0) -- (\W+\dx,\dy) -- (\W+\dx,\H+\dy) -- (\W,\H);
+  \draw[texto!75,line width=0.55pt] (0,\H) -- (\dx,\H+\dy) -- (\W+\dx,\H+\dy);
+  % cotas
+  \node[etiq,anchor=north,inner sep=4pt] at (\W/2,0) {$h_{1}\dd q^{1}$};
+  \node[etiq,anchor=north west,inner sep=2pt] at (\W+\dx/2,\dy/2) {$h_{2}\dd q^{2}$};
+  \node[etiq,anchor=west,inner sep=3pt] at (\W+\dx,\H+\dy-0.35) {$h_{3}\dd q^{3}$};
+  % vértice de referencia
+  \node[punto,fill=tenue,inner sep=1pt] at (0,0) {};
+  \node[peq,anchor=north east,inner sep=2pt] at (0,0) {$(q^{1},q^{2},q^{3})$};
+  % normales salientes
+  \draw[vec,cian] (\W+\dx/2,\H/2+\dy/2) -- ++(1.2,0)
+     node[anchor=west,etiq,inner sep=2pt]{$\uv{e}_{1}$};
+  \draw[vec,cian!60!tenue] (\dx/2,\H/2+\dy/2) -- ++(-1.2,0)
+     node[anchor=east,etiq,inner sep=2pt]{$-\uv{e}_{1}$};
+  \node[cian,font=\footnotesize,anchor=south,inner sep=3pt] at (\W+\dx/2,\H+\dy) {$q^{1}+\dd q^{1}$};
+  \node[cian!60!tenue,font=\footnotesize,anchor=south,inner sep=3pt] at (\dx/2,\H+\dy) {$q^{1}$};
+\end{tikzpicture}
+\caption{Paralelepípedo elemental de un sistema ortogonal: aristas
+$h_{i}\dd q^{i}$ y volumen $\dd V=h_{1}h_{2}h_{3}\dd q^{1}\dd q^{2}\dd q^{3}$.
+Las caras sombreadas, $q^{1}$ y $q^{1}+\dd q^{1}$, con normales salientes
+$\mp\uv{e}_{1}$, son las que intervienen en el cálculo de la divergencia
+(\cref{sec:div-curv}).}
+\label{fig:caja}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\subsection{Coordenadas cartesianas y cilíndricas}
+
+\paragraph{Cartesianas.} $(q^{1},q^{2},q^{3})=(x,y,z)$,
+$\vb{r}=x\ii+y\jj+z\kk$, base fija ($\dd\ii=\dd\jj=\dd\kk=\vb{0}$) y
+$h_{x}=h_{y}=h_{z}=1$:
+\begin{equation}
+  \dd s^{2}=\dd x^{2}+\dd y^{2}+\dd z^{2},\quad
+  \dd\vb{S}=(\dd y\,\dd z\,\ii,\ \dd z\,\dd x\,\jj,\ \dd x\,\dd y\,\kk),\quad
+  \dd V=\dd x\,\dd y\,\dd z .
+\end{equation}
+
+\begin{definicion}[Coordenadas cilíndricas]
+$(q^{1},q^{2},q^{3})=(\rho,\varphi,z)$ con $\rho\ge0$, $\varphi\in[0,2\pi)$:
+\begin{equation}
+  x=\rho\cos\varphi,\quad y=\rho\sin\varphi,\quad z=z
+  \qquad\Longleftrightarrow\qquad
+  \rho=\sqrt{x^{2}+y^{2}},\quad \varphi=\arctan(y/x).
+  \label{eq:cil}
+\end{equation}
+Superficies coordenadas: cilindros ($\rho=\text{const}$), semiplanos
+($\varphi=\text{const}$) y planos ($z=\text{const}$).
+\end{definicion}
+
+Aplicando \eqref{eq:escala} a $\vb{r}=\rho\cos\varphi\,\ii+\rho\sin\varphi\,\jj+z\,\kk$:
+\begin{equation}
+  \pd{\vb{r}}{\rho}=\cos\varphi\,\ii+\sin\varphi\,\jj,\qquad
+  \pd{\vb{r}}{\varphi}=\rho\,(-\sin\varphi\,\ii+\cos\varphi\,\jj),\qquad
+  \pd{\vb{r}}{z}=\kk,
+\end{equation}
+de donde
+\begin{equation}
+  \resultado{
+  \begin{gathered}
+  h_{\rho}=1,\qquad h_{\varphi}=\rho,\qquad h_{z}=1,\\
+  \erho=\cos\varphi\,\ii+\sin\varphi\,\jj,\quad
+  \ef=-\sin\varphi\,\ii+\cos\varphi\,\jj,\quad \uv{e}_{z}=\kk .
+  \end{gathered}}
+  \label{eq:cil-base}
+\end{equation}
+La base es ortonormal y dextrógira ($\erho\times\ef=\kk$). Además
+$\vb{r}=\rho\,\erho+z\,\kk$ y, por \cref{prop:metrica,prop:elementos},
+\begin{gather}
+  \dd\vb{r}=\dd\rho\,\erho+\rho\,\dd\varphi\,\ef+\dd z\,\kk,\qquad
+  \dd s^{2}=\dd\rho^{2}+\rho^{2}\dd\varphi^{2}+\dd z^{2},\\
+  \dd\vb{S}_{\rho}=\rho\,\dd\varphi\,\dd z\,\erho,\quad
+  \dd\vb{S}_{\varphi}=\dd z\,\dd\rho\,\ef,\quad
+  \dd\vb{S}_{z}=\rho\,\dd\rho\,\dd\varphi\,\kk,\qquad
+  \dd V=\rho\,\dd\rho\,\dd\varphi\,\dd z .
+  \label{eq:cil-elem}
+\end{gather}
+
+\subsection{Coordenadas esféricas}
+
+\begin{definicion}[Coordenadas esféricas]
+$(q^{1},q^{2},q^{3})=(r,\theta,\varphi)$ con $r\ge0$, $\theta\in[0,\pi]$,
+$\varphi\in[0,2\pi)$:
+\begin{equation}
+  \begin{aligned}
+  x&=r\sin\theta\cos\varphi,\\ y&=r\sin\theta\sin\varphi,\\ z&=r\cos\theta,
+  \end{aligned}
+  \qquad\Longleftrightarrow\qquad
+  \begin{aligned}
+  r&=\sqrt{x^{2}+y^{2}+z^{2}},\\ \theta&=\arccos(z/r),\\ \varphi&=\arctan(y/x).
+  \end{aligned}
+  \label{eq:esf}
+\end{equation}
+Superficies coordenadas: esferas ($r$), conos de vértice $O$ ($\theta$) y
+semiplanos de borde el eje $z$ ($\varphi$).
+\end{definicion}
+
+Derivando $\vb{r}=r\sin\theta\cos\varphi\,\ii+r\sin\theta\sin\varphi\,\jj+r\cos\theta\,\kk$:
+\begin{equation}
+  \pd{\vb{r}}{r}=\er,\qquad
+  \pd{\vb{r}}{\theta}=r\,\et,\qquad
+  \pd{\vb{r}}{\varphi}=r\sin\theta\,\ef,
+\end{equation}
+con
+\begin{equation}
+  \resultado{
+  \begin{aligned}
+  \er&=\sin\theta\cos\varphi\,\ii+\sin\theta\sin\varphi\,\jj+\cos\theta\,\kk,\\
+  \et&=\cos\theta\cos\varphi\,\ii+\cos\theta\sin\varphi\,\jj-\sin\theta\,\kk,\\
+  \ef&=-\sin\varphi\,\ii+\cos\varphi\,\jj,
+  \end{aligned}
+  \qquad
+  \begin{aligned}
+  h_{r}&=1,\\ h_{\theta}&=r,\\ h_{\varphi}&=r\sin\theta .
+  \end{aligned}}
+  \label{eq:esf-base}
+\end{equation}
+La base es ortonormal y dextrógira ($\er\times\et=\ef$), $\vb{r}=r\,\er$, y
+\begin{gather}
+  \dd\vb{r}=\dd r\,\er+r\,\dd\theta\,\et+r\sin\theta\,\dd\varphi\,\ef,\qquad
+  \dd s^{2}=\dd r^{2}+r^{2}\dd\theta^{2}+r^{2}\sin^{2}\theta\,\dd\varphi^{2},\\
+  \dd\vb{S}_{r}=r^{2}\sin\theta\,\dd\theta\,\dd\varphi\,\er,\quad
+  \dd\vb{S}_{\theta}=r\sin\theta\,\dd\varphi\,\dd r\,\et,\quad
+  \dd\vb{S}_{\varphi}=r\,\dd r\,\dd\theta\,\ef,\\
+  \dd V=r^{2}\sin\theta\,\dd r\,\dd\theta\,\dd\varphi .
+  \label{eq:esf-elem}
+\end{gather}
+
+\subsection{La base móvil y sus derivadas}
+
+A diferencia de $(\ii,\jj,\kk)$, la base curvilínea depende del punto. Sus
+diferenciales se obtienen derivando \eqref{eq:cil-base} y \eqref{eq:esf-base}.
+
+\begin{proposicion}[Diferenciales de la base]
+\label{prop:dbase}
+\begin{align}
+  &\text{Cilíndricas:} &
+  \dd\erho&=\dd\varphi\,\ef,\qquad \dd\ef=-\dd\varphi\,\erho,\qquad \dd\kk=\vb{0};
+  \label{eq:dcil}\\[1mm]
+  &\text{Esféricas:} &
+  \dd\er&=\dd\theta\,\et+\sin\theta\,\dd\varphi\,\ef,\notag\\
+  && \dd\et&=-\dd\theta\,\er+\cos\theta\,\dd\varphi\,\ef,\label{eq:desf}\\
+  && \dd\ef&=-\dd\varphi\,(\sin\theta\,\er+\cos\theta\,\et).\notag
+\end{align}
+\end{proposicion}
+
+\begin{proof}
+Cilíndricas: $\dd\erho=\dd\varphi(-\sin\varphi\,\ii+\cos\varphi\,\jj)=\dd\varphi\,\ef$
+y $\dd\ef=-\dd\varphi(\cos\varphi\,\ii+\sin\varphi\,\jj)=-\dd\varphi\,\erho$.
+Esféricas: $\partial_{\theta}\er=\et$ y
+$\partial_{\varphi}\er=\sin\theta(-\sin\varphi\,\ii+\cos\varphi\,\jj)=\sin\theta\,\ef$;
+$\partial_{\theta}\et=-\er$ y $\partial_{\varphi}\et=\cos\theta\,\ef$;
+finalmente $\dd\ef=-\dd\varphi(\cos\varphi\,\ii+\sin\varphi\,\jj)$ y
+$\cos\varphi\,\ii+\sin\varphi\,\jj=\sin\theta\,\er+\cos\theta\,\et$
+(proyección horizontal de \eqref{eq:esf-base}).
+\end{proof}
+
+\begin{clave}[violeta]{Lectura compacta: la base gira}
+Las fórmulas anteriores son $\dd\uv{e}_{i}=\dd\vb{\Omega}\times\uv{e}_{i}$ con
+el «ángulo de giro» de la base
+\begin{equation}
+  \dd\vb{\Omega}_{\text{cil}}=\dd\varphi\,\kk,\qquad
+  \dd\vb{\Omega}_{\text{esf}}=\dd\varphi\,\kk+\dd\theta\,\ef,
+  \qquad \kk=\cos\theta\,\er-\sin\theta\,\et .
+  \label{eq:omega-base}
+\end{equation}
+Por ejemplo, $\dd\vb{\Omega}_{\text{esf}}\times\er
+=\dd\varphi\sin\theta\,\ef+\dd\theta\,\et$. Basta recordar
+$\dd\vb{\Omega}$ y la regla del producto vectorial.
+\end{clave}
+
+\begin{table}[ht]
+\centering
+\caption{Datos esenciales de los tres sistemas ortogonales usuales.}
+\label{tab:sistemas}
+\small
+\begin{tabular}{@{}l c c c c@{}}
+\toprule
+\color{cian} Sistema & \color{cian} $(q^{1},q^{2},q^{3})$ & \color{cian} $(h_{1},h_{2},h_{3})$
+ & \color{cian} $\vb{r}$ & \color{cian} $\dd V$\\
+\midrule
+Cartesianas & $(x,y,z)$ & $(1,1,1)$ & $x\ii+y\jj+z\kk$ & $\dd x\,\dd y\,\dd z$\\
+Cilíndricas & $(\rho,\varphi,z)$ & $(1,\rho,1)$ & $\rho\,\erho+z\,\kk$ & $\rho\,\dd\rho\,\dd\varphi\,\dd z$\\
+Esféricas & $(r,\theta,\varphi)$ & $(1,r,r\sin\theta)$ & $r\,\er$ & $r^{2}\sin\theta\,\dd r\,\dd\theta\,\dd\varphi$\\
+\bottomrule
+\end{tabular}
+\end{table}
