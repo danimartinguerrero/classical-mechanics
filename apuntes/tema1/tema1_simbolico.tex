@@ -39,11 +39,35 @@
 \section{Coordenadas y base local}
 % =====================================================================
 
-\paso{Levi-Civita y producto mixto.}
+\paso{Producto vectorial.}
+\begin{equation}
+  \uv{e}_{j}\times\uv{e}_{k}=\varepsilon_{jki}\uv{e}_{i}
+  \ \Longrightarrow\
+  \vb{b}\times\vb{c}=b_{j}c_{k}\,(\uv{e}_{j}\times\uv{e}_{k})=\varepsilon_{ijk}\,b_{j}c_{k}\,\uv{e}_{i},
+  \qquad \resultado{(\vb{b}\times\vb{c})_{i}=\varepsilon_{ijk}b_{j}c_{k}}
+\end{equation}
+
+\paso{Leibniz.} Lineal, alternada, $\det I=1$:
 \begin{gather}
-  (\vb{b}\times\vb{c})_{i}=\varepsilon_{ijk}b_{j}c_{k},\qquad
-  \vb{a}\cdot(\vb{b}\times\vb{c})=\varepsilon_{ijk}a_{i}b_{j}c_{k}
-  =\det\begin{pmatrix}a_{1}&a_{2}&a_{3}\\ b_{1}&b_{2}&b_{3}\\ c_{1}&c_{2}&c_{3}\end{pmatrix}\\
+  \det(\vb{a},\vb{b},\vb{c})=a_{i}b_{j}c_{k}\det(\vb{e}_{i},\vb{e}_{j},\vb{e}_{k}),\qquad
+  \det(\vb{e}_{i},\vb{e}_{j},\vb{e}_{k})=\varepsilon_{ijk}\\
+  \resultado{\det(\vb{a},\vb{b},\vb{c})=\varepsilon_{ijk}a_{i}b_{j}c_{k}}\\
+  \varepsilon_{ijk}a_{i}b_{j}c_{k}=a_{1}b_{2}c_{3}+a_{2}b_{3}c_{1}+a_{3}b_{1}c_{2}-a_{1}b_{3}c_{2}-a_{2}b_{1}c_{3}-a_{3}b_{2}c_{1}\\
+  =a_{1}(b_{2}c_{3}-b_{3}c_{2})+a_{2}(b_{3}c_{1}-b_{1}c_{3})+a_{3}(b_{1}c_{2}-b_{2}c_{1})
+  =a_{i}(\vb{b}\times\vb{c})_{i}
+\end{gather}
+
+\paso{Producto mixto y volumen.}
+\begin{gather}
+  \resultado{\vb{a}\cdot(\vb{b}\times\vb{c})=\varepsilon_{ijk}a_{i}b_{j}c_{k}
+  =\det\begin{pmatrix}a_{1}&a_{2}&a_{3}\\ b_{1}&b_{2}&b_{3}\\ c_{1}&c_{2}&c_{3}\end{pmatrix}}\\
+  V=\abs{\vb{b}\times\vb{c}}\cdot\abs{\vb{a}\cdot\un}
+  =\abs{\vb{b}\times\vb{c}}\,\frac{\abs{\vb{a}\cdot(\vb{b}\times\vb{c})}}{\abs{\vb{b}\times\vb{c}}}
+  =\abs{\vb{a}\cdot(\vb{b}\times\vb{c})}
+\end{gather}
+
+\paso{Contracción $\varepsilon$--$\delta$.}
+\begin{gather}
   \resultado{\varepsilon_{kij}\,\varepsilon_{kmn}=\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm}}\\
   [\vb{a}\times(\vb{b}\times\vb{c})]_{i}=\varepsilon_{kij}\varepsilon_{kmn}a_{j}b_{m}c_{n}
   =(\delta_{im}\delta_{jn}-\delta_{in}\delta_{jm})a_{j}b_{m}c_{n}\\

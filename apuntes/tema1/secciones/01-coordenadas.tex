@@ -272,8 +272,56 @@ Se adopta el \emph{convenio de suma de Einstein}: los índices repetidos se suma
 de $1$ a $3$.
 \end{definicion}
 
-Con él, $(\vb{b}\times\vb{c})_{i}=\varepsilon_{ijk}b_{j}c_{k}$ y el producto
-mixto es un determinante:
+Con él, producto vectorial y determinante se escriben de la misma forma,
+porque ambos salen del mismo mecanismo: linealidad más antisimetría.
+
+\begin{proposicion}[Producto vectorial en componentes]
+\label{prop:cruz}
+En una base ortonormal dextrógira $(\uv{e}_{1},\uv{e}_{2},\uv{e}_{3})$,
+\begin{equation}
+  \uv{e}_{j}\times\uv{e}_{k}=\varepsilon_{jki}\,\uv{e}_{i}
+  \qquad\Longrightarrow\qquad
+  (\vb{b}\times\vb{c})_{i}=\varepsilon_{ijk}\,b_{j}c_{k}.
+  \label{eq:cruz}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+La tabla $\uv{e}_{1}\times\uv{e}_{2}=\uv{e}_{3}$ (y cíclicas),
+$\uv{e}_{j}\times\uv{e}_{j}=\vb{0}$, es la definición geométrica (módulo
+$\abs{\vb{b}}\abs{\vb{c}}\sin\theta$, regla de la mano derecha) aplicada a la
+base; resumida, $\uv{e}_{j}\times\uv{e}_{k}=\varepsilon_{jki}\uv{e}_{i}$. Por
+bilinealidad y como $\varepsilon_{jki}=\varepsilon_{ijk}$ (permutación cíclica),
+$\vb{b}\times\vb{c}=b_{j}c_{k}\,(\uv{e}_{j}\times\uv{e}_{k})=\varepsilon_{ijk}\,b_{j}c_{k}\,\uv{e}_{i}$.
+\end{proof}
+
+\begin{teorema}[Fórmula de Leibniz]
+\label{teo:leibniz}
+Sea $\det$ la única función de las filas de una matriz $3\times3$ que es
+(i) lineal en cada fila, (ii) alternada (cambia de signo al intercambiar dos
+filas) y (iii) normalizada, $\det I=1$. Entonces
+\begin{equation}
+  \det\begin{pmatrix}a_{1}&a_{2}&a_{3}\\ b_{1}&b_{2}&b_{3}\\ c_{1}&c_{2}&c_{3}\end{pmatrix}
+  =\sum_{\sigma\in S_{3}}\operatorname{sgn}\sigma\;a_{\sigma(1)}b_{\sigma(2)}c_{\sigma(3)}
+  =\varepsilon_{ijk}\,a_{i}b_{j}c_{k}.
+  \label{eq:leibniz}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Con $\vb{a}=a_{i}\vb{e}_{i}$, $\vb{b}=b_{j}\vb{e}_{j}$, $\vb{c}=c_{k}\vb{e}_{k}$
+(filas en la base canónica):
+\begin{enumerate}
+  \item \emph{Linealidad}: $\det(\vb{a},\vb{b},\vb{c})=a_{i}b_{j}c_{k}\,\det(\vb{e}_{i},\vb{e}_{j},\vb{e}_{k})$.
+  \item \emph{Alternancia}: con un índice repetido hay dos filas iguales y
+  $\det(\vb{e}_{i},\vb{e}_{j},\vb{e}_{k})=0$; si $(i,j,k)$ es una permutación,
+  cada intercambio cambia el signo hasta llegar a $\det(\vb{e}_{1},\vb{e}_{2},\vb{e}_{3})=1$.
+  Es decir, $\det(\vb{e}_{i},\vb{e}_{j},\vb{e}_{k})=\varepsilon_{ijk}$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corolario}[Producto mixto, cofactores y volumen]
+\label{cor:mixto}
 \begin{equation}
   \vb{a}\cdot(\vb{b}\times\vb{c})=\varepsilon_{ijk}\,a_{i}b_{j}c_{k}
   =\det\begin{pmatrix}a_{1}&a_{2}&a_{3}\\ b_{1}&b_{2}&b_{3}\\ c_{1}&c_{2}&c_{3}\end{pmatrix},
@@ -281,6 +329,38 @@ mixto es un determinante:
   V_{\text{paralelepípedo}}=\abs{\vb{a}\cdot(\vb{b}\times\vb{c})}.
   \label{eq:mixto}
 \end{equation}
+\end{corolario}
+
+\begin{proof}
+\begin{enumerate}
+  \item \emph{Producto mixto $=$ Leibniz}. Por \eqref{eq:cruz},
+  $\vb{a}\cdot(\vb{b}\times\vb{c})=a_{i}(\vb{b}\times\vb{c})_{i}=\varepsilon_{ijk}\,a_{i}b_{j}c_{k}$,
+  que es \eqref{eq:leibniz}.
+  \item \emph{Leibniz $\to$ cofactores}. Los seis términos (permutaciones
+  pares $123,231,312$ con $+$; impares $132,213,321$ con $-$), agrupados por
+  la primera fila:
+  \begin{align*}
+    \varepsilon_{ijk}a_{i}b_{j}c_{k}
+    &=a_{1}b_{2}c_{3}+a_{2}b_{3}c_{1}+a_{3}b_{1}c_{2}-a_{1}b_{3}c_{2}-a_{2}b_{1}c_{3}-a_{3}b_{2}c_{1}\\
+    &=a_{1}(b_{2}c_{3}-b_{3}c_{2})+a_{2}(b_{3}c_{1}-b_{1}c_{3})+a_{3}(b_{1}c_{2}-b_{2}c_{1}).
+  \end{align*}
+  Cada paréntesis es un cofactor (menor $2\times2$ con signo): es el desarrollo
+  de Laplace por la primera fila. Y, por \eqref{eq:cruz}, los tres cofactores
+  son $(\vb{b}\times\vb{c})_{1}$, $(\vb{b}\times\vb{c})_{2}$, $(\vb{b}\times\vb{c})_{3}$.
+  \item \emph{Volumen}. Base: paralelogramo de $\vb{b},\vb{c}$, de área
+  $\abs{\vb{b}\times\vb{c}}$. Altura: proyección de $\vb{a}$ sobre la normal
+  $\un=\vb{b}\times\vb{c}/\abs{\vb{b}\times\vb{c}}$, $h=\abs{\vb{a}\cdot\un}$. Luego
+  $V=\abs{\vb{b}\times\vb{c}}\,h=\abs{\vb{a}\cdot(\vb{b}\times\vb{c})}$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{observacion}[Mismo mecanismo, misma $\varepsilon$]
+$\uv{e}_{j}\times\uv{e}_{k}=\varepsilon_{jki}\uv{e}_{i}$ y
+$\det(\vb{e}_{i},\vb{e}_{j},\vb{e}_{k})=\varepsilon_{ijk}$: linealidad más
+antisimetría reducen ambos objetos a $\varepsilon_{ijk}$. El signo de
+$\vb{a}\cdot(\vb{b}\times\vb{c})$ indica la orientación: $>0$ si
+$(\vb{a},\vb{b},\vb{c})$ es dextrógiro y $=0$ si son coplanarios.
+\end{observacion}
 
 \begin{lema}[Contracción $\varepsilon$--$\delta$]
 \label{lem:epsdelta}
