@@ -422,19 +422,70 @@ girada un ángulo $\theta$.}
 \end{figure}
 % ---------------------------------------------------------------------
 
-\begin{clave}[violeta]{Lectura compacta: la base gira}
-Las fórmulas anteriores son $\dd\uv{e}_{i}=\dd\vb{\Omega}\times\uv{e}_{i}$ con
-el «ángulo de giro» de la base
+\begin{proposicion}[La base gira]
+\label{prop:omega}
+Las fórmulas \eqref{eq:dcil}--\eqref{eq:desf} son
+$\dd\uv{e}_{i}=\dd\vb{\Omega}\times\uv{e}_{i}$, con el «ángulo de giro» de la base
 \begin{equation}
   \dd\vb{\Omega}_{\text{cil}}=\dd\varphi\,\kk,\qquad
   \dd\vb{\Omega}_{\text{esf}}=\dd\varphi\,\kk+\dd\theta\,\ef,
   \qquad \kk=\cos\theta\,\er-\sin\theta\,\et .
   \label{eq:omega-base}
 \end{equation}
-Por ejemplo, $\dd\vb{\Omega}_{\text{esf}}\times\er
-=\dd\varphi\sin\theta\,\ef+\dd\theta\,\et$. Basta recordar
-$\dd\vb{\Omega}$ y la regla del producto vectorial.
-\end{clave}
+\end{proposicion}
+
+\begin{proof}
+Comprobación directa con la tabla cíclica $\er\times\et=\ef$,
+$\et\times\ef=\er$, $\ef\times\er=\et$.
+\begin{enumerate}
+  \item \emph{Cilíndricas}: $\dd\varphi\,\kk\times\erho=\dd\varphi\,\ef=\dd\erho$,
+  $\dd\varphi\,\kk\times\ef=-\dd\varphi\,\erho=\dd\ef$, $\dd\varphi\,\kk\times\kk=\vb{0}=\dd\kk$.
+  \item \emph{Esféricas}: con
+  $\dd\vb{\Omega}=\dd\varphi\cos\theta\,\er-\dd\varphi\sin\theta\,\et+\dd\theta\,\ef$,
+  \begin{align*}
+    \dd\vb{\Omega}\times\er&=-\dd\varphi\sin\theta\,(\et\times\er)+\dd\theta\,(\ef\times\er)
+    =\dd\theta\,\et+\sin\theta\,\dd\varphi\,\ef=\dd\er,\\
+    \dd\vb{\Omega}\times\et&=\dd\varphi\cos\theta\,(\er\times\et)+\dd\theta\,(\ef\times\et)
+    =-\dd\theta\,\er+\cos\theta\,\dd\varphi\,\ef=\dd\et,\\
+    \dd\vb{\Omega}\times\ef&=\dd\varphi\cos\theta\,(\er\times\ef)-\dd\varphi\sin\theta\,(\et\times\ef)
+    =-\dd\varphi\,(\sin\theta\,\er+\cos\theta\,\et)=\dd\ef.\qedhere
+  \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{observacion}[Obtener $\dd\vb{\Omega}$ sin adivinarlo]
+Para cualquier base ortonormal móvil $\{\uv{e}_{i}\}$,
+\begin{equation}
+  \resultado{\dd\vb{\Omega}=\tfrac12\sum_{i=1}^{3}\uv{e}_{i}\times\dd\uv{e}_{i}}
+  \qquad\text{cumple}\qquad \dd\uv{e}_{k}=\dd\vb{\Omega}\times\uv{e}_{k}\quad(k=1,2,3).
+  \label{eq:omega-formula}
+\end{equation}
+\begin{enumerate}
+  \item \emph{Antisimetría}. Diferenciando $\uv{e}_{i}\cdot\uv{e}_{k}=\delta_{ik}$:
+  $\dd\uv{e}_{i}\cdot\uv{e}_{k}=-\uv{e}_{i}\cdot\dd\uv{e}_{k}$.
+  \item \emph{Verificación}. Con $(\vb{a}\times\vb{b})\times\vb{c}=\vb{b}(\vb{a}\cdot\vb{c})-\vb{a}(\vb{b}\cdot\vb{c})$
+  (\cref{cor:bac}),
+  \[
+    \dd\vb{\Omega}\times\uv{e}_{k}
+    =\tfrac12\sum_{i}\bigl[\dd\uv{e}_{i}\,(\uv{e}_{i}\cdot\uv{e}_{k})-\uv{e}_{i}\,(\dd\uv{e}_{i}\cdot\uv{e}_{k})\bigr]
+    =\tfrac12\Bigl[\dd\uv{e}_{k}+\sum_{i}\uv{e}_{i}\,(\uv{e}_{i}\cdot\dd\uv{e}_{k})\Bigr]
+    =\tfrac12\bigl[\dd\uv{e}_{k}+\dd\uv{e}_{k}\bigr]=\dd\uv{e}_{k},
+  \]
+  usando el paso 1 y que $\sum_{i}\uv{e}_{i}(\uv{e}_{i}\cdot\vb{u})=\vb{u}$ (componentes de $\vb{u}$).
+  \item \emph{Cilíndricas}:
+  $\dd\vb{\Omega}=\tfrac12\bigl[\erho\times\dd\varphi\,\ef+\ef\times(-\dd\varphi\,\erho)\bigr]=\dd\varphi\,\kk$.
+  \item \emph{Esféricas}:
+  \begin{align*}
+    2\,\dd\vb{\Omega}
+    &=\er\times(\dd\theta\,\et+\sin\theta\,\dd\varphi\,\ef)+\et\times(-\dd\theta\,\er+\cos\theta\,\dd\varphi\,\ef)\\
+    &\quad+\ef\times\bigl(-\dd\varphi(\sin\theta\,\er+\cos\theta\,\et)\bigr)
+    =2\,\dd\theta\,\ef+2\,\dd\varphi\,(\cos\theta\,\er-\sin\theta\,\et),
+  \end{align*}
+  es decir, $\dd\vb{\Omega}_{\text{esf}}=\dd\theta\,\ef+\dd\varphi\,\kk$.
+\end{enumerate}
+Es la misma idea que el vector de Darboux del triedro de Frenet
+(\cref{sec:frenet}): toda base ortonormal móvil gira con un vector angular.
+\end{observacion}
 
 \begin{table}[ht]
 \centering
