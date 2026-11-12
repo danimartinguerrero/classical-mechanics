@@ -21,6 +21,35 @@ Para una curva regular $\vb{r}(t)$ ($\dot{\vb{r}}\neq\vb{0}$), la
 \end{equation}
 \end{definicion}
 
+\begin{observacion}[La longitud como funcional]
+Un \emph{funcional} asigna un número a cada función. La longitud de una curva
+lo es: la variable es la curva entera.
+\begin{enumerate}
+  \item \emph{Gráfica $y=y(x)$ en el plano}:
+  \[
+    L[y]=\int_{a}^{b}\sqrt{1+y'(x)^{2}}\;\dd x,
+    \qquad\text{de la forma } \int_{a}^{b}F(x,y,y')\,\dd x \text{ con } F=\sqrt{1+y'^{2}}.
+  \]
+  \item \emph{Curva paramétrica}:
+  \[
+    L[\vb{r}]=\int_{t_{0}}^{t_{1}}\norm{\dot{\vb{r}}(t)}\,\dd t
+    =\int_{t_{0}}^{t_{1}}\sqrt{\dot x^{2}+\dot y^{2}+\dot z^{2}}\;\dd t .
+  \]
+  \item \emph{En coordenadas curvilíneas}, por \eqref{eq:metrica}; por ejemplo, sobre la esfera $r=R$:
+  \[
+    L[\vb{q}]=\int_{t_{0}}^{t_{1}}\sqrt{h_{1}^{2}(\dot q^{1})^{2}+h_{2}^{2}(\dot q^{2})^{2}+h_{3}^{2}(\dot q^{3})^{2}}\;\dd t,
+    \qquad
+    L[\theta,\varphi]=R\int_{t_{0}}^{t_{1}}\sqrt{\dot\theta^{2}+\sin^{2}\theta\,\dot\varphi^{2}}\;\dd t .
+  \]
+\end{enumerate}
+\emph{Función frente a funcional}: $s(t)$ en \eqref{eq:arco} es una
+\emph{función} de $t$ (la curva está fija); $L[\vb{r}]$ es un \emph{funcional}
+(cambia la curva y cambia el número). Además $L$ no depende de la
+parametrización: con $t=t(\lambda)$,
+$\norm{\dd\vb{r}/\dd t}\,\dd t=\norm{\dd\vb{r}/\dd\lambda}\,\dd\lambda$, así que es una
+propiedad de la \emph{órbita}, no de la trayectoria.
+\end{observacion}
+
 \begin{definicion}[Triedro de Frenet, curvatura, torsión]
 \label{def:frenet}
 Parametrizando por $s$ y suponiendo $\dd\utau/\dd s\neq\vb{0}$:
