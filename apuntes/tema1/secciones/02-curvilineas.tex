@@ -358,15 +358,69 @@ diferenciales se obtienen derivando \eqref{eq:cil-base} y \eqref{eq:esf-base}.
 \end{proposicion}
 
 \begin{proof}
-Cilíndricas: $\dd\erho=\dd\varphi(-\sin\varphi\,\ii+\cos\varphi\,\jj)=\dd\varphi\,\ef$
+\emph{Cilíndricas}: $\dd\erho=\dd\varphi(-\sin\varphi\,\ii+\cos\varphi\,\jj)=\dd\varphi\,\ef$
 y $\dd\ef=-\dd\varphi(\cos\varphi\,\ii+\sin\varphi\,\jj)=-\dd\varphi\,\erho$.
-Esféricas: $\partial_{\theta}\er=\et$ y
+
+\noindent\emph{Esféricas}: $\partial_{\theta}\er=\et$ y
 $\partial_{\varphi}\er=\sin\theta(-\sin\varphi\,\ii+\cos\varphi\,\jj)=\sin\theta\,\ef$;
-$\partial_{\theta}\et=-\er$ y $\partial_{\varphi}\et=\cos\theta\,\ef$;
-finalmente $\dd\ef=-\dd\varphi(\cos\varphi\,\ii+\sin\varphi\,\jj)$ y
-$\cos\varphi\,\ii+\sin\varphi\,\jj=\sin\theta\,\er+\cos\theta\,\et$
-(proyección horizontal de \eqref{eq:esf-base}).
+$\partial_{\theta}\et=-\er$ y $\partial_{\varphi}\et=\cos\theta\,\ef$. Para $\ef$:
+\begin{enumerate}
+  \item \emph{Derivar}. $\ef=-\sin\varphi\,\ii+\cos\varphi\,\jj$ sólo depende de $\varphi$:
+  $\dd\ef=-\dd\varphi(\cos\varphi\,\ii+\sin\varphi\,\jj)=-\dd\varphi\,\erho$, igual que en cilíndricas.
+  \item \emph{Plano meridiano}. En cada punto $P$, los vectores $\kk$ (eje), $\er$
+  (de $O$ a $P$), $\erho$ (horizontal, del eje a $P$) y $\et$ (tangente al
+  meridiano) están en el semiplano $\varphi=\varphi_{P}$ que contiene al eje $z$
+  y a $P$; $\ef$ es su normal (\cref{fig:meridiano}). No se fija $\varphi$ al
+  derivar: sólo se indica en qué plano viven, en cada punto, los cuatro vectores.
+  \item \emph{Proyecciones}. Agrupando $\cos\varphi\,\ii+\sin\varphi\,\jj=\erho$ en
+  \eqref{eq:esf-base}, la pareja $(\er,\et)$ es $(\erho,\kk)$ girada un ángulo $\theta$:
+  \[
+    \er=\sin\theta\,\erho+\cos\theta\,\kk,\qquad
+    \et=\cos\theta\,\erho-\sin\theta\,\kk .
+  \]
+  \item \emph{Invertir}. Multiplicando la primera por $\sin\theta$, la segunda por
+  $\cos\theta$ y sumando, $\kk$ se cancela:
+  \[
+    \sin\theta\,\er+\cos\theta\,\et
+    =(\sin^{2}\theta+\cos^{2}\theta)\,\erho+(\sin\theta\cos\theta-\cos\theta\sin\theta)\,\kk=\erho,
+  \]
+  luego $\dd\ef=-\dd\varphi\,(\sin\theta\,\er+\cos\theta\,\et)$. Del mismo modo,
+  $\kk=\cos\theta\,\er-\sin\theta\,\et$.\qedhere
+\end{enumerate}
 \end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=2.2]
+  \def\th{40}\def\R{1.15}
+  \fill[violeta,opacity=0.07] (0,-0.75) rectangle (2.0,1.6);
+  \draw[eje] (0,-0.75) -- (0,1.65) node[anchor=south,etiq,inner sep=2pt]{$\kk$ (eje $z$)};
+  \draw[eje] (0,0) -- (2.1,0) node[anchor=west,etiq,inner sep=2pt]{$\erho$};
+  \coordinate (P) at ({\R*sin(\th)},{\R*cos(\th)});
+  \draw[texto!60,line width=0.5pt] (0,0) -- (P);
+  \draw[aux] (P) -- ({\R*sin(\th)},0);
+  \draw[violeta,line width=0.6pt,->] (0,0.42) arc[start angle=90,end angle={90-\th},radius=0.42];
+  \node[violeta,font=\small] at ({0.6*sin(\th/2)},{0.6*cos(\th/2)}) {$\theta$};
+  \draw[vec,cian] (P) -- ++({0.55*sin(\th)},{0.55*cos(\th)}) node[anchor=south west,etiq,inner sep=1pt]{$\er$};
+  \draw[vec,rosa] (P) -- ++({0.55*cos(\th)},{-0.55*sin(\th)}) node[anchor=north west,etiq,inner sep=1pt]{$\et$};
+  \node[punto] at (P) {};
+  \node[etiq,anchor=east,inner sep=4pt] at (P) {$P$};
+  \node[punto,fill=tenue,inner sep=0.9pt] at (0,0) {};
+  \node[peq,anchor=north east,inner sep=2pt] at (0,0) {$O$};
+  \node[violeta,font=\footnotesize,anchor=south east,inner sep=2pt] at (2.0,-0.75) {$\varphi=\varphi_{P}$};
+  % ef saliente del plano
+  \draw[texto!80,line width=0.6pt] (1.7,1.35) circle (0.055);
+  \fill[texto!80] (1.7,1.35) circle (0.018);
+  \node[etiq,anchor=west,inner sep=4pt] at (1.7,1.35) {$\ef$};
+\end{tikzpicture}
+\caption{Plano meridiano $\varphi=\varphi_{P}$ (el semiplano que contiene al eje
+$z$ y al punto $P$). En él están $\kk$, $\er$, $\et$ y $\erho$; $\ef$ sale
+perpendicular al papel ($\odot$). La pareja $(\er,\et)$ es $(\erho,\kk)$
+girada un ángulo $\theta$.}
+\label{fig:meridiano}
+\end{figure}
+% ---------------------------------------------------------------------
 
 \begin{clave}[violeta]{Lectura compacta: la base gira}
 Las fórmulas anteriores son $\dd\uv{e}_{i}=\dd\vb{\Omega}\times\uv{e}_{i}$ con
