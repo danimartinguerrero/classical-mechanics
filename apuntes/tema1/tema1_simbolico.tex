@@ -145,6 +145,19 @@
   \kk=\cos\theta\,\er-\sin\theta\,\et
 \end{gather}
 
+\paso{Giro de la base: obtener $\dd\vb{\Omega}$.}
+\begin{gather}
+  \dd\uv{e}_{i}=\sum_{j}A_{ij}\uv{e}_{j},\quad A_{ij}=\uv{e}_{j}\cdot\dd\uv{e}_{i}\\
+  0=\dd(\uv{e}_{i}\cdot\uv{e}_{j})=A_{ij}+A_{ji}\ \Rightarrow\ A_{ji}=-A_{ij},\ A_{ii}=0\\
+  \dd\vb{\Omega}\times\uv{e}_{i}=\sum_{j}M_{ij}\uv{e}_{j},\quad M_{ij}=\sum_{k}\varepsilon_{ijk}\Omega_{k}\\
+  M=A\iff\Omega_{1}=A_{23},\ \Omega_{2}=A_{31},\ \Omega_{3}=A_{12}\\
+  \sum_{i,j}\varepsilon_{ijl}\varepsilon_{ijk}=2\delta_{lk}\ \Rightarrow\ \Omega_{l}=\tfrac12\sum_{i,j}\varepsilon_{ijl}A_{ij}\\
+  \sum_{i}\uv{e}_{i}\times\dd\uv{e}_{i}=\sum_{i,j}A_{ij}\,\uv{e}_{i}\times\uv{e}_{j}=\sum_{l}\Bigl(\sum_{i,j}\varepsilon_{ijl}A_{ij}\Bigr)\uv{e}_{l}=2\,\dd\vb{\Omega}\\
+  \resultado{\dd\vb{\Omega}=\tfrac12\sum_{i}\uv{e}_{i}\times\dd\uv{e}_{i}}\\
+  \text{cil.: }A_{\rho\varphi}=\dd\varphi\ \Rightarrow\ \dd\vb{\Omega}=\dd\varphi\,\kk;\qquad
+  \text{esf.: }2\,\dd\vb{\Omega}=2\,\dd\theta\,\ef+2\,\dd\varphi(\cos\theta\,\er-\sin\theta\,\et)
+\end{gather}
+
 % =====================================================================
 \section{Cinemática}
 % =====================================================================

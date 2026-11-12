@@ -454,25 +454,45 @@ $\et\times\ef=\er$, $\ef\times\er=\et$.
 \end{proof}
 
 \begin{observacion}[Obtener $\dd\vb{\Omega}$ sin adivinarlo]
-Para cualquier base ortonormal móvil $\{\uv{e}_{i}\}$,
+Para \emph{cualquier} base ortonormal móvil $\{\uv{e}_{i}\}$ existe un único
+$\dd\vb{\Omega}$ con $\dd\uv{e}_{i}=\dd\vb{\Omega}\times\uv{e}_{i}$, y
 \begin{equation}
-  \resultado{\dd\vb{\Omega}=\tfrac12\sum_{i=1}^{3}\uv{e}_{i}\times\dd\uv{e}_{i}}
-  \qquad\text{cumple}\qquad \dd\uv{e}_{k}=\dd\vb{\Omega}\times\uv{e}_{k}\quad(k=1,2,3).
+  \resultado{\dd\vb{\Omega}=\tfrac12\sum_{i=1}^{3}\uv{e}_{i}\times\dd\uv{e}_{i}} .
   \label{eq:omega-formula}
 \end{equation}
 \begin{enumerate}
-  \item \emph{Antisimetría}. Diferenciando $\uv{e}_{i}\cdot\uv{e}_{k}=\delta_{ik}$:
-  $\dd\uv{e}_{i}\cdot\uv{e}_{k}=-\uv{e}_{i}\cdot\dd\uv{e}_{k}$.
-  \item \emph{Verificación}. Con $(\vb{a}\times\vb{b})\times\vb{c}=\vb{b}(\vb{a}\cdot\vb{c})-\vb{a}(\vb{b}\cdot\vb{c})$
-  (\cref{cor:bac}),
+  \item \emph{Componentes}. Como todo vector,
+  $\dd\uv{e}_{i}=\sum_{j}A_{ij}\,\uv{e}_{j}$ con $A_{ij}\defeq\uv{e}_{j}\cdot\dd\uv{e}_{i}$
+  (cuánto se inclina $\uv{e}_{i}$ hacia $\uv{e}_{j}$).
+  \item \emph{Antisimetría}. $\uv{e}_{i}\cdot\uv{e}_{j}=\delta_{ij}$ es constante:
+  \begin{gather*}
+    0=\dd(\uv{e}_{i}\cdot\uv{e}_{j})=\dd\uv{e}_{i}\cdot\uv{e}_{j}+\uv{e}_{i}\cdot\dd\uv{e}_{j}=A_{ij}+A_{ji}
+    \ \Longrightarrow\ A_{ji}=-A_{ij},\quad A_{ii}=0,\\
+    A=\begin{pmatrix}0&A_{12}&-A_{31}\\ -A_{12}&0&A_{23}\\ A_{31}&-A_{23}&0\end{pmatrix}.
+  \end{gather*}
+  $A_{ii}=0$ es el \cref{lem:unitario}: un unitario no se estira. Quedan 3 números libres.
+  \item \emph{«$\dd\vb{\Omega}\times$» es antisimétrica}. Con $\dd\vb{\Omega}=\sum_{k}\Omega_{k}\uv{e}_{k}$
+  y $\uv{e}_{k}\times\uv{e}_{i}=\sum_{j}\varepsilon_{kij}\uv{e}_{j}$:
   \[
-    \dd\vb{\Omega}\times\uv{e}_{k}
-    =\tfrac12\sum_{i}\bigl[\dd\uv{e}_{i}\,(\uv{e}_{i}\cdot\uv{e}_{k})-\uv{e}_{i}\,(\dd\uv{e}_{i}\cdot\uv{e}_{k})\bigr]
-    =\tfrac12\Bigl[\dd\uv{e}_{k}+\sum_{i}\uv{e}_{i}\,(\uv{e}_{i}\cdot\dd\uv{e}_{k})\Bigr]
-    =\tfrac12\bigl[\dd\uv{e}_{k}+\dd\uv{e}_{k}\bigr]=\dd\uv{e}_{k},
+    \dd\vb{\Omega}\times\uv{e}_{i}=\sum_{j}M_{ij}\,\uv{e}_{j},\qquad
+    M_{ij}=\sum_{k}\varepsilon_{ijk}\,\Omega_{k}
+    =\begin{pmatrix}0&\Omega_{3}&-\Omega_{2}\\ -\Omega_{3}&0&\Omega_{1}\\ \Omega_{2}&-\Omega_{1}&0\end{pmatrix}.
   \]
-  usando el paso 1 y que $\sum_{i}\uv{e}_{i}(\uv{e}_{i}\cdot\vb{u})=\vb{u}$ (componentes de $\vb{u}$).
-  \item \emph{Cilíndricas}:
+  \item \emph{Igualar}. $M=A$ si y sólo si
+  $\Omega_{1}=A_{23}$, $\Omega_{2}=A_{31}$, $\Omega_{3}=A_{12}$: existe y es único.
+  Una matriz $3\times3$ antisimétrica equivale a un vector (3 números $\leftrightarrow$ 3 componentes).
+  \item \emph{Forma compacta}. Invirtiendo $A_{ij}=\sum_{k}\varepsilon_{ijk}\Omega_{k}$ con
+  $\sum_{i,j}\varepsilon_{ijl}\varepsilon_{ijk}=2\delta_{lk}$ (\cref{lem:epsdelta} con $j=m$):
+  \[
+    \Omega_{l}=\tfrac12\sum_{i,j}\varepsilon_{ijl}\,A_{ij},
+    \qquad\text{p.\,ej. } \Omega_{3}=\tfrac12(A_{12}-A_{21})=A_{12}.
+  \]
+  Y esa es la componente $l$ de \eqref{eq:omega-formula}:
+  \[
+    \sum_{i}\uv{e}_{i}\times\dd\uv{e}_{i}=\sum_{i,j}A_{ij}\,(\uv{e}_{i}\times\uv{e}_{j})
+    =\sum_{l}\Bigl(\sum_{i,j}\varepsilon_{ijl}A_{ij}\Bigr)\uv{e}_{l}=2\sum_{l}\Omega_{l}\,\uv{e}_{l}=2\,\dd\vb{\Omega}.
+  \]
+  \item \emph{Cilíndricas} ($A_{\rho\varphi}=\dd\varphi$, resto nulo):
   $\dd\vb{\Omega}=\tfrac12\bigl[\erho\times\dd\varphi\,\ef+\ef\times(-\dd\varphi\,\erho)\bigr]=\dd\varphi\,\kk$.
   \item \emph{Esféricas}:
   \begin{align*}
@@ -483,8 +503,10 @@ Para cualquier base ortonormal móvil $\{\uv{e}_{i}\}$,
   \end{align*}
   es decir, $\dd\vb{\Omega}_{\text{esf}}=\dd\theta\,\ef+\dd\varphi\,\kk$.
 \end{enumerate}
-Es la misma idea que el vector de Darboux del triedro de Frenet
-(\cref{sec:frenet}): toda base ortonormal móvil gira con un vector angular.
+\emph{Idea física}: un cambio que conserva longitudes y ángulos es un giro
+infinitesimal, y todo giro infinitesimal actúa como $\vb{u}\mapsto\dd\vb{\Omega}\times\vb{u}$
+(eje $\dd\vb{\Omega}/\abs{\dd\vb{\Omega}}$, ángulo $\abs{\dd\vb{\Omega}}$). Es la misma idea que el
+vector de Darboux del triedro de Frenet (\cref{sec:frenet}).
 \end{observacion}
 
 \begin{table}[ht]
