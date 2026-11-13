@@ -234,12 +234,50 @@ Si $\vb{v}\times\vb{a}\neq\vb{0}$,
 \end{proposicion}
 
 \begin{proof}
-De \eqref{eq:intrinseca}, $\vb{v}\times\vb{a}=v\utau\times(\dot v\utau+\kappa v^{2}\un)=\kappa v^{3}\,\ub$,
-lo que da $\ub$ y $\kappa$; y $\vb{v}\cdot\vb{a}=v\dot v$ da $a_{T}$. Para
-$\tors$, derivando $\vb{a}$:
-$\dot{\vb{a}}=(\cdots)\utau+(\cdots)\un+\kappa v^{2}\,\dot{\un}$ y
-$\dot{\un}\cdot\ub=v\,\tors$ por \eqref{eq:frenet}, luego
-$(\vb{v}\times\vb{a})\cdot\dot{\vb{a}}=\kappa v^{3}\cdot\kappa v^{3}\tors=\norm{\vb{v}\times\vb{a}}^{2}\tors$.
+Partimos de \eqref{eq:intrinseca}: $\vb{v}=v\,\utau$,
+$\vb{a}=\dot v\,\utau+\kappa v^{2}\,\un$, con $v>0$, $\kappa\ge0$,
+$\utau\times\un=\ub$ y $\utau\times\utau=\vb{0}$.
+\begin{enumerate}
+  \item \emph{$\ub$ y $\kappa$}. El término en $\utau\times\utau$ se anula:
+  \[
+    \vb{v}\times\vb{a}=v\dot v\,(\utau\times\utau)+\kappa v^{3}\,(\utau\times\un)=\kappa v^{3}\,\ub .
+  \]
+  Como $\ub$ es unitario y $\kappa v^{3}\ge0$, $\norm{\vb{v}\times\vb{a}}=\kappa v^{3}$: de aquí
+  $\kappa$ y $\ub=\vb{v}\times\vb{a}/\norm{\vb{v}\times\vb{a}}$; y $\un=\ub\times\utau$.
+  \item \emph{$a_{T}$ y $a_{N}$}. Con $\utau\cdot\utau=1$ y $\utau\cdot\un=0$,
+  $\vb{v}\cdot\vb{a}=v\dot v$, luego $a_{T}=\dot v=\vb{v}\cdot\vb{a}/v$; y
+  $a_{N}=\kappa v^{2}=\norm{\vb{v}\times\vb{a}}/v$.
+  \item \emph{Regla de la cadena para el triedro}. $\utau$ y $\un$ dependen de $t$
+  a través de $s$: $\utau(t)=\utau\bigl(s(t)\bigr)$. Para cualquier $f(s(t))$,
+  \[
+    \od{f}{t}=\od{f}{s}\,\od{s}{t}=v\,\od{f}{s}
+    \qquad\Longrightarrow\qquad
+    \dot{\utau}=v\,\od{\utau}{s}=\kappa v\,\un,\qquad
+    \dot{\un}=v\,\od{\un}{s}=v\,(-\kappa\,\utau+\tors\,\ub),
+  \]
+  donde las derivadas respecto de $s$ son las de Frenet--Serret \eqref{eq:frenet}.
+  \item \emph{Derivar $\vb{a}$} (regla del producto en $\dot v\cdot\utau$ y en $(\kappa v^{2})\cdot\un$):
+  \[
+    \dot{\vb{a}}=\underbrace{\ddot v\,\utau+\dot v\,\dot{\utau}}_{\od{}{t}(\dot v\,\utau)}
+    +\underbrace{\od{(\kappa v^{2})}{t}\,\un+\kappa v^{2}\,\dot{\un}}_{\od{}{t}(\kappa v^{2}\,\un)} .
+  \]
+  Sustituyendo el paso 3, $\dot v\,\dot{\utau}=\kappa v\dot v\,\un$ y
+  $\kappa v^{2}\,\dot{\un}=-\kappa^{2}v^{3}\,\utau+\kappa v^{3}\tors\,\ub$; agrupando,
+  \[
+    \dot{\vb{a}}=(\ddot v-\kappa^{2}v^{3})\,\utau
+    +\Bigl(\kappa v\dot v+\od{(\kappa v^{2})}{t}\Bigr)\un
+    +\kappa v^{3}\tors\,\ub .
+  \]
+  La componente en $\ub$ sólo procede de $\dot{\un}$: es la que mide cómo se sale
+  la curva del plano osculador.
+  \item \emph{Proyectar sobre $\vb{v}\times\vb{a}=\kappa v^{3}\ub$}. Como
+  $\ub\cdot\utau=\ub\cdot\un=0$, sólo sobrevive la componente en $\ub$:
+  \[
+    (\vb{v}\times\vb{a})\cdot\dot{\vb{a}}=\kappa v^{3}\,(\ub\cdot\dot{\vb{a}})
+    =\kappa v^{3}\cdot\kappa v^{3}\tors=\norm{\vb{v}\times\vb{a}}^{2}\,\tors
+    \ \Longrightarrow\ \tors=\frac{(\vb{v}\times\vb{a})\cdot\dot{\vb{a}}}{\norm{\vb{v}\times\vb{a}}^{2}}.\qedhere
+  \]
+\end{enumerate}
 \end{proof}
 
 \begin{ejemplo}[Circunferencia de radio $R$]

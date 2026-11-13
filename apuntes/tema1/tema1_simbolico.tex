@@ -248,8 +248,12 @@ $\duv{e}{\varphi}=-\dot\varphi(\sin\theta\,\er+\cos\theta\,\et)$:
 \begin{gather}
   \vb{v}\times\vb{a}=v\,\utau\times(\dot v\,\utau+\kappa v^{2}\,\un)=\kappa v^{3}\,\ub,\qquad
   \vb{v}\cdot\vb{a}=v\dot v\\
-  \dot{\vb{a}}=(\cdots)\utau+(\cdots)\un+\kappa v^{2}\,\dot{\un},\qquad \dot{\un}\cdot\ub=v\,\tors
-  \ \Longrightarrow\ (\vb{v}\times\vb{a})\cdot\dot{\vb{a}}=\kappa^{2}v^{6}\,\tors\\
+  \od{f}{t}=\od{f}{s}\od{s}{t}=v\,\od{f}{s}:\qquad
+  \dot{\utau}=v\,\od{\utau}{s}=\kappa v\,\un,\qquad
+  \dot{\un}=v\,\od{\un}{s}=v(-\kappa\,\utau+\tors\,\ub)\\
+  \dot{\vb{a}}=\ddot v\,\utau+\dot v\,\dot{\utau}+\od{(\kappa v^{2})}{t}\,\un+\kappa v^{2}\,\dot{\un}\\
+  =(\ddot v-\kappa^{2}v^{3})\,\utau+\Bigl(\kappa v\dot v+\od{(\kappa v^{2})}{t}\Bigr)\un+\kappa v^{3}\tors\,\ub\\
+  (\vb{v}\times\vb{a})\cdot\dot{\vb{a}}=\kappa v^{3}\,\ub\cdot\dot{\vb{a}}=\kappa v^{3}\cdot\kappa v^{3}\tors=\norm{\vb{v}\times\vb{a}}^{2}\,\tors\\
   \resultado{
   \begin{gathered}
   \utau=\frac{\vb{v}}{v},\quad
