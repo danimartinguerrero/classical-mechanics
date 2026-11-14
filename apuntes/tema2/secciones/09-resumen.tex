@@ -1,0 +1,51 @@
+% =====================================================================
+\section{Resumen operativo}
+\label{sec:resumen}
+% =====================================================================
+
+\begin{table}[ht]
+\centering
+\caption{Teoremas del tema y cuándo usarlos.}
+\label{tab:resumen}
+\small
+\renewcommand{\arraystretch}{1.75}
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\color{cian}Magnitud & \color{cian}Ecuación & \color{cian}Se conserva si\\
+\midrule
+CM & $\Rc=\frac1M\sum m_{\alpha}\vb{r}_{\alpha}=\frac1M\int\vb{r}\,\dd m$ & ---\\
+Momento lineal & $\dot{\vb{P}}=M\ddot{\Rc}=\vb{F}\ext$ & $\vb{F}\ext=\vb{0}$ (o una componente)\\
+Momento angular & $\dot{\vb{L}}_{Q}=\vtorque_{Q}\ext$ ($Q$ fijo o CM) & $\vtorque_{Q}\ext=\vb{0}$\\
+König I & $\vb{L}_{O}=\Rc\times M\Vc+\vb{L}'$ & ---\\
+König II & $T=\frac12MV^{2}+T'$ & ---\\
+Energía & $E=T+U\inn+V\ext$ & fuerzas conservativas\\
+Masa variable & $m\dot{\vb{v}}=\vb{F}\ext+\dot m\,\vb{u}$ & ---\\
+Virial & $2\prom{T}=-\prom{\sum\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}}=n\prom{V}$ & movimiento acotado\\
+Pappus & $A=2\pi\bar y L$,\ \ $V=2\pi\bar y A$ & ---\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{clave}{Estrategia general}
+\begin{enumerate}[leftmargin=1.4em]
+  \item \emph{Elegir el sistema}: qué partículas entran (en masa variable,
+        cuerpo $+$ masa intercambiada; en una explosión, todos los fragmentos).
+  \item \emph{Clasificar las fuerzas}: las internas no cambian $\vb{P}$ ni, si son
+        centrales, $\vb{L}$; sí pueden cambiar $T$.
+  \item \emph{Buscar conservaciones}: $\vb{F}\ext=\vb{0}\Rightarrow\vb{P}$;
+        $\vtorque\ext=\vb{0}\Rightarrow\vb{L}$; todo conservativo $\Rightarrow E$.
+  \item \emph{Pasar al CM} cuando simplifique: allí $\vb{P}'=\vb{0}$, y por
+        König $\vb{L}$ y $T$ se separan en una parte del CM y otra interna.
+\end{enumerate}
+\end{clave}
+
+\begin{clave}[violeta]{Errores típicos}
+\begin{itemize}[leftmargin=1.3em]
+  \item Usar $\vb{F}=m\vb{a}$ con masa variable: hay que añadir el empuje
+        $\dot m\,\vb{u}$, con $\vb{u}$ \emph{relativa} al cuerpo.
+  \item Conservar $T$ en una explosión o un choque: se conserva $\vb{P}$, no $T$.
+  \item Olvidar que $\dot{\vb{L}}_{Q}=\vtorque_{Q}\ext$ exige $Q$ fijo o el CM.
+  \item En el CM de un continuo, no aprovechar la simetría, o poner la
+        densidad sin el factor geométrico ($\dd S=R^{2}\sin\theta\,\dd\theta\,\dd\varphi$).
+\end{itemize}
+\end{clave}

@@ -1,0 +1,152 @@
+% =====================================================================
+\section{Sistemas de partículas}
+\label{sec:sistemas}
+% =====================================================================
+
+\subsection{Sistemas discretos y continuos}
+
+\begin{definicion}[Sistema de partículas]
+Un \emph{sistema de partículas} es un conjunto de $N$ partículas que
+interaccionan entre sí. La partícula $\alpha$ ($\alpha=1,\dots,N$) tiene masa
+$m_{\alpha}$ y vector de posición $\vb{r}_{\alpha}$ respecto del origen $O$ de un SRI;
+la masa total es
+\begin{equation}
+  M\defeq\sa m_{\alpha}.
+\end{equation}
+\end{definicion}
+
+\begin{definicion}[Sistema continuo]
+Un sistema continuo es el límite $N\to\infty$ de partículas de masa
+$\dd m$. Según su geometría, se describe con una densidad
+\begin{equation}
+  \lambda=\od{m}{l}\ \ (\text{lineal}),\qquad
+  \sigma=\od{m}{S}\ \ (\text{superficial}),\qquad
+  \rho=\od{m}{V}\ \ (\text{volúmica}),
+\end{equation}
+y toda suma sobre partículas se sustituye por una integral:
+\begin{equation}
+  \resultado{\sa m_{\alpha}\,f(\vb{r}_{\alpha})\ \longrightarrow\ \int f(\vb{r})\,\dd m},
+  \qquad \dd m=\lambda\,\dd l=\sigma\,\dd S=\rho\,\dd V .
+  \label{eq:diccionario}
+\end{equation}
+\end{definicion}
+
+Con este diccionario, todo resultado del tema vale para ambos tipos de
+sistema. Los elementos $\dd l,\dd S,\dd V$ se escriben en las coordenadas
+adaptadas a la simetría (Tema 1, \S2).
+
+\subsection{Fuerzas internas y externas}
+
+\begin{definicion}[Fuerzas internas y externas]
+Sobre la partícula $\alpha$ actúan
+\begin{itemize}
+  \item la \emph{fuerza externa} $\vb{F}_{\alpha}\ext$, la resultante de los agentes
+        ajenos al sistema;
+  \item las \emph{fuerzas internas} $\vb{F}_{\alpha\beta}$, la fuerza que ejerce la partícula
+        $\beta$ sobre la $\alpha$, con $\vb{F}_{\alpha\alpha}=\vb{0}$.
+\end{itemize}
+Por superposición, la ecuación de movimiento de cada partícula es
+\begin{equation}
+  \resultado{\dot{\vb{p}}_{\alpha}=m_{\alpha}\ddot{\vb{r}}_{\alpha}
+  =\vb{F}_{\alpha}\ext+\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}},
+  \qquad \alpha=1,\dots,N .
+  \label{eq:newton-alpha}
+\end{equation}
+\end{definicion}
+
+\begin{definicion}[Tercera ley: formas débil y fuerte]
+\label{def:tercera}
+\begin{casos}
+  \item \emph{Forma débil}: $\vb{F}_{\alpha\beta}=-\vb{F}_{\beta\alpha}$.
+  \item \emph{Forma fuerte}: además, las fuerzas son \emph{centrales}, es decir,
+        $\vb{F}_{\alpha\beta}\parallel\vb{r}_{\alpha\beta}\defeq\vb{r}_{\alpha}-\vb{r}_{\beta}$.
+        La cumplen la gravedad y la electrostática.
+\end{casos}
+\end{definicion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.25]
+  % nube de partículas
+  \foreach \p in {(2.0,2.55),(2.55,0.75),(3.75,2.55),(1.75,1.35),(4.3,1.75),(2.95,3.05),(6.05,2.35)}
+    \node[punto,fill=tenue,inner sep=1.3pt] at \p {};
+  \coordinate (O) at (0,0);
+  \coordinate (C) at (3.1,1.55);
+  \coordinate (A) at (4.75,3.05);
+  \coordinate (B) at (5.75,0.95);
+  % ejes
+  \draw[eje] (O) -- (7.0,0) node[anchor=north,peq,inner sep=2pt]{$x$};
+  \draw[eje] (O) -- (0,3.75) node[anchor=east,peq,inner sep=2pt]{$y$};
+  % vectores de posición
+  \draw[vec,texto!55] (O) -- (A) node[pos=0.55,anchor=south east,etiq,inner sep=1pt]{$\vb{r}_{\alpha}$};
+  \draw[vec,texto!55] (O) -- (B) node[pos=0.72,anchor=north west,etiq,inner sep=2pt]{$\vb{r}_{\beta}$};
+  \draw[vec,violeta] (O) -- (C) node[pos=0.55,anchor=north west,etiq,inner sep=1pt]{$\Rc$};
+  \draw[vec,cian] (C) -- (A) node[pos=0.45,anchor=north west,etiq,inner sep=2pt]{$\rp_{\alpha}$};
+  % vector relativo y fuerzas internas
+  \draw[aux,ambar] (B) -- (A);
+  \node[ambar,font=\footnotesize,anchor=west,inner sep=4pt] at ($(B)!0.55!(A)$) {$\vb{r}_{\alpha\beta}$};
+  \draw[vec,rosa] (A) -- ($(A)!0.36!(B)$);
+  \node[rosa,font=\small,anchor=west,inner sep=3pt] at ($(A)!0.30!(B)$) {$\vb{F}_{\alpha\beta}$};
+  \draw[vec,rosa] (B) -- ($(B)!0.36!(A)$);
+  \node[rosa,font=\small,anchor=north west,inner sep=3pt] at ($(B)!0.34!(A)$) {$\vb{F}_{\beta\alpha}$};
+  % fuerza externa
+  \draw[vec,verde] (A) -- ++(0,0.8) node[anchor=south,etiq,inner sep=2pt]{$\vb{F}_{\alpha}\ext$};
+  % puntos
+  \node[punto,fill=violeta,inner sep=1.7pt] at (C) {};
+  \node[violeta,font=\small,anchor=north west,inner sep=2pt] at (C) {CM};
+  \node[punto,inner sep=1.6pt] at (A) {};
+  \node[etiq,anchor=west,inner sep=4pt] at (A) {$m_{\alpha}$};
+  \node[punto,inner sep=1.6pt] at (B) {};
+  \node[etiq,anchor=north,inner sep=4pt] at (B) {$m_{\beta}$};
+  \node[punto,fill=tenue,inner sep=1pt] at (O) {};
+  \node[peq,anchor=north east,inner sep=2pt] at (O) {$O$};
+\end{tikzpicture}
+\caption{Sistema de partículas. Posiciones respecto de $O$ ($\vb{r}_{\alpha}$),
+del centro de masas ($\Rc$) y relativas al CM ($\rp_{\alpha}=\vb{r}_{\alpha}-\Rc$).
+Las fuerzas internas forman pares de acción y reacción
+$\vb{F}_{\alpha\beta}=-\vb{F}_{\beta\alpha}$; si son centrales, actúan sobre la recta
+$\vb{r}_{\alpha\beta}=\vb{r}_{\alpha}-\vb{r}_{\beta}$.}
+\label{fig:sistema}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{lema}[Las fuerzas internas no tienen resultante ni momento]
+\label{lem:internas}
+\begin{casos}
+  \item Con la forma débil: $\displaystyle\sa\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}=\vb{0}$.
+  \item Con la forma fuerte: $\displaystyle\sa\sum_{\beta\neq\alpha}\vb{r}_{\alpha}\times\vb{F}_{\alpha\beta}=\vb{0}$.
+\end{casos}
+\end{lema}
+
+\begin{proof}
+\begin{enumerate}
+  \item Se agrupan los términos por parejas $\{\alpha,\beta\}$: cada par aparece
+  dos veces, como $(\alpha,\beta)$ y como $(\beta,\alpha)$:
+  \[
+    \sum_{\alpha}\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}=\sab\bigl(\vb{F}_{\alpha\beta}+\vb{F}_{\beta\alpha}\bigr)=\vb{0}.
+  \]
+  Equivalentemente, la «matriz» $(\vb{F}_{\alpha\beta})$ es antisimétrica y la suma de
+  todos los elementos de una matriz antisimétrica es nula.
+  \item Agrupando igual y usando $\vb{F}_{\beta\alpha}=-\vb{F}_{\alpha\beta}$:
+  \[
+    \sum_{\alpha}\sum_{\beta\neq\alpha}\vb{r}_{\alpha}\times\vb{F}_{\alpha\beta}
+    =\sab\bigl(\vb{r}_{\alpha}\times\vb{F}_{\alpha\beta}+\vb{r}_{\beta}\times\vb{F}_{\beta\alpha}\bigr)
+    =\sab\vb{r}_{\alpha\beta}\times\vb{F}_{\alpha\beta}=\vb{0},
+  \]
+  porque $\vb{F}_{\alpha\beta}\parallel\vb{r}_{\alpha\beta}$ (\cref{fig:sistema}).\qedhere
+\end{enumerate}
+\end{proof}
+
+\subsection{Magnitudes dinámicas del sistema}
+
+\begin{definicion}[Magnitudes totales]
+\label{def:magnitudes}
+Para un sistema de $N$ partículas, respecto de un punto $O$ de un SRI,
+\begin{equation}
+  \vb{P}\defeq\sa\vb{p}_{\alpha}=\sa m_{\alpha}\vb{v}_{\alpha},\qquad
+  \vb{L}_{O}\defeq\sa\vb{r}_{\alpha}\times m_{\alpha}\vb{v}_{\alpha},\qquad
+  T\defeq\sa\tfrac12\,m_{\alpha}v_{\alpha}^{2}.
+\end{equation}
+Son el momento lineal, el momento angular y la energía cinética totales.
+\end{definicion}

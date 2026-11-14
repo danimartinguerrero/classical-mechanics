@@ -1,0 +1,145 @@
+% =====================================================================
+\section{Momento lineal y centro de masas}
+\label{sec:momento-lineal}
+% =====================================================================
+
+\subsection{Centro de masas}
+
+\begin{definicion}[Centro de masas]
+\label{def:cm}
+El \emph{centro de masas} (CM) es el punto de vector de posición
+\begin{equation}
+  \resultado{\Rc\defeq\frac{1}{M}\sa m_{\alpha}\vb{r}_{\alpha}}\ \ \text{(discreto)},\qquad
+  \Rc=\frac{1}{M}\int\vb{r}\,\dd m,\ \ M=\int\dd m\ \ \text{(continuo)}.
+  \label{eq:cm}
+\end{equation}
+Su velocidad es $\Vc\defeq\dot{\Rc}$. Las posiciones y velocidades
+\emph{relativas al CM} son $\rp_{\alpha}\defeq\vb{r}_{\alpha}-\Rc$ y
+$\vp_{\alpha}\defeq\vb{v}_{\alpha}-\Vc$.
+\end{definicion}
+
+\begin{observacion}
+El CM es un punto físico único, pero su vector $\Rc$ depende del origen y de
+las coordenadas elegidas. No tiene por qué coincidir con una partícula: el CM
+de un anillo está en su centro, donde no hay masa.
+\end{observacion}
+
+\begin{proposicion}[Propiedades del CM]
+\label{prop:cm}
+\begin{equation}
+  \resultado{\sa m_{\alpha}\rp_{\alpha}=\vb{0},\qquad
+  \sa m_{\alpha}\vp_{\alpha}=\vb{0},\qquad
+  \vb{P}=M\Vc} .
+  \label{eq:prop-cm}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+$\sum m_{\alpha}\rp_{\alpha}=\sum m_{\alpha}\vb{r}_{\alpha}-\Rc\sum m_{\alpha}=M\Rc-M\Rc=\vb{0}$: la posición
+del CM medida desde el propio CM es nula. Derivando respecto de $t$ (las
+masas son constantes), $\sum m_{\alpha}\vp_{\alpha}=\vb{0}$. Por último,
+$\vb{P}=\sum m_{\alpha}\dot{\vb{r}}_{\alpha}=\od{}{t}\bigl(M\Rc\bigr)=M\Vc$.
+\end{proof}
+
+\subsection{Teorema del momento lineal}
+
+\begin{teorema}[Momento lineal, movimiento del CM]
+\label{teo:momento-lineal}
+Si las fuerzas internas cumplen la tercera ley en forma débil,
+\begin{equation}
+  \resultado{\dot{\vb{P}}=M\ddot{\Rc}=\vb{F}\ext\defeq\sa\vb{F}_{\alpha}\ext} .
+  \label{eq:momento-lineal}
+\end{equation}
+El CM se mueve como una partícula de masa $M$ sometida sólo a la resultante
+de las fuerzas \emph{externas}; las internas no afectan a su movimiento.
+\end{teorema}
+
+\begin{proof}
+Sumando \eqref{eq:newton-alpha} en $\alpha$:
+$\dot{\vb{P}}=\sum_{\alpha}\vb{F}_{\alpha}\ext+\sum_{\alpha}\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}$. El
+segundo término es nulo por el \cref{lem:internas}. Por \eqref{eq:prop-cm},
+$\dot{\vb{P}}=M\ddot{\Rc}$.
+\end{proof}
+
+\begin{corolario}[Conservación del momento lineal]
+\label{cor:conserva-P}
+Si $\vb{F}\ext=\vb{0}$, entonces $\vb{P}=M\Vc$ es constante: el CM se mueve en
+línea recta y con velocidad constante. Si sólo se anula una componente,
+$F\ext_{x}=0$, se conserva $P_{x}$.
+\end{corolario}
+
+\begin{observacion}[Sistema de referencia del CM]
+Si $\vb{F}\ext=\vb{0}$, el CM es un SRI, el \emph{sistema del CM}. En él
+$\vb{P}'=\sum m_{\alpha}\vp_{\alpha}=\vb{0}$, por \eqref{eq:prop-cm}. Las magnitudes primadas
+($\vb{L}'$, $T'$\dots) se refieren a este sistema. En explosiones y choques, la
+fuerza interna es enorme y breve, las externas son despreciables durante el
+proceso y $\vb{P}$ se conserva justo antes y justo después.
+\end{observacion}
+
+\subsection{Cálculo del centro de masas}
+
+\begin{clave}{Método: centro de masas}
+\begin{enumerate}[leftmargin=1.4em]
+  \item \emph{Simetría}. Si el cuerpo tiene un plano, un eje o un centro de
+        simetría (de forma \emph{y} de densidad), el CM está en él.
+  \item \emph{Composición}. El CM de un sistema formado por partes de masas
+        $M_{k}$ y CM $\Rc_{k}$ es $\Rc=\sum_{k}M_{k}\Rc_{k}/\sum_{k}M_{k}$. Un hueco
+        cuenta como una masa negativa.
+  \item \emph{Integración}. Se elige el elemento $\dd m$ según la geometría
+        ($\lambda\,\dd l$, $\sigma\,\dd S$, $\rho\,\dd V$) y las coordenadas según la simetría:
+        \begin{gather*}
+          \dd l=R\,\dd\theta\ \ (\text{arco}),\qquad
+          \dd S=R^{2}\sin\theta\,\dd\theta\,\dd\varphi\ \ (\text{casquete}),\\
+          \dd V=r^{2}\sin\theta\,\dd r\,\dd\theta\,\dd\varphi\ \ (\text{esfera}),
+        \end{gather*}
+        y se calculan $M=\int\dd m$ y $\Rc=\frac1M\int\vb{r}\,\dd m$, sólo para las
+        componentes que no fija la simetría.
+  \item \emph{Pappus--Guldin} (\cref{sec:pappus}): si se conoce el área o el
+        volumen de revolución, se despeja la distancia del centroide al eje.
+\end{enumerate}
+\end{clave}
+
+\begin{ejemplo}[Alambre semicircular homogéneo]
+\label{ej:semicirculo}
+Un arco de radio $R$ y densidad $\lambda$ constante ocupa
+$\vb{r}=R(\cos\theta,\sin\theta)$, con $\theta\in[0,\pi]$ (\cref{fig:semicirculo}).
+\begin{enumerate}
+  \item \emph{Simetría}: el eje $y$ es de simetría, así que $X=0$.
+  \item \emph{Elemento}: $\dd m=\lambda R\,\dd\theta$, y por tanto $M=\lambda\pi R$.
+  \item \emph{Integral}:
+  $Y=\dfrac{1}{M}\displaystyle\int_{0}^{\pi}R\sin\theta\,\lambda R\,\dd\theta
+  =\dfrac{\lambda R^{2}\,[-\cos\theta]_{0}^{\pi}}{\lambda\pi R}=\resultado{\dfrac{2R}{\pi}}\simeq0{,}64\,R$.
+\end{enumerate}
+Para un semicírculo \emph{macizo} ($\dd m=\sigma\rho\,\dd\rho\,\dd\theta$) sale $Y=4R/3\pi\simeq0{,}42\,R$.
+\end{ejemplo}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.6]
+  \def\R{1.6}\def\th{58}
+  \draw[eje] (-2.0,0) -- (2.15,0) node[anchor=west,peq,inner sep=2pt]{$x$};
+  \draw[eje] (0,0) -- (0,2.05) node[anchor=south,peq,inner sep=2pt]{$y$};
+  \draw[texto,line width=1.3pt] (\R,0) arc[start angle=0,end angle=180,radius=\R];
+  % elemento dm
+  \draw[cian,line width=3pt] ({\R*cos(\th)},{\R*sin(\th)}) arc[start angle=\th,end angle={\th+9},radius=\R];
+  \draw[aux] (0,0) -- ({\R*cos(\th)},{\R*sin(\th)});
+  \draw[violeta,line width=0.6pt,->] (0.42,0) arc[start angle=0,end angle=\th,radius=0.42];
+  \node[violeta,font=\small] at ({0.62*cos(\th/2)},{0.62*sin(\th/2)}) {$\theta$};
+  \node[cian,font=\small,anchor=south west,inner sep=2pt] at ({\R*cos(\th+9)},{\R*sin(\th+9)}) {$\dd m=\lambda R\,\dd\theta$};
+  % CM
+  \pgfmathsetmacro{\Y}{2*\R/pi}
+  \node[punto,fill=violeta,inner sep=1.7pt] at (0,\Y) {};
+  \node[violeta,font=\small,anchor=west,inner sep=3pt] at (0,\Y) {CM};
+  \draw[violeta,line width=0.5pt,<->] (-0.22,0) -- (-0.22,\Y);
+  \draw[aux] (-0.3,\Y) -- (0,\Y);
+  \node[violeta,font=\small,anchor=east,inner sep=3pt] at (-0.22,{\Y/2}) {$\dfrac{2R}{\pi}$};
+  \node[punto,fill=tenue,inner sep=0.9pt] at (0,0) {};
+  \node[peq,anchor=north,inner sep=3pt] at (0,0) {$O$};
+  \node[peq,anchor=north,inner sep=3pt] at (\R,0) {$R$};
+\end{tikzpicture}
+\caption{Alambre semicircular homogéneo. El CM está en el eje de simetría, a
+$2R/\pi$ del centro, fuera del propio alambre.}
+\label{fig:semicirculo}
+\end{figure}
+% ---------------------------------------------------------------------

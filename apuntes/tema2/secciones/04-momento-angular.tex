@@ -1,0 +1,121 @@
+% =====================================================================
+\section{Momento angular}
+\label{sec:momento-angular}
+% =====================================================================
+
+\subsection{Primer teorema de König}
+
+\begin{teorema}[König para el momento angular]
+\label{teo:konig1}
+Para cualquier punto fijo $O$ de un SRI,
+\begin{equation}
+  \resultado{\vb{L}_{O}=\underbrace{\Rc\times M\Vc}_{\vb{L}_{\text{orb}}}
+  +\underbrace{\sa\rp_{\alpha}\times m_{\alpha}\vp_{\alpha}}_{\vb{L}'}} .
+  \label{eq:konig1}
+\end{equation}
+El momento angular total es el \emph{orbital}, el de una partícula de masa
+$M$ situada en el CM, más el \emph{intrínseco} o de espín $\vb{L}'$, debido al
+movimiento relativo al CM.
+\end{teorema}
+
+\begin{proof}
+Con $\vb{r}_{\alpha}=\Rc+\rp_{\alpha}$ y $\vb{v}_{\alpha}=\Vc+\vp_{\alpha}$, el producto vectorial
+distributivo da cuatro términos:
+\[
+  \vb{L}_{O}=\sa m_{\alpha}(\Rc+\rp_{\alpha})\times(\Vc+\vp_{\alpha})
+  =\Rc\times\Vc\sa m_{\alpha}
+\]
+\[
+  \qquad+\Rc\times\underbrace{\sa m_{\alpha}\vp_{\alpha}}_{\vb{0}}
+  +\underbrace{\Bigl(\sa m_{\alpha}\rp_{\alpha}\Bigr)}_{\vb{0}}\times\Vc
+  +\sa m_{\alpha}\,\rp_{\alpha}\times\vp_{\alpha}.
+\]
+Los términos cruzados se anulan por \eqref{eq:prop-cm}, y $\sum m_{\alpha}=M$.
+\end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.15]
+  \def\a{3.3}\def\b{1.75}\def\t{38}
+  \draw[texto!45,line width=0.6pt,dash pattern=on 3pt off 2pt] (0,0) ellipse[x radius=\a,y radius=\b];
+  \coordinate (O) at (0,0);
+  \coordinate (C) at ({\a*cos(\t)},{\b*sin(\t)});
+  \node[punto,fill=ambar,inner sep=3pt] at (O) {};
+  \node[peq,anchor=north,inner sep=5pt] at (O) {$O$};
+  \draw[vec,violeta] (O) -- (C) node[pos=0.5,anchor=south east,etiq,inner sep=1pt]{$\Rc$};
+  % velocidad del CM (tangente a la elipse)
+  \pgfmathsetmacro{\tx}{-\a*sin(\t)}\pgfmathsetmacro{\ty}{\b*cos(\t)}
+  \pgfmathsetmacro{\tn}{sqrt(\tx*\tx+\ty*\ty)}
+  % cuerpo girando
+  \draw[texto!85,line width=0.8pt,fill=caja] (C) circle (0.36);
+  \draw[rosa,line width=0.9pt,->] ($(C)+(175:0.6)$) arc[start angle=175,end angle=480,radius=0.6];
+  \draw[vec,cian] (C) -- ++({1.35*\tx/\tn},{1.35*\ty/\tn}) node[anchor=south east,etiq,inner sep=1pt]{$\Vc$};
+  \node[rosa,font=\small,anchor=west,inner sep=3pt] at ($(C)+(-15:0.75)$) {$\vb{L}'$ (espín)};
+  \node[punto,fill=violeta,inner sep=1.4pt] at (C) {};
+  \node[violeta,font=\small,anchor=north,inner sep=3pt] at (0,-\b) {$\vb{L}_{\text{orb}}=\Rc\times M\Vc$};
+\end{tikzpicture}
+\caption{Primer teorema de König. Para la Tierra respecto del Sol $O$:
+traslación del CM a lo largo de la órbita ($\vb{L}_{\text{orb}}$) más rotación
+alrededor del propio CM ($\vb{L}'$).}
+\label{fig:konig1}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\subsection{Ecuación del momento angular}
+
+\begin{teorema}[Momento angular respecto de un punto $Q$]
+\label{teo:momento-angular}
+Sea $Q$ un punto, posiblemente móvil, con posición $\vb{r}_{Q}(t)$, y sean
+\[
+  \vb{L}_{Q}\defeq\sa(\vb{r}_{\alpha}-\vb{r}_{Q})\times m_{\alpha}(\dot{\vb{r}}_{\alpha}-\dot{\vb{r}}_{Q}),
+  \qquad
+  \vtorque_{Q}\ext\defeq\sa(\vb{r}_{\alpha}-\vb{r}_{Q})\times\vb{F}_{\alpha}\ext .
+\]
+Si las fuerzas internas cumplen la tercera ley en forma fuerte,
+\begin{equation}
+  \dot{\vb{L}}_{Q}=\vtorque_{Q}\ext-M\,(\Rc-\vb{r}_{Q})\times\ddot{\vb{r}}_{Q} .
+  \label{eq:LQ-general}
+\end{equation}
+En particular,
+\begin{equation}
+  \resultado{\dot{\vb{L}}_{Q}=\vtorque_{Q}\ext}
+  \quad\text{si }Q\text{ es fijo }(\ddot{\vb{r}}_{Q}=\vb{0}),\ \text{si }Q=\text{CM},\ \text{o si }\ddot{\vb{r}}_{Q}\parallel(\Rc-\vb{r}_{Q}).
+  \label{eq:LQ}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+\begin{enumerate}
+  \item \emph{Derivar}. El primer término de la regla del producto es
+  $(\dot{\vb{r}}_{\alpha}-\dot{\vb{r}}_{Q})\times m_{\alpha}(\dot{\vb{r}}_{\alpha}-\dot{\vb{r}}_{Q})=\vb{0}$, luego
+  \[
+    \dot{\vb{L}}_{Q}=\sa(\vb{r}_{\alpha}-\vb{r}_{Q})\times m_{\alpha}\ddot{\vb{r}}_{\alpha}
+    -\Bigl(\sa m_{\alpha}(\vb{r}_{\alpha}-\vb{r}_{Q})\Bigr)\times\ddot{\vb{r}}_{Q}.
+  \]
+  \item \emph{Segundo término}: $\sum m_{\alpha}(\vb{r}_{\alpha}-\vb{r}_{Q})=M(\Rc-\vb{r}_{Q})$ por \eqref{eq:cm}.
+  \item \emph{Primer término}: por \eqref{eq:newton-alpha},
+  $m_{\alpha}\ddot{\vb{r}}_{\alpha}=\vb{F}_{\alpha}\ext+\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}$, y
+  \[
+    \sa(\vb{r}_{\alpha}-\vb{r}_{Q})\times\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}
+    =\underbrace{\sum_{\alpha}\sum_{\beta\neq\alpha}\vb{r}_{\alpha}\times\vb{F}_{\alpha\beta}}_{\vb{0}\ (\text{forma fuerte})}
+    -\vb{r}_{Q}\times\underbrace{\sum_{\alpha}\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}}_{\vb{0}\ (\text{forma débil})},
+  \]
+  ambos nulos por el \cref{lem:internas}. Queda $\vtorque_{Q}\ext$.
+  \item \emph{Casos particulares}: el término $M(\Rc-\vb{r}_{Q})\times\ddot{\vb{r}}_{Q}$ se
+  anula si $\ddot{\vb{r}}_{Q}=\vb{0}$, si $\vb{r}_{Q}=\Rc$, o si ambos vectores son paralelos.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{observacion}[El CM siempre sirve]
+Respecto del CM la ecuación es $\dot{\vb{L}}{}'=\vtorque^{\prime(\mathrm{ext})}$, \emph{aunque el CM
+esté acelerado}. Por eso la rotación de un cuerpo puede estudiarse en torno
+a su CM, sea cual sea el movimiento de este (Tema de sólido rígido).
+\end{observacion}
+
+\begin{corolario}[Conservación del momento angular]
+\label{cor:conserva-L}
+Si $\vtorque_{Q}\ext=\vb{0}$ respecto de un punto fijo o del CM, entonces
+$\vb{L}_{Q}=\text{const}$. Basta que se anule una componente,
+$\tau\ext_{Q,z}=0$, para que se conserve $L_{Q,z}$.
+\end{corolario}

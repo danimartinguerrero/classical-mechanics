@@ -1,0 +1,149 @@
+% =====================================================================
+\section{Sistemas de masa variable}
+\label{sec:masa-variable}
+% =====================================================================
+
+Un cohete que expulsa gas o una gota que capta agua cambian de masa. La
+ecuación $\vb{F}=m\vb{a}$ \emph{no} vale para el cuerpo solo; hay que aplicar el
+teorema del momento lineal al sistema cuerpo $+$ masa intercambiada.
+
+\begin{teorema}[Ecuación de un cuerpo de masa variable]
+\label{teo:masa-variable}
+Sea un cuerpo de masa $m(t)$ y velocidad $\vb{v}(t)$ que, en $\dd t$, intercambia
+la masa $\abs{\dd m}$ con velocidad $\vb{u}$ \emph{relativa al cuerpo}, sometido a
+la fuerza externa $\vb{F}\ext$. Entonces
+\begin{equation}
+  \resultado{m\,\od{\vb{v}}{t}=\vb{F}\ext+\od{m}{t}\,\vb{u}} .
+  \label{eq:masa-variable}
+\end{equation}
+El término $\dot m\,\vb{u}$ es el \emph{empuje}. Vale tanto si el cuerpo pierde masa
+($\dot m<0$, $\vb{u}$ velocidad relativa del gas expulsado) como si la gana
+($\dot m>0$, $\vb{u}$ velocidad relativa de la masa captada).
+\end{teorema}
+
+\begin{proof}
+Caso de expulsión (\cref{fig:cohete-esquema}); el de captación es análogo.
+\begin{enumerate}
+  \item \emph{Instante $t$}: el sistema es el cuerpo, con $\vb{P}(t)=m\vb{v}$.
+  \item \emph{Instante $t+\dd t$}: cuerpo de masa $m+\dd m$ ($\dd m<0$) y velocidad
+  $\vb{v}+\dd\vb{v}$, más el gas expulsado, de masa $-\dd m>0$ y velocidad $\vb{v}+\vb{u}$:
+  \[
+    \vb{P}(t+\dd t)=(m+\dd m)(\vb{v}+\dd\vb{v})+(-\dd m)(\vb{v}+\vb{u}).
+  \]
+  \item \emph{Balance}. Por el \cref{teo:momento-lineal}, $\dd\vb{P}=\vb{F}\ext\dd t$.
+  Desarrollando y despreciando el término de segundo orden $\dd m\,\dd\vb{v}$:
+  \[
+    \dd\vb{P}=m\,\dd\vb{v}+\vb{v}\,\dd m-\vb{v}\,\dd m-\vb{u}\,\dd m=m\,\dd\vb{v}-\vb{u}\,\dd m=\vb{F}\ext\dd t .
+  \]
+  \item Dividiendo entre $\dd t$: $m\dot{\vb{v}}=\vb{F}\ext+\dot m\,\vb{u}$.\qedhere
+\end{enumerate}
+\end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % instante t
+  \begin{scope}
+    \draw[texto!85,line width=0.8pt,fill=caja,rounded corners=2pt] (0,0) rectangle (2.4,0.9);
+    \node[etiq] at (1.2,0.45) {$m$};
+    \draw[vec,cian] (2.4,0.45) -- ++(1.0,0) node[anchor=west,etiq,inner sep=2pt]{$\vb{v}$};
+    \node[etiq,anchor=north,inner sep=6pt] at (1.6,0) {instante $t$};
+  \end{scope}
+  % instante t+dt
+  \begin{scope}[xshift=6.3cm]
+    \draw[texto!85,line width=0.8pt,fill=caja,rounded corners=2pt] (0,0) rectangle (2.4,0.9);
+    \node[etiq] at (1.2,0.45) {$m+\dd m$};
+    \draw[vec,cian] (2.4,0.45) -- ++(1.0,0) node[anchor=west,etiq,inner sep=2pt]{$\vb{v}+\dd\vb{v}$};
+    \foreach \p in {(-0.35,0.3),(-0.55,0.62),(-0.75,0.36),(-0.42,0.58)}
+      \fill[naranja!80] \p circle (0.06);
+    \draw[vec,naranja] (-0.85,0.45) -- ++(-0.9,0) node[anchor=east,etiq,inner sep=2pt]{$\vb{v}+\vb{u}$};
+    \node[naranja,font=\footnotesize,anchor=south,inner sep=4pt] at (-0.55,0.75) {$-\dd m$};
+    \node[etiq,anchor=north,inner sep=6pt] at (1.2,0) {instante $t+\dd t$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Balance de momento de un cohete. En $\dd t$ expulsa la masa $-\dd m>0$
+con velocidad $\vb{u}$ relativa al cohete (en el laboratorio, $\vb{v}+\vb{u}$).}
+\label{fig:cohete-esquema}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\subsection{El cohete}
+
+Tomamos el eje en la dirección del movimiento, con el gas expulsado hacia
+atrás a velocidad relativa constante $\vb{u}=-u\,\uv{e}$ ($u>0$) y un ritmo de
+consumo $\mu\defeq-\dot m>0$. El empuje es entonces
+$\dot m\,\vb{u}=\mu u\,\uv{e}$: hacia delante y de módulo $\mu u$.
+
+\begin{corolario}[Tsiolkovski]
+\label{cor:tsiolkovski}
+Sin fuerzas externas, $m\,\dd v=-u\,\dd m$, de donde
+\begin{equation}
+  \resultado{v-v_{0}=u\ln\frac{m_{0}}{m}} .
+  \label{eq:tsiolkovski}
+\end{equation}
+La velocidad depende sólo del cociente de masas, no del ritmo de consumo.
+\end{corolario}
+
+\begin{proof}
+$\dd v=-u\,\dd m/m$, e integrando de $(v_{0},m_{0})$ a $(v,m)$,
+$v-v_{0}=-u\,[\ln m]_{m_{0}}^{m}=u\ln(m_{0}/m)$.
+\end{proof}
+
+\begin{corolario}[Ascenso vertical con $\mu$ constante]
+\label{cor:cohete-g}
+Con $m=m_{0}-\mu t$, en un campo $\vb{g}=-g\kk$ y partiendo del reposo,
+\begin{equation}
+  m\dot v=\mu u-mg
+  \qquad\Longrightarrow\qquad
+  \resultado{v(t)=-u\ln\Bigl(1-\frac{\mu t}{m_{0}}\Bigr)-gt} .
+\end{equation}
+El cohete despega si el empuje vence al peso inicial: $\mu u>m_{0}g$.
+\end{corolario}
+
+\begin{proof}
+$\dot v=\mu u/(m_{0}-\mu t)-g$, e integrando de $0$ a $t$,
+$v=-u\ln(m_{0}-\mu t)+u\ln m_{0}-gt$.
+\end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=10cm,height=6.2cm,
+  xmin=0,xmax=0.92,ymin=0,ymax=2.5,
+  xlabel={$\mu t/m_{0}$ (fracción de masa consumida)},ylabel={$v/u$},
+  legend pos=north west]
+  \addplot[cian,domain=0:0.9,samples=120] {-ln(1-x)};
+  \addlegendentry{$\gamma=0$ (sin gravedad)}
+  \addplot[ambar,domain=0:0.9,samples=120] {-ln(1-x)-0.5*x};
+  \addlegendentry{$\gamma=0{,}5$}
+  \addplot[rosa,domain=0:0.9,samples=120] {-ln(1-x)-0.9*x};
+  \addlegendentry{$\gamma=0{,}9$}
+\end{axis}
+\end{tikzpicture}
+\caption{Velocidad de un cohete con consumo constante, en función de la fracción
+de masa consumida, para $\gamma\defeq m_{0}g/(\mu u)$. Con $\gamma=0$ se recupera
+Tsiolkovski; la gravedad resta $\gamma\,\mu t/m_{0}$. El crecimiento logarítmico
+hace que las últimas fracciones de combustible sean las más eficaces.}
+\label{fig:cohete-v}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{observacion}[Rozamiento]
+En la atmósfera se añade a $\vb{F}\ext$ un arrastre
+$\vb{F}_{\text{roz}}=-\tfrac12\rho C_{D}A\,v\,\vb{v}$, de módulo proporcional a $v^{2}$ y opuesto a la velocidad.
+\end{observacion}
+
+\subsection{Captación de masa en reposo}
+
+Si el cuerpo capta masa que estaba \emph{en reposo} en el laboratorio
+(una gota en una nube), la velocidad relativa de la masa captada es
+$\vb{u}=\vb{0}-\vb{v}=-\vb{v}$, y \eqref{eq:masa-variable} queda
+\begin{equation}
+  m\dot{\vb{v}}=\vb{F}\ext-\dot m\,\vb{v}
+  \qquad\Longleftrightarrow\qquad
+  \resultado{\od{(m\vb{v})}{t}=\vb{F}\ext} .
+  \label{eq:captacion}
+\end{equation}
+En este caso, y sólo en él, vale «$\vb{F}=\dot{\vb{p}}$» para el cuerpo (\cref{prob:8}).

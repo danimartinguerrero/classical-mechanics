@@ -1,0 +1,109 @@
+% =====================================================================
+\section{Energía}
+\label{sec:energia}
+% =====================================================================
+
+\subsection{Segundo teorema de König}
+
+\begin{teorema}[König para la energía cinética]
+\label{teo:konig2}
+\begin{equation}
+  \resultado{T=\tfrac12\,MV^{2}+T',\qquad T'\defeq\sa\tfrac12\,m_{\alpha}{v'_{\alpha}}^{2}} .
+  \label{eq:konig2}
+\end{equation}
+La energía cinética es la del CM, que lleva toda la masa, más la
+\emph{interna} $T'$ del movimiento relativo al CM.
+\end{teorema}
+
+\begin{proof}
+Con $\vb{v}_{\alpha}=\Vc+\vp_{\alpha}$, $v_{\alpha}^{2}=V^{2}+{v'_{\alpha}}^{2}+2\,\Vc\cdot\vp_{\alpha}$, y por tanto
+\[
+  T=\tfrac12V^{2}\sa m_{\alpha}+\sa\tfrac12 m_{\alpha}{v'_{\alpha}}^{2}
+  +\Vc\cdot\underbrace{\sa m_{\alpha}\vp_{\alpha}}_{\vb{0}\ \eqref{eq:prop-cm}} .\qedhere
+\]
+\end{proof}
+
+\begin{observacion}
+$T'$ es la parte de la energía cinética que «no se ve» desde fuera: en un
+gas es la agitación térmica. En un choque o una explosión, $\tfrac12MV^{2}$ no
+cambia si $\vb{F}\ext=\vb{0}$, y toda la energía puesta en juego se reparte en $T'$.
+\end{observacion}
+
+\subsection{Teoremas de la energía}
+
+\begin{proposicion}[Variación de la energía cinética]
+\label{prop:dT}
+Con la tercera ley en forma débil,
+\begin{equation}
+  \od{T}{t}=\underbrace{\sa\vb{v}_{\alpha}\cdot\vb{F}_{\alpha}\ext}_{\mathcal{P}\ext}
+  +\sab(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta} .
+  \label{eq:dT}
+\end{equation}
+Si las distancias entre partículas son constantes (sólido rígido), las
+fuerzas internas centrales no trabajan y $\dot T=\mathcal{P}\ext$.
+\end{proposicion}
+
+\begin{proof}
+$\dot T=\sum m_{\alpha}\vb{v}_{\alpha}\cdot\dot{\vb{v}}_{\alpha}=\sum\vb{v}_{\alpha}\cdot\bigl(\vb{F}_{\alpha}\ext+\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}\bigr)$.
+Agrupando la doble suma por parejas y usando $\vb{F}_{\beta\alpha}=-\vb{F}_{\alpha\beta}$,
+$\vb{v}_{\alpha}\cdot\vb{F}_{\alpha\beta}+\vb{v}_{\beta}\cdot\vb{F}_{\beta\alpha}=(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}$. En un sólido
+rígido, $r_{\alpha\beta}=\text{const}$, y por el \cref{lem:radial} el producto se anula.
+\end{proof}
+
+\begin{lema}[Derivada de una distancia]
+\label{lem:radial}
+Con $\vb{r}_{\alpha\beta}=r_{\alpha\beta}\,\uv{r}_{\alpha\beta}$:\quad
+$\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}=\dot r_{\alpha\beta}$.
+\end{lema}
+
+\begin{proof}
+Derivando $r_{\alpha\beta}^{2}=\vb{r}_{\alpha\beta}\cdot\vb{r}_{\alpha\beta}$:
+$2r_{\alpha\beta}\dot r_{\alpha\beta}=2\,\vb{r}_{\alpha\beta}\cdot\dot{\vb{r}}_{\alpha\beta}$, y se divide entre $2r_{\alpha\beta}$.
+\end{proof}
+
+\begin{teorema}[Conservación de la energía de un sistema]
+\label{teo:energia-sistema}
+Supongamos que las fuerzas internas derivan de un potencial de pares,
+\begin{equation}
+  \vb{F}_{\alpha\beta}=-\od{U_{\alpha\beta}}{r_{\alpha\beta}}\,\uv{r}_{\alpha\beta},
+  \qquad U\inn\defeq\sab U_{\alpha\beta}(r_{\alpha\beta}),
+\end{equation}
+que son centrales y conservativas. Entonces:
+\begin{casos}
+  \item $\od{}{t}\bigl(T+U\inn\bigr)=\mathcal{P}\ext$: sin fuerzas externas, se conserva
+        la energía mecánica \emph{propia} $T+U\inn$.
+  \item Si además $\vb{F}_{\alpha}\ext=-\grad_{\alpha}V\ext$, entonces
+        \begin{equation}
+          \resultado{E\defeq T+U\inn+V\ext=\text{const}} .
+        \end{equation}
+\end{casos}
+\end{teorema}
+
+\begin{proof}
+(i) Por el \cref{lem:radial},
+$(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}=-U'_{\alpha\beta}\,\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}
+=-U'_{\alpha\beta}\,\dot r_{\alpha\beta}=-\od{U_{\alpha\beta}}{t}$. Sumando en $\alpha<\beta$, el segundo
+término de \eqref{eq:dT} es $-\dot U\inn$.
+(ii) Por la regla de la cadena,
+$\mathcal{P}\ext=-\sum\vb{v}_{\alpha}\cdot\grad_{\alpha}V\ext=-\dot V\ext$, y por (i) $\dot T+\dot U\inn+\dot V\ext=0$.
+\end{proof}
+
+\begin{table}[ht]
+\centering
+\caption{Tipos de energía de un sistema de partículas.}
+\label{tab:energias}
+\small
+\begin{tabular}{@{}l l@{}}
+\toprule
+\color{cian}Símbolo & \color{cian}Significado\\
+\midrule
+$T=\tfrac12MV^{2}+T'$ & energía cinética total (König)\\
+$T'$ & energía cinética interna, respecto del CM\\
+$U\inn$ & energía potencial interna (pares de partículas)\\
+$V\ext$ & energía potencial de las fuerzas externas\\
+$T'+U\inn$ & energía interna del sistema\\
+$T+U\inn$ & energía mecánica propia: se conserva si $\vb{F}\ext=\vb{0}$\\
+$T+U\inn+V\ext$ & energía mecánica total: se conserva si todo es conservativo\\
+\bottomrule
+\end{tabular}
+\end{table}

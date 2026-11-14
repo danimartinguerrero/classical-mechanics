@@ -1,0 +1,167 @@
+% =====================================================================
+\section{Dinámica de una partícula}
+\label{sec:particula}
+% =====================================================================
+
+Todo el tema se construye sumando sobre partículas las leyes de una sola.
+Recordamos lo imprescindible: las leyes de Newton, el teorema trabajo--energía
+y el momento angular.
+
+\subsection{Leyes de Newton}
+
+\begin{definicion}[Leyes de Newton]
+\label{def:newton}
+En un sistema de referencia inercial (SRI), para una partícula de masa $m$,
+momento lineal $\vb{p}\defeq m\vb{v}$ y fuerza neta $\vb{F}$:
+\begin{casos}
+  \item \emph{Inercia}: si $\vb{F}=\vb{0}$, entonces $\vb{v}=\text{const}$.
+  \item \emph{Ley fundamental}: $\vb{F}=\od{\vb{p}}{t}$, que para $m$ constante es $\vb{F}=m\vb{a}$.
+  \item \emph{Acción y reacción}: la fuerza que $\beta$ ejerce sobre $\alpha$ es
+        $\vb{F}_{\alpha\beta}=-\vb{F}_{\beta\alpha}$.
+\end{casos}
+\end{definicion}
+
+\begin{observacion}[Relatividad de Galileo y equivalencia]
+Las leyes de la mecánica son las mismas en todos los SRI (principio de
+relatividad de Galileo); en un sistema acelerado aparecen fuerzas de inercia.
+La masa inercial (la de $\vb{F}=m\vb{a}$) y la gravitatoria (la del peso)
+coinciden: todos los cuerpos caen con la misma aceleración. La misión
+MICROSCOPE (2022) lo verificó hasta $\abs{\eta}\lesssim10^{-15}$.
+\end{observacion}
+
+\subsection{Trabajo y energía}
+
+\begin{definicion}[Trabajo, energía cinética]
+El trabajo de $\vb{F}$ a lo largo de una curva $C$ de $A$ a $B$ y la energía
+cinética son
+\begin{equation}
+  W_{AB}\defeq\int_{C}\vb{F}\cdot\dd\vb{r},\qquad T\defeq\tfrac12\,m v^{2}.
+\end{equation}
+\end{definicion}
+
+\begin{teorema}[Trabajo--energía, o de las fuerzas vivas]
+\label{teo:fuerzas-vivas}
+Si $\vb{F}$ es la fuerza neta y $m$ es constante,
+\begin{equation}
+  \resultado{W_{AB}=T_{B}-T_{A}} .
+  \label{eq:fuerzas-vivas}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Con $\vb{F}=m\,\dd\vb{v}/\dd t$ y $\dd\vb{r}=\vb{v}\,\dd t$:
+$\vb{F}\cdot\dd\vb{r}=m\,\od{\vb{v}}{t}\cdot\vb{v}\,\dd t=m\,\vb{v}\cdot\dd\vb{v}
+=\dd\bigl(\tfrac12 m v^{2}\bigr)$, pues $\dd(\vb{v}\cdot\vb{v})=2\,\vb{v}\cdot\dd\vb{v}$.
+Integrando de $A$ a $B$ se obtiene \eqref{eq:fuerzas-vivas}.
+\end{proof}
+
+\begin{definicion}[Fuerza conservativa, energía potencial]
+$\vb{F}$ es \emph{conservativa} si $W_{AB}$ no depende del camino;
+equivalentemente (Tema 1, en un dominio simplemente conexo),
+$\rot\vb{F}=\vb{0}$, y existe $V(\vb{r})$ con
+\begin{equation}
+  \vb{F}=-\grad V,\qquad W_{AB}=V(\vb{r}_{A})-V(\vb{r}_{B}).
+\end{equation}
+Una fuerza constante es conservativa: $W_{AB}=\vb{F}\cdot(\vb{r}_{B}-\vb{r}_{A})$, con $V=-\vb{F}\cdot\vb{r}$.
+\end{definicion}
+
+\begin{teorema}[Conservación de la energía mecánica]
+\label{teo:energia-particula}
+Si todas las fuerzas que trabajan son conservativas,
+\begin{equation}
+  \resultado{E\defeq\tfrac12 m v^{2}+V(\vb{r})=\text{const}} .
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Igualando las dos expresiones del trabajo,
+$T_{B}-T_{A}=V(\vb{r}_{A})-V(\vb{r}_{B})$, es decir, $T_{A}+V_{A}=T_{B}+V_{B}$ para
+$A,B$ arbitrarios.
+\end{proof}
+
+\subsection{Movimiento unidimensional: diagrama de energía}
+
+En 1D con $V=V(x)$, la energía $E=\tfrac12 m\dot x^{2}+V(x)$ reduce el problema a
+una \emph{cuadratura}:
+\begin{equation}
+  \dot x=\pm\sqrt{\tfrac{2}{m}\bigl[E-V(x)\bigr]}
+  \qquad\Longrightarrow\qquad
+  t-t_{0}=\pm\int_{x_{0}}^{x}\frac{\dd x'}{\sqrt{\tfrac{2}{m}\bigl[E-V(x')\bigr]}} .
+  \label{eq:cuadratura}
+\end{equation}
+
+\begin{proposicion}[Lectura del diagrama $V(x)$]
+\label{prop:diagrama}
+\begin{casos}
+  \item El movimiento sólo es posible donde $V(x)\le E$.
+  \item \emph{Puntos de retroceso}: $V(x)=E$, donde $\dot x=0$. Con dos el
+        movimiento está \emph{ligado} (acotado); con uno, no ligado.
+  \item \emph{Equilibrio}: $V'(x_{0})=0$, es decir, $F=-V'=0$. Es estable si
+        $V''(x_{0})>0$ (mínimo) e inestable si $V''(x_{0})<0$ (máximo).
+  \item \emph{Pequeñas oscilaciones} en torno a un mínimo: con
+        $y=x-x_{0}$, $V(x)\simeq V(x_{0})+\tfrac12V''(x_{0})\,y^{2}$ (Taylor, $V'(x_{0})=0$), luego
+        \begin{equation}
+          m\ddot y=-V''(x_{0})\,y
+          \qquad\Longrightarrow\qquad
+          \resultado{\omega^{2}=\frac{V''(x_{0})}{m}} .
+          \label{eq:pequenas}
+        \end{equation}
+\end{casos}
+\end{proposicion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=11.5cm,height=6.8cm,
+  xmin=0,xmax=8,ymin=-3.4,ymax=3.6,xlabel={$x$},ylabel={$V(x)$},
+  xtick=\empty,ytick={0},yticklabels={$0$},grid=none,clip=false,
+  axis lines=left]
+  \addplot[texto,line width=1.3pt,domain=0.08:8,samples=300,smooth]
+    {3*exp(-2*(x-1))-6*exp(-(x-1))+2.6*exp(-(x-3.2)^2/2.0)};
+  \draw[aux] (axis cs:0,0) -- (axis cs:8,0);
+  % E1 ligada
+  \draw[cian,line width=1.0pt] (axis cs:0.489,-1.6) -- (axis cs:1.625,-1.6);
+  \node[cian,font=\footnotesize,anchor=west] at (axis cs:1.75,-1.6) {$E_{1}<0$: ligada};
+  \foreach \xx in {0.489,1.625}{
+    \edef\temp{\noexpand\draw[aux,cian] (axis cs:\xx,-1.6) -- (axis cs:\xx,-3.4);}\temp
+    \edef\temp{\noexpand\node[punto,fill=cian,inner sep=1.1pt] at (axis cs:\xx,-1.6) {};}\temp}
+  \node[cian,font=\footnotesize,anchor=north] at (axis cs:0.489,-3.4) {$x_{1}$};
+  \node[cian,font=\footnotesize,anchor=north] at (axis cs:1.625,-3.4) {$x_{2}$};
+  % E2 no ligada
+  \draw[rosa,line width=1.0pt] (axis cs:0.14,2.6) -- (axis cs:8,2.6);
+  \node[rosa,font=\footnotesize,anchor=south east] at (axis cs:8,2.6) {$E_{2}$: no ligada};
+  \node[punto,fill=rosa,inner sep=1.1pt] at (axis cs:0.14,2.6) {};
+  % equilibrios
+  \node[punto,fill=verde,inner sep=1.4pt] at (axis cs:0.932,-2.787) {};
+  \draw[verde,line width=0.4pt] (axis cs:1.0,-2.85) -- (axis cs:2.35,-2.85);
+  \node[verde,font=\footnotesize,anchor=west,inner sep=2pt] at (axis cs:2.35,-2.85) {equilibrio estable};
+  \node[punto,fill=ambar,inner sep=1.4pt] at (axis cs:3.395,2.029) {};
+  \node[ambar,font=\footnotesize,anchor=south,inner sep=3pt] at (axis cs:3.395,2.029) {inestable};
+\end{axis}
+\end{tikzpicture}
+\caption{Diagrama de energía. Con $E_{1}$ la partícula oscila entre los
+puntos de retroceso $x_{1},x_{2}$ (órbita ligada); con $E_{2}$, por encima de
+la barrera, rebota en un único punto de retroceso y escapa a $x\to\infty$.
+El mínimo es un equilibrio estable ($V''>0$) y el máximo, inestable ($V''<0$).}
+\label{fig:diagrama-energia}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\subsection{Momento angular de una partícula}
+
+\begin{definicion}[Momento angular y momento de una fuerza]
+Respecto de un punto fijo $O$,
+$\vb{L}_{O}\defeq\vb{r}\times\vb{p}$ y $\vtorque_{O}\defeq\vb{r}\times\vb{F}$.
+\end{definicion}
+
+\begin{proposicion}
+\label{prop:L-particula}
+$\dot{\vb{L}}_{O}=\vtorque_{O}$. En particular, si $\vtorque_{O}=\vb{0}$ (fuerza
+central respecto de $O$), $\vb{L}_{O}$ se conserva.
+\end{proposicion}
+
+\begin{proof}
+$\dot{\vb{L}}_{O}=\dot{\vb{r}}\times\vb{p}+\vb{r}\times\dot{\vb{p}}
+=\underbrace{\vb{v}\times m\vb{v}}_{\vb{0}}+\vb{r}\times\vb{F}=\vtorque_{O}$.
+\end{proof}

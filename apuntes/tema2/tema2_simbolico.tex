@@ -1,0 +1,256 @@
+% =====================================================================
+%  Mecánica I · Tema 2 — Desarrollo simbólico (teoría y seminario)
+%  Compilar:  latexmk -lualatex tema2_simbolico.tex
+% =====================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{estilo-oscuro}
+
+\renewcommand{\cabeceraimpar}{Tema 2 · Desarrollo simbólico}
+\renewcommand{\cabecerapar}{Mecánica I}
+\hypersetup{pdftitle={Tema 2. Sistemas de partículas: desarrollo simbólico},
+  pdfauthor={Daniel Martín Guerrero},pdfsubject={Mecánica I}}
+
+\newcommand{\ext}{^{(\mathrm{ext})}}
+\newcommand{\inn}{^{(\mathrm{int})}}
+\newcommand{\sa}{\sum_{\alpha}}
+\newcommand{\sab}{\sum_{\alpha<\beta}}
+\newcommand{\Rc}{\vb{R}}
+\newcommand{\Vc}{\vb{V}}
+\newcommand{\rp}{\vb{r}'}
+\newcommand{\vp}{\vb{v}'}
+\newcommand{\vtorque}{\bm{\tau}}
+\newcommand{\prom}[1]{\left\langle #1\right\rangle}
+
+\titleformat{\section}
+  {\needspace{7\baselineskip}\normalfont\large\bfseries\color{violeta}}
+  {\thesection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{4.2ex plus 1ex}{1.8ex}
+\newcounter{paso}[section]
+\newcommand{\paso}[1]{\par\addvspace{2.2ex}\needspace{4\baselineskip}%
+  \refstepcounter{paso}\noindent{\color{cian}\bfseries\thepaso.\ \ #1}\quad\ignorespaces}
+\newcommand{\prob}[2]{\par\addvspace{3ex}\needspace{5\baselineskip}%
+  \noindent{\color{cian}\bfseries Problema #1.}\ \ {\color{tenue}#2}\nopagebreak}
+\setlength{\parindent}{0pt}
+\allowdisplaybreaks
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+{\Large\bfseries Sistemas de partículas\par}
+\vspace{1.2mm}
+{\small\color{tenue}Mecánica I · Tema 2 · \textsc{Desarrollo simbólico}\par}
+\vspace{2mm}
+{\color{regla}\rule{0.35\textwidth}{0.4pt}}
+\end{center}
+
+% =====================================================================
+\section{Una partícula}
+% =====================================================================
+
+\paso{Trabajo--energía.}
+\begin{gather}
+  \vb{F}\cdot\dd\vb{r}=m\od{\vb{v}}{t}\cdot\vb{v}\,\dd t=m\,\vb{v}\cdot\dd\vb{v}=\dd\bigl(\tfrac12mv^{2}\bigr)
+  \ \Longrightarrow\ \resultado{W_{AB}=T_{B}-T_{A}}\\
+  \vb{F}=-\grad V:\ W_{AB}=V_{A}-V_{B}\ \Longrightarrow\ \resultado{\tfrac12mv^{2}+V=E=\text{const}}
+\end{gather}
+
+\paso{Cuadratura 1D y pequeñas oscilaciones.}
+\begin{gather}
+  \dot x=\pm\sqrt{\tfrac2m(E-V)}\ \Longrightarrow\ t-t_{0}=\pm\int_{x_{0}}^{x}\frac{\dd x'}{\sqrt{\tfrac2m(E-V(x'))}}\\
+  V\simeq V_{0}+\tfrac12V''(x_{0})\,y^{2},\ y=x-x_{0}\ \Longrightarrow\ m\ddot y=-V''(x_{0})\,y,\quad \resultado{\omega^{2}=\frac{V''(x_{0})}{m}}
+\end{gather}
+
+\paso{Momento angular.}
+\begin{equation}
+  \dot{\vb{L}}_{O}=\dot{\vb{r}}\times\vb{p}+\vb{r}\times\dot{\vb{p}}=\vb{v}\times m\vb{v}+\vb{r}\times\vb{F}=\resultado{\vtorque_{O}}
+\end{equation}
+
+% =====================================================================
+\section{Sistemas, fuerzas internas y CM}
+% =====================================================================
+
+\paso{Ecuación de cada partícula.}
+\begin{equation}
+  m_{\alpha}\ddot{\vb{r}}_{\alpha}=\vb{F}_{\alpha}\ext+\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta},\qquad
+  \vb{F}_{\alpha\beta}=-\vb{F}_{\beta\alpha}\ (\text{débil}),\qquad \vb{F}_{\alpha\beta}\parallel\vb{r}_{\alpha\beta}\ (\text{fuerte})
+\end{equation}
+
+\paso{Fuerzas internas.}
+\begin{gather}
+  \sa\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}=\sab(\vb{F}_{\alpha\beta}+\vb{F}_{\beta\alpha})=\vb{0}\\
+  \sa\sum_{\beta\neq\alpha}\vb{r}_{\alpha}\times\vb{F}_{\alpha\beta}=\sab(\vb{r}_{\alpha}-\vb{r}_{\beta})\times\vb{F}_{\alpha\beta}=\sab\vb{r}_{\alpha\beta}\times\vb{F}_{\alpha\beta}=\vb{0}
+\end{gather}
+
+\paso{Centro de masas.}
+\begin{gather}
+  M=\sa m_{\alpha}=\int\dd m,\qquad \resultado{\Rc=\frac1M\sa m_{\alpha}\vb{r}_{\alpha}=\frac1M\int\vb{r}\,\dd m}\\ \dd m=\lambda\,\dd l=\sigma\,\dd S=\rho\,\dd V\\
+  \sa m_{\alpha}\rp_{\alpha}=\sa m_{\alpha}\vb{r}_{\alpha}-\Rc\sa m_{\alpha}=\vb{0},\qquad \sa m_{\alpha}\vp_{\alpha}=\vb{0},\qquad \vb{P}=\sa m_{\alpha}\dot{\vb{r}}_{\alpha}=M\Vc
+\end{gather}
+
+\paso{Momento lineal.}
+\begin{equation}
+  \dot{\vb{P}}=\sa\vb{F}_{\alpha}\ext+\underbrace{\sa\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}}_{\vb{0}}
+  \ \Longrightarrow\ \resultado{M\ddot{\Rc}=\vb{F}\ext},\qquad \vb{F}\ext=\vb{0}\Rightarrow\vb{P}=\text{const}
+\end{equation}
+
+% =====================================================================
+\section{Momento angular}
+% =====================================================================
+
+\paso{König I.} $\vb{r}_{\alpha}=\Rc+\rp_{\alpha}$, $\vb{v}_{\alpha}=\Vc+\vp_{\alpha}$:
+\begin{gather}
+  \vb{L}_{O}=\sa m_{\alpha}(\Rc+\rp_{\alpha})\times(\Vc+\vp_{\alpha})
+  =M\Rc\times\Vc\notag\\
+  +\Rc\times\underbrace{\sa m_{\alpha}\vp_{\alpha}}_{\vb{0}}+\underbrace{\sa m_{\alpha}\rp_{\alpha}}_{\vb{0}}\times\Vc+\sa m_{\alpha}\rp_{\alpha}\times\vp_{\alpha}\\
+  \resultado{\vb{L}_{O}=\Rc\times M\Vc+\vb{L}',\qquad \vb{L}'=\sa\rp_{\alpha}\times m_{\alpha}\vp_{\alpha}}
+\end{gather}
+
+\paso{Ecuación respecto de $Q$.}
+\begin{gather}
+  \vb{L}_{Q}=\sa(\vb{r}_{\alpha}-\vb{r}_{Q})\times m_{\alpha}(\dot{\vb{r}}_{\alpha}-\dot{\vb{r}}_{Q})\\
+  \dot{\vb{L}}_{Q}=\sa(\vb{r}_{\alpha}-\vb{r}_{Q})\times m_{\alpha}\ddot{\vb{r}}_{\alpha}-M(\Rc-\vb{r}_{Q})\times\ddot{\vb{r}}_{Q}\\
+  \sa(\vb{r}_{\alpha}-\vb{r}_{Q})\times\sum_{\beta}\vb{F}_{\alpha\beta}=\vb{0}\ \Longrightarrow\
+  \dot{\vb{L}}_{Q}=\vtorque_{Q}\ext-M(\Rc-\vb{r}_{Q})\times\ddot{\vb{r}}_{Q}\\
+  \resultado{\dot{\vb{L}}_{Q}=\vtorque_{Q}\ext}\ \ (Q\ \text{fijo},\ Q=\text{CM},\ \ddot{\vb{r}}_{Q}\parallel\Rc-\vb{r}_{Q})
+\end{gather}
+
+% =====================================================================
+\section{Energía}
+% =====================================================================
+
+\paso{König II.}
+\begin{gather}
+  v_{\alpha}^{2}=V^{2}+{v'_{\alpha}}^{2}+2\Vc\cdot\vp_{\alpha}
+  \notag\\ T=\tfrac12V^{2}\sa m_{\alpha}+\sa\tfrac12m_{\alpha}{v'_{\alpha}}^{2}+\Vc\cdot\underbrace{\sa m_{\alpha}\vp_{\alpha}}_{\vb{0}}\notag\\
+  \resultado{T=\tfrac12MV^{2}+T'}
+\end{gather}
+
+\paso{Variación de $T$.}
+\begin{gather}
+  \dot T=\sa\vb{v}_{\alpha}\cdot\vb{F}_{\alpha}\ext+\sab(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}\\
+  r_{\alpha\beta}^{2}=\vb{r}_{\alpha\beta}\cdot\vb{r}_{\alpha\beta}\ \Rightarrow\ \dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}=\dot r_{\alpha\beta}\\
+  \vb{F}_{\alpha\beta}=-U'_{\alpha\beta}\uv{r}_{\alpha\beta}:\ (\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}=-U'_{\alpha\beta}\dot r_{\alpha\beta}=-\dot U_{\alpha\beta}
+  \ \Longrightarrow\ \od{}{t}(T+U\inn)=\mathcal{P}\ext\\
+  \vb{F}_{\alpha}\ext=-\grad_{\alpha}V\ext\ \Rightarrow\ \mathcal{P}\ext=-\dot V\ext\ \Longrightarrow\ \resultado{T+U\inn+V\ext=E}
+\end{gather}
+
+% =====================================================================
+\section{Masa variable}
+% =====================================================================
+
+\paso{Balance de momento.}
+\begin{gather}
+  \vb{P}(t)=m\vb{v},\qquad \vb{P}(t+\dd t)=(m+\dd m)(\vb{v}+\dd\vb{v})+(-\dd m)(\vb{v}+\vb{u})\\
+  \dd\vb{P}=m\,\dd\vb{v}-\vb{u}\,\dd m=\vb{F}\ext\dd t\ \Longrightarrow\ \resultado{m\dot{\vb{v}}=\vb{F}\ext+\dot m\,\vb{u}}
+\end{gather}
+
+\paso{Cohete.} $\vb{u}=-u\uv{e}$, $\mu=-\dot m$:
+\begin{gather}
+  m\,\dd v=-u\,\dd m\ \Longrightarrow\ \resultado{v-v_{0}=u\ln\frac{m_{0}}{m}}\\
+  m=m_{0}-\mu t,\ \ m\dot v=\mu u-mg\ \Longrightarrow\ \resultado{v=-u\ln\Bigl(1-\frac{\mu t}{m_{0}}\Bigr)-gt},\qquad \mu u>m_{0}g
+\end{gather}
+
+\paso{Captación en reposo.} $\vb{u}=-\vb{v}$:
+\begin{equation}
+  m\dot{\vb{v}}=\vb{F}\ext-\dot m\,\vb{v}\ \Longleftrightarrow\ \resultado{\od{(m\vb{v})}{t}=\vb{F}\ext}
+\end{equation}
+
+% =====================================================================
+\section{Virial y Pappus}
+% =====================================================================
+
+\paso{Virial.}
+\begin{gather}
+  S=\sa\vb{r}_{\alpha}\cdot\vb{p}_{\alpha},\qquad \dot S=2T+\sa\vb{r}_{\alpha}\cdot\vb{F}_{\alpha},\qquad
+  \prom{\dot S}=\frac{S(\tau)-S(0)}{\tau}\to0\\
+  \resultado{\prom{T}=-\tfrac12\Bigl\langle\sa\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}\Bigr\rangle}\\
+  V(\lambda\vb{r})=\lambda^{n}V\ \Rightarrow\ \od{}{\lambda}V(\lambda\vb{r})\Big|_{1}=\vb{r}\cdot\grad V=nV\ \Longrightarrow\
+  \resultado{2\prom{T}=n\prom{V}},\quad \prom{T}=\tfrac{n}{n+2}E
+\end{gather}
+
+\paso{Pappus--Guldin.}
+\begin{gather}
+  A=\int_{C}2\pi y\,\dd s=\resultado{2\pi\bar y\,L},\qquad V=\int_{D}2\pi y\,\dd A=\resultado{2\pi\bar y\,A}\\
+  \text{toro: } A=2\pi R\cdot2\pi r=4\pi^{2}Rr,\qquad V=2\pi R\cdot\pi r^{2}=2\pi^{2}Rr^{2}
+\end{gather}
+
+% =====================================================================
+\section{Seminario}
+% =====================================================================
+
+\prob{1}{Triángulo equilátero}
+\begin{equation}
+  \Rc=\tfrac13\bigl[(0,0)+(L,0)+(\tfrac L2,\tfrac{\sqrt3}{2}L)\bigr]=\resultado{\Bigl(\frac L2,\frac{\sqrt3}{6}L\Bigr)},\qquad \abs{\Rc-\vb{r}_{1}}=\frac{L}{\sqrt3}
+\end{equation}
+
+\prob{2}{König para tres partículas}
+\begin{gather}
+  \vb{v}_{1}=(0,6t^{2},0),\quad \vb{v}_{2}=(0,-2,18t^{2}),\quad \vb{v}_{3}=(2t,4,0)\\
+  \Rc=\bigl(\tfrac{t^{2}+5}{3},\ \tfrac{2t^{3}+2t-4}{3},\ 2t^{3}+1\bigr),\qquad \Vc=\bigl(\tfrac{2t}{3},\ 2t^{2}+\tfrac23,\ 6t^{2}\bigr)\\
+  \vb{r}_{1}\times\vb{v}_{1}=(0,0,24t^{2}),\quad \vb{r}_{2}\times\vb{v}_{2}=(-24t^{3},-18t^{2},-2),\quad \vb{r}_{3}\times\vb{v}_{3}=(-12,6t,-4t^{2})\\
+  \vb{L}_{O}=m\,(-24t^{3}-12,\ -18t^{2}+6t,\ 20t^{2}-2)\\
+  \vb{L}_{\text{orb}}=3m\,\Rc\times\Vc\\ \resultado{\vb{L}_{\text{orb}}=m\bigl(8t^{3}-30t^{2}-2,\ -2t^{4}-30t^{2}+2t,\ \tfrac13(2t^{4}+28t^{2}+8t+10)\bigr)}\\
+  \resultado{\vb{L}'=\vb{L}_{O}-\vb{L}_{\text{orb}}=m\bigl(-32t^{3}+30t^{2}-10,\ 2t^{4}+12t^{2}+4t,\ \tfrac13(-2t^{4}+32t^{2}-8t-16)\bigr)}
+\end{gather}
+
+\prob{3}{Varilla $\lambda=\lambda_{0}+kx$}
+\begin{gather}
+  M=S\int_{0}^{L}(\lambda_{0}+kx)\,\dd x=S\bigl(\lambda_{0}L+\tfrac12kL^{2}\bigr),\qquad
+  \int x\,\dd m=S\bigl(\tfrac12\lambda_{0}L^{2}+\tfrac13kL^{3}\bigr)\\
+  \resultado{X=\frac L3\,\frac{3\lambda_{0}+2kL}{2\lambda_{0}+kL}},\qquad k=0:\ \tfrac L2,\qquad \lambda_{0}=0:\ \tfrac{2L}{3}
+\end{gather}
+
+\prob{4}{Cascarón hemisférico}
+\begin{gather}
+  \dd m=\sigma R^{2}\sin\theta\,\dd\theta\,\dd\varphi,\quad z=R\cos\theta,\quad M=2\pi\sigma R^{2}\\
+  \int z\,\dd m=2\pi\sigma R^{3}\int_{0}^{\pi/2}\cos\theta\sin\theta\,\dd\theta=\pi\sigma R^{3}\ \Longrightarrow\ \resultado{Z=\frac R2}
+\end{gather}
+
+\prob{5}{Granada}
+\begin{gather}
+  m_{1}=m_{2}=\tfrac M4,\ m_{3}=\tfrac M2,\qquad \vb{P}'=\vb{0}:\ \tfrac M4\vp_{1}+\tfrac M4\vp_{2}+\tfrac M2\vp_{3}=\vb{0}\ \Rightarrow\ \vp_{3}=-\tfrac12(\vp_{1}+\vp_{2})\\
+  \vp_{1}=80\,\ii,\ \vp_{2}=80\,\jj:\ \resultado{\vp_{3}=-40(\ii+\jj)\ \text{m/s},\ \ v'_{3}=40\sqrt2\simeq56{,}6\ \text{m/s}},\qquad \vb{v}_{3}=\Vc+\vp_{3}
+\end{gather}
+
+\prob{6}{Atwood}
+\begin{gather}
+  m_{1}g-T=m_{1}a,\quad T-m_{2}g=m_{2}a\ \Rightarrow\ a=\frac{m_{1}-m_{2}}{m_{1}+m_{2}}g,\quad T=\frac{2m_{1}m_{2}}{m_{1}+m_{2}}g\\
+  \ddot Z=\frac{-m_{1}a+m_{2}a}{m_{1}+m_{2}}=\resultado{-\Bigl(\frac{m_{1}-m_{2}}{m_{1}+m_{2}}\Bigr)^{2}g},\qquad \resultado{\dot Z=-\Bigl(\frac{m_{1}-m_{2}}{m_{1}+m_{2}}\Bigr)^{2}g\,t}\\
+  M\ddot Z=2T-Mg=\frac{4m_{1}m_{2}-(m_{1}+m_{2})^{2}}{m_{1}+m_{2}}g=-\frac{(m_{1}-m_{2})^{2}}{m_{1}+m_{2}}g
+\end{gather}
+
+\prob{7}{Colapso gravitatorio}
+\begin{gather}
+  \ddot{\vb{r}}=\ddot{\vb{r}}_{1}-\ddot{\vb{r}}_{2}=-\frac{G(m_{1}+m_{2})}{r^{2}}\uv{r},\qquad
+  \tfrac12\dot r^{2}-\frac{GM}{r}=-\frac{GM}{D}\ \Rightarrow\ \dot r=-\sqrt{\frac{2GM}{D}}\sqrt{\frac{D-r}{r}}\\
+  t_{c}=\sqrt{\frac{D}{2GM}}\int_{0}^{D}\sqrt{\frac{r}{D-r}}\,\dd r,\qquad r=D\sin^{2}\theta:\ \int_{0}^{\pi/2}2D\sin^{2}\theta\,\dd\theta=\frac{\pi D}{2}\\
+  \resultado{t_{c}=\frac\pi2\sqrt{\frac{D^{3}}{2G(m_{1}+m_{2})}}}=\pi\sqrt{\frac{(D/2)^{3}}{GM}}\ \ (\text{medio periodo de Kepler})
+\end{gather}
+
+\prob{8}{Gota}
+\begin{gather}
+  m=\tfrac43\pi\rho_{w}r^{3},\quad \dot r=r_{0}b\ \Rightarrow\ \resultado{\dot m=4\pi\rho_{w}r^{2}\dot r=(\rho_{w}r_{0}b)\,S}\\
+  \od{(mv)}{t}=mg,\quad m=m_{0}(1+bt)^{3}:\ (1+bt)^{3}v=g\,\frac{(1+bt)^{4}-1}{4b}\\
+  \resultado{v=\frac{g}{4b}\Bigl[(1+bt)-\frac{1}{(1+bt)^{3}}\Bigr]},\qquad v\simeq gt-\tfrac32bg\,t^{2},\qquad \dot v\to\tfrac g4
+\end{gather}
+
+\prob{9}{Cohete a $30^{\circ}$}
+\begin{gather}
+  m\vb{a}=m\vb{g}-\tfrac13mg\,\utau+(-G)(-v_{c}\utau),\qquad \vb{g}=\tfrac g2\utau+\tfrac{\sqrt3}{2}g\,\un\\
+  \resultado{a_{T}=\frac g6+\frac{Gv_{c}}{m},\qquad a_{N}=\frac{\sqrt3}{2}g},\qquad a=\sqrt{a_{T}^{2}+\tfrac34g^{2}}
+\end{gather}
+
+\prob{10}{Virial: osciladores}
+\begin{gather}
+  V=\tfrac12kx^{2}:\ xV'=2V\Rightarrow\prom{T}=\prom{V}=\tfrac E2;\qquad x=A\cos\omega t:\ \prom{T}=\prom{V}=\tfrac14kA^{2}\\
+  V=\tfrac12kx^{2}+\tfrac14\lambda x^{4}:\ xV'=2V_{2}+4V_{4}\ \Rightarrow\ \resultado{\prom{T}=\prom{V_{2}}+2\prom{V_{4}}}\\
+  k=0:\ \prom{T}=2\prom{V},\quad \prom{T}=\tfrac23E,\quad \prom{V}=\tfrac13E
+\end{gather}
+
+\prob{11}{Cono por Pappus}
+\begin{equation}
+  A=\tfrac12Rh,\quad \bar\rho=\frac{0+R+0}{3}=\frac R3,\quad V=2\pi\bar\rho A=\resultado{\tfrac13\pi R^{2}h},\qquad
+  \int_{0}^{h}\pi R^{2}\bigl(1-\tfrac zh\bigr)^{2}\dd z=\tfrac13\pi R^{2}h
+\end{equation}
+
+\end{document}

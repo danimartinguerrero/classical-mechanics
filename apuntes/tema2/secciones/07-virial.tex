@@ -1,0 +1,87 @@
+% =====================================================================
+\section{Teorema del virial}
+\label{sec:virial}
+% =====================================================================
+
+El virial relaciona los \emph{promedios temporales} de la energía cinética y
+de las fuerzas en cualquier movimiento acotado, sin resolver las ecuaciones
+de movimiento.
+
+\begin{definicion}[Virial, promedio temporal]
+Se definen
+\begin{equation}
+  S(t)\defeq\sa\vb{r}_{\alpha}\cdot\vb{p}_{\alpha},
+  \qquad
+  \prom{A}\defeq\lim_{\tau\to\infty}\frac1\tau\int_{0}^{\tau}A(t)\,\dd t .
+\end{equation}
+Para un movimiento periódico de periodo $T_{0}$ basta promediar sobre un periodo.
+\end{definicion}
+
+\begin{teorema}[Virial de Clausius]
+\label{teo:virial}
+Si todas las $\vb{r}_{\alpha}$ y $\vb{p}_{\alpha}$ están acotadas, con
+$\vb{F}_{\alpha}$ la fuerza total sobre $\alpha$,
+\begin{equation}
+  \resultado{\prom{T}=-\frac12\Bigl\langle\sa\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}\Bigr\rangle} .
+  \label{eq:virial}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+\begin{enumerate}
+  \item \emph{Derivar $S$}:
+  $\dot S=\sum\dot{\vb{r}}_{\alpha}\cdot\vb{p}_{\alpha}+\sum\vb{r}_{\alpha}\cdot\dot{\vb{p}}_{\alpha}
+  =\sum m_{\alpha}v_{\alpha}^{2}+\sum\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}=2T+\sum\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}$.
+  \item \emph{Promediar}:
+  $\prom{\dot S}=\dfrac{S(\tau)-S(0)}{\tau}\to0$ si $S$ está acotada; si el movimiento
+  es periódico, es exactamente $0$ con $\tau=nT_{0}$.
+  \item Por tanto $0=2\prom{T}+\prom{\sum\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}}$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{observacion}[Con fuerzas internas]
+Separando $\vb{F}_{\alpha}=\vb{F}_{\alpha}\ext+\sum_{\beta}\vb{F}_{\alpha\beta}$ y agrupando por parejas:
+\begin{equation}
+  \prom{T}=-\frac12\Bigl\langle\sa\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}\ext+\sab\vb{r}_{\alpha\beta}\cdot\vb{F}_{\alpha\beta}\Bigr\rangle .
+\end{equation}
+\end{observacion}
+
+\begin{lema}[Euler, funciones homogéneas]
+\label{lem:euler}
+Si $V(\lambda\vb{r})=\lambda^{n}V(\vb{r})$ para todo $\lambda>0$, entonces $\vb{r}\cdot\grad V=nV$.
+\end{lema}
+
+\begin{proof}
+Se deriva respecto de $\lambda$ y se evalúa en $\lambda=1$:
+$\od{}{\lambda}V(\lambda\vb{r})\big|_{\lambda=1}=\vb{r}\cdot\grad V$ por la regla de la
+cadena, y $\od{}{\lambda}\lambda^{n}V\big|_{\lambda=1}=nV$.
+\end{proof}
+
+\begin{corolario}[Potencial homogéneo]
+\label{cor:virial-potencia}
+Si $\vb{F}=-\grad V$ con $V$ homogéneo de grado $n$ (por ejemplo, $V=k\,r^{n}$),
+\begin{equation}
+  \resultado{2\prom{T}=n\prom{V}},
+  \qquad
+  \prom{T}=\frac{n}{n+2}\,E,\qquad \prom{V}=\frac{2}{n+2}\,E .
+  \label{eq:virial-n}
+\end{equation}
+\begin{itemize}
+  \item Oscilador armónico ($n=2$): $\prom{T}=\prom{V}=E/2$.
+  \item Gravedad y Coulomb ($n=-1$): $2\prom{T}=-\prom{V}$, y $E=-\prom{T}<0$.
+\end{itemize}
+\end{corolario}
+
+\begin{proof}
+Por \eqref{eq:virial} y el \cref{lem:euler},
+$\prom{T}=\tfrac12\prom{\vb{r}\cdot\grad V}=\tfrac n2\prom{V}$. Con $E=\prom{T}+\prom{V}$, constante,
+se despejan ambos promedios.
+\end{proof}
+
+\begin{observacion}[Materia oscura]
+Zwicky (1933) aplicó $2\prom{T}=-\prom{V}$ al cúmulo de Coma: con
+$T\sim\tfrac12Mv^{2}$ y $V\sim-GM^{2}/R$ se obtiene $M\sim Rv^{2}/G$. La masa así
+estimada era cientos de veces mayor que la luminosa, primera evidencia de la
+materia oscura, confirmada por Vera Rubin (1980) con las curvas de rotación
+de galaxias.
+\end{observacion}

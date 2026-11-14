@@ -1,0 +1,92 @@
+% =====================================================================
+\section{Teoremas de Pappus--Guldin}
+\label{sec:pappus}
+% =====================================================================
+
+Relacionan áreas y volúmenes de revolución con el \emph{centroide}, el CM
+de una figura homogénea, de la curva o región que gira. Sirven en los dos
+sentidos: para calcular áreas y volúmenes, o para hallar centroides.
+
+\begin{teorema}[Pappus--Guldin I: superficies]
+\label{teo:pappus1}
+Una curva plana de longitud $L$ gira alrededor de un eje de su plano que no
+la corta. El área de la superficie generada es
+\begin{equation}
+  \resultado{A=2\pi\bar y\,L},\qquad \bar y\defeq\frac1L\int_{C}y\,\dd s ,
+\end{equation}
+donde $\bar y$ es la distancia del centroide de la curva al eje. Es decir, la
+longitud de la curva por la longitud de la circunferencia que describe su centroide.
+\end{teorema}
+
+\begin{proof}
+Cada elemento $\dd s$, a distancia $y$ del eje, genera una banda de área
+$\dd A=2\pi y\,\dd s$. Integrando, $A=2\pi\int_{C}y\,\dd s=2\pi\,\bar y\,L$.
+\end{proof}
+
+\begin{teorema}[Pappus--Guldin II: volúmenes]
+\label{teo:pappus2}
+Una región plana de área $A$ gira alrededor de un eje de su plano que no la
+corta. El volumen generado es
+\begin{equation}
+  \resultado{V=2\pi\bar y\,A},\qquad \bar y\defeq\frac1A\int_{D}y\,\dd A .
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Cada elemento $\dd A$, a distancia $y$ del eje, genera un anillo de volumen
+$\dd V=2\pi y\,\dd A$. Integrando, $V=2\pi\int_{D}y\,\dd A=2\pi\bar y\,A$.
+\end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,baseline=(tita.base)]
+  % (a) región girando alrededor del eje x
+  \draw[eje] (-0.3,0) -- (4.6,0) node[anchor=west,peq,inner sep=2pt]{eje};
+  \fill[cian,opacity=0.18] plot[smooth cycle,tension=0.8] coordinates {(1.0,1.25) (2.0,2.05) (3.3,1.85) (3.5,1.1) (2.3,0.75)};
+  \draw[cian,line width=0.9pt] plot[smooth cycle,tension=0.8] coordinates {(1.0,1.25) (2.0,2.05) (3.3,1.85) (3.5,1.1) (2.3,0.75)};
+  \draw[cian!45!fondo,line width=0.6pt,dash pattern=on 2pt off 2pt] plot[smooth cycle,tension=0.8] coordinates {(1.0,-1.25) (2.0,-2.05) (3.3,-1.85) (3.5,-1.1) (2.3,-0.75)};
+  \coordinate (G) at (2.35,1.4);
+  \draw[violeta,line width=0.6pt,dash pattern=on 3pt off 2pt] (2.35,0) ellipse[x radius=0.22,y radius=1.4];
+  \draw[aux] (G) -- (2.35,0);
+  \node[punto,fill=violeta,inner sep=1.5pt] at (G) {};
+  \node[violeta,font=\small,anchor=south west,inner sep=2pt] at (G) {$G$};
+  \node[violeta,font=\footnotesize,anchor=east,inner sep=4pt] at (2.13,0.6) {$\bar y$};
+  \node[cian,font=\small,anchor=south,inner sep=3pt] at (2.0,2.05) {$A$};
+  \node[violeta,font=\footnotesize,anchor=north,inner sep=3pt] at (2.35,-2.1) {$2\pi\bar y$};
+  \node[etiq,anchor=south] (tita) at (2.1,2.65) {(a) $V=2\pi\bar y\,A$};
+\end{tikzpicture}\hspace{12mm}%
+\begin{tikzpicture}[scale=1.0,baseline=(titb.base)]
+  % (b) toro: círculo generatriz y trayectoria de su centro
+  \def\Rr{1.75}\def\rr{0.55}
+  \draw[eje] (0,-1.6) -- (0,1.9) node[anchor=south,peq,inner sep=2pt]{eje};
+  \draw[violeta,line width=0.6pt,dash pattern=on 3pt off 2pt] (0,0) ellipse[x radius=\Rr,y radius=0.5];
+  \draw[cian!45!fondo,line width=0.7pt,dash pattern=on 2pt off 2pt] (-\Rr,0) circle (\rr);
+  \draw[cian,line width=0.9pt,fill=cian,fill opacity=0.15] (\Rr,0) circle (\rr);
+  \draw[aux] (0,0) -- (\Rr,0);
+  \node[punto,fill=violeta,inner sep=1.4pt] at (\Rr,0) {};
+  \node[peq,anchor=south,inner sep=3pt] at ({\Rr/2},0) {$R$};
+  \draw[cian,line width=0.6pt] (\Rr,0) -- ({\Rr+\rr*cos(-50)},{\rr*sin(-50)});
+  \node[cian,font=\footnotesize,anchor=north west,inner sep=1pt] at ({\Rr+\rr*cos(-50)},{\rr*sin(-50)}) {$r$};
+  \node[violeta,font=\footnotesize,anchor=north east,inner sep=2pt] at (-0.9,-0.45) {$2\pi R$};
+  \node[etiq,anchor=south] (titb) at (0,2.65) {(b) Toro};
+\end{tikzpicture}
+\caption{(a) Pappus--Guldin II: la región $A$ gira alrededor del eje y su
+centroide $G$ recorre una circunferencia de longitud $2\pi\bar y$.
+(b) Toro: un círculo de radio $r$ cuyo centro (a distancia $R$ del eje)
+recorre $2\pi R$: $A=2\pi R\cdot2\pi r=4\pi^{2}Rr$ y $V=2\pi R\cdot\pi r^{2}=2\pi^{2}Rr^{2}$.}
+\label{fig:pappus}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{ejemplo}[Centroides por Pappus]
+\label{ej:pappus-centroides}
+Usando Pappus «al revés»:
+\begin{enumerate}
+  \item \emph{Semicircunferencia} de radio $R$ girando alrededor de su diámetro:
+  genera una esfera, luego $4\pi R^{2}=2\pi\bar y\cdot\pi R$ y $\bar y=2R/\pi$
+  (\cref{ej:semicirculo}).
+  \item \emph{Semicírculo} macizo: genera una bola, luego
+  $\tfrac43\pi R^{3}=2\pi\bar y\cdot\tfrac12\pi R^{2}$ y $\bar y=4R/3\pi$.
+\end{enumerate}
+\end{ejemplo}

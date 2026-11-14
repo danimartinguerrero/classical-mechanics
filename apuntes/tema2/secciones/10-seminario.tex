@@ -1,0 +1,660 @@
+% =====================================================================
+\section{Seminario de problemas}
+\label{sec:seminario}
+% =====================================================================
+
+Los once problemas de la hoja se agrupan en cinco tipos.
+
+\begin{table}[ht]
+\centering
+\caption{Mapa de métodos del seminario.}
+\label{tab:mapa}
+\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\color{cian}Tipo & \color{cian}Problemas & \color{cian}Herramienta clave\\
+\midrule
+A. Centro de masas & 1, 3, 4 & \eqref{eq:cm}, simetría, elemento $\dd m$\\
+B. Momentos y König & 2 & \cref{teo:konig1}\\
+C. Conservación de $\vb{P}$ y movimiento del CM & 5, 6, 7 & \cref{teo:momento-lineal}, energía\\
+D. Masa variable & 8, 9 & \cref{teo:masa-variable}\\
+E. Virial y Pappus & 10, 11 & \cref{cor:virial-potencia}, \cref{teo:pappus2}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =====================================================================
+\subsection{Tipo A · Centro de masas}
+% =====================================================================
+
+\begin{problema}{1}[Triángulo equilátero]
+\label{prob:1}
+Calcular el centro de masas de un sistema de tres partículas de masa $m$
+situadas en los vértices de un triángulo equilátero de lado $L$.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Coordenadas} (\cref{fig:triangulo}):
+  $\vb{r}_{1}=(0,0)$, $\vb{r}_{2}=(L,0)$, $\vb{r}_{3}=\bigl(\tfrac L2,\tfrac{\sqrt3}{2}L\bigr)$; $M=3m$.
+  \item \emph{Definición} \eqref{eq:cm}:
+  \[
+    \Rc=\frac{m}{3m}\Bigl[(0,0)+(L,0)+\bigl(\tfrac L2,\tfrac{\sqrt3}{2}L\bigr)\Bigr]
+    =\resultado{\Bigl(\frac L2,\ \frac{\sqrt3}{6}L\Bigr)} .
+  \]
+  \item \emph{Interpretación}: con masas iguales, el CM es la media de las
+  posiciones, es decir, el baricentro del triángulo. Está sobre las tres
+  medianas (ejes de simetría), a $\tfrac23$ de cada vértice, y su distancia a cada
+  vértice es $\abs{\Rc-\vb{r}_{1}}=L\sqrt{\tfrac14+\tfrac1{12}}=L/\sqrt3$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.6]
+  \coordinate (A) at (0,0); \coordinate (B) at (3,0); \coordinate (C) at (1.5,{1.5*sqrt(3)});
+  \coordinate (G) at (1.5,{0.5*sqrt(3)});
+  \fill[cian,opacity=0.07] (A) -- (B) -- (C) -- cycle;
+  \draw[texto!80,line width=0.8pt] (A) -- (B) -- (C) -- cycle;
+  \draw[aux] (A) -- ($(B)!0.5!(C)$);
+  \draw[aux] (B) -- ($(A)!0.5!(C)$);
+  \draw[aux] (C) -- ($(A)!0.5!(B)$);
+  \foreach \P/\l/\a in {A/1/north east,B/2/north west,C/3/south}{
+    \node[punto,inner sep=1.8pt] at (\P) {};
+    \node[etiq,anchor=\a,inner sep=3pt] at (\P) {$m$};}
+  \node[punto,fill=violeta,inner sep=1.8pt] at (G) {};
+  \node[violeta,font=\small,anchor=south west,inner sep=1pt] at ($(G)+(60:0.22)$) {CM};
+  \draw[violeta,line width=0.5pt,<->] (3.35,0) -- (3.35,{0.5*sqrt(3)});
+  \draw[aux] (G) -- (3.45,{0.5*sqrt(3)});
+  \node[violeta,font=\small,anchor=west,inner sep=3pt] at (3.35,{0.25*sqrt(3)}) {$\frac{\sqrt3}{6}L$};
+  \node[peq,anchor=north,inner sep=4pt] at (1.5,0) {$L$};
+\end{tikzpicture}
+\caption{Tres masas iguales en un triángulo equilátero: el CM es el
+baricentro, intersección de las medianas, a altura $\sqrt3L/6$ sobre la base.}
+\label{fig:triangulo}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{3}[Varilla de densidad lineal variable]
+\label{prob:3}
+Determinar el centro de masas de una varilla rectilínea de longitud $L$ y de
+sección transversal $S$ con densidad $\lambda=\lambda_{0}+kx$.
+\end{problema}
+
+\begin{resolucion}
+Se toma la varilla sobre $x\in[0,L]$. La sección $S$ es uniforme, así que la masa
+por unidad de longitud es proporcional a $\lambda$: si $\lambda$ es volúmica,
+$\dd m=\lambda S\,\dd x$, y $S$ se cancela en $X$.
+\begin{enumerate}
+  \item \emph{Simetría}: el CM está sobre el eje de la varilla. Como $\lambda$
+  crece con $x$, estará desplazado hacia $x=L$.
+  \item \emph{Masa}:
+  $M=S\displaystyle\int_{0}^{L}(\lambda_{0}+kx)\,\dd x=S\Bigl(\lambda_{0}L+\frac{kL^{2}}{2}\Bigr)$.
+  \item \emph{Primer momento}:
+  $\displaystyle\int x\,\dd m=S\int_{0}^{L}(\lambda_{0}x+kx^{2})\,\dd x=S\Bigl(\frac{\lambda_{0}L^{2}}{2}+\frac{kL^{3}}{3}\Bigr)$.
+  \item \emph{Cociente}:
+  \[
+    X=\frac{\tfrac{\lambda_{0}L^{2}}{2}+\tfrac{kL^{3}}{3}}{\lambda_{0}L+\tfrac{kL^{2}}{2}}
+    =\resultado{\frac{L}{3}\,\frac{3\lambda_{0}+2kL}{2\lambda_{0}+kL}} .
+  \]
+  \item \emph{Comprobación}: $k=0$ da $X=L/2$ (varilla homogénea); $\lambda_{0}=0$
+  da $X=2L/3$ (densidad $\propto x$, como un triángulo); y si $k>0$, $X\in(L/2,2L/3)$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+\begin{problema}{4}[Cascarón hemisférico]
+\label{prob:4}
+Determinar el centro de masas de un cascarón hemisférico de radio $R$ y
+densidad superficial constante.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Simetría}: el eje $z$ es de revolución, así que $X=Y=0$.
+  \item \emph{Elemento} (esféricas con $r=R$, \cref{fig:cascaron}):
+  $\dd S=R^{2}\sin\theta\,\dd\theta\,\dd\varphi$, $\dd m=\sigma\,\dd S$, $z=R\cos\theta$,
+  con $\theta\in[0,\tfrac\pi2]$ y $\varphi\in[0,2\pi)$.
+  \item \emph{Masa}:
+  $M=\sigma R^{2}\displaystyle\int_{0}^{2\pi}\!\!\dd\varphi\int_{0}^{\pi/2}\!\!\sin\theta\,\dd\theta=2\pi\sigma R^{2}$.
+  \item \emph{Primer momento}:
+  \[
+    \int z\,\dd m=\sigma R^{3}\int_{0}^{2\pi}\!\!\dd\varphi\int_{0}^{\pi/2}\!\!\cos\theta\sin\theta\,\dd\theta
+    =2\pi\sigma R^{3}\Bigl[\tfrac12\sin^{2}\theta\Bigr]_{0}^{\pi/2}=\pi\sigma R^{3}.
+  \]
+  \item \emph{Resultado}: $Z=\dfrac{\pi\sigma R^{3}}{2\pi\sigma R^{2}}=\resultado{\dfrac{R}{2}}$.
+  \item \emph{Comparación}: la semiesfera \emph{maciza} tiene $Z=3R/8<R/2$: en el
+  cascarón toda la masa está lejos del centro.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.5]
+  \def\R{1.8}\def\th{48}
+  \fill[cian,opacity=0.07] (\R,0) arc[start angle=0,end angle=180,radius=\R] -- cycle;
+  \draw[texto!85,line width=1.1pt] (\R,0) arc[start angle=0,end angle=180,radius=\R];
+  \draw[texto!60,line width=0.6pt] (0,0) ellipse[x radius=\R,y radius=0.32];
+  \draw[eje] (0,0) -- (0,2.35) node[anchor=south,peq,inner sep=2pt]{$z$};
+  % banda dS
+  \draw[cian,line width=3pt] ({\R*cos(90-\th)},{\R*sin(90-\th)}) arc[start angle={90-\th},end angle={90-\th+8},radius=\R];
+  \draw[aux] (0,0) -- ({\R*cos(90-\th)},{\R*sin(90-\th)});
+  \draw[violeta,line width=0.6pt,->] (0,0.5) arc[start angle=90,end angle={90-\th},radius=0.5];
+  \node[violeta,font=\small] at ({0.68*cos(90-\th/2)},{0.68*sin(90-\th/2)}) {$\theta$};
+  \node[cian,font=\small,anchor=south west,inner sep=6pt] at ({\R*cos(90-\th+8)},{\R*sin(90-\th+8)}) {$\dd S=R^{2}\sin\theta\,\dd\theta\,\dd\varphi$};
+  % CM
+  \node[punto,fill=violeta,inner sep=1.8pt] at (0,{\R/2}) {};
+  \node[violeta,font=\small,anchor=west,inner sep=4pt] at (0,{\R/2}) {CM};
+  \draw[violeta,line width=0.5pt,<->] (-0.25,0) -- (-0.25,{\R/2});
+  \draw[aux] (-0.33,{\R/2}) -- (0,{\R/2});
+  \node[violeta,font=\small,anchor=east,inner sep=3pt] at (-0.25,{\R/4}) {$R/2$};
+  \node[punto,fill=tenue,inner sep=0.9pt] at (0,0) {};
+  \node[peq,anchor=north,inner sep=6pt] at (0,0) {$O$};
+\end{tikzpicture}
+\caption{Cascarón hemisférico. Elemento de superficie en esféricas con $r=R$;
+el CM está en el eje, a $R/2$ de la base.}
+\label{fig:cascaron}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{clave}[violeta]{Consejo}
+Para comprobar un CM, mira dos casos límite: densidad uniforme (debe salir
+el centro geométrico) y toda la masa concentrada en un extremo.
+\end{clave}
+
+% =====================================================================
+\subsection{Tipo B · Momento angular y König}
+% =====================================================================
+
+\begin{problema}{2}[König para tres partículas]
+\label{prob:2}
+Para el sistema de tres partículas (de igual masa $m$) con vectores de posición
+$\vb{r}_{1}=4\,\ii+(2t^{3}-4)\,\jj$,\quad $\vb{r}_{2}=\ii-2t\,\jj+6t^{3}\,\kk$,\quad
+$\vb{r}_{3}=t^{2}\,\ii+4t\,\jj+3\,\kk$,
+hallar las componentes del CM y relativa al mismo del vector momento angular.
+\end{problema}
+
+\begin{resolucion}
+Se pide la descomposición de König \eqref{eq:konig1},
+$\vb{L}_{O}=\vb{L}_{\text{orb}}+\vb{L}'$.
+\begin{enumerate}
+  \item \emph{Velocidades}:
+  $\vb{v}_{1}=(0,\,6t^{2},\,0)$,\quad $\vb{v}_{2}=(0,\,-2,\,18t^{2})$,\quad $\vb{v}_{3}=(2t,\,4,\,0)$.
+  \item \emph{CM} ($M=3m$, media de las posiciones):
+  \[
+    \Rc=\Bigl(\frac{t^{2}+5}{3},\ \frac{2t^{3}+2t-4}{3},\ 2t^{3}+1\Bigr),\qquad
+    \Vc=\Bigl(\frac{2t}{3},\ 2t^{2}+\frac23,\ 6t^{2}\Bigr).
+  \]
+  \item \emph{Momento angular total}, partícula a partícula:
+  \begin{align*}
+    \vb{r}_{1}\times\vb{v}_{1}&=(0,\,0,\,24t^{2}),\\
+    \vb{r}_{2}\times\vb{v}_{2}&=(-24t^{3},\,-18t^{2},\,-2),\\
+    \vb{r}_{3}\times\vb{v}_{3}&=(-12,\,6t,\,-4t^{2}),
+  \end{align*}
+  \[
+    \vb{L}_{O}=m\sum_{\alpha}\vb{r}_{\alpha}\times\vb{v}_{\alpha}
+    =m\,\bigl(-24t^{3}-12,\ -18t^{2}+6t,\ 20t^{2}-2\bigr).
+  \]
+  \item \emph{Parte orbital} (del CM): $\vb{L}_{\text{orb}}=\Rc\times M\Vc=3m\,\Rc\times\Vc$,
+  \[
+    \resultado{\vb{L}_{\text{orb}}=m\Bigl(8t^{3}-30t^{2}-2,\ \ -2t^{4}-30t^{2}+2t,\ \ \tfrac13(2t^{4}+28t^{2}+8t+10)\Bigr)} .
+  \]
+  \item \emph{Parte relativa al CM}, por diferencia (König):
+  \[
+    \resultado{\vb{L}'=\vb{L}_{O}-\vb{L}_{\text{orb}}
+    =m\Bigl(-32t^{3}+30t^{2}-10,\ \ 2t^{4}+12t^{2}+4t,\ \ \tfrac13(-2t^{4}+32t^{2}-8t-16)\Bigr)} .
+  \]
+  \item \emph{Comprobación}: calculando directamente
+  $\vb{L}'=\sum m\,\rp_{\alpha}\times\vp_{\alpha}$ con $\rp_{\alpha}=\vb{r}_{\alpha}-\Rc$,
+  $\vp_{\alpha}=\vb{v}_{\alpha}-\Vc$, se obtiene lo mismo. Por ejemplo, en $t=0$:
+  $\vb{L}_{O}=m(-12,0,-2)$, $\vb{L}_{\text{orb}}=m(-2,0,\tfrac{10}{3})$ y $\vb{L}'=m(-10,0,-\tfrac{16}{3})$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+\begin{clave}[violeta]{Consejo}
+Calcula siempre $\vb{L}_{O}$ y $\vb{L}_{\text{orb}}$, que son fáciles, y obtén $\vb{L}'$ por
+diferencia; usa el cálculo directo de $\vb{L}'$ sólo como comprobación en un
+instante concreto. Por el \cref{teo:momento-angular}, $\dot{\vb{L}}'$ da el momento de
+las fuerzas externas respecto del CM.
+\end{clave}
+
+% =====================================================================
+\subsection{Tipo C · Conservación del momento y movimiento del CM}
+% =====================================================================
+
+\begin{problema}{5}[La granada]
+\label{prob:5}
+Una granada es lanzada al aire y explota en tres pedazos. Dos de ellos, con
+masas iguales a la cuarta parte de la masa de la granada, salen disparados
+con direcciones perpendiculares entre sí tras la explosión, siendo la
+velocidad final de cada uno, medida respecto al centro de masas, $80$\,m/s.
+Determinar la velocidad del tercer pedazo después de la explosión, suponiendo
+despreciable la masa del explosivo.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Masas}: $m_{1}=m_{2}=M/4$, luego $m_{3}=M-M/2=M/2$.
+  \item \emph{Momento}: la explosión es interna y dura muy poco, así que $\vb{P}$
+  se conserva (el peso no cambia $\vb{P}$ durante el instante de la explosión).
+  En el sistema del CM, $\vb{P}'=\vb{0}$ antes y después (\cref{cor:conserva-P}):
+  \[
+    \frac M4\,\vp_{1}+\frac M4\,\vp_{2}+\frac M2\,\vp_{3}=\vb{0}
+    \qquad\Longrightarrow\qquad
+    \vp_{3}=-\frac{\vp_{1}+\vp_{2}}{2}.
+  \]
+  \item \emph{Ejes} (\cref{fig:granada}): $\vp_{1}=80\,\ii$ y $\vp_{2}=80\,\jj$ (m/s), que son
+  perpendiculares:
+  \[
+    \resultado{\vp_{3}=-40\,(\ii+\jj)\ \text{m/s},\qquad
+    v'_{3}=40\sqrt2\simeq56{,}6\ \text{m/s}} ,
+  \]
+  dirigida según la bisectriz opuesta, a $135^{\circ}$ de cada uno de los otros dos.
+  \item \emph{En el laboratorio}, si el CM llevaba en ese instante la
+  velocidad $\Vc$ de la granada, $\vb{v}_{3}=\Vc+\vp_{3}$. El CM sigue la misma
+  parábola que habría seguido la granada sin explotar.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.15]
+  \coordinate (C) at (0,0);
+  \draw[vec,cian] (C) -- (2.0,0) node[anchor=west,etiq,inner sep=3pt]{$\vp_{1}$ \ {\color{tenue}\footnotesize($M/4$)}};
+  \draw[vec,rosa] (C) -- (0,2.0) node[anchor=south,etiq,inner sep=3pt]{$\vp_{2}$ \ {\color{tenue}\footnotesize($M/4$)}};
+  \draw[vec,ambar] (C) -- (-1.0,-1.0) node[anchor=north east,etiq,inner sep=2pt]{$\vp_{3}$ \ {\color{tenue}\footnotesize($M/2$)}};
+  \draw[aux] (C) -- (1.4,1.4);
+  \draw[texto!60,line width=0.4pt] (0.25,0) -- (0.25,0.25) -- (0,0.25);
+  \node[peq,anchor=south west,inner sep=1pt] at (1.4,1.4) {$\vp_{1}+\vp_{2}$};
+  \node[punto,fill=violeta,inner sep=1.8pt] at (C) {};
+  \node[violeta,font=\small,anchor=north west,inner sep=3pt] at (C) {CM};
+\end{tikzpicture}
+\caption{Explosión vista desde el CM: $\vb{P}'=\vb{0}$ obliga a que el tercer
+fragmento, de masa doble, salga en sentido opuesto a $\vp_{1}+\vp_{2}$ con la mitad de
+su módulo.}
+\label{fig:granada}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{6}[Máquina de Atwood: el CM]
+\label{prob:6}
+Dos bloques de masas $m_{1}$ y $m_{2}$ están unidos mediante un hilo
+inextensible y sin masa que pasa por la garganta de una polea lisa. Hallar la
+velocidad y aceleración del centro de masas cuando se abandona el sistema
+partiendo del reposo.
+\end{problema}
+
+\begin{resolucion}
+Supongamos $m_{1}>m_{2}$; $m_{1}$ baja y $m_{2}$ sube (\cref{fig:atwood}). El eje $z$ es
+vertical hacia arriba y $a$ es el módulo de la aceleración de cada bloque.
+\begin{enumerate}
+  \item \emph{Bloques} (polea lisa y sin masa: misma tensión $T$ a ambos lados):
+  \[
+    m_{1}g-T=m_{1}a,\qquad T-m_{2}g=m_{2}a
+    \qquad\Longrightarrow\qquad
+    a=\frac{m_{1}-m_{2}}{m_{1}+m_{2}}\,g,\qquad T=\frac{2m_{1}m_{2}}{m_{1}+m_{2}}\,g .
+  \]
+  \item \emph{CM}: $Z=\dfrac{m_{1}z_{1}+m_{2}z_{2}}{m_{1}+m_{2}}$, con $\ddot z_{1}=-a$ y $\ddot z_{2}=+a$ (hilo inextensible):
+  \[
+    \ddot Z=\frac{-m_{1}a+m_{2}a}{m_{1}+m_{2}}
+    =\resultado{-\Bigl(\frac{m_{1}-m_{2}}{m_{1}+m_{2}}\Bigr)^{2}g},
+    \qquad
+    \resultado{\dot Z(t)=-\Bigl(\frac{m_{1}-m_{2}}{m_{1}+m_{2}}\Bigr)^{2}g\,t},
+  \]
+  dirigidas hacia abajo, partiendo del reposo. La componente horizontal del CM es fija.
+  \item \emph{Comprobación con el \cref{teo:momento-lineal}}. Sistema: bloques $+$ hilo.
+  Las fuerzas externas son los pesos, $-(m_{1}+m_{2})g\,\kk$, y la de la polea sobre el
+  hilo, $+2T\,\kk$:
+  \[
+    M\ddot Z=2T-Mg=\frac{4m_{1}m_{2}-(m_{1}+m_{2})^{2}}{m_{1}+m_{2}}\,g=-\frac{(m_{1}-m_{2})^{2}}{m_{1}+m_{2}}\,g .\ \checkmark
+  \]
+  \item \emph{Lectura}: el CM cae con aceleración menor que $g$; si $m_{1}=m_{2}$, el CM
+  queda en reposo.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.25]
+  \def\r{0.75}
+  % soporte y polea
+  \draw[texto!60,line width=0.8pt] (-1.5,4.2) -- (1.5,4.2);
+  \foreach \x in {-1.4,-1.1,...,1.5}{\draw[texto!40,line width=0.4pt] (\x,4.2) -- (\x+0.2,4.4);}
+  \draw[texto!60,line width=0.6pt] (0,4.2) -- (0,3.3);
+  \draw[texto!85,line width=0.9pt,fill=caja] (0,3.3) circle (\r);
+  \node[punto,fill=tenue,inner sep=1pt] at (0,3.3) {};
+  % hilos
+  \draw[texto!85,line width=0.8pt] (-\r,3.3) -- (-\r,0.7);
+  \draw[texto!85,line width=0.8pt] (\r,3.3) -- (\r,2.2);
+  % bloques
+  \draw[texto!85,line width=0.8pt,fill=caja] (-1.25,-0.3) rectangle (-0.25,0.7);
+  \node[etiq] at (-\r,0.2) {$m_{1}$};
+  \draw[texto!85,line width=0.8pt,fill=caja] (0.35,1.5) rectangle (1.15,2.2);
+  \node[etiq] at (\r,1.85) {$m_{2}$};
+  % tensiones sobre los bloques (en el hilo)
+  \draw[vec,cian] (-\r,0.7) -- (-\r,1.55);
+  \node[cian,font=\small,anchor=east,inner sep=3pt] at (-\r,1.25) {$T$};
+  \draw[vec,cian] (\r,2.2) -- (\r,2.85);
+  \node[cian,font=\small,anchor=west,inner sep=3pt] at (\r,2.6) {$T$};
+  % aceleraciones
+  \draw[vec,rosa] (-1.65,0.4) -- (-1.65,-0.4) node[anchor=north,etiq,inner sep=2pt]{$a$};
+  \draw[vec,rosa] (1.55,1.6) -- (1.55,2.4) node[anchor=south,etiq,inner sep=2pt]{$a$};
+  % CM (m1=3, m2=1)
+  \pgfmathsetmacro{\zc}{(0.2*3+1.85*1)/4}
+  \node[punto,fill=violeta,inner sep=1.7pt] at (0,\zc) {};
+  \draw[vec,violeta] (0,\zc) -- (0,{\zc-0.6});
+  \node[violeta,font=\footnotesize,anchor=west,inner sep=3pt] at (0,{\zc-0.3}) {$\ddot Z$};
+  \node[violeta,font=\footnotesize,anchor=south west,inner sep=2pt] at (0,\zc) {CM};
+\end{tikzpicture}
+\caption{Máquina de Atwood con $m_{1}>m_{2}$: los bloques tienen aceleraciones
+opuestas de módulo $a$. El CM (violeta) cae con
+$\abs{\ddot Z}=\bigl(\tfrac{m_{1}-m_{2}}{m_{1}+m_{2}}\bigr)^{2}g<g$.}
+\label{fig:atwood}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{7}[Colapso gravitatorio de dos cuerpos]
+\label{prob:7}
+Dos partículas de masas $m_{1}$ y $m_{2}$ están inicialmente en reposo separadas una
+distancia $D$ y sometidas tan sólo a su acción gravitatoria mutua. Calcular el
+tiempo que transcurrirá hasta que colisionen.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{CM}: no hay fuerzas externas y parten del reposo, así que el CM
+  está quieto (\cref{cor:conserva-P}). Chocan en el CM.
+  \item \emph{Ecuación relativa}. Con $\vb{r}\defeq\vb{r}_{1}-\vb{r}_{2}$ y $r=\abs{\vb{r}}$:
+  \[
+    m_{1}\ddot{\vb{r}}_{1}=-\frac{Gm_{1}m_{2}}{r^{2}}\,\uv{r},\qquad
+    m_{2}\ddot{\vb{r}}_{2}=+\frac{Gm_{1}m_{2}}{r^{2}}\,\uv{r}
+    \qquad\Longrightarrow\qquad
+    \ddot{\vb{r}}=-\frac{G(m_{1}+m_{2})}{r^{2}}\,\uv{r},
+  \]
+  restando tras dividir cada ecuación por su masa. Equivale a una partícula
+  atraída por una masa fija $M\defeq m_{1}+m_{2}$.
+  \item \emph{Energía} (movimiento radial, $\dot r(0)=0$, $r(0)=D$):
+  \[
+    \tfrac12\dot r^{2}-\frac{GM}{r}=-\frac{GM}{D}
+    \qquad\Longrightarrow\qquad
+    \dot r=-\sqrt{2GM\Bigl(\frac1r-\frac1D\Bigr)}=-\sqrt{\frac{2GM}{D}}\sqrt{\frac{D-r}{r}} .
+  \]
+  \item \emph{Cuadratura} \eqref{eq:cuadratura}:
+  \[
+    t_{c}=\sqrt{\frac{D}{2GM}}\int_{0}^{D}\sqrt{\frac{r}{D-r}}\;\dd r .
+  \]
+  \item \emph{Cambio} $r=D\sin^{2}\theta$, con $\dd r=2D\sin\theta\cos\theta\,\dd\theta$ y
+  $\sqrt{r/(D-r)}=\tan\theta$:
+  \[
+    \int_{0}^{D}\sqrt{\frac{r}{D-r}}\,\dd r=\int_{0}^{\pi/2}2D\sin^{2}\theta\,\dd\theta=\frac{\pi D}{2}
+    \qquad\Longrightarrow\qquad
+    \resultado{t_{c}=\frac{\pi}{2}\sqrt{\frac{D^{3}}{2G(m_{1}+m_{2})}}} .
+  \]
+  \item \emph{Comprobación con Kepler}: la caída radial es una elipse degenerada
+  de semieje mayor $a=D/2$, y $t_{c}$ es medio periodo:
+  $\tfrac12\cdot2\pi\sqrt{a^{3}/GM}=\pi\sqrt{D^{3}/(8GM)}$, que coincide.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+\begin{clave}[violeta]{Consejo}
+En problemas de dos cuerpos aislados: el CM se mueve uniformemente (o está
+quieto) y la coordenada relativa $\vb{r}=\vb{r}_{1}-\vb{r}_{2}$ obedece la ecuación de
+una sola partícula. La energía da $\dot r(r)$ y la integral \eqref{eq:cuadratura}, el
+tiempo.
+\end{clave}
+
+% =====================================================================
+\subsection{Tipo D · Masa variable}
+% =====================================================================
+
+\begin{clave}{Método: masa variable}
+\begin{enumerate}[leftmargin=1.4em]
+  \item Identificar $\dot m$ (signo) y la velocidad $\vb{u}$ de la masa intercambiada
+        \emph{relativa al cuerpo}.
+  \item Escribir $m\dot{\vb{v}}=\vb{F}\ext+\dot m\,\vb{u}$ y proyectar sobre ejes.
+  \item Si se capta masa en reposo, usar $\od{(m\vb{v})}{t}=\vb{F}\ext$ \eqref{eq:captacion}.
+\end{enumerate}
+\end{clave}
+
+\begin{problema}{8}[Gota que crece en una nube]
+\label{prob:8}
+Una gota esférica de agua pasa por una nube y varía su masa de modo que su
+radio crece como $r=r_{0}(1+bt)$, $b>0$. (a) Demostrar que $\dd m/\dd t$ es
+proporcional a su superficie. (b) Despreciando la resistencia del aire, obtener
+su velocidad en función del tiempo si parte del reposo.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{(a)} Con $m=\tfrac43\pi\rho_{w}r^{3}$ y $\dot r=r_{0}b$ constante:
+  \[
+    \od{m}{t}=4\pi\rho_{w}r^{2}\,\dot r=\resultado{(\rho_{w}r_{0}b)\,S},\qquad S=4\pi r^{2}.
+  \]
+  La gota capta agua a un ritmo proporcional a su superficie de captura.
+  \item \emph{(b) Ecuación}. Las gotitas de la nube están en reposo, luego por
+  \eqref{eq:captacion}, con $\vb{F}\ext=m\vb{g}$ y la vertical hacia abajo:
+  \[
+    \od{(mv)}{t}=mg .
+  \]
+  \item \emph{Integrar}. Con $m=m_{0}(1+bt)^{3}$ y $v(0)=0$:
+  \[
+    m_{0}(1+bt)^{3}v=m_{0}g\int_{0}^{t}(1+bt')^{3}\dd t'=m_{0}g\,\frac{(1+bt)^{4}-1}{4b}.
+  \]
+  \item \emph{Resultado}:
+  \[
+    \resultado{v(t)=\frac{g}{4b}\Bigl[(1+bt)-\frac{1}{(1+bt)^{3}}\Bigr]} .
+  \]
+  \item \emph{Comprobaciones}: para $bt\ll1$, $v\simeq gt-\tfrac32bg\,t^{2}$ (caída libre al
+  principio); para $bt\gg1$, $v\simeq\tfrac{g}{4b}(1+bt)$, con aceleración límite $g/4$.
+  La masa captada, que hay que acelerar desde el reposo, frena la gota.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=9.5cm,height=6cm,
+  xmin=0,xmax=6,ymin=0,ymax=3.2,xlabel={$bt$},ylabel={$v\,b/g$},
+  legend pos=south east]
+  \addplot[cian,domain=0:3.2,samples=80] {x};
+  \addlegendentry{caída libre, $v=gt$}
+  \addplot[ambar,domain=0:6,samples=150] {((1+x)-1/(1+x)^3)/4};
+  \addlegendentry{gota que crece}
+  \addplot[rosa,dashed,domain=0:6,samples=10] {(1+x)/4};
+  \addlegendentry{asíntota, pendiente $g/4$}
+\end{axis}
+\end{tikzpicture}
+\caption{Velocidad de la gota (\cref{prob:8}). Al principio cae libremente; al
+crecer, la masa captada en reposo la frena y la aceleración tiende a $g/4$.}
+\label{fig:gota}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{9}[Cohete que desciende]
+\label{prob:9}
+Un cohete autopropulsado se acerca a la superficie terrestre formando un
+ángulo de $30^{\circ}$ con la horizontal y encontrando en el aire una resistencia
+igual a la tercera parte de su peso. Calcular su aceleración si expulsa gases
+a razón de $G$\,kg/s con velocidad $v_{c}$ respecto al cohete.
+\end{problema}
+
+\begin{resolucion}
+Sea $m$ la masa instantánea, $\utau$ la dirección del movimiento (hacia abajo,
+a $30^{\circ}$ de la horizontal) y $\un$ la normal en el plano vertical
+(\cref{fig:cohete30}). Supuestos: el gas se expulsa hacia atrás,
+$\vb{u}=-v_{c}\,\utau$, con $\dot m=-G$; la resistencia es $-\tfrac13mg\,\utau$.
+\begin{enumerate}
+  \item \emph{Ecuación} \eqref{eq:masa-variable}:
+  \[
+    m\vb{a}=m\vb{g}-\tfrac13mg\,\utau+(-G)(-v_{c}\,\utau)
+    =m\vb{g}+\Bigl(Gv_{c}-\tfrac13mg\Bigr)\utau .
+  \]
+  \item \emph{Peso descompuesto}: $\vb{g}=g\sin30^{\circ}\,\utau+g\cos30^{\circ}\,\un=\tfrac g2\,\utau+\tfrac{\sqrt3}{2}g\,\un$.
+  \item \emph{Componentes}:
+  \[
+    \resultado{a_{T}=\frac g2-\frac g3+\frac{Gv_{c}}{m}=\frac g6+\frac{Gv_{c}}{m}},\qquad
+    \resultado{a_{N}=\frac{\sqrt3}{2}\,g},
+  \]
+  y el módulo es $a=\sqrt{a_{T}^{2}+\tfrac34g^{2}}$.
+  \item \emph{Variante}: si el cohete frena expulsando el gas hacia delante
+  ($\vb{u}=+v_{c}\,\utau$), el empuje cambia de signo y $a_{T}=\tfrac g6-\tfrac{Gv_{c}}{m}$. Para
+  que el cohete mantenga una trayectoria rectilínea, otra fuerza (sustentación
+  o empuje lateral) tiene que anular $a_{N}$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.25]
+  \coordinate (P) at (2.2,2.6);
+  % trayectoria y horizontal
+  \draw[aux] ($(P)+(150:1.9)$) -- ($(P)+(-30:3.4)$);
+  \draw[aux] (P) -- ($(P)+(2.6,0)$);
+  \draw[violeta,line width=0.6pt] ($(P)+(2.2,0)$) arc[start angle=0,end angle=-30,radius=2.2];
+  \node[violeta,font=\small,anchor=west,inner sep=3pt] at ($(P)+(-15:2.2)$) {$30^{\circ}$};
+  % cohete
+  \begin{scope}[shift={(P)},rotate=-30]
+    \draw[texto!85,line width=0.8pt,fill=caja] (-0.8,-0.2) -- (0.6,-0.2) -- (0.9,0) -- (0.6,0.2) -- (-0.8,0.2) -- cycle;
+    \foreach \p in {(-1.05,0.08),(-1.25,-0.1),(-1.45,0.12),(-1.6,-0.05)} \fill[naranja!80] \p circle (0.055);
+  \end{scope}
+  \node[punto,inner sep=1.2pt] at (P) {};
+  % fuerzas y vectores
+  \draw[vec,cian] ($(P)+(-30:0.95)$) -- ++(-30:1.0) node[anchor=north east,etiq,inner sep=1pt]{$\utau$};
+  \draw[vec,rosa] (P) -- ++(0,-1.4) node[anchor=north,etiq,inner sep=2pt]{$m\vb{g}$};
+  \draw[vec,ambar] ($(P)+(60:0.55)$) -- ($(P)+(60:0.55)+(150:1.1)$) node[anchor=south,etiq,inner sep=3pt]{$\tfrac13 mg$};
+  \draw[vec,verde] (P) -- ++(-120:1.0) node[anchor=north east,etiq,inner sep=1pt]{$\un$};
+  % suelo
+  \draw[texto!50,line width=0.6pt] (0,0) -- (7.2,0);
+  \foreach \x in {0.2,0.6,...,7.1}{\draw[texto!35,line width=0.4pt] (\x,0) -- (\x-0.2,-0.2);}
+\end{tikzpicture}
+\caption{Cohete que desciende a $30^{\circ}$: peso, resistencia opuesta al
+movimiento y empuje del gas expulsado hacia atrás (a lo largo de $\utau$).}
+\label{fig:cohete30}
+\end{figure}
+% ---------------------------------------------------------------------
+
+% =====================================================================
+\subsection{Tipo E · Virial y Pappus}
+% =====================================================================
+
+\begin{problema}{10}[Virial para osciladores]
+\label{prob:10}
+Verificar el cumplimiento del teorema del virial para el caso del oscilador
+armónico y anarmónico (con término cuártico) unidimensional.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Virial en 1D}: $\prom{T}=\tfrac12\prom{x\,V'(x)}$, por \eqref{eq:virial} con $F=-V'$.
+  \item \emph{Armónico}, $V=\tfrac12kx^{2}$: $xV'=kx^{2}=2V$, así que el virial predice
+  $\prom{T}=\prom{V}=E/2$. \emph{Verificación explícita} con $x=A\cos\omega t$:
+  \begin{gather*}
+    T=\tfrac12kA^{2}\sin^{2}\omega t,\qquad V=\tfrac12kA^{2}\cos^{2}\omega t,\qquad
+    \prom{\sin^{2}}=\prom{\cos^{2}}=\tfrac12\\
+    \Longrightarrow\ \resultado{\prom{T}=\prom{V}=\tfrac14kA^{2}=\tfrac E2}.
+  \end{gather*}
+  \item \emph{Anarmónico}, $V=\tfrac12kx^{2}+\tfrac14\lambda x^{4}$:
+  $xV'=kx^{2}+\lambda x^{4}=2V_{2}+4V_{4}$, donde $V_{2}=\tfrac12kx^{2}$ y $V_{4}=\tfrac14\lambda x^{4}$. Luego
+  \[
+    \resultado{\prom{T}=\prom{V_{2}}+2\prom{V_{4}}} .
+  \]
+  \item \emph{Caso cuártico puro} ($k=0$): $n=4$ en \eqref{eq:virial-n}, y
+  $\prom{T}=2\prom{V}$, es decir, $\prom{T}=\tfrac23E$ y $\prom{V}=\tfrac13E$.
+  \item \emph{Verificación numérica} (\cref{fig:virial}): integrando la ecuación
+  de movimiento durante dos periodos exactos se obtiene
+  $\prom{T}/E=0{,}6667$ y $\prom{V}/E=0{,}3333$. El periodo del cuártico depende de la amplitud
+  (no es isócrono), pero la proporción entre $\prom{T}$ y $\prom{V}$ no.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1,horizontal sep=12mm},
+  oscuro,width=7.2cm,height=5.4cm,xmin=0,xmax=2,ymin=0,ymax=1.08,
+  xlabel={$t/T_{0}$},xtick={0,0.5,1,1.5,2},height=5.8cm]
+  \nextgroupplot[title={(a) Armónico: $\prom{T}=\prom{V}=\frac E2$},ylabel={energía$/E$},
+    ytick={0,0.5,1},yticklabels={$0$,$\frac12$,$1$}]
+    \addplot[cian] table[x=t,y=T]{datos/armonico.dat};
+    \addplot[rosa] table[x=t,y=V]{datos/armonico.dat};
+    \addplot[texto!70,dashed,line width=0.7pt,domain=0:2,samples=2] {0.5};
+  \nextgroupplot[title={(b) Cuártico: $\prom{T}=\frac{2E}{3}$, $\prom{V}=\frac E3$},
+    ytick={0,0.3333,0.6667,1},yticklabels={$0$,$\frac13$,$\frac23$,$1$}]
+    \addplot[cian] table[x=t,y=T]{datos/cuartico.dat};
+    \addplot[rosa] table[x=t,y=V]{datos/cuartico.dat};
+    \addplot[cian!70,dashed,line width=0.7pt,domain=0:2,samples=2] {0.6667};
+    \addplot[rosa!70,dashed,line width=0.7pt,domain=0:2,samples=2] {0.3333};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Energía cinética (cian) y potencial (rosa) durante dos periodos,
+normalizadas por $E$. Las rectas a trazos son los promedios: iguales en el
+armónico ($n=2$) y en proporción $2:1$ en el cuártico ($n=4$), como predice
+$2\prom{T}=n\prom{V}$.}
+\label{fig:virial}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{11}[Volumen del cono por Pappus]
+\label{prob:11}
+Usando el teorema de Pappus, calcular el volumen de un cono homogéneo de
+base circular de radio $R$ y altura $h$.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Región generatriz}: el triángulo rectángulo de catetos $R$ (base,
+  perpendicular al eje) y $h$ (sobre el eje) genera el cono al girar alrededor
+  del cateto $h$ (\cref{fig:cono}). Su área es $A=\tfrac12Rh$.
+  \item \emph{Centroide}: el de un triángulo es la media de sus vértices
+  (\cref{prob:1}). Con vértices $(0,0)$, $(R,0)$ y $(0,h)$, siendo la primera coordenada la
+  distancia al eje,
+  \[
+    \bar\rho=\frac{0+R+0}{3}=\frac R3 .
+  \]
+  \item \emph{Pappus II} (\cref{teo:pappus2}):
+  \[
+    V=2\pi\bar\rho\,A=2\pi\cdot\frac R3\cdot\frac{Rh}{2}=\resultado{\frac13\pi R^{2}h} .
+  \]
+  \item \emph{Comprobación} por integración (discos):
+  $V=\int_{0}^{h}\pi\bigl(R(1-z/h)\bigr)^{2}\dd z=\pi R^{2}h\int_{0}^{1}(1-u)^{2}\dd u=\tfrac13\pi R^{2}h$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.2]
+  \def\R{1.8}\def\h{2.8}
+  \draw[texto!45,line width=0.6pt] (0,0) ellipse[x radius=\R,y radius=0.36];
+  \draw[texto!45,line width=0.6pt] (-\R,0) -- (0,\h) -- (\R,0);
+  \fill[cian,opacity=0.18] (0,0) -- (\R,0) -- (0,\h) -- cycle;
+  \draw[cian,line width=1pt] (0,0) -- (\R,0) -- (0,\h) -- cycle;
+  \draw[eje] (0,-0.6) -- (0,\h+0.6) node[anchor=south,peq,inner sep=2pt]{eje};
+  \coordinate (G) at ({\R/3},{\h/3});
+  \node[punto,fill=violeta,inner sep=1.7pt] at (G) {};
+  \node[violeta,font=\small,anchor=south west,inner sep=2pt] at (G) {$G$};
+  \draw[violeta,line width=0.6pt,dash pattern=on 3pt off 2pt] (0,{\h/3}) ellipse[x radius={\R/3},y radius=0.12];
+  \draw[violeta,line width=0.5pt,<->] (0,-0.62) -- ({\R/3},-0.62);
+  \draw[aux,violeta] ({\R/3},-0.7) -- (G);
+  \node[violeta,font=\footnotesize,anchor=north,inner sep=2pt] at ({\R/6},-0.62) {$R/3$};
+  \node[peq,anchor=north west,inner sep=2pt] at ({\R/2+0.4},-0.3) {$R$};
+  \draw[tenue,line width=0.5pt,<->] (-2.15,0) -- (-2.15,\h);
+  \node[peq,anchor=east,inner sep=3pt] at (-2.15,{\h/2}) {$h$};
+\end{tikzpicture}
+\caption{Cono generado por el triángulo rectángulo (cian) al girar alrededor
+del cateto $h$. Su centroide $G$ está a $R/3$ del eje y recorre $2\pi R/3$.}
+\label{fig:cono}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{clave}[violeta]{Consejo}
+Pappus funciona en los dos sentidos: si conoces el volumen (o el área)
+generado, despejas la posición del centroide sin integrar
+(\cref{ej:pappus-centroides}).
+\end{clave}
