@@ -289,6 +289,50 @@ Luego $\kappa=1/R$, $\un=-\vb{r}/R$ apunta al centro y $a_{N}=v^{2}/R$: la
 aceleración centrípeta conocida.
 \end{ejemplo}
 
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.25]
+  \def\R{2.2}\def\th{50}\def\thb{155}
+  % ejes y circunferencia
+  \draw[eje] (-3.0,0) -- (3.3,0) node[anchor=west,peq,inner sep=2pt]{$x$};
+  \draw[eje] (0,-2.75) -- (0,3.0) node[anchor=south,peq,inner sep=2pt]{$y$};
+  \draw[texto!80,line width=1.0pt] (0,0) circle (\R);
+  % arco s y ángulo theta
+  \draw[violeta,line width=2.0pt] (\R,0) arc[start angle=0,end angle=\th,radius=\R];
+  \node[violeta,font=\small,anchor=west,inner sep=7pt] at ({\R*cos(\th/2)},{\R*sin(\th/2)}) {$s=R\theta$};
+  \draw[violeta,line width=0.6pt,->] (0.6,0) arc[start angle=0,end angle=\th,radius=0.6];
+  \node[violeta,font=\small] at ({0.85*cos(\th/2)},{0.85*sin(\th/2)}) {$\theta$};
+  % vector de posición
+  \coordinate (P) at ({\R*cos(\th)},{\R*sin(\th)});
+  \draw[vec,texto!60] (0,0) -- (P) node[pos=0.3,anchor=south east,etiq,inner sep=2pt]{$\vb{r}$};
+  % triedro en P
+  \draw[vec,cian] (P) -- ++({-sin(\th)},{cos(\th)}) node[anchor=south east,etiq,inner sep=1pt]{$\utau$};
+  \draw[vec,rosa,line width=1.3pt] (P) -- ++({-cos(\th)},{-sin(\th)}) node[anchor=south east,etiq,inner sep=2pt]{$\un$};
+  \draw[ambar,line width=0.7pt] ($(P)+({0.42*cos(\th)},{0.42*sin(\th)})$) circle (0.075);
+  \fill[ambar] ($(P)+({0.42*cos(\th)},{0.42*sin(\th)})$) circle (0.024);
+  \node[etiq,anchor=west,inner sep=4pt] at ($(P)+({0.42*cos(\th)},{0.42*sin(\th)})$) {$\ub=\kk$};
+  \node[punto,pin={[etiq,pin distance=7mm,pin edge={tenue,line width=0.4pt}]-15:{$P$}}] at (P) {};
+  % segundo punto: el triedro gira con P
+  \coordinate (Q) at ({\R*cos(\thb)},{\R*sin(\thb)});
+  \draw[vec,cian!55!fondo] (Q) -- ++({-0.8*sin(\thb)},{0.8*cos(\thb)});
+  \draw[vec,rosa!55!fondo] (Q) -- ++({-0.8*cos(\thb)},{-0.8*sin(\thb)});
+  \node[punto,fill=tenue] at (Q) {};
+  % centro
+  \node[punto,fill=tenue,inner sep=0.9pt] at (0,0) {};
+  \node[peq,anchor=north east,inner sep=2pt] at (0,0) {$O$};
+  \node[peq,anchor=north west,inner sep=2pt] at ({\R*cos(-35)},{\R*sin(-35)}) {$R$};
+\end{tikzpicture}
+\caption{Triedro de Frenet sobre la circunferencia de radio $R$ (\cref{ej:circ}).
+En $P$: tangente $\utau$ (cian), normal $\un=-\vb{r}/R$ hacia el centro (rosa)
+y binormal $\ub=\utau\times\un=\kk$ saliendo del papel ($\odot$). El arco
+violeta es $s=R\theta$. En otro punto (tenue) el triedro ha girado con la
+curva: $\kappa=1/R$ mide ese giro por unidad de longitud y $\tors=0$ porque
+$\ub$ no cambia (curva plana).}
+\label{fig:circunferencia}
+\end{figure}
+% ---------------------------------------------------------------------
+
 \begin{clave}{Método: triedro intrínseco de $\vb{r}(t)$}
 \begin{enumerate}[leftmargin=1.4em]
   \item Derivar: $\vb{v}=\dot{\vb{r}}$, $\vb{a}=\ddot{\vb{r}}$ (y $\dot{\vb{a}}$ si se pide $\tors$).
