@@ -158,10 +158,59 @@ el CM está en el eje, a $R/2$ de la base.}
 \end{figure}
 % ---------------------------------------------------------------------
 
-\begin{clave}[violeta]{Consejo}
-Para comprobar un CM, mira dos casos límite: densidad uniforme (debe salir
-el centro geométrico) y toda la masa concentrada en un extremo.
+\begin{clave}[violeta]{Consejo: comprobar con casos límite}
+Si la densidad depende de un parámetro, la fórmula final del CM tiene que dar
+resultados obvios en los casos extremos de ese parámetro; si no los da, hay
+un error. Además, el CM es un promedio de posiciones: tiene que quedar dentro
+de la envolvente convexa de la masa. Sólo puede quedar fuera del propio objeto
+si este es curvo, como el $2R/\pi$ del alambre semicircular (\cref{ej:semicirculo}).
 \end{clave}
+
+\begin{ejemplo}[Varilla con $\lambda=\lambda_{0}(x/L)^{n}$]
+\label{ej:limites}
+Para $x\in[0,L]$:
+\[
+  X=\frac{\int_{0}^{L}x\,\lambda\,\dd x}{\int_{0}^{L}\lambda\,\dd x}
+  =\frac{L^{n+2}/(n+2)}{L^{n+1}/(n+1)}=\frac{n+1}{n+2}\,L .
+\]
+\begin{itemize}
+  \item \emph{Densidad uniforme} ($n=0$): $X=L/2$, el punto medio.
+  \item \emph{Masa concentrada en $x=L$} ($n\to\infty$): $(x/L)^{n}\to0$ salvo cerca de $x=L$, y $X\to L$.
+  \item $X$ crece con $n$ y queda siempre en $[L/2,L)\subset[0,L]$ (\cref{fig:limites}).
+\end{itemize}
+El \cref{prob:3} pasa la misma prueba: $k=0$ da $L/2$ y $\lambda_{0}=0$ da $2L/3$, que es el
+caso $n=1$ de este ejemplo.
+\end{ejemplo}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=10cm,height=5.8cm,
+  xmin=0,xmax=1.05,ymin=0,ymax=1.5,xlabel={$x/L$},ylabel={$\lambda/\lambda_{0}$},
+  xtick={0,0.5,0.667,0.8,0.917,1},xticklabels={$0$,$\frac12$,$\frac23$,$\frac45$,$\frac{11}{12}$,$1$},
+  ytick={0,0.5,1},grid=none,legend pos=north west,legend columns=2]
+  \addplot[cian,domain=0:1,samples=2] {1};
+  \addlegendentry{$n=0$}
+  \addplot[ambar,domain=0:1,samples=60] {x};
+  \addlegendentry{$n=1$}
+  \addplot[rosa,domain=0:1,samples=120] {x^3};
+  \addlegendentry{$n=3$}
+  \addplot[violeta,domain=0:1,samples=200] {x^10};
+  \addlegendentry{$n=10$}
+  \draw[cian,line width=0.6pt,dash pattern=on 2pt off 2pt] (axis cs:0.5,0) -- (axis cs:0.5,1);
+  \draw[ambar,line width=0.6pt,dash pattern=on 2pt off 2pt] (axis cs:0.6667,0) -- (axis cs:0.6667,0.6667);
+  \draw[rosa,line width=0.6pt,dash pattern=on 2pt off 2pt] (axis cs:0.8,0) -- (axis cs:0.8,0.512);
+  \draw[violeta,line width=0.6pt,dash pattern=on 2pt off 2pt] (axis cs:0.9167,0) -- (axis cs:0.9167,0.419);
+  \foreach \xx/\cc in {0.5/cian,0.6667/ambar,0.8/rosa,0.9167/violeta}{
+    \edef\temp{\noexpand\node[punto,fill=\cc,inner sep=1.5pt] at (axis cs:\xx,0) {};}\temp}
+\end{axis}
+\end{tikzpicture}
+\caption{Densidades $\lambda=\lambda_{0}(x/L)^{n}$ y su CM, $X=\frac{n+1}{n+2}L$ (líneas a trazos).
+Al crecer $n$, la masa se acumula en $x=L$ y el CM se desplaza hacia allí, sin salir nunca de la varilla.}
+\label{fig:limites}
+\end{figure}
+% ---------------------------------------------------------------------
 
 % =====================================================================
 \subsection{Tipo B · Momento angular y König}
