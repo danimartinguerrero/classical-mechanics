@@ -147,10 +147,12 @@
   \dd\vb{P}=m\,\dd\vb{v}-\vb{u}\,\dd m=\vb{F}\ext\dd t\ \Longrightarrow\ \resultado{m\dot{\vb{v}}=\vb{F}\ext+\dot m\,\vb{u}}
 \end{gather}
 
-\paso{Cohete.} $\vb{u}=-u\uv{e}$, $\mu=-\dot m$:
+\paso{Cohete (notación de las transparencias).} $m+m_{e}=m_{0}$, $u=v+v_{e}$, $\alpha=\dot m_{e}=-\dot m$:
 \begin{gather}
-  m\,\dd v=-u\,\dd m\ \Longrightarrow\ \resultado{v-v_{0}=u\ln\frac{m_{0}}{m}}\\
-  m=m_{0}-\mu t,\ \ m\dot v=\mu u-mg\ \Longrightarrow\ \resultado{v=-u\ln\Bigl(1-\frac{\mu t}{m_{0}}\Bigr)-gt},\qquad \mu u>m_{0}g
+  mv=(m-\dd m_{e})(v+\dd v)-\dd m_{e}\,v_{e}\ \Longrightarrow\ m\,\dd v=\dd m_{e}(v+v_{e})=u\,\dd m_{e}=-u\,\dd m\\
+  \resultado{v-v_{0}=u\ln\frac{m_{0}}{m}},\qquad m=m_{0}\e^{-(v-v_{0})/u},\qquad m_{e}=m_{0}\bigl(1-\e^{-v/u}\bigr)\\
+  m=m_{0}-\alpha t:\ \ m\dot v=\alpha u-mg\ \Longrightarrow\ \resultado{v=-u\ln\Bigl(1-\frac{\alpha t}{m_{0}}\Bigr)-gt},\qquad \alpha u>mg\\
+  \vb{F}_{\text{emp}}=-\dot m_{e}\,\vb{u}_{\text{gas}}=\alpha u\,\kk,\qquad \vb{F}_{\text{roz}}=-\tfrac12\rho C_{D}A\,v\abs{v}\,\kk
 \end{gather}
 
 \paso{Captación en reposo.} $\vb{u}=-\vb{v}$:

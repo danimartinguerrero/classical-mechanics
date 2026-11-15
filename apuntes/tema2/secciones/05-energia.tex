@@ -33,14 +33,67 @@ cambia si $\vb{F}\ext=\vb{0}$, y toda la energía puesta en juego se reparte en 
 
 \begin{lema}[Derivada de una distancia]
 \label{lem:radial}
-Con $\vb{r}_{\alpha\beta}=r_{\alpha\beta}\,\uv{r}_{\alpha\beta}$:\quad
-$\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}=\dot r_{\alpha\beta}$.
+Sea $\vb{r}_{\alpha\beta}=r_{\alpha\beta}\,\uv{r}_{\alpha\beta}$, donde $\dot{\vb{r}}_{\alpha\beta}$ (vector) es la velocidad relativa
+de $\alpha$ respecto de $\beta$ y $\dot r_{\alpha\beta}$ (escalar), el ritmo de cambio de su distancia. Entonces
+\begin{equation}
+  \resultado{\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}=\dot r_{\alpha\beta}} :
+\end{equation}
+la proyección de la velocidad relativa sobre la recta que une las partículas
+es el ritmo al que cambia su distancia.
 \end{lema}
 
 \begin{proof}
-Derivando $r_{\alpha\beta}^{2}=\vb{r}_{\alpha\beta}\cdot\vb{r}_{\alpha\beta}$:
+\emph{Vía 1.} Derivando $r_{\alpha\beta}^{2}=\vb{r}_{\alpha\beta}\cdot\vb{r}_{\alpha\beta}$:
 $2r_{\alpha\beta}\dot r_{\alpha\beta}=2\,\vb{r}_{\alpha\beta}\cdot\dot{\vb{r}}_{\alpha\beta}$, y se divide entre $2r_{\alpha\beta}$.
+
+\noindent\emph{Vía 2 (base móvil).} Por la regla del producto,
+\begin{equation}
+  \dot{\vb{r}}_{\alpha\beta}=\underbrace{\dot r_{\alpha\beta}\,\uv{r}_{\alpha\beta}}_{\text{radial: cambia la distancia}}
+  +\underbrace{r_{\alpha\beta}\,\dot{\uv{r}}_{\alpha\beta}}_{\text{perpendicular: giro}} ,
+  \label{eq:radial-giro}
+\end{equation}
+y $\dot{\uv{r}}_{\alpha\beta}\perp\uv{r}_{\alpha\beta}$ porque $\uv{r}_{\alpha\beta}$ es unitario (Tema 1, lema del vector
+unitario). Al multiplicar por $\uv{r}_{\alpha\beta}$, el término de giro se anula y queda $\dot r_{\alpha\beta}$.
 \end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.5]
+  \coordinate (B) at (0,0);
+  \coordinate (A) at (3.2,1.6);
+  \pgfmathsetmacro{\ang}{atan2(1.6,3.2)}
+  % trayectoria circular de giro (distancia fija)
+  \draw[texto!35,line width=0.6pt,dash pattern=on 2pt off 2pt]
+    (B) ++({\ang-28}:{sqrt(3.2^2+1.6^2)}) arc[start angle={\ang-28},end angle={\ang+9},radius={sqrt(3.2^2+1.6^2)}];
+  % vector relativo
+  \draw[vec,texto!70] (B) -- (A) node[pos=0.5,anchor=north west,etiq,inner sep=2pt]{$\vb{r}_{\alpha\beta}$};
+  \draw[aux] (A) -- ($(B)!1.38!(A)$);
+  % componentes
+  \coordinate (Vr) at ($(A)+({\ang}:1.25)$);
+  \coordinate (Vp) at ($(A)+({\ang+90}:1.1)$);
+  \coordinate (V) at ($(Vr)+({\ang+90}:1.1)$);
+  \draw[aux] (Vr) -- (V);
+  \draw[aux] (Vp) -- (V);
+  \draw[vec,cian] (A) -- (Vr) node[anchor=north west,etiq,inner sep=1pt]{$\dot r_{\alpha\beta}\,\uv{r}_{\alpha\beta}$};
+  \draw[vec,rosa] (A) -- (Vp) node[anchor=south east,etiq,inner sep=2pt]{$r_{\alpha\beta}\,\dot{\uv{r}}_{\alpha\beta}$};
+  \draw[vec,ambar,line width=1.1pt] (A) -- (V) node[anchor=south west,etiq,inner sep=2pt]{$\dot{\vb{r}}_{\alpha\beta}$};
+  % ángulo recto
+  \draw[texto!60,line width=0.4pt] ($(A)+({\ang}:0.2)$) -- ($(A)+({\ang}:0.2)+({\ang+90}:0.2)$) -- ($(A)+({\ang+90}:0.2)$);
+  % partículas
+  \node[punto,inner sep=1.7pt] at (B) {};
+  \node[etiq,anchor=north east,inner sep=3pt] at (B) {$\beta$};
+  \node[punto,inner sep=1.7pt] at (A) {};
+  \node[etiq,anchor=east,inner sep=5pt] at ($(A)+(165:0.05)$) {$\alpha$};
+  \node[peq,anchor=north west,inner sep=2pt] at ($(B)+({\ang-28}:{sqrt(3.2^2+1.6^2)})$) {$r_{\alpha\beta}=\text{const}$};
+\end{tikzpicture}
+\caption{Descomposición \eqref{eq:radial-giro} de la velocidad relativa: la
+componente radial (cian) estira o acorta la distancia; la perpendicular
+(rosa) hace girar la pareja sobre la circunferencia $r_{\alpha\beta}=\text{const}$ (a
+trazos) sin cambiar la distancia. Una fuerza central sólo «ve» la parte radial.}
+\label{fig:radial-giro}
+\end{figure}
+% ---------------------------------------------------------------------
 
 \begin{proposicion}[Variación de la energía cinética]
 \label{prop:dT}
