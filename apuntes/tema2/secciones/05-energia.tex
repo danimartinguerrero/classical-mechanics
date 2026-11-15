@@ -31,25 +31,6 @@ cambia si $\vb{F}\ext=\vb{0}$, y toda la energía puesta en juego se reparte en 
 
 \subsection{Teoremas de la energía}
 
-\begin{proposicion}[Variación de la energía cinética]
-\label{prop:dT}
-Con la tercera ley en forma débil,
-\begin{equation}
-  \od{T}{t}=\underbrace{\sa\vb{v}_{\alpha}\cdot\vb{F}_{\alpha}\ext}_{\mathcal{P}\ext}
-  +\sab(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta} .
-  \label{eq:dT}
-\end{equation}
-Si las distancias entre partículas son constantes (sólido rígido), las
-fuerzas internas centrales no trabajan y $\dot T=\mathcal{P}\ext$.
-\end{proposicion}
-
-\begin{proof}
-$\dot T=\sum m_{\alpha}\vb{v}_{\alpha}\cdot\dot{\vb{v}}_{\alpha}=\sum\vb{v}_{\alpha}\cdot\bigl(\vb{F}_{\alpha}\ext+\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}\bigr)$.
-Agrupando la doble suma por parejas y usando $\vb{F}_{\beta\alpha}=-\vb{F}_{\alpha\beta}$,
-$\vb{v}_{\alpha}\cdot\vb{F}_{\alpha\beta}+\vb{v}_{\beta}\cdot\vb{F}_{\beta\alpha}=(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}$. En un sólido
-rígido, $r_{\alpha\beta}=\text{const}$, y por el \cref{lem:radial} el producto se anula.
-\end{proof}
-
 \begin{lema}[Derivada de una distancia]
 \label{lem:radial}
 Con $\vb{r}_{\alpha\beta}=r_{\alpha\beta}\,\uv{r}_{\alpha\beta}$:\quad
@@ -60,6 +41,37 @@ $\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}=\dot r_{\alpha\beta}$.
 Derivando $r_{\alpha\beta}^{2}=\vb{r}_{\alpha\beta}\cdot\vb{r}_{\alpha\beta}$:
 $2r_{\alpha\beta}\dot r_{\alpha\beta}=2\,\vb{r}_{\alpha\beta}\cdot\dot{\vb{r}}_{\alpha\beta}$, y se divide entre $2r_{\alpha\beta}$.
 \end{proof}
+
+\begin{proposicion}[Variación de la energía cinética]
+\label{prop:dT}
+\begin{casos}
+  \item Con la tercera ley en forma \emph{débil},
+  \begin{equation}
+    \od{T}{t}=\underbrace{\sa\vb{v}_{\alpha}\cdot\vb{F}_{\alpha}\ext}_{\mathcal{P}\ext}
+    +\sab(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta} .
+    \label{eq:dT}
+  \end{equation}
+  \item Si además las fuerzas internas son centrales (forma \emph{fuerte}) y las
+  distancias entre partículas son constantes (sólido rígido), las fuerzas
+  internas no trabajan y $\dot T=\mathcal{P}\ext$.
+\end{casos}
+\end{proposicion}
+
+\begin{proof}
+(i) $\dot T=\sum m_{\alpha}\vb{v}_{\alpha}\cdot\dot{\vb{v}}_{\alpha}=\sum\vb{v}_{\alpha}\cdot\bigl(\vb{F}_{\alpha}\ext+\sum_{\beta\neq\alpha}\vb{F}_{\alpha\beta}\bigr)$.
+Agrupando la doble suma por parejas y usando sólo $\vb{F}_{\beta\alpha}=-\vb{F}_{\alpha\beta}$,
+$\vb{v}_{\alpha}\cdot\vb{F}_{\alpha\beta}+\vb{v}_{\beta}\cdot\vb{F}_{\beta\alpha}=(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}=\dot{\vb{r}}_{\alpha\beta}\cdot\vb{F}_{\alpha\beta}$.
+
+\noindent(ii) Con la forma fuerte, $\vb{F}_{\alpha\beta}=F_{\alpha\beta}\,\uv{r}_{\alpha\beta}$, y por el \cref{lem:radial}
+$\dot{\vb{r}}_{\alpha\beta}\cdot\vb{F}_{\alpha\beta}=F_{\alpha\beta}\,\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}=F_{\alpha\beta}\,\dot r_{\alpha\beta}$, que se anula si
+$r_{\alpha\beta}=\text{const}$.
+\end{proof}
+
+\begin{observacion}[Por qué hace falta la forma fuerte]
+Con la forma débil sola, $\vb{F}_{\alpha\beta}$ podría tener componente perpendicular
+a $\vb{r}_{\alpha\beta}$; aunque la distancia sea fija, $\dot{\vb{r}}_{\alpha\beta}$ (el giro relativo
+de la pareja) es perpendicular a $\vb{r}_{\alpha\beta}$ y esa componente trabajaría.
+\end{observacion}
 
 \begin{teorema}[Conservación de la energía de un sistema]
 \label{teo:energia-sistema}
