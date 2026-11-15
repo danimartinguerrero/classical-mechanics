@@ -147,14 +147,57 @@ que son centrales y conservativas. Entonces:
 \end{casos}
 \end{teorema}
 
+\begin{notacion}[Gradiente respecto de una partícula]
+$V\ext=V(\vb{r}_{1},\dots,\vb{r}_{N})$ es función de $3N$ variables. El gradiente
+$\grad_{\alpha}$ deriva sólo respecto de las coordenadas de la partícula $\alpha$:
+\begin{equation}
+  \grad_{\alpha}V\defeq\Bigl(\pd{V}{x_{\alpha}},\ \pd{V}{y_{\alpha}},\ \pd{V}{z_{\alpha}}\Bigr),
+  \qquad \vb{F}_{\alpha}\ext=-\grad_{\alpha}V\ext .
+\end{equation}
+Ejemplo (peso): $V\ext=\sum_{\beta}m_{\beta}g\,z_{\beta}\Rightarrow\grad_{2}V\ext=(0,0,m_{2}g)$, luego
+$\vb{F}_{2}\ext=-m_{2}g\,\kk$.
+\end{notacion}
+
 \begin{proof}
-(i) Por el \cref{lem:radial},
-$(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}=-U'_{\alpha\beta}\,\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}
-=-U'_{\alpha\beta}\,\dot r_{\alpha\beta}=-\od{U_{\alpha\beta}}{t}$. Sumando en $\alpha<\beta$, el segundo
-término de \eqref{eq:dT} es $-\dot U\inn$.
-(ii) Por la regla de la cadena,
-$\mathcal{P}\ext=-\sum\vb{v}_{\alpha}\cdot\grad_{\alpha}V\ext=-\dot V\ext$, y por (i) $\dot T+\dot U\inn+\dot V\ext=0$.
+Objetivo: escribir los dos sumandos de \eqref{eq:dT} como derivadas totales,
+$-\dot U\inn$ y $-\dot V\ext$.
+
+\noindent\emph{(i) Fuerzas internas}, pareja a pareja:
+\begin{enumerate}
+  \item \emph{Velocidad relativa}: $\vb{v}_{\alpha}-\vb{v}_{\beta}=\dot{\vb{r}}_{\alpha\beta}$ (vector).
+  \item \emph{Fuerza de pares}, con $U'_{\alpha\beta}\defeq\dd U_{\alpha\beta}/\dd r_{\alpha\beta}$:
+  $(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}=-U'_{\alpha\beta}\,(\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta})$.
+  \item \emph{\Cref{lem:radial}} (fuerza central: sólo trabaja la parte radial):
+  $\dot{\vb{r}}_{\alpha\beta}\cdot\uv{r}_{\alpha\beta}=\dot r_{\alpha\beta}$ (escalar).
+  \item \emph{Regla de la cadena} ($U_{\alpha\beta}$ depende de $t$ sólo a través de $r_{\alpha\beta}$):
+  \[
+    (\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}=-U'_{\alpha\beta}\,\dot r_{\alpha\beta}
+    =-\od{U_{\alpha\beta}}{r_{\alpha\beta}}\od{r_{\alpha\beta}}{t}=-\od{U_{\alpha\beta}}{t}.
+  \]
+  \item \emph{Sumando} en $\alpha<\beta$:
+  \[
+    \sab(\vb{v}_{\alpha}-\vb{v}_{\beta})\cdot\vb{F}_{\alpha\beta}=-\od{}{t}\sab U_{\alpha\beta}=-\dot U\inn
+    \ \Longrightarrow\ \od{}{t}\bigl(T+U\inn\bigr)=\mathcal{P}\ext .
+  \]
+\end{enumerate}
+\emph{(ii) Fuerzas externas}. Por la regla de la cadena en las $3N$ variables,
+\[
+  \od{V\ext}{t}=\sa\Bigl(\pd{V}{x_{\alpha}}\dot x_{\alpha}+\pd{V}{y_{\alpha}}\dot y_{\alpha}+\pd{V}{z_{\alpha}}\dot z_{\alpha}\Bigr)
+  =\sa\grad_{\alpha}V\ext\cdot\vb{v}_{\alpha}=-\sa\vb{v}_{\alpha}\cdot\vb{F}_{\alpha}\ext=-\mathcal{P}\ext ,
+\]
+y con (i): $\dot T+\dot U\inn+\dot V\ext=0$.
 \end{proof}
+
+\begin{observacion}[Dónde entra cada hipótesis]
+\begin{itemize}
+  \item \emph{Centrales}: permiten el paso 3; una componente perpendicular de
+        $\vb{F}_{\alpha\beta}$ trabajaría con el giro relativo (\cref{fig:radial-giro}).
+  \item \emph{Conservativas}: convierten $U'_{\alpha\beta}\dot r_{\alpha\beta}$ en la derivada total del paso 4.
+  \item \emph{$V\ext$ sin dependencia explícita de $t$}: si $V\ext=V\ext(\vb{r}_{1},\dots,\vb{r}_{N},t)$, la
+        regla de la cadena añade $\partial V\ext/\partial t$ y $\dot E=\partial V\ext/\partial t\neq0$
+        (por ejemplo, un campo externo que se enciende).
+\end{itemize}
+\end{observacion}
 
 \begin{table}[ht]
 \centering
