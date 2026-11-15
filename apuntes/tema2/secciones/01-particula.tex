@@ -21,12 +21,107 @@ momento lineal $\vb{p}\defeq m\vb{v}$ y fuerza neta $\vb{F}$:
 \end{casos}
 \end{definicion}
 
-\begin{observacion}[Relatividad de Galileo y equivalencia]
-Las leyes de la mecánica son las mismas en todos los SRI (principio de
-relatividad de Galileo); en un sistema acelerado aparecen fuerzas de inercia.
-La masa inercial (la de $\vb{F}=m\vb{a}$) y la gravitatoria (la del peso)
-coinciden: todos los cuerpos caen con la misma aceleración. La misión
-MICROSCOPE (2022) lo verificó hasta $\abs{\eta}\lesssim10^{-15}$.
+\subsection{Relatividad de Galileo y principio de equivalencia}
+
+\begin{definicion}[Sistema de referencia inercial]
+Un SRI es un sistema en el que se cumple la primera ley: una partícula libre
+de fuerzas permanece en reposo o en movimiento rectilíneo uniforme.
+\end{definicion}
+
+\begin{teorema}[Relatividad de Galileo]
+\label{teo:galileo}
+Si $S$ es un SRI y $S'$ se traslada respecto de él con velocidad constante
+$\vb{V}$, la transformación de Galileo y sus derivadas son
+\begin{equation}
+  \vb{r}'=\vb{r}-\vb{V}t,\quad t'=t
+  \qquad\Longrightarrow\qquad
+  \vb{v}'=\vb{v}-\vb{V},\qquad \resultado{\vb{a}'=\vb{a}}\quad(\dot{\vb{V}}=\vb{0}).
+\end{equation}
+Como las fuerzas físicas sólo dependen de posiciones y velocidades
+\emph{relativas} entre cuerpos, $\vb{F}'=\vb{F}$, y por tanto
+$\vb{F}=m\vb{a}\iff\vb{F}=m\vb{a}'$: las leyes de la mecánica son las mismas en
+todos los SRI.
+\end{teorema}
+
+\begin{observacion}
+Ningún experimento mecánico hecho dentro de un sistema distingue el reposo del
+movimiento uniforme (el barco de Galileo: en el camarote todo ocurre igual
+que en puerto). No existe un reposo absoluto.
+\end{observacion}
+
+\begin{proposicion}[Fuerzas de inercia]
+\label{prop:inercia}
+Si $S'$ está acelerado respecto de un SRI (su origen con aceleración $\vb{A}$ y
+sus ejes girando con velocidad angular $\bm{\omega}$),
+\begin{equation}
+  m\vb{a}'=\vb{F}
+  \underbrace{-\,m\vb{A}}_{\text{arrastre}}
+  \underbrace{-\,m\,\bm{\omega}\times(\bm{\omega}\times\vb{r}')}_{\text{centrífuga}}
+  \underbrace{-\,2m\,\bm{\omega}\times\vb{v}'}_{\text{Coriolis}}
+  \underbrace{-\,m\,\dot{\bm{\omega}}\times\vb{r}'}_{\text{Euler}} .
+\end{equation}
+Las fuerzas de inercia no proceden de ninguna interacción (no tienen pareja de
+acción y reacción) y todas son proporcionales a la masa $m$.
+\end{proposicion}
+
+\begin{definicion}[Masa inercial y masa gravitatoria]
+La masa aparece en dos leyes con papeles distintos:
+\begin{itemize}
+  \item \emph{Inercial} $m_{i}$, en $\vb{F}=m_{i}\vb{a}$: resistencia a cambiar de velocidad.
+  \item \emph{Gravitatoria} $m_{g}$, en $\vb{P}=m_{g}\vb{g}$: «carga» con la que la gravedad atrae al cuerpo.
+\end{itemize}
+\end{definicion}
+
+\begin{proposicion}[Principio de equivalencia débil]
+\label{prop:equivalencia}
+En caída libre, $m_{i}a=m_{g}g$, luego $a=(m_{g}/m_{i})\,g$. Como todos los cuerpos caen
+con la misma aceleración, $m_{g}/m_{i}$ es universal y, con unidades adecuadas,
+\begin{equation}
+  \resultado{m_{g}=m_{i}} .
+\end{equation}
+Se contrasta con el \emph{parámetro de Eötvös} de dos materiales $A$ y $B$,
+\begin{equation}
+  \eta\defeq2\,\frac{\abs{a_{A}-a_{B}}}{a_{A}+a_{B}},
+  \qquad \eta=0\ \text{si el principio es exacto}.
+\end{equation}
+\end{proposicion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=11cm,height=5.6cm,
+  ymode=log,ymin=1e-16,ymax=1e-1,xmin=0.4,xmax=5.6,
+  xtick={1,2,3,4,5},
+  xticklabels={Galileo,Newton,Eötvös,Eöt-Wash,MICROSCOPE},
+  x tick label style={font=\scriptsize,text=texto},
+  ytick={1e-15,1e-12,1e-9,1e-6,1e-3},
+  ylabel={cota de $\abs{\eta}$},grid=major]
+  \addplot[violeta,line width=0.6pt,dash pattern=on 2pt off 2pt] coordinates {(1,1e-3) (2,1e-3) (3,1e-9) (4,1e-13) (5,1e-15)};
+  \addplot[only marks,mark=*,mark size=2.6pt,cian] coordinates {(1,1e-3) (2,1e-3) (3,1e-9) (4,1e-13) (5,1e-15)};
+  \node[peq,anchor=south,inner sep=5pt] at (axis cs:1,1e-3) {s.\,XVII};
+  \node[peq,anchor=south,inner sep=5pt] at (axis cs:2,1e-3) {1687};
+  \node[peq,anchor=south west,inner sep=4pt] at (axis cs:3,1e-9) {$\sim$1900};
+  \node[peq,anchor=south west,inner sep=4pt] at (axis cs:4,1e-13) {2008};
+  \node[peq,anchor=south west,inner sep=4pt] at (axis cs:5,1e-15) {2022};
+\end{axis}
+\end{tikzpicture}
+\caption{Precisión con que se ha comprobado $m_{g}=m_{i}$: planos inclinados y
+péndulos (Galileo, Newton), balanza de torsión (Eötvös, grupo Eöt-Wash) y
+satélite MICROSCOPE.}
+\label{fig:eotvos}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{observacion}[MICROSCOPE]
+El satélite (CNES/ESA) llevó en órbita dos cilindros concéntricos, de titanio
+y platino, en caída libre alrededor de la Tierra; un control electrostático
+los mantenía en la misma posición relativa, y cualquier tendencia a caer de
+forma distinta habría aparecido en la fuerza necesaria. Resultado final (2022):
+\[
+  \eta(\text{Ti},\text{Pt})=\bigl[-1{,}5\pm2{,}3_{\text{(estad.)}}\pm1{,}5_{\text{(sist.)}}\bigr]\times10^{-15},
+\]
+es decir, $m_{g}=m_{i}$ al menos hasta la decimoquinta cifra.
 \end{observacion}
 
 \subsection{Trabajo y energía}
