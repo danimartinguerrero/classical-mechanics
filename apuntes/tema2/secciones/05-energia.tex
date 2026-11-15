@@ -59,33 +59,36 @@ unitario). Al multiplicar por $\uv{r}_{\alpha\beta}$, el término de giro se anu
 % ---------------------------------------------------------------------
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=1.5]
+\begin{tikzpicture}[scale=1.35]
   \coordinate (B) at (0,0);
   \coordinate (A) at (3.2,1.6);
   \pgfmathsetmacro{\ang}{atan2(1.6,3.2)}
-  % trayectoria circular de giro (distancia fija)
-  \draw[texto!35,line width=0.6pt,dash pattern=on 2pt off 2pt]
-    (B) ++({\ang-28}:{sqrt(3.2^2+1.6^2)}) arc[start angle={\ang-28},end angle={\ang+9},radius={sqrt(3.2^2+1.6^2)}];
+  \pgfmathsetmacro{\rr}{sqrt(3.2^2+1.6^2)}
+  % circunferencia r = const (sólo por debajo de alpha)
+  \draw[texto!30,line width=0.45pt,dash pattern=on 1.5pt off 1.5pt]
+    (B) ++({\ang-26}:\rr) arc[start angle={\ang-26},end angle={\ang-1.5},radius=\rr];
   % vector relativo
-  \draw[vec,texto!70] (B) -- (A) node[pos=0.5,anchor=north west,etiq,inner sep=2pt]{$\vb{r}_{\alpha\beta}$};
-  \draw[aux] (A) -- ($(B)!1.38!(A)$);
+  \draw[texto!55,line width=0.6pt,-{Stealth[length=4pt,width=3pt]}] (B) -- (A)
+    node[pos=0.5,anchor=north west,etiq,inner sep=2pt]{$\vb{r}_{\alpha\beta}$};
   % componentes
-  \coordinate (Vr) at ($(A)+({\ang}:1.25)$);
-  \coordinate (Vp) at ($(A)+({\ang+90}:1.1)$);
-  \coordinate (V) at ($(Vr)+({\ang+90}:1.1)$);
-  \draw[aux] (Vr) -- (V);
-  \draw[aux] (Vp) -- (V);
-  \draw[vec,cian] (A) -- (Vr) node[anchor=north west,etiq,inner sep=1pt]{$\dot r_{\alpha\beta}\,\uv{r}_{\alpha\beta}$};
-  \draw[vec,rosa] (A) -- (Vp) node[anchor=south east,etiq,inner sep=2pt]{$r_{\alpha\beta}\,\dot{\uv{r}}_{\alpha\beta}$};
-  \draw[vec,ambar,line width=1.1pt] (A) -- (V) node[anchor=south west,etiq,inner sep=2pt]{$\dot{\vb{r}}_{\alpha\beta}$};
-  % ángulo recto
-  \draw[texto!60,line width=0.4pt] ($(A)+({\ang}:0.2)$) -- ($(A)+({\ang}:0.2)+({\ang+90}:0.2)$) -- ($(A)+({\ang+90}:0.2)$);
+  \coordinate (Vr) at ($(A)+({\ang}:1.15)$);
+  \coordinate (Vp) at ($(A)+({\ang+90}:0.95)$);
+  \coordinate (V) at ($(Vr)+({\ang+90}:0.95)$);
+  \draw[texto!25,line width=0.35pt,dash pattern=on 1.5pt off 1.5pt] (Vr) -- (V) -- (Vp);
+  \draw[cian,line width=0.7pt,-{Stealth[length=4pt,width=3pt]}] (A) -- (Vr)
+    node[anchor=north west,etiq,inner sep=1pt]{$\dot r_{\alpha\beta}\,\uv{r}_{\alpha\beta}$};
+  \draw[rosa,line width=0.7pt,-{Stealth[length=4pt,width=3pt]}] (A) -- (Vp)
+    node[anchor=south east,etiq,inner sep=1pt]{$r_{\alpha\beta}\,\dot{\uv{r}}_{\alpha\beta}$};
+  \draw[ambar,line width=0.8pt,-{Stealth[length=4.5pt,width=3.2pt]}] (A) -- (V)
+    node[anchor=south west,etiq,inner sep=1pt]{$\dot{\vb{r}}_{\alpha\beta}$};
+  % ángulo recto mínimo
+  \draw[texto!50,line width=0.3pt] ($(A)+({\ang}:0.11)$) -- ($(A)+({\ang}:0.11)+({\ang+90}:0.11)$) -- ($(A)+({\ang+90}:0.11)$);
   % partículas
-  \node[punto,inner sep=1.7pt] at (B) {};
-  \node[etiq,anchor=north east,inner sep=3pt] at (B) {$\beta$};
-  \node[punto,inner sep=1.7pt] at (A) {};
-  \node[etiq,anchor=east,inner sep=5pt] at ($(A)+(165:0.05)$) {$\alpha$};
-  \node[peq,anchor=north west,inner sep=2pt] at ($(B)+({\ang-28}:{sqrt(3.2^2+1.6^2)})$) {$r_{\alpha\beta}=\text{const}$};
+  \fill[texto] (B) circle (1.4pt);
+  \node[etiq,anchor=north east,inner sep=2pt] at (B) {$\beta$};
+  \fill[texto] (A) circle (1.4pt);
+  \node[etiq,anchor=north west,inner sep=3pt] at ($(A)+({\ang-90}:0.05)$) {$\alpha$};
+  \node[peq,anchor=north,inner sep=2pt] at ($(B)+({\ang-26}:\rr)$) {$r_{\alpha\beta}=\text{const}$};
 \end{tikzpicture}
 \caption{Descomposición \eqref{eq:radial-giro} de la velocidad relativa: la
 componente radial (cian) estira o acorta la distancia; la perpendicular
