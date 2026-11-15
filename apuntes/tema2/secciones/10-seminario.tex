@@ -83,16 +83,20 @@ sección transversal $S$ con densidad $\lambda=\lambda_{0}+kx$.
 \end{problema}
 
 \begin{resolucion}
-Se toma la varilla sobre $x\in[0,L]$. La sección $S$ es uniforme, así que la masa
-por unidad de longitud es proporcional a $\lambda$: si $\lambda$ es volúmica,
-$\dd m=\lambda S\,\dd x$, y $S$ se cancela en $X$.
+Se toma la varilla sobre $x\in[0,L]$ y $\lambda$ como densidad \emph{lineal}
+(masa por unidad de longitud), de modo que $\dd m=\lambda\,\dd x$.
+\begin{observacion}[¿Y la sección $S$?]
+Si la densidad dada fuera volúmica, $\rho=\rho_{0}+kx$, sería $\dd m=\rho S\,\dd x$, es
+decir, $\lambda=\rho S$. Como $S$ es constante, aparece en $M$ y en $\int x\,\dd m$ y se
+cancela en $X$: el resultado es el mismo.
+\end{observacion}
 \begin{enumerate}
   \item \emph{Simetría}: el CM está sobre el eje de la varilla. Como $\lambda$
   crece con $x$, estará desplazado hacia $x=L$.
   \item \emph{Masa}:
-  $M=S\displaystyle\int_{0}^{L}(\lambda_{0}+kx)\,\dd x=S\Bigl(\lambda_{0}L+\frac{kL^{2}}{2}\Bigr)$.
+  $M=\displaystyle\int_{0}^{L}(\lambda_{0}+kx)\,\dd x=\lambda_{0}L+\frac{kL^{2}}{2}$.
   \item \emph{Primer momento}:
-  $\displaystyle\int x\,\dd m=S\int_{0}^{L}(\lambda_{0}x+kx^{2})\,\dd x=S\Bigl(\frac{\lambda_{0}L^{2}}{2}+\frac{kL^{3}}{3}\Bigr)$.
+  $\displaystyle\int x\,\dd m=\int_{0}^{L}(\lambda_{0}x+kx^{2})\,\dd x=\frac{\lambda_{0}L^{2}}{2}+\frac{kL^{3}}{3}$.
   \item \emph{Cociente}:
   \[
     X=\frac{\tfrac{\lambda_{0}L^{2}}{2}+\tfrac{kL^{3}}{3}}{\lambda_{0}L+\tfrac{kL^{2}}{2}}
