@@ -161,6 +161,43 @@ $\rot\vb{F}=\vb{0}$, y existe $V(\vb{r})$ con
 Una fuerza constante es conservativa: $W_{AB}=\vb{F}\cdot(\vb{r}_{B}-\vb{r}_{A})$, con $V=-\vb{F}\cdot\vb{r}$.
 \end{definicion}
 
+\begin{teorema}[Teorema del gradiente]
+\label{teo:gradiente}
+Para $V\in\C^{1}$ y cualquier curva $\gamma$ de $\vb{r}_{A}$ a $\vb{r}_{B}$,
+\begin{equation}
+  \resultado{\int_{\gamma}\grad V\cdot\dd\vb{r}=V(\vb{r}_{B})-V(\vb{r}_{A})} .
+  \label{eq:gradiente}
+\end{equation}
+Por tanto, si $\vb{F}=-\grad V$,
+$W_{AB}=-\int_{\gamma}\dd V=V(\vb{r}_{A})-V(\vb{r}_{B})$.
+Es la versión en varias variables de $\int_{a}^{b}f'(x)\,\dd x=f(b)-f(a)$.
+\end{teorema}
+
+\begin{proof}
+\begin{enumerate}
+  \item \emph{Diferencial total}. En componentes,
+  \[
+    \grad V\cdot\dd\vb{r}=\pd{V}{x}\dd x+\pd{V}{y}\dd y+\pd{V}{z}\dd z=\dd V,
+  \]
+  que es, por definición, el cambio de $V$ al desplazarse $\dd\vb{r}$.
+  \item \emph{Parametrizando} $\gamma$ por $\vb{r}(t)$, $t\in[t_{A},t_{B}]$, con $\dd\vb{r}=\dot{\vb{r}}\,\dd t$, y llamando
+  $f(t)\defeq V\bigl(\vb{r}(t)\bigr)$, la regla de la cadena da
+  $\dot f=\partial_{x}V\,\dot x+\partial_{y}V\,\dot y+\partial_{z}V\,\dot z=\grad V\cdot\dot{\vb{r}}$. Por el teorema
+  fundamental del cálculo,
+  \[
+    \int_{\gamma}\grad V\cdot\dd\vb{r}=\int_{t_{A}}^{t_{B}}\od{f}{t}\,\dd t=f(t_{B})-f(t_{A})=V(\vb{r}_{B})-V(\vb{r}_{A}) .
+  \]
+  \item Con $\vb{F}=-\grad V$ se obtiene $W_{AB}$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{observacion}
+Sumar los cambios infinitesimales $\dd V$ a lo largo del camino da el cambio
+total, valor final menos inicial. Otro camino cambia el integrando punto a
+punto, pero no el resultado: por eso el trabajo de una fuerza $-\grad V$ no
+depende del camino.
+\end{observacion}
+
 \begin{teorema}[Conservación de la energía mecánica]
 \label{teo:energia-particula}
 Si todas las fuerzas que trabajan son conservativas,
