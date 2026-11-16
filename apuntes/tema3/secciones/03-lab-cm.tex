@@ -1,0 +1,366 @@
+% =====================================================================
+\section{Sistemas laboratorio y centro de masas. Diagrama de Landau}
+\label{sec:landau}
+% =====================================================================
+
+\begin{notacion}[Diapositivas]
+\label{not:lab-cm}
+Blanco $m_{2}$ en reposo en el \lab. Sea $\lambda\defeq m_{1}/m_{2}$.
+\begin{itemize}[leftmargin=1.3em]
+  \item \emph{\lab}: $\vb{p}_{1}=m_{1}\vb{v}_{1}$, $\vb{p}_{2}=\vb{0}$ antes; $\vb{p}_{1}'$, $\vb{p}_{2}'$ después.
+        $\alpha$: ángulo de \emph{difusión} de $m_{1}$; $\beta$: ángulo de \emph{retroceso} de $m_{2}$, ambos
+        respecto de la dirección incidente.
+  \item \emph{\scm}: $\vb{q}_{i}=m_{i}\vb{u}_{i}$ antes, $\vb{q}_{i}'=m_{i}\vb{u}_{i}'$ después, con
+        $\vb{u}_{i}=\vb{v}_{i}-\Vcm$. $\theta$: ángulo de difusión en el CM.
+\end{itemize}
+\end{notacion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,baseline=(ta.base)]
+  \draw[aux] (0,0) -- (2.7,0);
+  \draw[vec,cian] (-2.6,0) -- (-0.18,0) node[pos=0.45,above,etiq,cian] {$\vb{p}_{1}$};
+  \fill[rosa] (0,0) circle (0.11);
+  \draw[vec,cian] (0,0) -- (35:2.3) node[anchor=south west,etiq,cian,inner sep=2pt] {$\vb{p}_{1}'$};
+  \draw[vec,rosa] (0,0) -- (-42:1.9) node[anchor=north west,etiq,rosa,inner sep=2pt] {$\vb{p}_{2}'$};
+  \draw[ambar,line width=0.6pt] (0.85,0) arc (0:35:0.85);
+  \node[etiq,ambar] at (17.5:1.15) {$\alpha$};
+  \draw[ambar,line width=0.6pt] (0.85,0) arc (0:-42:0.85);
+  \node[etiq,ambar] at (-21:1.15) {$\beta$};
+  \node[etiq,rosa,anchor=north east] at (-0.06,-0.08) {$m_{2}$};
+  \node[etiq,anchor=south] (ta) at (0,2.05) {(a) Sistema \lab};
+\end{tikzpicture}\hspace{14mm}%
+\begin{tikzpicture}[scale=1.0,baseline=(tb.base)]
+  \draw[aux] (0,0) -- (2.5,0);
+  \draw[vec,cian] (-2.4,0) -- (-0.18,0) node[pos=0.45,above,etiq,cian] {$\vb{q}_{1}$};
+  \draw[vec,rosa] (2.4,0) -- (0.18,0) node[pos=0.4,below,etiq,rosa] {$\vb{q}_{2}$};
+  \node[punto,inner sep=1.3pt] at (0,0) {};
+  \draw[vec,cian] (0,0) -- (50:2.0) node[anchor=south west,etiq,cian,inner sep=2pt] {$\vb{q}_{1}'$};
+  \draw[vec,rosa] (0,0) -- (230:2.0) node[anchor=north east,etiq,rosa,inner sep=2pt] {$\vb{q}_{2}'$};
+  \draw[ambar,line width=0.6pt] (0.8,0) arc (0:50:0.8);
+  \node[etiq,ambar] at (25:1.08) {$\theta$};
+  \draw[ambar,line width=0.6pt] (-0.8,0) arc (180:230:0.8);
+  \node[etiq,ambar] at (205:1.08) {$\theta$};
+  \node[etiq,anchor=south] (tb) at (0,2.05) {(b) Sistema \scm};
+\end{tikzpicture}
+\caption{Notación. (a) En el \lab{} el blanco está en reposo y las partículas salen
+con ángulos $\alpha$ y $\beta$ distintos. (b) En el \scm{} los momentos son siempre opuestos:
+ambas partículas se desvían el mismo ángulo $\theta$.}
+\label{fig:notacion}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{observacion}[Indeterminación]
+En el \lab{} hay $3$ ecuaciones (dos de momento en el plano del choque y la energía) y
+$4$ incógnitas ($p_{1}'$, $p_{2}'$, $\alpha$, $\beta$). Un ángulo lo fija la interacción
+(parámetro de impacto, potencial), así que en los problemas \emph{siempre se da un ángulo}.
+\end{observacion}
+
+\begin{proposicion}[Choque elástico en el CM]
+\label{prop:elastico-cm}
+$\abs{\vb{q}_{1}}=\abs{\vb{q}_{2}}=\abs{\vb{q}_{1}'}=\abs{\vb{q}_{2}'}\equiv q=\mu v_{1}$ y $\theta_{1}+\theta_{2}=\pi$:
+el choque sólo \emph{gira} los momentos un ángulo $\theta$.
+\end{proposicion}
+
+\begin{proof}
+$\vb{P}'=\vb{0}$ da $\vb{q}_{2}=-\vb{q}_{1}$ y $\vb{q}_{2}'=-\vb{q}_{1}'$. La energía,
+$\frac{q_{1}^{2}}{2m_{1}}+\frac{q_{1}^{2}}{2m_{2}}=\frac{q_{1}^{2}}{2\mu}=\frac{q_{1}'^{2}}{2\mu}$, da $q_{1}'=q_{1}$.
+Además $q_{1}=\mu v_{12}=\mu v_{1}$ por \eqref{eq:momentos-cm}. Proyectando
+$\vb{q}_{1}'+\vb{q}_{2}'=\vb{0}$ sobre $\ii$: $\cos\theta_{1}=-\cos\theta_{2}$, es decir, $\theta_{1}+\theta_{2}=\pi$.
+\end{proof}
+
+\begin{proposicion}[Cambio de sistema]
+\label{prop:cambio}
+Con $\vb{p}_{2}=\vb{0}$:
+\begin{equation}
+  \resultado{\Vcm=\frac{\vb{q}_{1}}{m_{2}},\qquad
+  \vb{p}_{1}=(1+\lambda)\,\vb{q}_{1},\qquad
+  \vb{p}_{1}'=\vb{q}_{1}'+\lambda\,\vb{q}_{1},\qquad
+  \vb{p}_{2}'=\vb{q}_{1}-\vb{q}_{1}'} .
+  \label{eq:cambio}
+\end{equation}
+\end{proposicion}
+
+\begin{proof}
+De $\vb{v}=\vb{u}+\Vcm$: $\vb{p}_{i}=\vb{q}_{i}+m_{i}\Vcm$. Con $\vb{p}_{2}=\vb{0}$, $\vb{q}_{1}=-\vb{q}_{2}=m_{2}\Vcm$.
+Entonces $\vb{p}_{1}=\vb{q}_{1}+m_{1}\vb{q}_{1}/m_{2}$, $\vb{p}_{1}'=\vb{q}_{1}'+m_{1}\Vcm$ y
+$\vb{p}_{2}'=\vb{q}_{2}'+m_{2}\Vcm=-\vb{q}_{1}'+\vb{q}_{1}$.
+\end{proof}
+
+\subsection{Diagrama de Landau (choque elástico)}
+
+\begin{teorema}[Diagrama de Landau]
+\label{teo:landau}
+Sobre un segmento $\overline{AB}=\vb{p}_{1}$ se marca $O$ con $\overline{AO}=\lambda q$,
+$\overline{OB}=q$, y se traza la circunferencia de centro $O$ y radio $q$. Cada punto $C$ de
+ella, con $\angle BOC=\theta$, da un choque posible (\cref{fig:landau}):
+$\overrightarrow{OC}=\vb{q}_{1}'$, $\overrightarrow{AC}=\vb{p}_{1}'$, $\overrightarrow{CB}=\vb{p}_{2}'$, y
+\begin{equation}
+  \resultado{\beta=\frac{\pi-\theta}{2}},\qquad
+  \resultado{p_{2}'=2q\sin\frac\theta2},\qquad
+  \resultado{\tan\alpha=\frac{\sin\theta}{\lambda+\cos\theta}},
+  \label{eq:landau}
+\end{equation}
+y $p_{1}'^{2}=q^{2}\bigl(1+\lambda^{2}+2\lambda\cos\theta\bigr)$.
+\end{teorema}
+
+\begin{proof}
+\begin{enumerate}
+  \item Por \eqref{eq:cambio}, $\vb{p}_{1}'=\lambda\vb{q}_{1}+\vb{q}_{1}'=\overrightarrow{AO}+\overrightarrow{OC}$ y
+        $\vb{p}_{2}'=\vb{q}_{1}-\vb{q}_{1}'=\overrightarrow{OB}-\overrightarrow{OC}=\overrightarrow{CB}$.
+  \item $\triangle OCB$ es isósceles ($\overline{OC}=\overline{OB}=q$) con ángulo $\theta$ en $O$: sus
+        ángulos iguales valen $\beta=(\pi-\theta)/2$, y su base $p_{2}'=2q\sin(\theta/2)$.
+  \item $C=O+q(\cos\theta,\sin\theta)$ con $O=(\lambda q,0)$ desde $A$:
+        $\tan\alpha=\dfrac{q\sin\theta}{\lambda q+q\cos\theta}$, y $p_{1}'^{2}=\abs{\overrightarrow{AC}}^{2}$.\qedhere
+\end{enumerate}
+\end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0,baseline=(ta.base)]
+  % lambda = 1/2, q = 2.2, theta = 70
+  \def\q{2.2}\def\la{0.5}\def\th{70}
+  \coordinate (A) at (0,0); \coordinate (O) at ({\la*\q},0); \coordinate (B) at ({\la*\q+\q},0);
+  \coordinate (C) at ($(O)+(\th:\q)$);
+  \draw[tenue!70,line width=0.5pt] (O) circle (\q);
+  \draw[texto!80,line width=0.6pt] (A) -- (B);
+  \draw[vec,ambar,line width=0.7pt] (O) -- (C);
+  \draw[vec,cian] (A) -- (C);
+  \draw[vec,rosa] (C) -- (B);
+  \draw[vec,texto,line width=0.6pt] ($(A)+(0,-0.62)$) -- ($(B)+(0,-0.62)$)
+     node[midway,below,etiq,inner sep=3pt] {$\vb{p}_{1}=(1+\lambda)\,\vb{q}_{1}$};
+  \foreach \P in {A,O,B} \node[punto,inner sep=1.1pt] at (\P) {};
+  \node[etiq,anchor=north east,inner sep=2pt] at (A) {$A$};
+  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
+  \node[etiq,anchor=north west,inner sep=2pt] at (B) {$B$};
+  \node[etiq,anchor=south,inner sep=3pt] at (C) {$C$};
+  \node[etiq,cian,anchor=south east,inner sep=2pt] at ($(A)!0.55!(C)$) {$\vb{p}_{1}'$};
+  \node[etiq,rosa,anchor=south west,inner sep=2pt] at ($(C)!0.45!(B)$) {$\vb{p}_{2}'$};
+  \node[etiq,ambar,anchor=west,inner sep=3pt] at ($(O)!0.62!(C)$) {$\vb{q}_{1}'$};
+  \pic[draw=cian,line width=0.5pt,angle radius=0.55cm,angle eccentricity=1.45,pic text={$\alpha$},pic text options={cian,font=\small}] {angle=B--A--C};
+  \pic[draw=ambar,line width=0.5pt,angle radius=0.42cm,angle eccentricity=1.6,pic text={$\theta$},pic text options={ambar,font=\small}] {angle=B--O--C};
+  \pic[draw=rosa,line width=0.5pt,angle radius=0.55cm,angle eccentricity=1.45,pic text={$\beta$},pic text options={rosa,font=\small}] {angle=C--B--A};
+  \node[etiq,anchor=south] (ta) at (O|-0,2.55) {(a) $m_{1}<m_{2}$ ($\lambda=\tfrac12$)};
+\end{tikzpicture}\hspace{10mm}%
+\begin{tikzpicture}[scale=1.0,baseline=(tb.base)]
+  % lambda = 2, q = 1.5: tangente, theta = 120
+  \def\q{1.5}\def\la{2}\def\th{120}
+  \coordinate (A) at (0,0); \coordinate (O) at ({\la*\q},0); \coordinate (B) at ({\la*\q+\q},0);
+  \coordinate (C) at ($(O)+(\th:\q)$);
+  \draw[tenue!70,line width=0.5pt] (O) circle (\q);
+  \draw[aux] (A) -- ($(A)!1.55!(C)$);
+  \draw[texto!80,line width=0.6pt] (A) -- (B);
+  \draw[vec,ambar,line width=0.7pt] (O) -- (C);
+  \draw[vec,cian] (A) -- (C);
+  \draw[vec,rosa] (C) -- (B);
+  \draw[vec,texto,line width=0.6pt] ($(A)+(0,-0.62)$) -- ($(B)+(0,-0.62)$)
+     node[midway,below,etiq,inner sep=3pt] {$\vb{p}_{1}$};
+  \foreach \P in {A,O,B} \node[punto,inner sep=1.1pt] at (\P) {};
+  \node[etiq,anchor=north east,inner sep=2pt] at (A) {$A$};
+  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
+  \node[etiq,anchor=north west,inner sep=2pt] at (B) {$B$};
+  \node[etiq,anchor=south east,inner sep=2pt] at (C) {$C$};
+  \node[etiq,cian,anchor=south east,inner sep=2pt] at ($(A)!0.55!(C)$) {$\vb{p}_{1}'$};
+  \node[etiq,rosa,anchor=south west,inner sep=2pt] at ($(C)!0.55!(B)$) {$\vb{p}_{2}'$};
+  \pic[draw=tenue,line width=0.45pt,angle radius=0.2cm] {right angle=A--C--O};
+  \pic[draw=cian,line width=0.5pt,angle radius=1.3cm] {angle=B--A--C};
+  \node[etiq,cian,anchor=west,inner sep=2pt] at (14:1.36) {$\alpha_{\max}$};
+  \pic[draw=ambar,line width=0.5pt,angle radius=0.38cm,angle eccentricity=1.75,pic text={$\theta$},pic text options={ambar,font=\small}] {angle=B--O--C};
+  \node[etiq,anchor=south] (tb) at (O|-0,2.55) {(b) $m_{1}>m_{2}$ ($\lambda=2$)};
+\end{tikzpicture}
+\caption{Diagrama de Landau. Todos los choques elásticos posibles corresponden a los
+puntos $C$ de la circunferencia. (a) Si $\lambda<1$, $A$ es interior: $\alpha$ toma cualquier
+valor en $[0,\pi]$. (b) Si $\lambda>1$, $A$ es exterior: $\alpha$ es máximo cuando $AC$ es
+tangente, es decir, $\vb{p}_{1}'\perp\vb{q}_{1}'$, y $\sin\alpha_{\protect\max}=q/(\lambda q)=1/\lambda$.}
+\label{fig:landau}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{corolario}[Casos según las masas]
+\label{cor:casos}
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+  \item $m_{1}<m_{2}$: $\alpha\in[0,\pi]$; la partícula sale a $90^{\circ}$ si
+        $\cos\theta_{0}=-\lambda$ y rebota hacia atrás si $\theta>\theta_{0}$.
+  \item $m_{1}=m_{2}$: $A$ está sobre la circunferencia y $\tan\alpha=\dfrac{\sin\theta}{1+\cos\theta}=\tan\dfrac\theta2$:
+        \[
+          \resultado{\alpha=\frac\theta2,\qquad \alpha+\beta=\frac\pi2},
+        \]
+        pues $\overline{AB}$ es un diámetro (Tales): las bolas de billar salen perpendiculares.
+  \item $m_{1}>m_{2}$: $\lambda+\cos\theta>0$, $\alpha<\pi/2$ y
+        \[
+          \resultado{\sin\alpha_{\max}=\frac{m_{2}}{m_{1}}},\qquad \cos\theta_{\max}=-\frac{m_{2}}{m_{1}};
+        \]
+        cada $\alpha<\alpha_{\max}$ se alcanza con dos $\theta$ (difusión \emph{forward} y \emph{backward}).
+        Midiendo $\alpha_{\max}$ se obtiene la masa del blanco.
+\end{enumerate}
+\end{corolario}
+
+\begin{proof}[Demostración de (iii)]
+$\od{}{\theta}\tan\alpha=\dfrac{\cos\theta(\lambda+\cos\theta)+\sin^{2}\theta}{(\lambda+\cos\theta)^{2}}=\dfrac{1+\lambda\cos\theta}{(\lambda+\cos\theta)^{2}}=0
+\iff\cos\theta=-\dfrac1\lambda$; entonces $\tan\alpha_{\max}=\dfrac{\sqrt{1-1/\lambda^{2}}}{\lambda-1/\lambda}=\dfrac{1}{\sqrt{\lambda^{2}-1}}$,
+es decir, $\sin\alpha_{\max}=1/\lambda$.
+\end{proof}
+
+\begin{proposicion}[Energía cedida al blanco]
+\label{prop:energia-cedida}
+\begin{equation}
+  \resultado{\frac{T_{2}'}{T_{1}}=\frac{4m_{1}m_{2}}{(m_{1}+m_{2})^{2}}\,\sin^{2}\frac\theta2
+  =\frac{4m_{1}m_{2}}{(m_{1}+m_{2})^{2}}\,\cos^{2}\beta} .
+  \label{eq:energia-cedida}
+\end{equation}
+Es máxima en el choque frontal ($\theta=\pi$) y vale $1$ sólo si $m_{1}=m_{2}$.
+\end{proposicion}
+
+\begin{proof}
+$T_{1}=\dfrac{p_{1}^{2}}{2m_{1}}$ con $p_{1}=\dfrac{m_{1}+m_{2}}{m_{2}}\,q$, y $T_{2}'=\dfrac{p_{2}'^{2}}{2m_{2}}$ con
+$p_{2}'=2q\sin\frac\theta2$. Dividiendo: $\dfrac{T_{2}'}{T_{1}}=\dfrac{m_{1}}{m_{2}}\,\dfrac{4m_{2}^{2}}{(m_{1}+m_{2})^{2}}\sin^{2}\dfrac\theta2$.
+Por último, $\theta/2=\pi/2-\beta$.
+\end{proof}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1,horizontal sep=16mm},
+  oscuro,width=7.2cm,height=6.0cm,xmin=0,xmax=180,xtick={0,45,90,135,180},
+  xlabel={$\theta$ (grados)}]
+  \nextgroupplot[ymin=0,ymax=185,ytick={0,30,60,90,120,150,180},
+    ylabel={$\alpha$ (grados)},title={(a) Ángulo de difusión en el \lab},
+    legend pos=north west]
+    \addplot[rosa,domain=0:180,samples=181] {atan2(sin(x),0.5+cos(x))};
+    \addlegendentry{$\lambda=\tfrac12$}
+    \addplot[cian,domain=0:179.5,samples=181] {atan2(sin(x),1+cos(x))};
+    \addlegendentry{$\lambda=1$}
+    \addplot[ambar,domain=0:180,samples=181] {atan2(sin(x),2+cos(x))};
+    \addlegendentry{$\lambda=2$}
+    \addplot[violeta,domain=0:180,samples=181] {atan2(sin(x),4+cos(x))};
+    \addlegendentry{$\lambda=4$}
+    \draw[aux,ambar!80] (axis cs:0,30) -- (axis cs:180,30);
+    \draw[aux,violeta!80] (axis cs:0,14.48) -- (axis cs:180,14.48);
+  \nextgroupplot[ymin=0,ymax=1.08,ylabel={$T_{2}'/T_{1}$},
+    title={(b) Energía cedida al blanco},legend pos=north west]
+    \addplot[cian,domain=0:180,samples=121] {sin(x/2)^2};
+    \addlegendentry{$\lambda=1$}
+    \addplot[ambar,domain=0:180,samples=121] {8/9*sin(x/2)^2};
+    \addlegendentry{$\lambda=2$ o $\tfrac12$}
+    \addplot[violeta,domain=0:180,samples=121] {16/25*sin(x/2)^2};
+    \addlegendentry{$\lambda=4$ o $\tfrac14$}
+\end{groupplot}
+\end{tikzpicture}
+\caption{(a) $\alpha(\theta)$ según \eqref{eq:landau}. Si $\lambda>1$, $\alpha$ no supera
+$\arcsin(1/\lambda)$ (discontinuas: $30^{\circ}$ y $14{,}5^{\circ}$). (b) Fracción de energía
+cedida, \eqref{eq:energia-cedida}: sólo depende de $\lambda$ a través de
+$4\lambda/(1+\lambda)^{2}$, invariante bajo $\lambda\mapsto1/\lambda$.}
+\label{fig:alfa-theta}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{clave}{Método · choques bidimensionales}
+\begin{enumerate}[leftmargin=1.4em]
+  \item Dato habitual: un ángulo ($\alpha$, $\beta$ o $\theta$) y las masas.
+  \item Pasar a $\theta$ con \eqref{eq:landau}: $\beta=\frac{\pi-\theta}{2}$, $\tan\alpha=\frac{\sin\theta}{\lambda+\cos\theta}$.
+  \item Módulos: $q=\mu v_{1}=p_{1}/(1+\lambda)$; $p_{2}'=2q\sin\frac\theta2$; $p_{1}'$ por el coseno en $\triangle AOC$.
+  \item Con masas iguales usar directamente el triángulo rectángulo $ACB$:
+        $p_{1}'=p_{1}\cos\alpha$, $p_{2}'=p_{1}\cos\beta$.
+\end{enumerate}
+\end{clave}
+
+\begin{problema}{8}[Detector a un ángulo dado]
+\label{prob:8}
+Una partícula $m_{1}$ incide sobre otra $m_{2}=m_{1}$ en reposo. ¿A qué ángulo del \lab{}
+debe situarse el espectrómetro para detectar las partículas que pierden un tercio de
+su momento incidente? Choque elástico.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Masas iguales}: $\lambda=1$, $A$ está sobre la circunferencia y $\triangle ACB$
+        es rectángulo en $C$ con hipotenusa $\overline{AB}=p_{1}$ (\cref{cor:casos}):
+        \[
+          p_{1}'=p_{1}\cos\alpha,\qquad p_{2}'=p_{1}\sin\alpha,\qquad \alpha+\beta=\frac\pi2 .
+        \]
+  \item \emph{Condición}: pierde un tercio, luego $p_{1}'=\tfrac23p_{1}$:
+        \[
+          \cos\alpha=\frac23\quad\Longrightarrow\quad\resultado{\alpha=\arccos\frac23\simeq48{,}2^{\circ}} .
+        \]
+  \item \emph{Resto del choque}: $\theta=2\alpha\simeq96{,}4^{\circ}$, $\beta=90^{\circ}-\alpha\simeq41{,}8^{\circ}$,
+        $p_{2}'=\tfrac{\sqrt5}{3}p_{1}$. Comprobación: $\bigl(\tfrac23\bigr)^{2}+\tfrac59=1$, es decir, $T_{1}'+T_{2}'=T_{1}$.
+\end{enumerate}
+Por simetría, los blancos que salen con $\tfrac23p_{1}$ lo hacen a $\beta=48{,}2^{\circ}$ al otro lado del haz.
+\end{resolucion}
+
+\subsection{Choques inelásticos}
+
+\begin{problema}{9}[Diagrama de Landau inelástico]
+\label{prob:9}
+Determinar cómo se modifica el diagrama de Landau en el caso general no elástico, con $0<e<1$.
+\end{problema}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{En el CM} sigue siendo $\vb{P}'=\vb{0}$, luego $\vb{q}_{2}'=-\vb{q}_{1}'$, y la energía da
+        \[
+          \frac{q'^{2}}{2\mu}=\frac{q^{2}}{2\mu}-Q
+          \quad\Longrightarrow\quad
+          \resultado{q'=e\,q},\qquad e^{2}\defeq1-\frac{Q}{K_{\mathrm{disp}}} ,
+        \]
+        que coincide con el $e$ de Huygens--Newton en el choque frontal (\cref{teo:frontal}).
+  \item \emph{Cambio de sistema}: \eqref{eq:cambio} no depende de la energía, así que $A$, $O$ y $B$
+        no cambian: $\vb{p}_{1}'=\lambda\vb{q}_{1}+\vb{q}_{1}'$, $\vb{p}_{2}'=\vb{q}_{1}-\vb{q}_{1}'$.
+  \item \emph{Nuevo diagrama}: $C$ recorre la circunferencia de centro $O$ y radio $e\,q<q$; ahora $B$
+        es exterior y $\triangle OCB$ deja de ser isósceles (\cref{fig:landau-inelastico}). Con
+        $\overrightarrow{OC}=eq(\cos\theta,\sin\theta)$:
+        \[
+          \resultado{\tan\alpha=\frac{e\sin\theta}{\lambda+e\cos\theta},\qquad
+          \tan\beta=\frac{e\sin\theta}{1-e\cos\theta}},\qquad
+          p_{2}'^{2}=q^{2}\bigl(1+e^{2}-2e\cos\theta\bigr).
+        \]
+  \item \emph{Consecuencias}:
+  \begin{itemize}[leftmargin=1.2em]
+    \item $m_{1}$ sólo puede rebotar hacia atrás si $\lambda<e$; si no, $\sin\alpha_{\max}=e/\lambda$.
+    \item $B$ es exterior: $\sin\beta_{\max}=e$, así que el blanco nunca sale a $90^{\circ}$.
+    \item Masas iguales: $\vb{p}_{1}'\cdot\vb{p}_{2}'=(\vb{q}_{1}+\vb{q}_{1}')\cdot(\vb{q}_{1}-\vb{q}_{1}')=(1-e^{2})q^{2}>0$, luego
+          $\resultado{\alpha+\beta<\pi/2}$.
+    \item $e=0$: $C=O$; ambas salen con $\Vcm$ ($\alpha=\beta=0$) y se pierde toda $K_{\mathrm{disp}}$.\qedhere
+  \end{itemize}
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+  % lambda = 1, q = 2.2, e = 0.6, theta = 75
+  \begin{tikzpicture}[scale=1.35]
+  \def\q{2.2}\def\la{1}\def\th{75}\def\e{0.6}
+  \coordinate (A) at (0,0); \coordinate (O) at ({\la*\q},0); \coordinate (B) at ({\la*\q+\q},0);
+  \coordinate (C) at ($(O)+(\th:\e*\q)$);
+  \draw[tenue!60,dash pattern=on 2pt off 2pt,line width=0.45pt] (O) circle (\q);
+  \draw[violeta!80,line width=0.6pt] (O) circle ({\e*\q});
+  \draw[texto!80,line width=0.6pt] (A) -- (B);
+  \draw[vec,ambar,line width=0.7pt] (O) -- (C);
+  \draw[vec,cian] (A) -- (C);
+  \draw[vec,rosa] (C) -- (B);
+  \foreach \P in {A,O,B} \node[punto,inner sep=1.1pt] at (\P) {};
+  \node[etiq,anchor=north east,inner sep=2pt] at (A) {$A$};
+  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
+  \node[etiq,anchor=north west,inner sep=2pt] at (B) {$B$};
+  \node[etiq,anchor=south,inner sep=3pt] at (C) {$C$};
+  \node[etiq,cian,anchor=south east,inner sep=2pt] at ($(A)!0.5!(C)$) {$\vb{p}_{1}'$};
+  \node[etiq,rosa,anchor=south west,inner sep=2pt] at ($(C)!0.5!(B)$) {$\vb{p}_{2}'$};
+  \node[etiq,ambar,anchor=west,inner sep=2pt] at ($(O)!0.6!(C)$) {$\vb{q}_{1}'$};
+  \pic[draw=cian,line width=0.5pt,angle radius=0.95cm] {angle=B--A--C};
+  \node[etiq,cian,anchor=west,inner sep=1pt] at ($(A)+(8:1.0)$) {$\alpha$};
+  \pic[draw=ambar,line width=0.5pt,angle radius=0.38cm,angle eccentricity=1.8,pic text={$\theta$},pic text options={ambar,font=\small}] {angle=B--O--C};
+  \pic[draw=rosa,line width=0.5pt,angle radius=0.95cm] {angle=C--B--A};
+  \node[etiq,rosa,anchor=east,inner sep=1pt] at ($(B)+(172:1.0)$) {$\beta$};
+  \draw[tenue,line width=0.35pt] ($(O)+(118:\q)$) -- ++(118:0.4) node[anchor=south,peq,inner sep=2pt] {radio $q$ (elástico)};
+  \draw[violeta!80,line width=0.35pt] ($(O)+(250:\e*\q)$) -- ($(O)+(244:2.45)$) node[anchor=north,peq,text=violeta,inner sep=2pt] {radio $e\,q$};
+\end{tikzpicture}
+\caption{Diagrama de Landau inelástico ($m_{1}=m_{2}$, $e=0{,}6$, $\theta=75^{\circ}$). El
+punto $C$ recorre una circunferencia de radio $eq$ concéntrica con la elástica
+(discontinua); el ángulo en $C$ es agudo, luego $\alpha+\beta<90^{\circ}$.}
+\label{fig:landau-inelastico}
+\end{figure}
+% ---------------------------------------------------------------------

@@ -1,0 +1,389 @@
+% =====================================================================
+\section{Colisiones: percusión y restitución}
+\label{sec:colisiones}
+% =====================================================================
+
+\begin{definicion}[Colisión]
+\label{def:colision}
+Una \emph{colisión} o choque es una interacción breve e intensa entre partículas
+que transfiere momento lineal; no requiere contacto. Es \emph{elástica} si además se
+conserva la energía cinética. El balance energético se escribe
+\begin{equation}
+  \resultado{K_{i}=K_{f}+Q} ,
+  \label{eq:Q}
+\end{equation}
+con $Q>0$ en un choque inelástico (calor, deformación\ldots), $Q=0$ en uno elástico
+y $Q<0$ en uno superelástico (explosión).
+\end{definicion}
+
+\begin{definicion}[Percusión]
+\label{def:percusion}
+Si una fuerza $\vb{F}$ actúa durante un intervalo $\Delta t\to0$, su efecto es la
+\emph{percusión}
+\begin{equation}
+  \bm{\pi}\defeq\lim_{\Delta t\to0}\int_{t}^{t+\Delta t}\vb{F}\,\dd t=\Delta\vb{p} .
+  \label{eq:percusion}
+\end{equation}
+Una fuerza es \emph{impulsiva} si $\bm{\pi}\neq\vb{0}$, lo que exige $\abs{\vb{F}}\to\infty$.
+\end{definicion}
+
+\begin{proposicion}[Conservación en el choque]
+\label{prop:conservacion}
+Durante una colisión:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2em]
+  \item las posiciones no cambian: $\Delta\vb{r}=\int\vb{v}\,\dd t\to0$;
+  \item las fuerzas finitas (peso, rozamiento, muelles\ldots) no contribuyen:
+        $\abs{\int\vb{F}\,\dd t}\le F_{\max}\Delta t\to0$;
+  \item si no hay fuerzas exteriores \emph{impulsivas}, $\resultado{\vb{P}_{\mathrm{antes}}=\vb{P}_{\mathrm{después}}}$.
+\end{enumerate}
+\end{proposicion}
+
+\begin{observacion}
+Una pared, el suelo o un eje fijo sí ejercen percusiones exteriores. En un rebote
+contra el suelo no se conserva $\vb{P}$ de la partícula; si el suelo es liso,
+sí su componente tangencial (\cref{sec:rebotes}).
+\end{observacion}
+
+\subsection{Coeficiente de restitución}
+
+El choque tiene dos fases (\cref{fig:percusion}): \emph{compresión}, hasta que ambas
+partículas alcanzan una velocidad común $w$, y \emph{restitución}, en la que se separan.
+
+\begin{definicion}[Coeficiente de restitución]
+\label{def:e}
+Es la constante $e\in[0,1]$, propia de los materiales, tal que
+\begin{equation}
+  \pi_{\mathrm{rest}}=e\,\pi_{\mathrm{comp}} .
+\end{equation}
+$e=1$: choque elástico; $e=0$: completamente inelástico (las partículas quedan unidas).
+\end{definicion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{axis}[oscuro,width=9.5cm,height=5.6cm,grid=none,axis lines=left,
+  xmin=-0.1,xmax=2.75,ymin=0,ymax=1.55,
+  xtick={0,1,1.6},xticklabels={$0$,$t_{*}$,$\Delta t$},
+  ytick=\empty,xlabel={$t$},ylabel={$\abs{F}$},
+  ylabel style={rotate=-90},clip=false]
+  \addplot[cian,line width=1.1pt,domain=0:1,samples=80,name path=c] {sin(deg(pi*x/2))};
+  \addplot[rosa,line width=1.1pt,domain=1:1.6,samples=60,name path=r] {cos(deg(pi*(x-1)/1.2))};
+  \path[name path=ax] (axis cs:0,0) -- (axis cs:1.6,0);
+  \addplot[cian,opacity=0.18] fill between[of=c and ax,soft clip={domain=0:1}];
+  \addplot[rosa,opacity=0.20] fill between[of=r and ax,soft clip={domain=1:1.6}];
+  \draw[aux] (axis cs:1,0) -- (axis cs:1,1.06);
+  \node[etiq,cian] at (axis cs:0.58,0.32) {$\pi_{\mathrm{comp}}$};
+  \draw[tenue,line width=0.35pt] (axis cs:1.30,0.30) -- (axis cs:1.72,0.62)
+    node[anchor=south west,etiq,rosa,inner sep=1pt] {$\pi_{\mathrm{rest}}=e\,\pi_{\mathrm{comp}}$};
+  \node[peq,anchor=south,align=center] at (axis cs:1,1.06) {máxima compresión:\\ velocidad común $w$};
+\end{axis}
+\end{tikzpicture}
+\caption{Fuerza de contacto durante un choque (aquí $e=0{,}6$). Las áreas son las
+percusiones de compresión y de restitución; su cociente define $e$.}
+\label{fig:percusion}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{teorema}[Regla de Huygens--Newton]
+\label{teo:huygens}
+En un choque frontal (velocidades sobre la línea de choque),
+\begin{equation}
+  \resultado{v_{1}'-v_{2}'=-e\,(v_{1}-v_{2})} ,
+  \qquad
+  \pi_{\mathrm{comp}}=\mu\,(v_{1}-v_{2}),\qquad
+  \pi_{\mathrm{total}}=(1+e)\,\mu\,(v_{1}-v_{2}) .
+  \label{eq:huygens}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Sea $\pi_{c}$ la percusión de compresión que $2$ ejerce sobre $1$ (hacia atrás).
+\begin{enumerate}
+  \item \emph{Compresión}: $m_{1}(w-v_{1})=-\pi_{c}$, $m_{2}(w-v_{2})=\pi_{c}$. Restando,
+        tras dividir cada una por su masa: $v_{1}-v_{2}=\pi_{c}\bigl(\frac1{m_{1}}+\frac1{m_{2}}\bigr)=\pi_{c}/\mu$.
+  \item \emph{Restitución}: $m_{1}(v_{1}'-w)=-e\pi_{c}$, $m_{2}(v_{2}'-w)=e\pi_{c}$; igualmente
+        $v_{1}'-v_{2}'=-e\pi_{c}/\mu$.
+  \item Dividiendo: $v_{1}'-v_{2}'=-e\,(v_{1}-v_{2})$. La percusión total es $(1+e)\pi_{c}$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\subsection{Choque frontal: el método del CM}
+
+\begin{teorema}[Choque frontal]
+\label{teo:frontal}
+Con $V\cm=\dfrac{m_{1}v_{1}+m_{2}v_{2}}{M}$ (que no cambia en el choque),
+\begin{equation}
+  \resultado{v_{i}'=(1+e)\,V\cm-e\,v_{i}},\qquad
+  \resultado{Q=\tfrac12\,\mu\,(1-e^{2})\,(v_{1}-v_{2})^{2}} .
+  \label{eq:frontal}
+\end{equation}
+Explícitamente,
+\begin{equation}
+  v_{1}'=\frac{(m_{1}-e\,m_{2})\,v_{1}+(1+e)\,m_{2}v_{2}}{M},\qquad
+  v_{2}'=\frac{(1+e)\,m_{1}v_{1}+(m_{2}-e\,m_{1})\,v_{2}}{M}.
+  \label{eq:frontal-explicito}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+\begin{enumerate}
+  \item \emph{Al CM}: $u_{i}\defeq v_{i}-V\cm$, con $m_{1}u_{1}+m_{2}u_{2}=0$ antes y después.
+  \item \emph{Huygens--Newton}: $u_{1}'-u_{2}'=-e(u_{1}-u_{2})$. Junto con $m_{1}u_{1}'+m_{2}u_{2}'=0$, el
+        único par solución es $\resultado{u_{i}'=-e\,u_{i}}$: en el CM cada velocidad se invierte y se reduce en un factor $e$.
+  \item \emph{Al \lab}: $v_{i}'=V\cm+u_{i}'=V\cm-e(v_{i}-V\cm)$.
+  \item \emph{Energía} (\cref{teo:konig2}): $K=\tfrac12MV\cm^{2}+\tfrac12\mu v_{12}^{2}$ antes y
+        $K'=\tfrac12MV\cm^{2}+\tfrac12\mu e^{2}v_{12}^{2}$ después; restando se obtiene $Q$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corolario}[Energía disponible]
+\label{cor:disponible}
+La energía del CM, $\tfrac12MV\cm^{2}$, no puede disiparse. Sólo está disponible
+\begin{equation}
+  K_{\mathrm{disp}}=\tfrac12\,\mu\,v_{12}^{2},\qquad Q=(1-e^{2})\,K_{\mathrm{disp}}\le K_{\mathrm{disp}} .
+\end{equation}
+Con el blanco en reposo ($v_{2}=0$): $\dfrac{Q}{K_{1}}=(1-e^{2})\,\dfrac{m_{2}}{m_{1}+m_{2}}$.
+\end{corolario}
+
+\begin{clave}{Método · choque frontal}
+\begin{enumerate}[leftmargin=1.4em]
+  \item Fijar un eje y signos; calcular $V\cm$.
+  \item Pasar al CM: $u_{i}=v_{i}-V\cm$.
+  \item Choque en el CM: $u_{i}'=-e\,u_{i}$ (sólo invertir y escalar).
+  \item Volver: $v_{i}'=V\cm+u_{i}'$; y $Q=\tfrac12\mu(1-e^{2})v_{12}^{2}$.
+\end{enumerate}
+Evita resolver la cuadrática de la energía y su solución espuria ($v_{i}'=v_{i}$, «no hay choque»).
+\end{clave}
+
+\begin{ejemplo}[Elástico, $m$ contra $3m$]
+\label{ej:m3m}
+$v_{1}=v_{0}$, $v_{2}=-v_{0}$, $e=1$. Entonces
+\begin{gather*}
+  V\cm=\frac{mv_{0}-3mv_{0}}{4m}=-\frac{v_{0}}{2},\qquad
+  u_{1}=\frac32v_{0},\quad u_{2}=-\frac12v_{0}
+  \ \xrightarrow{\ e=1\ }\ u_{1}'=-\frac32v_{0},\quad u_{2}'=\frac12v_{0},\\
+  v_{1}'=-\frac{v_{0}}2-\frac32v_{0}=\resultado{-2v_{0}},\qquad
+  v_{2}'=-\frac{v_{0}}2+\frac12v_{0}=\resultado{0} .
+\end{gather*}
+La masa $3m$ se detiene y la ligera rebota con el doble de rapidez.
+\end{ejemplo}
+
+\begin{observacion}[Choques relativistas: $\sqrt{s}$]
+Con $c=1$ y $p^{\mu}=(E,\vb{p})$, el invariante $s=(E_{1}+E_{2})^{2}-\abs{\vb{p}_{1}+\vb{p}_{2}}^{2}$
+vale lo mismo en todo sistema; en el CM ($\vb{p}_{1}+\vb{p}_{2}=\vb{0}$) es $E\cm=\sqrt{s}$,
+la energía disponible para crear partículas. Blanco fijo de masa $m$ (proyectil de igual masa):
+$s=(E_{\lab}+m)^{2}-p^{2}=2m^{2}+2mE_{\lab}$, luego $\sqrt s\simeq\sqrt{2mE_{\lab}}$ crece sólo como la raíz.
+Colisionador de haces opuestos: $\sqrt s=2E_{\text{haz}}$; en el LHC,
+$E_{\text{haz}}=6{,}8$\,TeV da $\sqrt s=13{,}6$\,TeV, que con blanco fijo de protones
+($m=0{,}938$\,GeV) exigiría $E_{\lab}=s/2m\approx10^{5}$\,TeV.
+\end{observacion}
+
+% =====================================================================
+\subsection{Problemas: choques frontales}
+% =====================================================================
+
+\begin{problema}{3}[Frontal, $m_{2}=3m_{1}$]
+\label{prob:3}
+Colisión elástica frontal entre $m_{1}$ y $m_{2}=3m_{1}$, con $m_{2}$ inicialmente en reposo
+en el \lab. Describirla en los sistemas \lab{} y \scm. Considerar después el caso
+completamente inelástico.
+\end{problema}
+
+\begin{resolucion}
+Sea $v_{1}=v$, $v_{2}=0$, $M=4m_{1}$, $\mu=\tfrac34m_{1}$.
+\begin{enumerate}
+  \item \emph{CM}: $V\cm=\dfrac{m_{1}v}{4m_{1}}=\dfrac v4$, que no cambia.
+  \item \emph{Sistema \scm}: $u_{1}=v-\frac v4=\frac34v$, $u_{2}=-\frac v4$; momentos
+        $q_{1}=m_{1}u_{1}=\mu v$, $q_{2}=-\mu v$. Elástico: $u_{1}'=-\frac34v$, $u_{2}'=\frac v4$.
+        Cada partícula invierte su velocidad sin cambiar su módulo.
+  \item \emph{Sistema \lab}: $v_{1}'=\frac v4-\frac34v$, $v_{2}'=\frac v4+\frac v4$, es decir,
+        \[
+          \resultado{v_{1}'=-\frac v2,\qquad v_{2}'=\frac v2} .
+        \]
+        Comprobación: $m_{1}(-\frac v2)+3m_{1}\frac v2=m_{1}v$, y
+        $\frac12m_{1}\frac{v^{2}}4+\frac12\,3m_{1}\frac{v^{2}}4=\frac12m_{1}v^{2}$.
+  \item \emph{Energías}: $K_{\lab}=\frac12m_{1}v^{2}$; la del CM es $\frac12MV\cm^{2}=\frac14K_{\lab}$
+        y la disponible $\frac12\mu v^{2}=\frac34K_{\lab}$.
+  \item \emph{Completamente inelástico} ($e=0$): $u_{i}'=0$, ambas quedan en reposo en el CM y en
+        el \lab{} se mueven juntas con $\resultado{v'=V\cm=v/4}$. Se pierde toda la energía disponible:
+        \[
+          \resultado{Q=\tfrac12\mu v^{2}=\tfrac34K_{\lab}} ,
+        \]
+        y el 25\,\% restante es la energía del CM, que no puede disiparse (\cref{fig:xt}).\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size=2 by 1,horizontal sep=10mm,y descriptions at=edge left},
+  oscuro,width=6.6cm,height=5.6cm,xmin=-2,xmax=2,ymin=-1.5,ymax=1.5,
+  xlabel={$t$},xtick={-2,-1,0,1,2},ytick={-1,0,1}]
+  \nextgroupplot[title={(a) Elástico},ylabel={$x$},
+    legend to name=leyxt,legend columns=3,legend style={/tikz/every even column/.append style={column sep=8pt}}]
+    \addplot[cian,domain=-2:0] {x}; \addlegendentry{$m_{1}$}
+    \addplot[rosa,line width=1.6pt,domain=-2:0] {0}; \addlegendentry{$m_{2}=3m_{1}$}
+    \addplot[texto,dashed,line width=0.8pt,domain=-2:2] {x/4}; \addlegendentry{CM}
+    \addplot[cian,domain=0:2] {-x/2};
+    \addplot[rosa,line width=1.6pt,domain=0:2] {x/2};
+    \node[punto,fill=ambar] at (axis cs:0,0) {};
+  \nextgroupplot[title={(b) Completamente inelástico}]
+    \addplot[cian,domain=-2:0] {x};
+    \addplot[rosa,line width=1.6pt,domain=-2:0] {0};
+    \addplot[texto,dashed,line width=0.8pt,domain=-2:2] {x/4};
+    \addplot[violeta,line width=1.6pt,domain=0:2] {x/4};
+    \node[punto,fill=ambar] at (axis cs:0,0) {};
+\end{groupplot}
+\node[anchor=north] at ($(group c1r1.south east)!0.5!(group c2r1.south west)+(0,-9mm)$) {\pgfplotslegendfromname{leyxt}};
+\end{tikzpicture}
+\caption{\Cref{prob:3} en el \lab{} (unidades $v=1$, choque en $t=0$, $x=0$). La
+pendiente de cada recta es la velocidad. El CM (discontinua) sigue la misma recta
+antes y después: en el CM, (a) las pendientes respecto de ella se invierten y (b) se
+anulan (la pareja unida, en violeta, viaja con el CM).}
+\label{fig:xt}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{problema}{4}[Partícula contra varilla]
+\label{prob:4}
+Una partícula $m$ con velocidad $v_{0}$ se mueve sobre una superficie horizontal lisa y
+choca frontalmente con el extremo de una varilla uniforme ($M$, $L$) en reposo, alineada
+con el movimiento y libre. Choque unidimensional con $0\le e<1$. En $t=0$ la
+partícula está en $x=0$ y la varilla ocupa $0\le x\le L$. (a) Posición y velocidad del CM
+antes del choque. (b) Velocidades tras el choque, usando el CM. (c) Energía cinética
+transformada.
+\end{problema}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \draw[eje] (-1.6,0) -- (6.2,0) node[anchor=north,peq] {$x$};
+  \fill[tenue!40!fondo] (0,0) rectangle (5,0.28);
+  \draw[texto!70,line width=0.5pt] (0,0) rectangle (5,0.28);
+  \fill[cian] (-0.17,0.17) circle (0.17);
+  \draw[vec,cian] (-1.35,0.75) -- (-0.35,0.75) node[midway,above,etiq,cian] {$\vb{v}_{0}$};
+  \node[etiq,cian,anchor=east] at (-0.42,0.17) {$m$};
+  \node[etiq,anchor=south] at (3.6,0.30) {$M$};
+  \draw[tenue,line width=0.4pt,|-|] (0,0.95) -- (5,0.95) node[midway,fill=fondo,etiq,inner sep=2pt] {$L$};
+  \foreach \x/\t in {0/{0},5/{L}} {\draw[tenue] (\x,0) -- (\x,-0.1) node[anchor=north,peq] {$\t$};}
+  \draw[ambar,line width=0.6pt] (1.875,0.08) -- (1.875,-0.1);
+  \node[punto,fill=ambar,inner sep=1.3pt] at (1.875,0) {};
+  \node[anchor=north,peq,text=ambar] at (1.875,-0.12) {$X\cm(0)$};
+\end{tikzpicture}
+\caption{\Cref{prob:4} en $t=0$ (dibujado con $M=3m$, para el que $X\cm(0)=3L/8$).}
+\label{fig:varilla}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{resolucion}
+Como el impacto es a lo largo del eje de la varilla, ésta sólo se traslada y se
+comporta como una partícula de masa $M$ con centro en $x=L/2$. Sea $\mu=\frac{mM}{m+M}$.
+\begin{enumerate}
+  \item[(a)] Para $t\le0$: $x_{m}=v_{0}t$, $x_{M}=L/2$, luego
+  \[
+    X\cm(t)=\frac{m\,v_{0}t+M\,L/2}{m+M},\qquad
+    \resultado{X\cm(0)=\frac{ML}{2(m+M)},\qquad V\cm=\frac{m\,v_{0}}{m+M}} .
+  \]
+  $V\cm$ es constante también después del choque (no hay fuerzas exteriores horizontales).
+  \item[(b)] \emph{En el CM}: $u_{1}=v_{0}-V\cm=\dfrac{Mv_{0}}{m+M}$, $u_{2}=-V\cm=-\dfrac{mv_{0}}{m+M}$.
+  Tras el choque $u_{i}'=-e\,u_{i}$, y de vuelta al \lab:
+  \[
+    v_{1}'=\frac{mv_{0}}{m+M}-e\,\frac{Mv_{0}}{m+M},\qquad
+    v_{2}'=\frac{mv_{0}}{m+M}+e\,\frac{mv_{0}}{m+M},
+  \]
+  \[
+    \resultado{v_{1}'=\frac{m-e\,M}{m+M}\,v_{0},\qquad v_{2}'=\frac{(1+e)\,m}{m+M}\,v_{0}} .
+  \]
+  La partícula rebota si $m<eM$ y sigue hacia delante si $m>eM$.
+  \item[(c)] Por el \cref{teo:frontal} con $v_{12}=v_{0}$:
+  \[
+    \resultado{Q=\frac{mM\,(1-e^{2})}{2(m+M)}\,v_{0}^{2}},\qquad
+    \frac{Q}{\frac12mv_{0}^{2}}=\frac{(1-e^{2})\,M}{m+M} .\qedhere
+  \]
+\end{enumerate}
+\end{resolucion}
+
+\begin{problema}{6}[Cuna de Newton con dos péndulos]
+\label{prob:6}
+Dos péndulos contiguos de masa $m$ y longitud $l$ oscilan en el vacío; $0<e<1$.
+En $t=0$ se separa uno de ellos hasta $\theta=\alpha$ con $\dot\theta=0$. Hallar, tras el
+primer choque, la amplitud de las oscilaciones y $\theta_{1}(t)$, $\theta_{2}(t)$.
+\end{problema}
+
+\begin{resolucion}
+Se mide $\theta_{i}$ desde la vertical, positivo en el sentido del impacto
+(\cref{fig:cuna}a): $\theta_{1}(0)=-\alpha$. Sea $\omega=\sqrt{g/l}$; se usa la
+aproximación de ángulos pequeños para $\theta(t)$.
+\begin{enumerate}
+  \item \emph{Antes del choque}: $\theta_{1}(t)=-\alpha\cos\omega t$; llega a la vertical en
+  $t_{c}=\dfrac{\pi}{2\omega}$ con $v_{0}=l\,\dot\theta_{1}(t_{c})=l\omega\alpha$
+  (exacto, por energía: $v_{0}=\sqrt{2gl(1-\cos\alpha)}=2\sqrt{gl}\,\sin\frac\alpha2$).
+  \item \emph{Choque} ($m_{1}=m_{2}$, $v_{2}=0$, $V\cm=v_{0}/2$) con \eqref{eq:frontal}:
+  \[
+    v_{1}'=\frac{1-e}{2}\,v_{0},\qquad v_{2}'=\frac{1+e}{2}\,v_{0} .
+  \]
+  \item \emph{Amplitudes}: por energía, $\frac12mv_{i}'^{2}=mgl(1-\cos A_{i})$, es decir,
+  $\sin\frac{A_{i}}2=\frac{1\mp e}{2}\sin\frac\alpha2$; para ángulos pequeños
+  \[
+    \resultado{A_{1}=\frac{1-e}{2}\,\alpha,\qquad A_{2}=\frac{1+e}{2}\,\alpha} .
+  \]
+  \item \emph{Movimiento}: ambos parten de la vertical con velocidad positiva en $t_{c}$:
+  \[
+    \resultado{\theta_{1}(t)=\frac{1-e}{2}\,\alpha\,\sin\omega(t-t_{c}),\qquad
+    \theta_{2}(t)=\frac{1+e}{2}\,\alpha\,\sin\omega(t-t_{c})},
+    \qquad t_{c}\le t\le t_{c}+\frac{\pi}{\omega}.
+  \]
+  Con el mismo periodo, ambos vuelven juntos a la vertical en $t_{c}+\pi/\omega$, donde
+  se produce el segundo choque (\cref{fig:cuna}b).
+  \item \emph{Energía perdida}: $\mu=m/2$, luego $Q=\frac12\frac m2(1-e^{2})v_{0}^{2}$, es decir,
+  $Q/E_{0}=(1-e^{2})/2$.\qedhere
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.95,baseline=(ta.base)]
+  \fill[tenue!40!fondo] (-1.4,0) rectangle (1.4,0.12);
+  \draw[texto!60,line width=0.4pt] (-1.4,0) -- (1.4,0);
+  \draw[aux] (-0.3,0) -- (-0.3,-3.0);
+  \draw[tenue!60,dash pattern=on 1.5pt off 1.5pt,line width=0.4pt] (-0.3,-3.3) circle (0.3);
+  \draw[texto!80,line width=0.6pt] (-0.3,0) -- ({-0.3-3.3*sin(35)},{-3.3*cos(35)});
+  \fill[cian] ({-0.3-3.3*sin(35)},{-3.3*cos(35)}) circle (0.3);
+  \draw[texto!80,line width=0.6pt] (0.3,0) -- (0.3,-3.0);
+  \fill[rosa] (0.3,-3.3) circle (0.3);
+  \draw[ambar,line width=0.6pt] (-0.3,-1.2) arc (-90:-125:1.2);
+  \node[etiq,ambar] at ({-0.3-1.55*sin(17)},{-1.55*cos(17)}) {$\alpha$};
+  \node[etiq,anchor=south east,inner sep=2pt] at ({-0.3-1.9*sin(35)},{-1.9*cos(35)}) {$l$};
+  \node[etiq,cian,anchor=east] at ({-0.65-3.3*sin(35)},{-3.3*cos(35)}) {$m$};
+  \node[etiq,rosa,anchor=west] at (0.65,-3.3) {$m$};
+  \draw[->,verde,line width=0.6pt] (0.95,-2.35) arc (-60:-30:1.1) node[anchor=west,etiq,verde,inner sep=2pt] {$+\theta$};
+  \node[etiq,anchor=south] (ta) at (0,0.35) {(a) Instante inicial};
+\end{tikzpicture}\hspace{8mm}%
+\begin{tikzpicture}[baseline=(tb.base)]
+\begin{axis}[oscuro,width=8.0cm,height=5.6cm,
+  xmin=0,xmax=4.712,ymin=-1.08,ymax=1.0,
+  xtick={0,1.5708,3.1416,4.712},xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
+  ytick={-1,0,0.25,0.75},yticklabels={$-1$,$0$,$\frac{1-e}{2}$,$\frac{1+e}{2}$},
+  xlabel={$\omega t$},ylabel={$\theta/\alpha$},legend pos=south east]
+  \addplot[cian,domain=0:1.5708,samples=60] {-cos(deg(x))};
+  \addlegendentry{$\theta_{1}$}
+  \addplot[rosa,domain=0:1.5708] {0};
+  \addlegendentry{$\theta_{2}$}
+  \addplot[cian,domain=1.5708:4.712,samples=80] {0.25*sin(deg(x-1.5708))};
+  \addplot[rosa,domain=1.5708:4.712,samples=80] {0.75*sin(deg(x-1.5708))};
+  \draw[aux] (axis cs:1.5708,-1.08) -- (axis cs:1.5708,1.0);
+  \draw[aux] (axis cs:4.712,-1.08) -- (axis cs:4.712,1.0);
+\end{axis}
+\node[etiq,anchor=south] (tb) at (3.2,4.75) {(b) $\theta_{i}(t)$ con $e=0{,}5$};
+\end{tikzpicture}
+\caption{\Cref{prob:6}. (a) Montaje: el péndulo izquierdo se suelta desde
+$\theta_{1}=-\alpha$. (b) Evolución (ángulos pequeños): tras el choque en $\omega t=\pi/2$
+(discontinua) ambos oscilan en fase con amplitudes $\frac{1\mp e}{2}\alpha$ y vuelven a
+chocar en $\omega t=3\pi/2$.}
+\label{fig:cuna}
+\end{figure}
+% ---------------------------------------------------------------------

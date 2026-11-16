@@ -1,0 +1,57 @@
+% =====================================================================
+\clearpage
+\section{Resumen operativo}
+\label{sec:resumen}
+% =====================================================================
+
+\begin{table}[!h]
+\centering
+\caption{Fórmulas del tema.}
+\label{tab:resumen}
+\small
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{@{}l l@{}}
+\toprule
+\color{cian}Situación & \color{cian}Resultado\\
+\midrule
+Dos cuerpos & $\mu=\frac{m_{1}m_{2}}{m_{1}+m_{2}}$,\ \ $\vb{r}_{1,2}=\Rcm\pm\frac{\mu}{m_{1,2}}\vb{r}$,\ \ $K=\frac12MV\cm^{2}+\frac12\mu v_{12}^{2}$\\
+Restitución & $v_{1}'-v_{2}'=-e(v_{1}-v_{2})$,\ \ $\pi_{\mathrm{rest}}=e\,\pi_{\mathrm{comp}}$\\
+Choque frontal & $v_{i}'=(1+e)V\cm-e\,v_{i}$\ \ (en el CM: $u_{i}'=-e\,u_{i}$)\\
+Energía perdida & $Q=\frac12\mu(1-e^{2})\,v_{12,n}^{2}$,\ \ $K_{\mathrm{disp}}=\frac12\mu v_{12}^{2}$\\
+\lab{} $\leftrightarrow$ \scm & $\Vcm=\vb{q}_{1}/m_{2}$,\ \ $\vb{p}_{1}'=\vb{q}_{1}'+\lambda\vb{q}_{1}$,\ \ $\vb{p}_{2}'=\vb{q}_{1}-\vb{q}_{1}'$,\ \ $q=\mu v_{1}$\\
+Landau elástico & $\beta=\frac{\pi-\theta}2$,\ \ $p_{2}'=2q\sin\frac\theta2$,\ \ $\tan\alpha=\frac{\sin\theta}{\lambda+\cos\theta}$\\
+Masas & $\lambda<1$: $\alpha\in[0,\pi]$;\ \ $\lambda=1$: $\alpha+\beta=\frac\pi2$;\ \ $\lambda>1$: $\sin\alpha_{\max}=\frac1\lambda$\\
+Energía cedida & $T_{2}'/T_{1}=\frac{4m_{1}m_{2}}{(m_{1}+m_{2})^{2}}\sin^{2}\frac\theta2$\\
+Landau inelástico & radio $eq$:\ \ $\tan\alpha=\frac{e\sin\theta}{\lambda+e\cos\theta}$,\ \ $\tan\beta=\frac{e\sin\theta}{1-e\cos\theta}$\\
+Oblicuo (liso) & $\sin\varphi=b/d$,\ \ $\beta=\varphi$;\ \ normal: frontal con $e$;\ \ tangencial: se conserva\\
+Rebote en plano & $v_{n}'=-e\,v_{n}$,\ \ $v_{t}'=v_{t}$,\ \ $h_{n+1}=e^{2}h_{n}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\caption{Mapa del seminario.}
+\label{tab:mapa}
+\small
+\begin{tabular}{@{}l l l@{}}
+\toprule
+\color{cian}Tipo & \color{cian}Problemas & \color{cian}Herramienta\\
+\midrule
+Choque frontal (CM) & 3, 4, 6 & \cref{teo:frontal}\\
+Diagrama de Landau & 8, 9 & \cref{teo:landau}, \cref{cor:casos}\\
+Choque oblicuo con $b$ & 2, 5 & \cref{prop:lisas}\\
+Rebotes y vuelos & 1, 7, 10 & \cref{prop:rebote}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{clave}[violeta]{Errores típicos}
+\begin{itemize}[leftmargin=1.3em]
+  \item Conservar $K$ en un choque inelástico; o no conservar $\vb{P}$ cuando no hay percusiones exteriores.
+  \item Conservar $\vb{P}$ en un rebote contra el suelo: el suelo da percusión; sólo se conserva $v_{t}$ si es liso.
+  \item Aplicar $e$ a las velocidades totales en un choque oblicuo: se aplica sólo a las componentes normales.
+  \item Confundir ángulos: $\theta$ (\scm) es el mismo para ambas partículas; $\alpha\neq\beta$ en el \lab.
+  \item Olvidar que la energía del CM, $\tfrac12MV\cm^{2}$, nunca se disipa.
+\end{itemize}
+\end{clave}

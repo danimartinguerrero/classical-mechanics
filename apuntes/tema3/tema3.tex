@@ -1,0 +1,86 @@
+% =====================================================================
+%  Mecánica I · Tema 3
+%  El problema de dos cuerpos. Colisiones
+%  Compilar:  latexmk -lualatex tema3.tex
+% =====================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{estilo-oscuro}
+
+\renewcommand{\cabeceraimpar}{Tema 3 · Dos cuerpos y colisiones}
+\renewcommand{\cabecerapar}{Mecánica I}
+
+\hypersetup{pdftitle={Tema 3. El problema de dos cuerpos. Colisiones},
+  pdfauthor={Daniel Martín Guerrero},pdfsubject={Mecánica I}}
+
+% ----- notación propia del tema ---------------------------------------
+\usetikzlibrary{decorations.pathreplacing,babel}
+\newcommand{\ext}{^{(\mathrm{ext})}}
+\newcommand{\inn}{^{(\mathrm{int})}}
+\newcommand{\cm}{_{\mathrm{CM}}}
+\newcommand{\Rcm}{\vb{R}\cm}
+\newcommand{\Vcm}{\vb{V}\cm}
+\newcommand{\vrel}{\vb{v}_{12}}
+\newcommand{\lab}{\textup{\textsc{lab}}}
+\newcommand{\scm}{\textup{\textsc{cm}}}
+
+\begin{document}
+
+% =====================================================================
+%  PORTADA
+% =====================================================================
+\begin{titlepage}
+\newgeometry{left=27mm,right=27mm,top=20mm,bottom=20mm}
+\pagecolor{fondo}\color{texto}
+\centering
+\includegraphics[width=0.30\textwidth]{figs/logo_usal.png}\par
+\vspace{6mm}
+{\color{tenue!60}\rule{\textwidth}{0.4pt}}\par
+\vspace{4mm}
+{\small\color{tenue}\textls[180]{\textsc{Facultad de Ciencias}}\quad·\quad
+ \textls[180]{\textsc{Grado en Física}}}\par
+\vspace{13mm}
+{\color{cian}\textls[220]{\textsc{Mecánica I}}}\par
+\vspace{2.2mm}
+{\small\color{tenue}\textls[200]{\textsc{Tema 3}}}\par
+\vspace{9mm}
+{\fontsize{29}{31}\selectfont\bfseries El problema de dos cuerpos.\\[1.5mm] Colisiones\par}
+\vspace{7mm}
+{\color{tenue}\rule{0.22\textwidth}{0.4pt}}\par
+\vspace{5mm}
+{\itshape Masa reducida · Percusión y coeficiente de restitución\\
+Sistemas {\upshape\lab{}} y {\upshape\scm{}} · Diagrama de Landau · Choques oblicuos y rebotes\par}
+\vfill
+\includegraphics[width=1.0\textwidth]{figs/portada.png}\par
+\vfill
+{\small
+$\displaystyle \mu=\frac{m_{1}m_{2}}{m_{1}+m_{2}},\qquad
+v_{1}'-v_{2}'=-e\,(v_{1}-v_{2}),\qquad
+\tan\alpha=\frac{\sin\theta}{m_{1}/m_{2}+\cos\theta}$\par}
+\vspace{9mm}
+{\color{tenue!60}\rule{\textwidth}{0.4pt}}\par
+\vspace{3mm}
+{\small
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r@{}}
+{\color{cian}\scriptsize\textls[200]{\textsc{Autor}}} &
+{\color{cian}\scriptsize\textls[200]{\textsc{Asignatura}}} &
+{\color{cian}\scriptsize\textls[200]{\textsc{Apuntes formalizados}}}\\[0.6mm]
+Daniel Martín Guerrero & Mecánica I (100810) & {\color{tenue}Salamanca, curso 2026/2027}\\
+ & {\color{tenue}Teoría y seminario de problemas} & \\
+\end{tabular*}}
+\restoregeometry
+\end{titlepage}
+
+% =====================================================================
+\setcounter{page}{2}
+\tableofcontents
+\clearpage
+
+\input{secciones/01-dos-cuerpos}
+\input{secciones/02-colisiones}
+\input{secciones/03-lab-cm}
+\input{secciones/04-oblicuas}
+\input{secciones/05-rebotes}
+\input{secciones/06-resumen}
+\input{secciones/07-referencias}
+
+\end{document}

@@ -1,0 +1,222 @@
+% =====================================================================
+\section{El problema de dos cuerpos}
+\label{sec:dos-cuerpos}
+% =====================================================================
+
+Es el sistema de partículas más sencillo y el único que, en general, se resuelve
+reduciéndolo a problemas de \emph{una} partícula. Notación: $M=m_{1}+m_{2}$,
+\[
+  \vb{r}\defeq\vb{r}_{12}=\vb{r}_{1}-\vb{r}_{2},\qquad
+  \vrel\defeq\dot{\vb{r}}=\vb{v}_{1}-\vb{v}_{2},\qquad
+  \Rcm=\frac{m_{1}\vb{r}_{1}+m_{2}\vb{r}_{2}}{M},\qquad \Vcm=\dot{\vb{R}}\cm .
+\]
+
+\begin{definicion}[Masa reducida]
+\label{def:mu}
+\begin{equation}
+  \resultado{\frac1\mu\defeq\frac1{m_{1}}+\frac1{m_{2}}
+  \quad\Longleftrightarrow\quad \mu=\frac{m_{1}m_{2}}{m_{1}+m_{2}}} ,
+  \qquad \mu<\min(m_{1},m_{2}).
+  \label{eq:mu}
+\end{equation}
+Si $m_{2}\gg m_{1}$, $\mu\simeq m_{1}$; si $m_{1}=m_{2}=m$, $\mu=m/2$.
+\end{definicion}
+
+\subsection{Desacoplamiento: CM y movimiento relativo}
+
+Las ecuaciones de movimiento, con $\vb{f}_{12}=-\vb{f}_{21}$ la fuerza interna,
+\begin{equation}
+  m_{1}\ddot{\vb{r}}_{1}=\vb{F}_{1}\ext+\vb{f}_{12},\qquad
+  m_{2}\ddot{\vb{r}}_{2}=\vb{F}_{2}\ext+\vb{f}_{21},
+  \label{eq:dos-cuerpos}
+\end{equation}
+están acopladas: $\vb{f}_{12}$ depende de $\vb{r}_{1}$ y de $\vb{r}_{2}$.
+
+\begin{teorema}[Desacoplamiento]
+\label{teo:desacoplamiento}
+Supóngase que
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+  \item la fuerza exterior total sólo depende de la posición del CM:
+        $\vb{F}_{1}\ext+\vb{F}_{2}\ext=\vb{F}\ext(\Rcm)$;
+  \item las fuerzas exteriores producen aceleraciones cuya diferencia sólo
+        depende de $\vb{r}$: $\dfrac{\vb{F}_{1}\ext}{m_{1}}-\dfrac{\vb{F}_{2}\ext}{m_{2}}=g(r)\,\vb{r}$.
+\end{enumerate}
+Entonces, con $\vb{f}_{12}=f(r)\,\uv{r}$ central, el problema se separa en dos
+problemas independientes de una partícula:
+\begin{equation}
+  \resultado{M\ddot{\vb{R}}\cm=\vb{F}\ext(\Rcm),\qquad
+  \mu\,\ddot{\vb{r}}=\vb{f}_{12}(\vb{r})+\mu\,g(r)\,\vb{r}} .
+  \label{eq:desacoplado}
+\end{equation}
+En particular, si el sistema está aislado: $\Vcm=\text{const}$ y $\mu\ddot{\vb{r}}=f(r)\,\uv{r}$.
+\end{teorema}
+
+\begin{proof}
+\begin{enumerate}
+  \item \emph{Suma} de \eqref{eq:dos-cuerpos}: $m_{1}\ddot{\vb{r}}_{1}+m_{2}\ddot{\vb{r}}_{2}=M\ddot{\vb{R}}\cm=\vb{F}_{1}\ext+\vb{F}_{2}\ext$, pues $\vb{f}_{12}+\vb{f}_{21}=\vb{0}$. Por (i), sólo aparece $\Rcm$.
+  \item \emph{Diferencia} de aceleraciones:
+  \[
+    \ddot{\vb{r}}=\ddot{\vb{r}}_{1}-\ddot{\vb{r}}_{2}
+    =\frac{\vb{F}_{1}\ext}{m_{1}}-\frac{\vb{F}_{2}\ext}{m_{2}}
+    +\Bigl(\frac1{m_{1}}+\frac1{m_{2}}\Bigr)\vb{f}_{12}
+    \overset{\text{(ii)}}{=}g(r)\,\vb{r}+\frac{\vb{f}_{12}}{\mu} .
+  \]
+  Multiplicando por $\mu$ se obtiene la segunda ecuación de \eqref{eq:desacoplado}.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposicion}[Vuelta a las partículas]
+\label{prop:posiciones}
+Resueltos $\Rcm(t)$ y $\vb{r}(t)$,
+\begin{gather}
+  \resultado{\vb{r}_{1}=\Rcm+\frac{\mu}{m_{1}}\,\vb{r},\qquad
+  \vb{r}_{2}=\Rcm-\frac{\mu}{m_{2}}\,\vb{r}} ,
+  \label{eq:posiciones}\\
+  \vb{v}_{1}=\Vcm+\frac{\mu}{m_{1}}\,\vrel,\qquad
+  \vb{v}_{2}=\Vcm-\frac{\mu}{m_{2}}\,\vrel .\notag
+\end{gather}
+\end{proposicion}
+
+\begin{proof}
+$\Rcm+\dfrac{m_{2}}{M}(\vb{r}_{1}-\vb{r}_{2})=\dfrac{m_{1}\vb{r}_{1}+m_{2}\vb{r}_{2}+m_{2}\vb{r}_{1}-m_{2}\vb{r}_{2}}{M}=\vb{r}_{1}$,
+y $\dfrac{m_{2}}{M}=\dfrac{\mu}{m_{1}}$. Análogo para $\vb{r}_{2}$; se deriva para las velocidades.
+\end{proof}
+
+El CM divide el segmento que une las partículas en razón inversa a las masas
+(\cref{fig:dos-cuerpos}): $\abs{\vb{r}_{1}-\Rcm}/\abs{\vb{r}_{2}-\Rcm}=m_{2}/m_{1}$.
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.25]
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (4.6,1.6);   % m1
+  \coordinate (B) at (1.6,3.4);   % m2
+  \coordinate (G) at (2.6,2.8);   % CM = (A+2B)/3
+  \draw[aux] (B) -- (A);
+  \draw[vec,cian] (O) -- (A) node[pos=0.55,below,etiq,cian,inner sep=4pt] {$\vb{r}_{1}$};
+  \draw[vec,rosa] (O) -- (B) node[pos=0.5,left,etiq,rosa,inner sep=4pt] {$\vb{r}_{2}$};
+  \draw[vec,texto] (O) -- (G) node[pos=0.5,below right,etiq,inner sep=2pt] {$\Rcm$};
+  \draw[vec,ambar,shorten >=2.6pt] (B) -- (A);
+  \node[etiq,ambar] at ($(B)!0.80!(A)+(-0.18,-0.31)$) {$\vb{r}$};
+  % llaves
+  \draw[decorate,decoration={brace,amplitude=4pt,raise=7pt},tenue] (B) -- (G)
+    node[midway,above right=9pt and 0pt,etiq,text=tenue,inner sep=1pt] {$(\mu/m_{2})\,r$};
+  \draw[decorate,decoration={brace,amplitude=4pt,raise=7pt},tenue] (G) -- (A)
+    node[midway,above right=9pt and 1pt,etiq,text=tenue,inner sep=1pt] {$(\mu/m_{1})\,r$};
+  % puntos
+  \fill[cian] (A) circle (0.10);
+  \fill[rosa] (B) circle (0.15);
+  \node[punto,inner sep=1.4pt] at (G) {};
+  \node[etiq,cian,anchor=west] at ($(A)+(0.14,0)$) {$m_{1}$};
+  \node[etiq,rosa,anchor=south east] at ($(B)+(-0.08,0.08)$) {$m_{2}$};
+  \draw[tenue,line width=0.35pt] (G) -- ++(-70:0.75) node[anchor=north,peq,inner sep=2pt] {CM};
+  \node[etiq,anchor=north east] at (O) {$O$};
+\end{tikzpicture}
+\caption{Posiciones en el problema de dos cuerpos. El CM está sobre el segmento
+que une las partículas y lo divide en razón $m_{2}:m_{1}$ (aquí $m_{2}=2m_{1}$);
+$\vb{r}=\vb{r}_{1}-\vb{r}_{2}$ apunta de $m_{2}$ a $m_{1}$.}
+\label{fig:dos-cuerpos}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\subsection{Momento lineal, angular y energía}
+
+En el sistema del CM ($\vb{r}_{i}'=\vb{r}_{i}-\Rcm$, $\vb{v}_{i}'=\vb{v}_{i}-\Vcm$), por \eqref{eq:posiciones},
+\begin{equation}
+  \vb{v}_{1}'=\frac{\mu}{m_{1}}\vrel,\quad \vb{v}_{2}'=-\frac{\mu}{m_{2}}\vrel
+  \quad\Longrightarrow\quad
+  \resultado{\vb{p}_{1}'=\mu\,\vrel=-\vb{p}_{2}'},\qquad \vb{P}'=\vb{0} .
+  \label{eq:momentos-cm}
+\end{equation}
+Los momentos de ambas partículas en el CM son opuestos y su módulo es el de una
+partícula de masa $\mu$ con la velocidad relativa.
+
+\begin{teorema}[König para dos cuerpos]
+\label{teo:konig2}
+\begin{equation}
+  \resultado{\vb{L}=\Rcm\times M\Vcm+\vb{r}\times\mu\vrel},\qquad
+  \resultado{K=\tfrac12MV\cm^{2}+\tfrac12\mu v_{12}^{2}} .
+  \label{eq:konig2}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Por König (Tema 2) basta calcular las partes internas con \eqref{eq:posiciones}:
+\begin{align*}
+  \vb{L}'&=\vb{r}_{1}'\times\vb{p}_{1}'+\vb{r}_{2}'\times\vb{p}_{2}'
+  =\frac{\mu}{m_{1}}\vb{r}\times\mu\vrel+\Bigl(-\frac{\mu}{m_{2}}\vb{r}\Bigr)\times(-\mu\vrel)\\
+  &=\mu^{2}\Bigl(\frac1{m_{1}}+\frac1{m_{2}}\Bigr)\vb{r}\times\vrel=\mu\,\vb{r}\times\vrel ,\\
+  K'&=\tfrac12m_{1}\Bigl(\frac{\mu}{m_{1}}\Bigr)^{2}v_{12}^{2}+\tfrac12m_{2}\Bigl(\frac{\mu}{m_{2}}\Bigr)^{2}v_{12}^{2}\\
+  &=\tfrac12\mu^{2}\Bigl(\frac1{m_{1}}+\frac1{m_{2}}\Bigr)v_{12}^{2}=\tfrac12\mu v_{12}^{2} .\qedhere
+\end{align*}
+\end{proof}
+
+\begin{clave}{Idea}
+El sistema equivale a \emph{dos partículas ficticias independientes}: una de masa $M$
+en $\Rcm$ y otra de masa $\mu$ en $\vb{r}$. Si está aislado, la primera es libre y la
+segunda describe el movimiento bajo una fuerza central $f(r)$ con centro fijo
+(\cref{fig:orbitas}); las órbitas reales son copias de la relativa, escaladas por
+$\mu/m_{1}$ y $-\mu/m_{2}$.
+\end{clave}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.92,
+  declare function={rr(\t)=1.6/(1+0.6*cos(\t));}]
+  % (a) órbitas respecto del CM
+  \draw[cian,line width=1.0pt,smooth,samples=160,domain=0:360]
+    plot ({2/3*rr(\x)*cos(\x)},{2/3*rr(\x)*sin(\x)});
+  \draw[rosa,line width=1.0pt,smooth,samples=160,domain=0:360]
+    plot ({-1/3*rr(\x)*cos(\x)},{-1/3*rr(\x)*sin(\x)});
+  \foreach \a in {40,115,215}{
+    \draw[tenue,line width=0.4pt]
+      ({2/3*rr(\a)*cos(\a)},{2/3*rr(\a)*sin(\a)}) -- ({-1/3*rr(\a)*cos(\a)},{-1/3*rr(\a)*sin(\a)});
+    \fill[cian] ({2/3*rr(\a)*cos(\a)},{2/3*rr(\a)*sin(\a)}) circle (0.075);
+    \fill[rosa] ({-1/3*rr(\a)*cos(\a)},{-1/3*rr(\a)*sin(\a)}) circle (0.105);
+  }
+  \node[punto,inner sep=1.3pt] at (0,0) {};
+  \node[etiq,cian,anchor=east] at (-2.75,0) {$m_{1}$};
+  \node[etiq,rosa,anchor=west] at (1.45,0) {$m_{2}$};
+  \node[etiq,anchor=south] at (-0.6,2.0) {(a) Respecto del CM};
+  % (b) problema equivalente
+  \begin{scope}[xshift=7.4cm]
+  \draw[ambar,line width=1.0pt,smooth,samples=160,domain=0:360]
+    plot ({rr(\x)*cos(\x)},{rr(\x)*sin(\x)});
+  \fill[texto!70] (0,0) circle (0.07);
+  \draw[vec,ambar!80,line width=0.7pt] (0,0) -- ({rr(250)*cos(250)},{rr(250)*sin(250)})
+    node[pos=0.55,anchor=east,etiq,inner sep=3pt] {$\vb{r}$};
+  \fill[ambar] ({rr(250)*cos(250)},{rr(250)*sin(250)}) circle (0.08);
+  \node[etiq,ambar,anchor=north,inner sep=4pt] at ({rr(250)*cos(250)},{rr(250)*sin(250)}) {$\mu$};
+  \node[peq,anchor=south] at (0,0.12) {centro fijo};
+  \node[etiq,anchor=south] at (-1.5,2.0) {(b) Problema equivalente};
+  \end{scope}
+\end{tikzpicture}
+\caption{Sistema aislado con atracción gravitatoria y $m_{2}=2m_{1}$.
+(a) Cada partícula recorre una elipse con foco en el CM; en todo instante ambas
+están alineadas con él (segmentos grises). (b) El movimiento relativo es el de
+una partícula de masa $\mu$ alrededor de un centro fijo: la elipse (a) de $m_{1}$ es
+esta escalada por $\mu/m_{1}=\tfrac23$, y la de $m_{2}$ por $-\mu/m_{2}=-\tfrac13$.}
+\label{fig:orbitas}
+\end{figure}
+% ---------------------------------------------------------------------
+
+\begin{ejemplo}[Sistema Tierra--Luna]
+\label{ej:tierra-luna}
+La fuerza exterior es la atracción del Sol, de masa $M_{\odot}$, situado en el origen:
+$\vb{F}_{i}\ext=-GM_{\odot}m_{i}\vb{r}_{i}/r_{i}^{3}$ ($i=T,L$). Como
+$r_{TL}\ll R$, se toma $r_{T}\simeq r_{L}\simeq R=\abs{\Rcm}$:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+  \item $\vb{F}_{T}\ext+\vb{F}_{L}\ext\simeq-\dfrac{GM_{\odot}}{R^{3}}(m_{T}\vb{r}_{T}+m_{L}\vb{r}_{L})=-\dfrac{GM_{\odot}M}{R^{3}}\,\Rcm$, que sólo depende de $\Rcm$;
+  \item $\dfrac{\vb{F}_{L}\ext}{m_{L}}-\dfrac{\vb{F}_{T}\ext}{m_{T}}\simeq-\dfrac{GM_{\odot}}{R^{3}}(\vb{r}_{L}-\vb{r}_{T})=-g\,\vb{r}_{TL}$, con $g\defeq GM_{\odot}/R^{3}\simeq\text{const}$.
+\end{enumerate}
+Por el \cref{teo:desacoplamiento},
+\[
+  M\ddot{\vb{R}}\cm=-\frac{GM_{\odot}M}{R^{3}}\Rcm,\qquad
+  \ddot{\vb{r}}_{TL}=-\frac{G(m_{T}+m_{L})}{r_{TL}^{3}}\vb{r}_{TL}-g\,\vb{r}_{TL}.
+\]
+El último término es una corrección de marea:
+$g\,r_{TL}^{3}/[G(m_{T}+m_{L})]=(M_{\odot}/M)(r_{TL}/R)^{3}\approx6\times10^{-3}$. Despreciándolo,
+el CM orbita el Sol y la Luna orbita la Tierra como dos problemas de Kepler independientes.
+\end{ejemplo}

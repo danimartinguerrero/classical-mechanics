@@ -1,0 +1,231 @@
+% =====================================================================
+%  Mecánica I · Tema 3 — Desarrollo simbólico (teoría y seminario)
+%  Compilar:  latexmk -lualatex tema3_simbolico.tex
+% =====================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{estilo-oscuro}
+
+\renewcommand{\cabeceraimpar}{Tema 3 · Desarrollo simbólico}
+\renewcommand{\cabecerapar}{Mecánica I}
+\hypersetup{pdftitle={Tema 3. El problema de dos cuerpos. Colisiones: desarrollo simbólico},
+  pdfauthor={Daniel Martín Guerrero},pdfsubject={Mecánica I}}
+
+\newcommand{\cm}{_{\mathrm{CM}}}
+\newcommand{\Rcm}{\vb{R}\cm}
+\newcommand{\Vcm}{\vb{V}\cm}
+\newcommand{\vrel}{\vb{v}_{12}}
+
+\titleformat{\section}
+  {\needspace{7\baselineskip}\normalfont\large\bfseries\color{violeta}}
+  {\thesection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{4.2ex plus 1ex}{1.8ex}
+\newcounter{paso}[section]
+\newcommand{\paso}[1]{\par\addvspace{2.2ex}\needspace{4\baselineskip}%
+  \refstepcounter{paso}\noindent{\color{cian}\bfseries\thepaso.\ \ #1}\quad\ignorespaces}
+\newcommand{\prob}[2]{\par\addvspace{3ex}\needspace{5\baselineskip}%
+  \noindent{\color{cian}\bfseries Problema #1.}\ \ {\color{tenue}#2}\nopagebreak}
+\setlength{\parindent}{0pt}
+\allowdisplaybreaks
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+{\Large\bfseries El problema de dos cuerpos. Colisiones\par}
+\vspace{1.2mm}
+{\small\color{tenue}Mecánica I · Tema 3 · \textsc{Desarrollo simbólico}\par}
+\vspace{2mm}
+{\color{regla}\rule{0.35\textwidth}{0.4pt}}
+\end{center}
+
+% =====================================================================
+\section{Dos cuerpos}
+% =====================================================================
+
+\paso{Desacoplamiento.}
+\begin{gather}
+  m_{1}\ddot{\vb{r}}_{1}=\vb{F}_{1}+\vb{f}_{12},\quad m_{2}\ddot{\vb{r}}_{2}=\vb{F}_{2}-\vb{f}_{12}
+  \ \Longrightarrow\ M\ddot{\vb{R}}\cm=\vb{F}_{1}+\vb{F}_{2}\\
+  \ddot{\vb{r}}=\frac{\vb{F}_{1}}{m_{1}}-\frac{\vb{F}_{2}}{m_{2}}+\Bigl(\frac1{m_{1}}+\frac1{m_{2}}\Bigr)\vb{f}_{12}\\
+  \resultado{\frac1\mu=\frac1{m_{1}}+\frac1{m_{2}}},\qquad
+  \text{aislado: }\resultado{M\ddot{\vb{R}}\cm=\vb{0},\quad \mu\ddot{\vb{r}}=f(r)\,\uv{r}}
+\end{gather}
+
+\paso{Posiciones y velocidades.}
+\begin{gather}
+  \Rcm+\frac{m_{2}}{M}(\vb{r}_{1}-\vb{r}_{2})=\vb{r}_{1},\qquad \frac{m_{2}}{M}=\frac{\mu}{m_{1}},\quad \frac{m_{1}}{M}=\frac{\mu}{m_{2}}\\
+  \resultado{\vb{r}_{1}=\Rcm+\frac{\mu}{m_{1}}\vb{r},\quad \vb{r}_{2}=\Rcm-\frac{\mu}{m_{2}}\vb{r}},\qquad
+  \vb{p}_{1}'=m_{1}\frac{\mu}{m_{1}}\vrel=\mu\vrel=-\vb{p}_{2}'
+\end{gather}
+
+\paso{Momento angular y energía cinética.}
+\begin{gather}
+  \vb{L}'=\frac{\mu}{m_{1}}\vb{r}\times\mu\vrel+\frac{\mu}{m_{2}}\vb{r}\times\mu\vrel=\mu^{2}\Bigl(\frac1{m_{1}}+\frac1{m_{2}}\Bigr)\vb{r}\times\vrel=\mu\,\vb{r}\times\vrel\\
+  K'=\frac12\frac{\mu^{2}}{m_{1}}v_{12}^{2}+\frac12\frac{\mu^{2}}{m_{2}}v_{12}^{2}=\frac12\mu v_{12}^{2}\\
+  \resultado{\vb{L}=\Rcm\times M\Vcm+\vb{r}\times\mu\vrel,\quad K=\tfrac12MV\cm^{2}+\tfrac12\mu v_{12}^{2}}
+\end{gather}
+
+\paso{Tierra--Luna.}
+\begin{gather}
+  \frac{\vb{F}_{L}}{m_{L}}-\frac{\vb{F}_{T}}{m_{T}}=-GM_{\odot}\Bigl(\frac{\vb{r}_{L}}{r_{L}^{3}}-\frac{\vb{r}_{T}}{r_{T}^{3}}\Bigr)
+  \overset{r_{T}\simeq r_{L}\simeq R}{\simeq}-\frac{GM_{\odot}}{R^{3}}\vb{r}_{TL}\\
+  \ddot{\vb{r}}_{TL}=-\frac{G(m_{T}+m_{L})}{r_{TL}^{3}}\vb{r}_{TL}-\frac{GM_{\odot}}{R^{3}}\vb{r}_{TL},\qquad
+  \frac{M_{\odot}}{m_{T}+m_{L}}\Bigl(\frac{r_{TL}}{R}\Bigr)^{3}\approx6\times10^{-3}
+\end{gather}
+
+% =====================================================================
+\section{Choque frontal}
+% =====================================================================
+
+\paso{Huygens--Newton.}
+\begin{gather}
+  m_{1}(w-v_{1})=-\pi_{c},\quad m_{2}(w-v_{2})=\pi_{c}\ \Longrightarrow\ v_{1}-v_{2}=\pi_{c}\Bigl(\frac1{m_{1}}+\frac1{m_{2}}\Bigr)=\frac{\pi_{c}}{\mu}\\
+  m_{1}(v_{1}'-w)=-e\pi_{c},\quad m_{2}(v_{2}'-w)=e\pi_{c}\ \Longrightarrow\ v_{1}'-v_{2}'=-\frac{e\pi_{c}}{\mu}\\
+  \resultado{v_{1}'-v_{2}'=-e(v_{1}-v_{2})}
+\end{gather}
+
+\paso{Método del CM.}
+\begin{gather}
+  u_{i}=v_{i}-V\cm,\quad m_{1}u_{1}+m_{2}u_{2}=0=m_{1}u_{1}'+m_{2}u_{2}',\quad u_{1}'-u_{2}'=-e(u_{1}-u_{2})\\
+  \Longrightarrow\ u_{i}'=-e\,u_{i}\ \Longrightarrow\ \resultado{v_{i}'=(1+e)V\cm-e\,v_{i}}\\
+  v_{1}'=\frac{(m_{1}-em_{2})v_{1}+(1+e)m_{2}v_{2}}{M},\quad
+  v_{2}'=\frac{(1+e)m_{1}v_{1}+(m_{2}-em_{1})v_{2}}{M}
+\end{gather}
+
+\paso{Energía.}
+\begin{gather}
+  K=\tfrac12MV\cm^{2}+\tfrac12\mu v_{12}^{2},\quad K'=\tfrac12MV\cm^{2}+\tfrac12\mu e^{2}v_{12}^{2}\\
+  \resultado{Q=\tfrac12\mu(1-e^{2})v_{12}^{2}},\qquad
+  v_{2}=0:\ \frac{Q}{K_{1}}=(1-e^{2})\frac{m_{2}}{M}
+\end{gather}
+
+\paso{Energía disponible relativista ($c=1$).}
+\begin{gather}
+  s=(E_{1}+E_{2})^{2}-\abs{\vb{p}_{1}+\vb{p}_{2}}^{2}=E\cm^{2}\\
+  \text{blanco fijo: }s=(E+m)^{2}-p^{2}=2m^{2}+2mE;\qquad \text{haces: }\sqrt s=2E_{\mathrm{haz}}
+\end{gather}
+
+% =====================================================================
+\section{Landau}
+% =====================================================================
+
+\paso{Cambio de sistema ($\vb{p}_{2}=\vb{0}$, $\lambda=m_{1}/m_{2}$).}
+\begin{gather}
+  \vb{p}_{i}=\vb{q}_{i}+m_{i}\Vcm,\quad \vb{q}_{2}=-m_{2}\Vcm=-\vb{q}_{1}\ \Longrightarrow\ \Vcm=\frac{\vb{q}_{1}}{m_{2}}\\
+  \resultado{\vb{p}_{1}=(1+\lambda)\vb{q}_{1},\quad \vb{p}_{1}'=\vb{q}_{1}'+\lambda\vb{q}_{1},\quad \vb{p}_{2}'=\vb{q}_{1}-\vb{q}_{1}'}\\
+  \frac{q_{1}^{2}}{2\mu}=\frac{q_{1}'^{2}}{2\mu}\Rightarrow q_{1}'=q_{1}=q=\mu v_{1}
+\end{gather}
+
+\paso{Ángulos.}
+\begin{gather}
+  \vb{q}_{1}'=q(\cos\theta,\sin\theta):\quad \vb{p}_{1}'=q(\lambda+\cos\theta,\sin\theta),\quad \vb{p}_{2}'=q(1-\cos\theta,-\sin\theta)\\
+  \resultado{\tan\alpha=\frac{\sin\theta}{\lambda+\cos\theta}},\quad
+  \tan\beta=\frac{\sin\theta}{1-\cos\theta}=\frac{2\sin\frac\theta2\cos\frac\theta2}{2\sin^{2}\frac\theta2}=\cot\frac\theta2\ \Rightarrow\ \resultado{\beta=\frac{\pi-\theta}{2}}\\
+  p_{2}'^{2}=q^{2}\bigl[(1-\cos\theta)^{2}+\sin^{2}\theta\bigr]=2q^{2}(1-\cos\theta)=4q^{2}\sin^{2}\tfrac\theta2\ \Rightarrow\ \resultado{p_{2}'=2q\sin\tfrac\theta2}
+\end{gather}
+
+\paso{Casos.}
+\begin{gather}
+  \lambda=1:\ \tan\alpha=\frac{2\sin\frac\theta2\cos\frac\theta2}{2\cos^{2}\frac\theta2}=\tan\frac\theta2\ \Rightarrow\ \resultado{\alpha=\tfrac\theta2,\ \alpha+\beta=\tfrac\pi2}\\
+  \od{}{\theta}\tan\alpha=\frac{1+\lambda\cos\theta}{(\lambda+\cos\theta)^{2}}=0\Rightarrow\cos\theta=-\frac1\lambda\\
+  \tan\alpha_{\max}=\frac{1}{\sqrt{\lambda^{2}-1}}\ \Rightarrow\ \resultado{\sin\alpha_{\max}=\frac{m_{2}}{m_{1}}}
+\end{gather}
+
+\paso{Energía cedida.}
+\begin{equation}
+  \frac{T_{2}'}{T_{1}}=\frac{p_{2}'^{2}/2m_{2}}{p_{1}^{2}/2m_{1}}=\frac{m_{1}}{m_{2}}\frac{4q^{2}\sin^{2}\frac\theta2}{(1+\lambda)^{2}q^{2}}
+  =\resultado{\frac{4m_{1}m_{2}}{(m_{1}+m_{2})^{2}}\sin^{2}\frac\theta2}
+\end{equation}
+
+% =====================================================================
+\section{Oblicuo y rebotes}
+% =====================================================================
+
+\paso{Esferas lisas.}
+\begin{gather}
+  m_{1}\Delta\vb{v}_{1}=-\pi\uv{n},\ m_{2}\Delta\vb{v}_{2}=\pi\uv{n}\ \Rightarrow\ \Delta v_{it}=0\\
+  v_{in}'=(1+e)V_{n}-e\,v_{in};\qquad \resultado{Q=\tfrac12\mu(1-e^{2})v_{12,n}^{2}}
+\end{gather}
+
+\paso{Plano fijo ($m_{2}\to\infty$).}
+\begin{gather}
+  V\cm\to0:\ \resultado{v_{n}'=-e\,v_{n},\ v_{t}'=v_{t}}\\
+  h_{n}=e^{2n}h,\quad T_{\infty}=\sqrt{\tfrac{2h}{g}}\Bigl(1+\frac{2e}{1-e}\Bigr)=\sqrt{\tfrac{2h}{g}}\,\frac{1+e}{1-e}
+\end{gather}
+
+% =====================================================================
+\section{Seminario}
+% =====================================================================
+
+\prob{1}{Caída con $F=kv^{2}$}
+\begin{gather}
+  w=v^{2}:\ m\dot v=mv\od{v}{s}=\frac m2\od{w}{s}=mg-kw\ \Rightarrow\ -\frac1k\ln\frac{mg-kw}{mg}=\frac{2s}{m}\\
+  \resultado{v=\sqrt{\frac{mg}{k}}\sqrt{1-\e^{-2ks/m}}}\\
+  \frac m2\od{w}{y}=-(mg+kw)\ \Rightarrow\ \frac1k\ln\frac{mg+kw_{h}}{mg}=\frac{2H}{m},\quad w_{h}=\frac{mg}{k}\bigl(1-\e^{-2kh/m}\bigr)\\
+  \resultado{H=\frac{m}{2k}\ln\bigl(2-\e^{-2kh/m}\bigr)}
+\end{gather}
+
+\prob{2}{Ángulo de difusión}
+\begin{gather}
+  \sin\varphi=\frac bd,\quad \uv{n}=(\cos\varphi,-\sin\varphi),\ \uv{t}=(\sin\varphi,\cos\varphi)\\
+  v_{1n}'=\frac{m_{1}-em_{2}}{M}v_{1}\cos\varphi,\ v_{2n}'=\frac{(1+e)m_{1}}{M}v_{1}\cos\varphi\\
+  v_{1x}'=\frac{v_{1}}{M}\bigl(m_{1}+m_{2}\sin^{2}\varphi-em_{2}\cos^{2}\varphi\bigr),\quad v_{1y}'=\frac{v_{1}}{M}(1+e)m_{2}\sin\varphi\cos\varphi\\
+  \resultado{\tan\alpha=\frac{(1+e)m_{2}\,b\sqrt{d^{2}-b^{2}}}{m_{1}d^{2}+m_{2}b^{2}-em_{2}(d^{2}-b^{2})}},\qquad \beta=\varphi
+\end{gather}
+
+\prob{3}{$m_{2}=3m_{1}$ en reposo}
+\begin{gather}
+  V\cm=\frac v4,\ u_{1}=\frac34v,\ u_{2}=-\frac v4\ \xrightarrow{e=1}\ u_{1}'=-\frac34v,\ u_{2}'=\frac v4\ \Rightarrow\ \resultado{v_{1}'=-\frac v2,\ v_{2}'=\frac v2}\\
+  e=0:\ \resultado{v'=\frac v4},\quad Q=\tfrac12\mu v^{2}=\tfrac12\cdot\tfrac34m_{1}v^{2}=\resultado{\tfrac34K}
+\end{gather}
+
+\prob{4}{Partícula y varilla}
+\begin{gather}
+  X\cm(t)=\frac{mv_{0}t+ML/2}{m+M},\quad \resultado{X\cm(0)=\frac{ML}{2(m+M)},\ V\cm=\frac{mv_{0}}{m+M}}\\
+  u_{1}=\frac{Mv_{0}}{m+M},\ u_{2}=-\frac{mv_{0}}{m+M}\ \Rightarrow\
+  \resultado{v_{1}'=\frac{m-eM}{m+M}v_{0},\ v_{2}'=\frac{(1+e)m}{m+M}v_{0}}\\
+  \resultado{Q=\frac{mM(1-e^{2})}{2(m+M)}v_{0}^{2}}
+\end{gather}
+
+\prob{5}{Energía liberada}
+\begin{equation}
+  Q=\tfrac12\mu(1-e^{2})v_{1}^{2}\cos^{2}\varphi,\quad \frac{\mu}{m_{1}}=\frac{m_{2}}{M}\ \Rightarrow\
+  \resultado{\frac{Q}{T_{1}}=\frac{m_{2}(1-e^{2})}{m_{1}+m_{2}}\Bigl(1-\frac{b^{2}}{d^{2}}\Bigr)}
+\end{equation}
+
+\prob{6}{Cuna de Newton}
+\begin{gather}
+  \theta_{1}=-\alpha\cos\omega t,\ t_{c}=\frac{\pi}{2\omega},\ v_{0}=l\omega\alpha\ \bigl(=2\sqrt{gl}\sin\tfrac\alpha2\bigr);\quad
+  v_{1}'=\frac{1-e}2v_{0},\ v_{2}'=\frac{1+e}2v_{0}\\
+  \tfrac12mv_{i}'^{2}=mgl(1-\cos A_{i})\ \Rightarrow\ \sin\frac{A_{i}}2=\frac{1\mp e}{2}\sin\frac\alpha2\\
+  \resultado{\theta_{i}(t)=\frac{1\mp e}{2}\,\alpha\,\sin\omega(t-t_{c})},\quad \frac{Q}{E_{0}}=\frac{1-e^{2}}{2}
+\end{gather}
+
+\prob{7}{Escalera}
+\begin{gather}
+  v_{\uparrow}=\sqrt{2gh},\quad v_{\downarrow}=\sqrt{2g(2h)},\quad v_{\uparrow}=e\,v_{\downarrow}\ \Rightarrow\ \resultado{e=\frac1{\sqrt2}}\\
+  u=\frac{h}{\sqrt{2h/g}+2\sqrt{h/g}}=\frac{\sqrt{gh}}{2+\sqrt2}
+\end{gather}
+
+\prob{8}{Detector, $m_{1}=m_{2}$}
+\begin{gather}
+  \lambda=1:\ \angle ACB=\tfrac\pi2,\ p_{1}'=p_{1}\cos\alpha=\tfrac23p_{1}\ \Rightarrow\ \resultado{\alpha=\arccos\tfrac23\simeq48{,}2^{\circ}}\\
+  \theta=2\alpha,\ \beta=41{,}8^{\circ},\ p_{2}'=\tfrac{\sqrt5}{3}p_{1}
+\end{gather}
+
+\prob{9}{Landau inelástico}
+\begin{gather}
+  \vb{P}'=\vb{0},\ \frac{q'^{2}}{2\mu}=\frac{q^{2}}{2\mu}-Q\ \Rightarrow\ \resultado{q'=eq},\ e^{2}=1-\frac{Q}{K_{\mathrm{disp}}}\\
+  \vb{p}_{1}'=q(\lambda+e\cos\theta,e\sin\theta),\ \vb{p}_{2}'=q(1-e\cos\theta,-e\sin\theta)\\
+  \resultado{\tan\alpha=\frac{e\sin\theta}{\lambda+e\cos\theta},\ \tan\beta=\frac{e\sin\theta}{1-e\cos\theta}}\\
+  \sin\alpha_{\max}=\frac e\lambda\ (\lambda>e),\quad \sin\beta_{\max}=e,\quad \lambda=1:\ \vb{p}_{1}'\cdot\vb{p}_{2}'=(1-e^{2})q^{2}>0
+\end{gather}
+
+\prob{10}{Mate tras un bote}
+\begin{gather}
+  v_{\uparrow}=\sqrt{2gH},\ v_{\downarrow}=\frac{v_{\uparrow}}{e},\ v_{0y}=\sqrt{\frac{2gH}{e^{2}}-2gh_{0}}=7{,}26\text{ m/s}\\
+  t_{1}=\frac{v_{\downarrow}-v_{0y}}{g}=0{,}237\text{ s},\ t_{2}=\frac{v_{\uparrow}}{g}=0{,}783\text{ s}\\
+  v_{x}=\frac{D}{t_{1}+t_{2}}=2{,}94\text{ m/s}\\
+  \resultado{v_{0}=\sqrt{v_{x}^{2}+v_{0y}^{2}}\simeq7{,}8\text{ m/s},\ 68^{\circ}\text{ bajo la horizontal}}
+\end{gather}
+
+\end{document}
