@@ -1,0 +1,304 @@
+\RequirePackage{fix-cm}
+% =====================================================================
+%  Mecánica I · Formulario (Temas 1–3), una cara
+%  Compilar:  latexmk -lualatex formulario.tex
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{estilo-oscuro}
+\usepackage{multicol}
+\hypersetup{pdftitle={Mecánica I. Formulario (Temas 1-3)},
+  pdfauthor={Daniel Martín Guerrero},pdfsubject={Mecánica I}}
+
+\newgeometry{left=5.5mm,right=5.5mm,top=6mm,bottom=5mm,includehead=false,includefoot=false}
+\pagestyle{empty}
+\setlength{\columnsep}{3.0mm}
+\setlength{\columnseprule}{0.3pt}
+\renewcommand{\columnseprulecolor}{\color{regla}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\newcommand{\fs}{\fontsize{7.4}{8.8}\selectfont
+  \abovedisplayskip=1.2pt plus 0.5pt\belowdisplayskip=1.2pt plus 0.5pt
+  \abovedisplayshortskip=0.6pt\belowdisplayshortskip=0.6pt
+  \setlength{\jot}{0.9pt}\thinmuskip=2mu\medmuskip=2.5mu plus 1mu\thickmuskip=3mu plus 2mu}
+% bloque de tema
+\newcommand{\T}[2]{\par\addvspace{2.2pt}{\color{#1}\sffamily\bfseries\small #2}\par
+  \vspace{0.4pt}{\color{#1}\hrule height 0.5pt}\vspace{1.4pt}}
+% subtítulo
+\newcommand{\Sb}[1]{\par\addvspace{1.6pt}{\color{cian}\bfseries #1}\enspace}
+\newcommand{\Sv}[1]{\par\addvspace{1.6pt}{\color{violeta}\bfseries #1}\enspace}
+\newcommand{\Sr}[1]{\par\addvspace{1.6pt}{\color{rosa}\bfseries #1}\enspace}
+\newcommand{\Sa}[1]{\par\addvspace{1.6pt}{\color{ambar}\bfseries #1}\enspace}
+\newcommand{\sth}{s_{\theta}}\newcommand{\cth}{c_{\theta}}
+\newcommand{\sph}{s_{\varphi}}\newcommand{\cph}{c_{\varphi}}
+\newcommand{\cm}{_{\mathrm{CM}}}
+\newcommand{\prom}[1]{\langle #1\rangle}
+\newcommand{\ud}{\uv{e}}
+\renewcommand{\resultado}[1]{{\setlength{\fboxsep}{1.5pt}\fcolorbox{tenue}{caja}{$#1$}}}
+
+\begin{document}
+\fs
+\begin{center}
+{\normalsize\bfseries Mecánica I\enspace{\color{tenue}·}\enspace Formulario}\enspace
+{\color{tenue}\footnotesize Temas 1--3: cinemática, sistemas de partículas, dos cuerpos y colisiones}
+\end{center}
+\vspace{-2.4mm}
+\begin{multicols}{3}
+\fs\raggedright
+% =====================================================================
+\T{cian}{1 · Cinemática y coordenadas}
+\Sb{Curvilíneas ortogonales} $(u_{1},u_{2},u_{3})$:
+\[
+  h_{i}=\Bigl|\pd{\vb{r}}{u_{i}}\Bigr|,\quad \ud_{i}=\frac1{h_{i}}\pd{\vb{r}}{u_{i}},\quad
+  \dd\vb{r}=\textstyle\sum h_{i}\,\dd u_{i}\,\ud_{i}
+\]
+\[
+  \dd S_{1}=h_{2}h_{3}\,\dd u_{2}\dd u_{3},\quad \dd V=h_{1}h_{2}h_{3}\,\dd^{3}u=\abs{J}\,\dd^{3}u
+\]
+\[
+  J=\pd{\vb{r}}{u_{1}}\cdot\Bigl(\pd{\vb{r}}{u_{2}}\times\pd{\vb{r}}{u_{3}}\Bigr)=\det\frac{\partial(x,y,z)}{\partial(u_{1},u_{2},u_{3})}
+\]
+
+\Sb{Cilíndricas} $(\rho,\varphi,z)$, $h=(1,\rho,1)$:\enspace $x=\rho\cph$, $y=\rho\sph$; $\rho=\sqrt{x^{2}+y^{2}}$, $\varphi=\arctan\frac yx$
+\[
+  \erho=\cph\ii+\sph\jj,\quad \ef=-\sph\ii+\cph\jj
+\]
+\[
+  \ii=\cph\erho-\sph\ef,\quad \jj=\sph\erho+\cph\ef
+\]
+\[
+  \dot{\ud}_{\rho}=\dot\varphi\,\ef,\quad \dot{\ud}_{\varphi}=-\dot\varphi\,\erho;\qquad
+  \vb{r}=\rho\,\erho+z\kk
+\]
+\[
+  \vb{v}=\dot\rho\,\erho+\rho\dot\varphi\,\ef+\dot z\,\kk
+\]
+\[
+  \vb{a}=(\ddot\rho-\rho\dot\varphi^{2})\,\erho+(\rho\ddot\varphi+2\dot\rho\dot\varphi)\,\ef+\ddot z\,\kk
+\]
+\[
+  \rho\ddot\varphi+2\dot\rho\dot\varphi=\tfrac1\rho\tfrac{\dd}{\dd t}(\rho^{2}\dot\varphi)
+\]
+\[
+  \dd\vb{\ell}=\dd\rho\,\erho+\rho\,\dd\varphi\,\ef+\dd z\,\kk,\qquad \dd V=\rho\,\dd\rho\,\dd\varphi\,\dd z
+\]
+\[
+  \dd S_{\rho}=\rho\,\dd\varphi\,\dd z,\quad \dd S_{\varphi}=\dd\rho\,\dd z,\quad \dd S_{z}=\rho\,\dd\rho\,\dd\varphi
+\]
+
+\Sb{Esféricas} $(r,\theta,\varphi)$, $h=(1,r,r\sth)$; $s_{\theta}\equiv\sin\theta$, $c_{\theta}\equiv\cos\theta$:
+\[
+  x=r\sth\cph,\quad y=r\sth\sph,\quad z=r\cth
+\]
+\[
+  r=\sqrt{x^{2}+y^{2}+z^{2}},\quad \varphi=\arctan\tfrac yx
+\]
+\[
+  \theta=\arctan\Bigl(\sqrt{x^{2}+y^{2}}\big/z\Bigr)=\arccos\tfrac zr
+\]
+\[
+\begin{aligned}
+  \er&=\sth\cph\,\ii+\sth\sph\,\jj+\cth\,\kk\\
+  \et&=\cth\cph\,\ii+\cth\sph\,\jj-\sth\,\kk\\
+  \ef&=-\sph\,\ii+\cph\,\jj
+\end{aligned}
+\]
+\[
+\begin{aligned}
+  \ii&=\sth\cph\,\er+\cth\cph\,\et-\sph\,\ef\\
+  \jj&=\sth\sph\,\er+\cth\sph\,\et+\cph\,\ef\\
+  \kk&=\cth\,\er-\sth\,\et
+\end{aligned}
+\]
+\[
+  \dot{\ud}_{r}=\dot\theta\,\et+\dot\varphi\sth\,\ef,\quad
+  \dot{\ud}_{\theta}=-\dot\theta\,\er+\dot\varphi\cth\,\ef
+\]
+\[
+  \dot{\ud}_{\varphi}=-\dot\varphi(\sth\,\er+\cth\,\et),\qquad \vb{r}=r\,\er
+\]
+\[
+  \vb{v}=\dot r\,\er+r\dot\theta\,\et+r\sth\dot\varphi\,\ef
+\]
+\[
+\begin{aligned}
+  a_{r}&=\ddot r-r\dot\theta^{2}-r\sth^{2}\dot\varphi^{2},\qquad
+  a_{\theta}=r\ddot\theta+2\dot r\dot\theta-r\sth\cth\dot\varphi^{2}\\
+  a_{\varphi}&=r\sth\ddot\varphi+2\sth\dot r\dot\varphi+2r\cth\dot\theta\dot\varphi
+\end{aligned}
+\]
+\[
+  \dd\vb{\ell}=\dd r\,\er+r\,\dd\theta\,\et+r\sth\,\dd\varphi\,\ef
+\]
+\[
+  \dd S_{r}=r^{2}\sth\,\dd\theta\dd\varphi,\ \dd S_{\theta}=r\sth\,\dd r\dd\varphi,\ \dd S_{\varphi}=r\,\dd r\dd\theta
+\]
+\[
+  \dd V=r^{2}\sth\,\dd r\dd\theta\dd\varphi,\quad \dd\Omega=\sth\,\dd\theta\dd\varphi,\quad \textstyle\oint\dd\Omega=4\pi
+\]
+
+\Sb{Intrínsecas (Frenet)} $s=\int\abs{\dot{\vb{r}}}\dd t$, $\utau=\od{\vb{r}}{s}=\tfrac{\vb{v}}{v}$, $\ub=\utau\times\un$:
+\[
+  \vb{a}=\dot v\,\utau+\frac{v^{2}}{R}\,\un,\quad a_{T}=\frac{\vb{v}\cdot\vb{a}}{v},\quad a_{N}=\frac{\abs{\vb{v}\times\vb{a}}}{v}
+\]
+\[
+  \kappa=\frac1R=\frac{\abs{\vb{v}\times\vb{a}}}{v^{3}},\quad \tors=\frac{(\vb{v}\times\vb{a})\cdot\dot{\vb{a}}}{\abs{\vb{v}\times\vb{a}}^{2}}
+\]
+\[
+  \od{\utau}{s}=\kappa\un,\qquad \od{\un}{s}=-\kappa\utau+\tors\ub,\qquad \od{\ub}{s}=-\tors\un
+\]
+Circular: $\vb{v}=\bm\omega\times\vb{r}$, $v=\omega R$, $a_{N}=\omega^{2}R=v^{2}/R$, $a_{T}=\dot\omega R$.
+Tiro parabólico: $y=x\tan\alpha-\frac{gx^{2}}{2v_{0}^{2}\cos^{2}\alpha}$, $D=\frac{v_{0}^{2}\sin2\alpha}{g}$,
+$H=\frac{v_{0}^{2}\sin^{2}\alpha}{2g}$, $t_{v}=\frac{2v_{0}\sin\alpha}{g}$; MRUA: $v^{2}=v_{0}^{2}+2a\Delta x$.
+
+\Sb{Operadores}
+\[
+  \grad f=\sum_{i}\frac{1}{h_{i}}\pd{f}{u_{i}}\ud_{i}
+\]
+\[
+  \lap f=\frac{1}{h_{1}h_{2}h_{3}}\sum_{i}\partial_{i}\Bigl(\frac{h_{1}h_{2}h_{3}}{h_{i}^{2}}\partial_{i}f\Bigr)
+\]
+\[
+  \div\vb{A}=\tfrac{1}{h_{1}h_{2}h_{3}}\bigl[\partial_{1}(h_{2}h_{3}A_{1})+\text{cícl.}\bigr]
+\]
+\[
+  \rot\vb{A}=\frac{1}{h_{1}h_{2}h_{3}}\begin{vmatrix}h_{1}\ud_{1}&h_{2}\ud_{2}&h_{3}\ud_{3}\\ \partial_{1}&\partial_{2}&\partial_{3}\\ h_{1}A_{1}&h_{2}A_{2}&h_{3}A_{3}\end{vmatrix}
+\]
+Cil.: $\grad f=\partial_{\rho}f\,\erho+\frac1\rho\partial_{\varphi}f\,\ef+\partial_{z}f\,\kk$,\
+$\div\vb{A}=\frac1\rho\partial_{\rho}(\rho A_{\rho})+\frac1\rho\partial_{\varphi}A_{\varphi}+\partial_{z}A_{z}$,\
+$\lap f=\frac1\rho\partial_{\rho}(\rho\,\partial_{\rho}f)+\frac1{\rho^{2}}\partial_{\varphi}^{2}f+\partial_{z}^{2}f$.\\
+Esf.: $\grad f=\partial_{r}f\,\er+\frac1r\partial_{\theta}f\,\et+\frac{1}{r\sth}\partial_{\varphi}f\,\ef$,\
+$\div\vb{A}=\frac1{r^{2}}\partial_{r}(r^{2}A_{r})+\frac{1}{r\sth}\partial_{\theta}(\sth A_{\theta})+\frac{1}{r\sth}\partial_{\varphi}A_{\varphi}$,\
+$\lap f=\frac1{r^{2}}\partial_{r}(r^{2}\partial_{r}f)+\frac{1}{r^{2}\sth}\partial_{\theta}(\sth\,\partial_{\theta}f)+\frac{1}{r^{2}\sth^{2}}\partial_{\varphi}^{2}f$.
+
+\Sb{Identidades}
+$\rot\grad f=\vb{0}$, $\div(\rot\vb{A})=0$, $\rot(\rot\vb{A})=\grad(\div\vb{A})-\lap\vb{A}$,
+$\div(f\vb{A})=f\div\vb{A}+\vb{A}\cdot\grad f$, $\rot(f\vb{A})=f\rot\vb{A}+\grad f\times\vb{A}$;
+$\div\vb{r}=3$, $\rot\vb{r}=\vb{0}$, $\grad f(r)=f'(r)\,\er$, $\grad\frac1r=-\frac{\er}{r^{2}}$, $\div\frac{\er}{r^{2}}=0$ ($r\neq0$).
+$\vb{a}\times(\vb{b}\times\vb{c})=\vb{b}(\vb{a}\cdot\vb{c})-\vb{c}(\vb{a}\cdot\vb{b})$;
+$\vb{a}\cdot(\vb{b}\times\vb{c})=\varepsilon_{ijk}a_{i}b_{j}c_{k}=\det[\vb{a},\vb{b},\vb{c}]$;
+$(\vb{b}\times\vb{c})_{i}=\varepsilon_{ijk}b_{j}c_{k}$;
+$\varepsilon_{ijk}\varepsilon_{ilm}=\delta_{jl}\delta_{km}-\delta_{jm}\delta_{kl}$, $\varepsilon_{ijk}\varepsilon_{ijl}=2\delta_{kl}$.
+
+\Sb{Teoremas integrales}
+$\int_{A}^{B}\grad f\cdot\dd\vb{r}=f(B)-f(A)$;\ Gauss: $\oint_{\partial V}\vb{A}\cdot\dd\vb{S}=\int_{V}\div\vb{A}\,\dd V$;\
+Stokes: $\oint_{\partial S}\vb{A}\cdot\dd\vb{r}=\int_{S}(\rot\vb{A})\cdot\dd\vb{S}$.
+Conservativo: $\rot\vb{F}=\vb{0}$ (simpl.\ conexo) $\Leftrightarrow\oint\vb{F}\cdot\dd\vb{r}=0\Leftrightarrow\vb{F}=-\grad V$,
+$V(\vb{r})=-\int_{\vb{r}_{0}}^{\vb{r}}\vb{F}\cdot\dd\vb{r}'$.
+
+% =====================================================================
+\T{violeta}{2 · Sistemas de partículas}
+\Sv{CM}
+$M=\sum m_{\alpha}=\int\dd m$, $\dd m=\lambda\,\dd\ell=\sigma\,\dd S=\rho\,\dd V$;\enspace
+$\vb{R}=\frac1M\sum m_{\alpha}\vb{r}_{\alpha}=\frac1M\int\vb{r}\,\dd m$. Simetría: el CM está en todo plano/eje de simetría.\\
+{\color{tenue}Distancias del CM (al centro o a la base):}
+arco $2\alpha$: $\frac{R\sin\alpha}{\alpha}$ (semicircunf.\ $\frac{2R}{\pi}$);
+sector $2\alpha$: $\frac{2R\sin\alpha}{3\alpha}$ (semicírculo $\frac{4R}{3\pi}$);
+casquete hemisf.\ $\frac R2$; semiesfera maciza $\frac{3R}{8}$;
+cono macizo $\frac h4$; sup.\ cónica y triángulo $\frac h3$ (desde la base).
+
+\Sv{Leyes}
+$\vb{P}=M\vb{V}$, $\dot{\vb{P}}=\vb{F}^{\mathrm{ext}}$;\enspace
+$\vb{L}_{O}=\vb{R}\times M\vb{V}+\sum\vb{r}_{\alpha}'\times m_{\alpha}\vb{v}_{\alpha}'$,\
+$\dot{\vb{L}}_{Q}=\bm\tau_{Q}^{\mathrm{ext}}$ ($Q$ fijo o CM);\enspace
+König: $T=\tfrac12MV^{2}+T'$;\enspace
+$W_{AB}=T_{B}-T_{A}$;\
+$E=T+\sum_{\alpha<\beta}V_{\alpha\beta}(r_{\alpha\beta})+V^{\mathrm{ext}}$;\
+$\vb{F}_{\alpha}=-\grad_{\alpha}V$.
+
+\Sv{1D}
+$E=\tfrac12m\dot x^{2}+V(x)$, $t=\int\frac{\dd x}{\sqrt{2(E-V)/m}}$; equilibrio $V'(x_{0})=0$, estable si $V''>0$,
+$\omega^{2}=V''(x_{0})/m$.
+
+\Sv{Fuerzas}
+Peso $V=mgz$; muelle $V=\frac12k(\ell-\ell_{0})^{2}$; gravitatoria $\vb{F}=-\frac{GMm}{r^{2}}\er$, $V=-\frac{GMm}{r}$
+(esfera: fuera, como puntual); rozamiento seco $f\le\mu N$; viscoso $-b\vb{v}$; cuadrático $-kv^{2}\,\utau$.
+
+\Sv{Masa variable}
+$m\dot{\vb{v}}=\vb{F}^{\mathrm{ext}}+\dot m\,\vb{u}$ ($\vb{u}$: velocidad de la masa intercambiada \emph{relativa} al cuerpo).
+Cohete vertical ($\abs{\vb{u}}=u$ hacia atrás): $m\dot v=-\dot m\,u-mg\Rightarrow v=v_{0}+u\ln\frac{m_{0}}{m}-gt$;
+Tsiolkovski $\Delta v=u\ln\frac{m_{0}}{m_{f}}$; $m=m_{0}-\alpha t$.
+
+\Sv{Virial}
+$\prom{A}=\lim\frac1\tau\int_{0}^{\tau}A\,\dd t$;\
+$\prom{T}=-\tfrac12\bigl\langle\sum\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}\bigr\rangle$;\
+$V(\lambda\vb{r})=\lambda^{n}V\Rightarrow\vb{r}\cdot\grad V=nV$:\
+$\resultado{2\prom{T}=n\prom{V}}$, $\prom{T}=\frac{n}{n+2}E$, $\prom{V}=\frac{2}{n+2}E$
+($n=2$: $\prom{T}=\prom{V}=\frac E2$; $n=-1$: $E=-\prom{T}$).
+
+\Sv{Pappus--Guldin}
+$A=2\pi\bar y\,L$ (curva),\ \ $V=2\pi\bar y\,A$ (región); toro: $A=4\pi^{2}Rr$, $V=2\pi^{2}Rr^{2}$.
+
+% =====================================================================
+\T{rosa}{3 · Dos cuerpos y colisiones}
+\Sr{Dos cuerpos}
+$\mu=\frac{m_{1}m_{2}}{m_{1}+m_{2}}$, $\vb{r}=\vb{r}_{1}-\vb{r}_{2}$:\
+$\vb{r}_{1}=\vb{R}+\frac{\mu}{m_{1}}\vb{r}$, $\vb{r}_{2}=\vb{R}-\frac{\mu}{m_{2}}\vb{r}$; aislado: $\mu\ddot{\vb{r}}=f(r)\,\er$;\
+$\vb{L}=\vb{R}\times M\vb{V}+\mu\,\vb{r}\times\vb{v}_{12}$, $K=\frac12MV^{2}+\frac12\mu v_{12}^{2}$; en el CM $\vb{p}_{1}'=\mu\vb{v}_{12}=-\vb{p}_{2}'$.
+
+\Sr{Choque}
+$\bm\pi=\int\vb{F}\dd t=\Delta\vb{p}$ ($\vb{P}$ se conserva salvo percusiones exteriores);\
+$\resultado{v_{1}'-v_{2}'=-e(v_{1}-v_{2})}$, $\pi_{\mathrm{comp}}=\mu v_{12}$, $\pi_{\mathrm{rest}}=e\,\pi_{\mathrm{comp}}$.\\
+Frontal: $\resultado{v_{i}'=(1+e)V\cm-e\,v_{i}}$ ($u_{i}'=-e\,u_{i}$ en el CM);\
+$v_{2}=0$: $v_{1}'=\frac{m_{1}-em_{2}}{M}v_{1}$, $v_{2}'=\frac{(1+e)m_{1}}{M}v_{1}$;\
+$\resultado{Q=\tfrac12\mu(1-e^{2})v_{12}^{2}}$, $K_{\mathrm{disp}}=\tfrac12\mu v_{12}^{2}$, $\frac{Q}{K_{1}}=(1-e^{2})\frac{m_{2}}{M}$;
+$e=1$, $m_{1}=m_{2}$: intercambian velocidades; $e=0$: $v'=V\cm$.
+
+\Sr{LAB$\leftrightarrow$CM} ($\vb{p}_{2}=\vb{0}$, $\lambda=\frac{m_{1}}{m_{2}}$)\
+$\vb{V}\cm=\frac{\vb{q}_{1}}{m_{2}}$, $q=\mu v_{1}$, $\vb{p}_{1}=(1+\lambda)\vb{q}_{1}$, $\vb{p}_{1}'=\vb{q}_{1}'+\lambda\vb{q}_{1}$, $\vb{p}_{2}'=\vb{q}_{1}-\vb{q}_{1}'$.\\
+Landau ($e=1$): $\beta=\frac{\pi-\theta}{2}$, $p_{2}'=2q\sin\frac\theta2$, $\resultado{\tan\alpha=\frac{\sin\theta}{\lambda+\cos\theta}}$,
+$p_{1}'^{2}=q^{2}(1+\lambda^{2}+2\lambda\cos\theta)$.
+$\lambda<1$: $\alpha\in[0,\pi]$; $\lambda=1$: $\alpha=\frac\theta2$, $\alpha+\beta=\frac\pi2$, $p_{1}'=p_{1}\cos\alpha$, $p_{2}'=p_{1}\cos\beta$;
+$\lambda>1$: $\sin\alpha_{\max}=\frac{m_{2}}{m_{1}}$ ($\cos\theta=-\frac1\lambda$).
+$\frac{T_{2}'}{T_{1}}=\frac{4m_{1}m_{2}}{M^{2}}\sin^{2}\frac\theta2=\frac{4m_{1}m_{2}}{M^{2}}\cos^{2}\beta$.\\
+Inelástico: $q'=eq$, $\tan\alpha=\frac{e\sin\theta}{\lambda+e\cos\theta}$, $\tan\beta=\frac{e\sin\theta}{1-e\cos\theta}$, $Q=(1-e^{2})K_{\mathrm{disp}}$.
+
+\Sr{Oblicuo y rebotes}
+Esferas lisas: $\sin\varphi=\frac{b}{R_{1}+R_{2}}$; normal: frontal con $e$; tangencial se conserva; $\beta=\varphi$;
+$Q=\frac12\mu(1-e^{2})(\vb{v}_{12}\cdot\un)^{2}$.
+Suelo: $v_{n}'=-e\,v_{n}$, $v_{t}'=v_{t}$; $h_{n+1}=e^{2}h_{n}$, $e=\sqrt{h'/h}$, $T_{\infty}=\sqrt{\frac{2h}{g}}\,\frac{1+e}{1-e}$.
+Relativista ($c=1$): $s=(E_{1}+E_{2})^{2}-\abs{\vb{p}_{1}+\vb{p}_{2}}^{2}=E\cm^{2}$; blanco fijo $\sqrt s\simeq\sqrt{2mE}$; haces $\sqrt s=2E$.
+
+% =====================================================================
+\T{ambar}{Matemáticas para problemas}
+\Sa{Integrales}
+\vspace{-1pt}
+\[
+\begin{gathered}
+  \textstyle\int\frac{\dd x}{a^{2}+x^{2}}=\frac1a\arctan\frac xa\\[1.6pt]
+  \textstyle\int\frac{\dd x}{\sqrt{a^{2}-x^{2}}}=\arcsin\frac xa\\[1.6pt]
+  \textstyle\int\frac{\dd x}{a^{2}-x^{2}}=\frac1a\operatorname{artanh}\frac xa=\frac1{2a}\ln\Bigl|\frac{a+x}{a-x}\Bigr|\\[1.6pt]
+  \textstyle\int\frac{\dd x}{\sqrt{x^{2}\pm a^{2}}}=\ln\bigl|x+\sqrt{x^{2}\pm a^{2}}\bigr|\\[1.6pt]
+  \textstyle\int\frac{x\,\dd x}{a^{2}\pm x^{2}}=\pm\frac12\ln|a^{2}\pm x^{2}|\\[1.6pt]
+  \textstyle\int\frac{x\,\dd x}{\sqrt{a^{2}\pm x^{2}}}=\pm\sqrt{a^{2}\pm x^{2}}\\[1.6pt]
+  \textstyle\int\frac{\dd x}{(x^{2}+a^{2})^{3/2}}=\frac{x}{a^{2}\sqrt{x^{2}+a^{2}}}\\[1.6pt]
+  \textstyle\int\frac{x\,\dd x}{(x^{2}+a^{2})^{3/2}}=\frac{-1}{\sqrt{x^{2}+a^{2}}}\\[1.6pt]
+  \textstyle\int\ln x\,\dd x=x\ln x-x\\[1.6pt]
+  \textstyle\int\sqrt{a^{2}-x^{2}}\,\dd x=\tfrac12\Bigl[x\sqrt{a^{2}-x^{2}}+a^{2}\arcsin\frac xa\Bigr]\\[1.6pt]
+  \textstyle\int\sqrt{1+x^{2}}\,\dd x=\tfrac12\Bigl[x\sqrt{1+x^{2}}+\operatorname{arsinh}x\Bigr]\\[1.6pt]
+  \textstyle\int\sin^{2}x\,\dd x=\frac x2-\frac{\sin2x}{4}\\[1.6pt]
+  \textstyle\int\cos^{2}x\,\dd x=\frac x2+\frac{\sin2x}{4}\\[1.6pt]
+  \textstyle\int\sin^{n}x\cos x\,\dd x=\frac{\sin^{n+1}x}{n+1}\\[1.6pt]
+  \textstyle\int\sin^{3}x\,\dd x=-\cos x+\frac{\cos^{3}x}{3}\\[1.6pt]
+  \textstyle\int x\,\e^{ax}\dd x=\e^{ax}\Bigl(\frac xa-\frac1{a^{2}}\Bigr)\\[1.6pt]
+  \textstyle\int\tan x\,\dd x=-\ln|\cos x|
+\end{gathered}
+\]
+
+$\int_{0}^{\pi}\sin\theta\,\dd\theta=2$, $\int_{0}^{\pi/2}\sin\theta\cos\theta\,\dd\theta=\frac12$, $\int_{0}^{\pi}\sin^{3}\theta\,\dd\theta=\frac43$,
+$\int_{0}^{2\pi}\sin^{2}=\int_{0}^{2\pi}\cos^{2}=\pi$, $\int_{0}^{\infty}\e^{-ax^{2}}\dd x=\frac12\sqrt{\frac\pi a}$, $\int_{0}^{\infty}x^{n}\e^{-ax}\dd x=\frac{n!}{a^{n+1}}$.
+
+\Sa{EDO}
+$\ddot x+\omega^{2}x=0\Rightarrow x=A\cos(\omega t+\delta)$;\
+$\dot v=-\gamma v\Rightarrow v=v_{0}\e^{-\gamma t}$;\
+$m\dot v=mg-kv^{2}\Rightarrow v=v_{L}\tanh\frac{gt}{v_{L}}$, $v_{L}=\sqrt{mg/k}$;\
+truco $\ddot x=v\od{v}{x}=\frac12\od{(v^{2})}{x}$ (EDO lineal en $w=v^{2}$);\
+$\dot y=a-by\Rightarrow y=\frac ab+(y_{0}-\frac ab)\e^{-bt}$.
+
+\Sa{Trigonometría y aproximaciones}
+$\sin2x=2\sin x\cos x$, $\cos2x=1-2\sin^{2}x$, $\sin^{2}\frac x2=\frac{1-\cos x}{2}$, $\cos^{2}\frac x2=\frac{1+\cos x}{2}$,
+$\tan\frac x2=\frac{\sin x}{1+\cos x}$, $1+\tan^{2}x=\frac{1}{\cos^{2}x}$, $\cosh^{2}-\sinh^{2}=1$;\
+$(1+x)^{n}\simeq1+nx$, $\e^{x}\simeq1+x+\frac{x^{2}}2$, $\ln(1+x)\simeq x-\frac{x^{2}}2$, $\sin x\simeq x-\frac{x^{3}}6$, $\cos x\simeq1-\frac{x^{2}}2$;
+$\sum_{n\ge0}e^{n}=\frac1{1-e}$; $f(\vb{r}+\dd\vb{r})\simeq f+\grad f\cdot\dd\vb{r}$.
+\end{multicols}
+\end{document}
