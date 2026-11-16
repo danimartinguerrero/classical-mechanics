@@ -40,41 +40,30 @@ $\dd V=2\pi y\,\dd A$. Integrando, $V=2\pi\int_{D}y\,\dd A=2\pi\bar y\,A$.
 % ---------------------------------------------------------------------
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=1.0,baseline=(tita.base)]
-  % (a) región girando alrededor del eje x
-  \draw[eje] (-0.3,0) -- (4.6,0) node[anchor=west,peq,inner sep=2pt]{eje};
-  \fill[cian,opacity=0.18] plot[smooth cycle,tension=0.8] coordinates {(1.0,1.25) (2.0,2.05) (3.3,1.85) (3.5,1.1) (2.3,0.75)};
-  \draw[cian,line width=0.9pt] plot[smooth cycle,tension=0.8] coordinates {(1.0,1.25) (2.0,2.05) (3.3,1.85) (3.5,1.1) (2.3,0.75)};
-  \draw[cian!45!fondo,line width=0.6pt,dash pattern=on 2pt off 2pt] plot[smooth cycle,tension=0.8] coordinates {(1.0,-1.25) (2.0,-2.05) (3.3,-1.85) (3.5,-1.1) (2.3,-0.75)};
-  \coordinate (G) at (2.35,1.4);
-  \draw[violeta,line width=0.6pt,dash pattern=on 3pt off 2pt] (2.35,0) ellipse[x radius=0.22,y radius=1.4];
-  \draw[aux] (G) -- (2.35,0);
-  \node[punto,fill=violeta,inner sep=1.5pt] at (G) {};
-  \node[violeta,font=\small,anchor=south west,inner sep=2pt] at (G) {$G$};
-  \node[violeta,font=\footnotesize,anchor=east,inner sep=4pt] at (2.13,0.6) {$\bar y$};
-  \node[cian,font=\small,anchor=south,inner sep=3pt] at (2.0,2.05) {$A$};
-  \node[violeta,font=\footnotesize,anchor=north,inner sep=3pt] at (2.35,-2.1) {$2\pi\bar y$};
-  \node[etiq,anchor=south] (tita) at (2.1,2.65) {(a) $V=2\pi\bar y\,A$};
-\end{tikzpicture}\hspace{12mm}%
-\begin{tikzpicture}[scale=1.0,baseline=(titb.base)]
-  % (b) toro: círculo generatriz y trayectoria de su centro
-  \def\Rr{1.75}\def\rr{0.55}
-  \draw[eje] (0,-1.6) -- (0,1.9) node[anchor=south,peq,inner sep=2pt]{eje};
-  \draw[violeta,line width=0.6pt,dash pattern=on 3pt off 2pt] (0,0) ellipse[x radius=\Rr,y radius=0.5];
-  \draw[cian!45!fondo,line width=0.7pt,dash pattern=on 2pt off 2pt] (-\Rr,0) circle (\rr);
-  \draw[cian,line width=0.9pt,fill=cian,fill opacity=0.15] (\Rr,0) circle (\rr);
-  \draw[aux] (0,0) -- (\Rr,0);
-  \node[punto,fill=violeta,inner sep=1.4pt] at (\Rr,0) {};
-  \node[peq,anchor=south,inner sep=3pt] at ({\Rr/2},0) {$R$};
-  \draw[cian,line width=0.6pt] (\Rr,0) -- ({\Rr+\rr*cos(-50)},{\rr*sin(-50)});
-  \node[cian,font=\footnotesize,anchor=north west,inner sep=1pt] at ({\Rr+\rr*cos(-50)},{\rr*sin(-50)}) {$r$};
-  \node[violeta,font=\footnotesize,anchor=north east,inner sep=2pt] at (-0.9,-0.45) {$2\pi R$};
-  \node[etiq,anchor=south] (titb) at (0,2.65) {(b) Toro};
+\input{figs/pappus_coords.tex}%
+\begin{tikzpicture}[baseline=(tita.base)]
+  \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=5.2cm]{figs/pappus_a.png}};
+  \node[etiq,anchor=south east,inner sep=2pt,text=foro] at \papAG {$G$};
+  \node[etiq,anchor=center,text=texto] at \papAA {$A$};
+  \node[etiq,anchor=east,inner sep=3pt,text=foro] at \papAybar {$\bar y$};
+  \node[etiq,anchor=east,inner sep=4pt,text=foro] at \papAruta {$2\pi\bar y$};
+  \node[peq,anchor=west,inner sep=3pt] at \papAeje {eje};
+  \node[etiq,anchor=south] (tita) at (2.6,{\papAh+0.25}) {(a) $V=2\pi\bar y\,A$};
+\end{tikzpicture}\hspace{8mm}%
+\begin{tikzpicture}[baseline=(titb.base)]
+  \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=6.6cm]{figs/pappus_b.png}};
+  \node[peq,anchor=south,inner sep=2pt] at \papBeje {eje};
+  \node[etiq,anchor=south west,inner sep=2pt] at \papBRm {$R$};
+  \node[etiq,anchor=north,inner sep=2pt] at \papBr {$r$};
+  \node[etiq,anchor=south,inner sep=3pt,text=foro] at \papBruta {$2\pi R$};
+  \node[etiq,anchor=south] (titb) at (3.3,{\papAh+0.25}) {(b) Toro};
 \end{tikzpicture}
-\caption{(a) Pappus--Guldin II: la región $A$ gira alrededor del eje y su
-centroide $G$ recorre una circunferencia de longitud $2\pi\bar y$.
-(b) Toro: un círculo de radio $r$ cuyo centro (a distancia $R$ del eje)
-recorre $2\pi R$: $A=2\pi R\cdot2\pi r=4\pi^{2}Rr$ y $V=2\pi R\cdot\pi r^{2}=2\pi^{2}Rr^{2}$.}
+\caption{(a) Pappus--Guldin II: una región plana $A$ (sección superior) gira alrededor del eje,
+que no la corta; su centroide $G$, a distancia $\bar y$, recorre la circunferencia de longitud
+$2\pi\bar y$ (discontinua) y el sólido generado tiene volumen $V=2\pi\bar y\,A$. Se ha retirado una
+cuña para mostrar dos secciones meridianas. (b) Toro: el círculo generatriz de radio $r$ tiene su
+centro a distancia $R$ del eje y recorre $2\pi R$, luego $A=2\pi R\cdot2\pi r=4\pi^{2}Rr$ y
+$V=2\pi R\cdot\pi r^{2}=2\pi^{2}Rr^{2}$.}
 \label{fig:pappus}
 \end{figure}
 % ---------------------------------------------------------------------

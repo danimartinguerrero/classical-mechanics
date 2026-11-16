@@ -117,63 +117,105 @@ y $p_{1}'^{2}=q^{2}\bigl(1+\lambda^{2}+2\lambda\cos\theta\bigr)$.
 \end{proof}
 
 % ---------------------------------------------------------------------
-\begin{figure}[ht]
+\begin{figure}[p]
 \centering
-\begin{tikzpicture}[scale=1.0,baseline=(ta.base)]
-  % lambda = 1/2, q = 2.2, theta = 70
-  \def\q{2.2}\def\la{0.5}\def\th{70}
-  \coordinate (A) at (0,0); \coordinate (O) at ({\la*\q},0); \coordinate (B) at ({\la*\q+\q},0);
-  \coordinate (C) at ($(O)+(\th:\q)$);
-  \draw[tenue!70,line width=0.5pt] (O) circle (\q);
-  \draw[texto!80,line width=0.6pt] (A) -- (B);
-  \draw[vec,ambar,line width=0.7pt] (O) -- (C);
-  \draw[vec,cian] (A) -- (C);
-  \draw[vec,rosa] (C) -- (B);
-  \draw[vec,texto,line width=0.6pt] ($(A)+(0,-0.62)$) -- ($(B)+(0,-0.62)$)
-     node[midway,below,etiq,inner sep=3pt] {$\vb{p}_{1}=(1+\lambda)\,\vb{q}_{1}$};
-  \foreach \P in {A,O,B} \node[punto,inner sep=1.1pt] at (\P) {};
-  \node[etiq,anchor=north east,inner sep=2pt] at (A) {$A$};
-  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
-  \node[etiq,anchor=north west,inner sep=2pt] at (B) {$B$};
-  \node[etiq,anchor=south,inner sep=3pt] at (C) {$C$};
-  \node[etiq,cian,anchor=south east,inner sep=2pt] at ($(A)!0.55!(C)$) {$\vb{p}_{1}'$};
-  \node[etiq,rosa,anchor=south west,inner sep=2pt] at ($(C)!0.45!(B)$) {$\vb{p}_{2}'$};
-  \node[etiq,ambar,anchor=west,inner sep=3pt] at ($(O)!0.62!(C)$) {$\vb{q}_{1}'$};
-  \pic[draw=cian,line width=0.5pt,angle radius=0.55cm,angle eccentricity=1.45,pic text={$\alpha$},pic text options={cian,font=\small}] {angle=B--A--C};
-  \pic[draw=ambar,line width=0.5pt,angle radius=0.42cm,angle eccentricity=1.6,pic text={$\theta$},pic text options={ambar,font=\small}] {angle=B--O--C};
-  \pic[draw=rosa,line width=0.5pt,angle radius=0.55cm,angle eccentricity=1.45,pic text={$\beta$},pic text options={rosa,font=\small}] {angle=C--B--A};
-  \node[etiq,anchor=south] (ta) at (O|-0,2.55) {(a) $m_{1}<m_{2}$ ($\lambda=\tfrac12$)};
-\end{tikzpicture}\hspace{10mm}%
-\begin{tikzpicture}[scale=1.0,baseline=(tb.base)]
-  % lambda = 2, q = 1.5: tangente, theta = 120
-  \def\q{1.5}\def\la{2}\def\th{120}
-  \coordinate (A) at (0,0); \coordinate (O) at ({\la*\q},0); \coordinate (B) at ({\la*\q+\q},0);
-  \coordinate (C) at ($(O)+(\th:\q)$);
-  \draw[tenue!70,line width=0.5pt] (O) circle (\q);
-  \draw[aux] (A) -- ($(A)!1.55!(C)$);
-  \draw[texto!80,line width=0.6pt] (A) -- (B);
-  \draw[vec,ambar,line width=0.7pt] (O) -- (C);
-  \draw[vec,cian] (A) -- (C);
-  \draw[vec,rosa] (C) -- (B);
-  \draw[vec,texto,line width=0.6pt] ($(A)+(0,-0.62)$) -- ($(B)+(0,-0.62)$)
-     node[midway,below,etiq,inner sep=3pt] {$\vb{p}_{1}$};
-  \foreach \P in {A,O,B} \node[punto,inner sep=1.1pt] at (\P) {};
-  \node[etiq,anchor=north east,inner sep=2pt] at (A) {$A$};
-  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
-  \node[etiq,anchor=north west,inner sep=2pt] at (B) {$B$};
-  \node[etiq,anchor=south east,inner sep=2pt] at (C) {$C$};
-  \node[etiq,cian,anchor=south east,inner sep=2pt] at ($(A)!0.55!(C)$) {$\vb{p}_{1}'$};
-  \node[etiq,rosa,anchor=south west,inner sep=2pt] at ($(C)!0.55!(B)$) {$\vb{p}_{2}'$};
-  \pic[draw=tenue,line width=0.45pt,angle radius=0.2cm] {right angle=A--C--O};
-  \pic[draw=cian,line width=0.5pt,angle radius=1.3cm] {angle=B--A--C};
-  \node[etiq,cian,anchor=west,inner sep=2pt] at (14:1.36) {$\alpha_{\max}$};
-  \pic[draw=ambar,line width=0.5pt,angle radius=0.38cm,angle eccentricity=1.75,pic text={$\theta$},pic text options={ambar,font=\small}] {angle=B--O--C};
-  \node[etiq,anchor=south] (tb) at (O|-0,2.55) {(b) $m_{1}>m_{2}$ ($\lambda=2$)};
+% ===================== fila 1: el choque físico =====================
+\begin{tikzpicture}[scale=1.5,baseline=(ta.base)]
+  % lambda = 1/2, theta = 100: alpha = 71.67, beta = 40; q = 1
+  \draw[tenue!60,dash pattern=on 2pt off 2pt,line width=0.4pt] (0,0) -- (1.45,0);
+  \shade[ball color=fazul] (-1.72,0) circle (0.075);
+  \draw[vec,texto] (-1.6,0) -- (-0.12,0) node[pos=0.5,above,etiq,inner sep=3pt] {$\vb{p}_{1}$};
+  \draw[vec,fazul] (0,0) -- (71.67:1.037) node[anchor=south,etiq,fazul,inner sep=2pt] {$\vb{p}_{1}'$};
+  \draw[vec,fhielo] (0,0) -- (-40:1.532) node[anchor=north west,etiq,fhielo,inner sep=1.5pt] {$\vb{p}_{2}'$};
+  \shade[ball color=fhielo] (0,0) circle (0.1);
+  \draw[foro,line width=0.55pt] (0.42,0) arc (0:71.67:0.42);
+  \node[etiq,foro] at (36:0.6) {$\alpha$};
+  \draw[foro,line width=0.55pt] (0.52,0) arc (0:-40:0.52);
+  \node[etiq,foro] at (-20:0.7) {$\beta$};
+  \node[etiq,fazul,anchor=south,inner sep=3pt] at (-1.72,0.06) {$m_{1}$};
+  \node[etiq,fhielo,anchor=north east,inner sep=2pt] at (-0.05,-0.07) {$m_{2}$};
+  \node[etiq,anchor=south] (ta) at (-0.1,1.25) {(a) Choque en el \lab};
+\end{tikzpicture}\hspace{12mm}%
+\begin{tikzpicture}[scale=1.5,baseline=(tb.base)]
+  \draw[tenue!60,dash pattern=on 2pt off 2pt,line width=0.4pt] (-1.1,0) -- (1.1,0);
+  \draw[vec,fazul,line width=0.75pt] (-1.15,0) -- (-0.1,0) node[pos=0.45,above,etiq,fazul,inner sep=3pt] {$\vb{q}_{1}$};
+  \draw[vec,fhielo,line width=0.75pt] (1.15,0) -- (0.1,0) node[pos=0.45,below,etiq,fhielo,inner sep=3pt] {$\vb{q}_{2}$};
+  \draw[vec,fazul] (0,0) -- (100:1.0) node[anchor=south,etiq,fazul,inner sep=2pt] {$\vb{q}_{1}'$};
+  \draw[vec,fhielo] (0,0) -- (280:1.0) node[anchor=north,etiq,fhielo,inner sep=2pt] {$\vb{q}_{2}'$};
+  \draw[foro,line width=0.55pt] (0.4,0) arc (0:100:0.4);
+  \node[etiq,foro] at (50:0.6) {$\theta$};
+  \draw[foro,line width=0.55pt] (-0.4,0) arc (180:280:0.4);
+  \node[etiq,foro] at (230:0.6) {$\theta$};
+  \fill[texto] (0,0) circle (0.045);
+  \draw[fondo,line width=0.5pt] (-0.045,0) -- (0.045,0) (0,-0.045) -- (0,0.045);
+  \node[etiq,anchor=south] (tb) at (0,1.25) {(b) El mismo choque en el \scm};
 \end{tikzpicture}
-\caption{Diagrama de Landau. Todos los choques elásticos posibles corresponden a los
-puntos $C$ de la circunferencia. (a) Si $\lambda<1$, $A$ es interior: $\alpha$ toma cualquier
-valor en $[0,\pi]$. (b) Si $\lambda>1$, $A$ es exterior: $\alpha$ es máximo cuando $AC$ es
-tangente, es decir, $\vb{p}_{1}'\perp\vb{q}_{1}'$, y $\sin\alpha_{\protect\max}=q/(\lambda q)=1/\lambda$.}
+
+\vspace{7mm}
+% ===================== fila 2: diagramas de Landau =====================
+\begin{tikzpicture}[scale=1.0,baseline=(tc.base)]
+  % lambda = 1/2, q = 2, theta = 100
+  \coordinate (A) at (0,0); \coordinate (O) at (1,0); \coordinate (B) at (3,0);
+  \coordinate (C) at (0.653,1.970);
+  \draw[tenue!55,line width=0.45pt] (O) circle (2);
+  \draw[vec,facero,line width=0.9pt,shorten >=1pt] (A) -- (O);
+  \draw[vec,texto!85,line width=0.9pt,shorten >=1pt] (O) -- (B);
+  \draw[vec,foro,line width=0.75pt] (O) -- (C);
+  \draw[vec,fazul] (A) -- (C);
+  \draw[vec,fhielo] (C) -- (B);
+  \draw[vec,texto,line width=0.6pt] (0,-2.35) -- (3,-2.35) node[midway,below,etiq,inner sep=3pt] {$\vb{p}_{1}=\lambda\vb{q}_{1}+\vb{q}_{1}$};
+  \foreach \P in {A,O,B} \fill[texto] (\P) circle (0.045);
+  \node[etiq,anchor=east,inner sep=3pt] at (A) {$A$};
+  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
+  \node[etiq,anchor=west,inner sep=3pt] at (B) {$B$};
+  \node[etiq,anchor=south east,inner sep=2pt] at (C) {$C$};
+  \node[peq,text=facero,anchor=north,inner sep=3pt] at (0.45,0) {$\lambda\vb{q}_{1}$};
+  \node[peq,text=texto!85,anchor=north,inner sep=3pt] at (2,0) {$\vb{q}_{1}$};
+  \node[etiq,fazul,anchor=east,inner sep=3pt] at ($(A)!0.55!(C)$) {$\vb{p}_{1}'$};
+  \node[etiq,foro,anchor=west,inner sep=3pt] at ($(O)!0.45!(C)$) {$\vb{q}_{1}'$};
+  \node[etiq,fhielo,anchor=south west,inner sep=2pt] at ($(C)!0.5!(B)$) {$\vb{p}_{2}'$};
+  \draw[fazul,line width=0.5pt] ($(A)+(0.45,0)$) arc (0:71.67:0.45);
+  \node[etiq,fazul] at ($(A)+(36:0.72)$) {$\alpha$};
+  \draw[foro,line width=0.5pt] ($(O)+(0.35,0)$) arc (0:100:0.35);
+  \node[etiq,foro] at ($(O)+(50:0.62)$) {$\theta$};
+  \draw[fhielo,line width=0.5pt] ($(B)+(-0.5,0)$) arc (180:140:0.5);
+  \node[etiq,fhielo] at ($(B)+(160:0.8)$) {$\beta$};
+  \node[etiq,anchor=south] (tc) at (1,2.45) {(c) Diagrama de Landau de ese choque};
+\end{tikzpicture}\hspace{9mm}%
+\begin{tikzpicture}[scale=1.0,baseline=(td.base)]
+  % lambda = 2, q = 1.5, theta = 120 (tangente)
+  \coordinate (A) at (0,0); \coordinate (O) at (3,0); \coordinate (B) at (4.5,0);
+  \coordinate (C) at (2.25,1.299);
+  \draw[tenue!55,line width=0.45pt] (O) circle (1.5);
+  \draw[tenue!60,dash pattern=on 2pt off 2pt,line width=0.4pt] (C) -- ($(A)!1.4!(C)$);
+  \draw[vec,facero,line width=0.9pt,shorten >=1pt] (A) -- (O);
+  \draw[vec,texto!85,line width=0.9pt,shorten >=1pt] (O) -- (B);
+  \draw[vec,foro,line width=0.75pt] (O) -- (C);
+  \draw[vec,fazul] (A) -- (C);
+  \draw[vec,fhielo] (C) -- (B);
+  \draw[vec,texto,line width=0.6pt] (0,-1.85) -- (4.5,-1.85) node[midway,below,etiq,inner sep=3pt] {$\vb{p}_{1}$};
+  \foreach \P in {A,O,B} \fill[texto] (\P) circle (0.045);
+  \node[etiq,anchor=east,inner sep=3pt] at (A) {$A$};
+  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
+  \node[etiq,anchor=west,inner sep=3pt] at (B) {$B$};
+  \node[etiq,anchor=south east,inner sep=2pt] at (C) {$C$};
+  \node[etiq,fazul,anchor=south east,inner sep=2pt] at ($(A)!0.5!(C)$) {$\vb{p}_{1}'$};
+  \node[etiq,fhielo,anchor=south west,inner sep=2pt] at ($(C)!0.55!(B)$) {$\vb{p}_{2}'$};
+  \pic[draw=tenue,line width=0.45pt,angle radius=0.17cm] {right angle=A--C--O};
+  \draw[fazul,line width=0.5pt] ($(A)+(0.75,0)$) arc (0:30:0.75);
+  \node[etiq,fazul,anchor=center] at ($(A)+(12:1.17)$) {$\alpha_{\max}$};
+  \draw[foro,line width=0.5pt] ($(O)+(0.3,0)$) arc (0:120:0.3);
+  \node[etiq,foro] at ($(O)+(75:0.56)$) {$\theta$};
+  \node[etiq,anchor=south] (td) at (2.25,2.45) {(d) $\lambda=2$: desviación máxima};
+\end{tikzpicture}
+\caption{Diagrama de Landau, construido a partir del choque físico. (a) Un choque elástico
+en el \lab{} con $\lambda=m_{1}/m_{2}=\frac12$: el blanco en reposo sale a $\beta$ y el proyectil a $\alpha$.
+(b) El mismo choque en el \scm: los momentos, opuestos y de módulo $q$, sólo giran un ángulo
+$\theta$. (c) Como $\vb{p}_{1}'=\lambda\vb{q}_{1}+\vb{q}_{1}'$ y $\vb{p}_{2}'=\vb{q}_{1}-\vb{q}_{1}'$, ambos vectores salen de
+encadenar los tramos fijos $AO=\lambda\vb{q}_{1}$ y $OB=\vb{q}_{1}$ con el radio
+$OC=\vb{q}_{1}'$; los ángulos $\alpha$, $\beta$ y $\theta$ de (a) y (b) reaparecen en $A$, $B$ y $O$.
+Al variar $\theta$, $C$ recorre la circunferencia. (d) Si $\lambda>1$, $A$ es exterior y $\alpha$ es máximo
+cuando $AC$ es tangente ($\vb{p}_{1}'\perp\vb{q}_{1}'$): $\sin\alpha_{\protect\max}=q/(\lambda q)=1/\lambda$.}
 \label{fig:landau}
 \end{figure}
 % ---------------------------------------------------------------------

@@ -33,13 +33,20 @@
 \definecolor{tenue}{HTML}{9CA0A8}
 \definecolor{regla}{HTML}{2E3036}
 \definecolor{rejilla}{HTML}{1C1F24}
-\definecolor{cian}{HTML}{20B4CE}
-\definecolor{violeta}{HTML}{A48BFA}
-\definecolor{rosa}{HTML}{F472B6}
-\definecolor{ambar}{HTML}{FBBF24}
-\definecolor{verde}{HTML}{4ADE80}
-\definecolor{naranja}{HTML}{FB923C}
-\definecolor{azul}{HTML}{60A5FA}
+\definecolor{cian}{HTML}{5AA9E6}
+\definecolor{violeta}{HTML}{8FA3D6}
+\definecolor{rosa}{HTML}{B7CCE8}
+\definecolor{ambar}{HTML}{D6B25E}
+\definecolor{verde}{HTML}{6FBFBF}
+\definecolor{naranja}{HTML}{CF9466}
+\definecolor{azul}{HTML}{4F8FD0}
+% tonos auxiliares para figuras (paleta sobria)
+\definecolor{fazul}{HTML}{5AA9E6}
+\definecolor{fhielo}{HTML}{C9DCF0}
+\definecolor{foro}{HTML}{D6B25E}
+\definecolor{facero}{HTML}{8098C8}
+\definecolor{fprof}{HTML}{2F5E91}
+\definecolor{fturq}{HTML}{6FBFBF}
 
 \pagecolor{fondo}
 \color{texto}
@@ -155,7 +162,7 @@
 \RequirePackage{tikz}
 \RequirePackage{tikz-3dplot}
 \usetikzlibrary{arrows.meta,calc,decorations.markings,patterns,
-  positioning,shapes.geometric,angles,quotes,3d,backgrounds,intersections}
+  positioning,shapes.geometric,angles,quotes,3d,backgrounds,intersections,decorations.markings,shadings}
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepgfplotslibrary{fillbetween,groupplots,colormaps}
@@ -168,6 +175,7 @@
   etiq/.style={font=\small,text=texto},
   peq/.style={font=\footnotesize,text=tenue},
   punto/.style={circle,fill=texto,inner sep=1.2pt},
+  cota/.style={tenue,line width=0.4pt,{Bar[width=4pt]Stealth[length=3.5pt]}-{Stealth[length=3.5pt]Bar[width=4pt]}},
   every picture/.append style={line cap=round,line join=round},
 }
 
@@ -185,7 +193,7 @@
     title style={font=\small,text=texto,yshift=-0.4ex},
     grid=major,
     major grid style={rejilla,line width=0.35pt},
-    legend style={fill=caja,draw=regla,text=texto,font=\scriptsize,
+    legend style={fill=caja,draw=regla,font=\scriptsize,
                   rounded corners=1pt,inner sep=2pt},
     legend cell align=left,
     cycle list name=oscura,
@@ -224,18 +232,18 @@
 
 \tcbset{
   base/.style={enhanced,breakable,colback=caja,coltext=texto,
-    boxrule=0.6pt,arc=2pt,outer arc=2pt,
+    boxrule=0.5pt,arc=1.5pt,outer arc=1.5pt,
     left=9pt,right=9pt,top=10pt,bottom=7pt,
     before skip=3.2ex plus 1ex,after skip=2.6ex plus 1ex,
     attach boxed title to top left={xshift=6pt,yshift*=-\tcboxedtitleheight/2},
-    boxed title style={boxrule=0pt,arc=2pt,left=4pt,right=4pt,top=1.5pt,bottom=1.5pt},
-    fonttitle=\sffamily\bfseries\small},
-  definicion/.style={base,colframe=cian,
-    boxed title style={colback=cian},coltitle=black},
-  teorema/.style={base,colframe=violeta,
-    boxed title style={colback=violeta},coltitle=black,fontupper=\itshape},
-  problema/.style={base,colframe=cian!55!regla,
-    boxed title style={colback=caja,colframe=cian,boxrule=0.6pt},coltitle=cian},
+    boxed title style={boxrule=0.5pt,arc=1.5pt,left=5pt,right=5pt,top=1.5pt,bottom=1.8pt,colback=fondo},
+    fonttitle=\small},
+  definicion/.style={base,colframe=cian!75!fondo,
+    boxed title style={colframe=cian},coltitle=cian},
+  teorema/.style={base,colframe=violeta!75!fondo,
+    boxed title style={colframe=violeta},coltitle=violeta,fontupper=\itshape},
+  problema/.style={base,colframe=cian!45!regla,
+    boxed title style={colframe=cian!80!fondo},coltitle=cian},
 }
 
 % \declararcaja{entorno}{Nombre}{estilo}{nombre-cref}{plural-cref}
@@ -244,7 +252,7 @@
   \crefname{#1}{#4}{#5}\Crefname{#1}{\MakeUppercase #4}{\MakeUppercase #5}%
   \NewDocumentEnvironment{#1}{o}{%
     \refstepcounter{#1}%
-    \begin{tcolorbox}[#3,title={#2~\thethm\IfValueT{##1}{\ \mdseries(##1)}}]}%
+    \begin{tcolorbox}[#3,title={\textls[60]{\scshape #2}~\thethm\IfValueT{##1}{\ {\normalfont\itshape\color{texto!85}(##1)}}}]}%
     {\end{tcolorbox}}}
 
 \declararcaja{definicion}{Definición}{definicion}{definición}{definiciones}
@@ -273,7 +281,7 @@
     frame hidden,boxrule=0pt,arc=0pt,left=10pt,right=10pt,top=7pt,bottom=7pt,
     before skip=2.4ex,after skip=2.4ex,
     borderline west={2.2pt}{0pt}{#1}]
-  {\sffamily\bfseries\small\color{#1}#2.}\enspace\ignorespaces}%
+  {\small\scshape\color{#1}\textls[40]{#2}.}\enspace\ignorespaces}%
   {\end{tcolorbox}}
 
 % enunciado de problema
@@ -283,7 +291,7 @@
 \NewDocumentEnvironment{problema}{m o}{%
   \setcounter{problema}{#1}\addtocounter{problema}{-1}%
   \refstepcounter{problema}%
-  \begin{tcolorbox}[problema,title={Problema~\theproblema\IfValueT{#2}{\ \mdseries(#2)}}]}%
+  \begin{tcolorbox}[problema,title={\textls[60]{\scshape Problema}~\theproblema\IfValueT{#2}{\ {\normalfont\itshape\color{texto!85}(#2)}}}]}%
   {\end{tcolorbox}}
 
 % demostración y resolución

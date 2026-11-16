@@ -62,25 +62,37 @@ $e=1$: choque elástico; $e=0$: completamente inelástico (las partículas queda
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}
-\begin{axis}[oscuro,width=9.5cm,height=5.6cm,grid=none,axis lines=left,
-  xmin=-0.1,xmax=2.75,ymin=0,ymax=1.55,
-  xtick={0,1,1.6},xticklabels={$0$,$t_{*}$,$\Delta t$},
-  ytick=\empty,xlabel={$t$},ylabel={$\abs{F}$},
-  ylabel style={rotate=-90},clip=false]
-  \addplot[cian,line width=1.1pt,domain=0:1,samples=80,name path=c] {sin(deg(pi*x/2))};
-  \addplot[rosa,line width=1.1pt,domain=1:1.6,samples=60,name path=r] {cos(deg(pi*(x-1)/1.2))};
-  \path[name path=ax] (axis cs:0,0) -- (axis cs:1.6,0);
-  \addplot[cian,opacity=0.18] fill between[of=c and ax,soft clip={domain=0:1}];
-  \addplot[rosa,opacity=0.20] fill between[of=r and ax,soft clip={domain=1:1.6}];
-  \draw[aux] (axis cs:1,0) -- (axis cs:1,1.06);
-  \node[etiq,cian] at (axis cs:0.58,0.32) {$\pi_{\mathrm{comp}}$};
-  \draw[tenue,line width=0.35pt] (axis cs:1.30,0.30) -- (axis cs:1.72,0.62)
-    node[anchor=south west,etiq,rosa,inner sep=1pt] {$\pi_{\mathrm{rest}}=e\,\pi_{\mathrm{comp}}$};
-  \node[peq,anchor=south,align=center] at (axis cs:1,1.06) {máxima compresión:\\ velocidad común $w$};
+\begin{axis}[oscuro,width=10.5cm,height=6.2cm,grid=none,axis lines=left,
+  axis line style={tenue!80,line width=0.45pt,-{Stealth[length=4.5pt,width=3.2pt]}},
+  xmin=0,xmax=2.15,ymin=0,ymax=1.42,
+  xtick={1,1.6},xticklabels={$t_{*}$,$\Delta t$},ytick=\empty,
+  xlabel={$t$},ylabel={$\abs{F(t)}$},
+  every axis x label/.style={at={(ticklabel* cs:1)},anchor=west,font=\small,text=texto},
+  every axis y label/.style={at={(ticklabel* cs:1)},anchor=south,font=\small,text=texto},
+  clip=false]
+  % áreas
+  \addplot[draw=none,fill=fazul,fill opacity=0.22,domain=0:1,samples=80] {sin(deg(pi*x/2))} \closedcycle;
+  \addplot[draw=none,fill=facero,fill opacity=0.30,domain=1:1.6,samples=60] {cos(deg(pi*(x-1)/1.2))} \closedcycle;
+  % curva
+  \addplot[fazul,line width=1.2pt,domain=0:1,samples=80] {sin(deg(pi*x/2))};
+  \addplot[facero,line width=1.2pt,domain=1:1.6,samples=60] {cos(deg(pi*(x-1)/1.2))};
+  % instante de máxima compresión
+  \draw[tenue!80,dash pattern=on 2pt off 2pt,line width=0.4pt] (axis cs:1,0) -- (axis cs:1,1.12);
+  \node[punto,fill=texto,inner sep=1.1pt] at (axis cs:1,1) {};
+  \node[peq,anchor=south,align=center,text=texto!85] at (axis cs:1,1.13) {máxima compresión\\[-1pt] $v_{1}=v_{2}=w$};
+  % etiquetas de áreas
+  \node[etiq,text=fhielo] at (axis cs:0.62,0.33) {$\pi_{\mathrm{comp}}$};
+  \node[etiq,text=fhielo] at (axis cs:1.27,0.27) {$e\,\pi_{\mathrm{comp}}$};
+  % fases
+  \draw[decorate,decoration={brace,mirror,amplitude=4pt,raise=13pt},fazul!80,line width=0.5pt]
+    (axis cs:0,0) -- (axis cs:0.985,0) node[midway,below=18pt,peq,text=fazul] {compresión};
+  \draw[decorate,decoration={brace,mirror,amplitude=4pt,raise=13pt},facero,line width=0.5pt]
+    (axis cs:1.015,0) -- (axis cs:1.6,0) node[midway,below=18pt,peq,text=facero] {restitución};
 \end{axis}
 \end{tikzpicture}
-\caption{Fuerza de contacto durante un choque (aquí $e=0{,}6$). Las áreas son las
-percusiones de compresión y de restitución; su cociente define $e$.}
+\caption{Fuerza de contacto durante un choque (aquí $e=0{,}6$). Durante la compresión las
+partículas se acercan hasta alcanzar la velocidad común $w$ en $t_{*}$; durante la restitución se
+separan. Las áreas son las percusiones de cada fase, $\pi_{\mathrm{rest}}=e\,\pi_{\mathrm{comp}}$.}
 \label{fig:percusion}
 \end{figure}
 % ---------------------------------------------------------------------
@@ -241,7 +253,7 @@ Sea $v_{1}=v$, $v_{2}=0$, $M=4m_{1}$, $\mu=\tfrac34m_{1}$.
 \caption{\Cref{prob:3} en el \lab{} (unidades $v=1$, choque en $t=0$, $x=0$). La
 pendiente de cada recta es la velocidad. El CM (discontinua) sigue la misma recta
 antes y después: en el CM, (a) las pendientes respecto de ella se invierten y (b) se
-anulan (la pareja unida, en violeta, viaja con el CM).}
+anulan (la pareja unida, en azul grisáceo, viaja con el CM).}
 \label{fig:xt}
 \end{figure}
 % ---------------------------------------------------------------------
@@ -346,44 +358,71 @@ aproximación de ángulos pequeños para $\theta(t)$.
 % ---------------------------------------------------------------------
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=0.95,baseline=(ta.base)]
-  \fill[tenue!40!fondo] (-1.4,0) rectangle (1.4,0.12);
-  \draw[texto!60,line width=0.4pt] (-1.4,0) -- (1.4,0);
-  \draw[aux] (-0.3,0) -- (-0.3,-3.0);
-  \draw[tenue!60,dash pattern=on 1.5pt off 1.5pt,line width=0.4pt] (-0.3,-3.3) circle (0.3);
-  \draw[texto!80,line width=0.6pt] (-0.3,0) -- ({-0.3-3.3*sin(35)},{-3.3*cos(35)});
-  \fill[cian] ({-0.3-3.3*sin(35)},{-3.3*cos(35)}) circle (0.3);
-  \draw[texto!80,line width=0.6pt] (0.3,0) -- (0.3,-3.0);
-  \fill[rosa] (0.3,-3.3) circle (0.3);
-  \draw[ambar,line width=0.6pt] (-0.3,-1.2) arc (-90:-125:1.2);
-  \node[etiq,ambar] at ({-0.3-1.55*sin(17)},{-1.55*cos(17)}) {$\alpha$};
-  \node[etiq,anchor=south east,inner sep=2pt] at ({-0.3-1.9*sin(35)},{-1.9*cos(35)}) {$l$};
-  \node[etiq,cian,anchor=east] at ({-0.65-3.3*sin(35)},{-3.3*cos(35)}) {$m$};
-  \node[etiq,rosa,anchor=west] at (0.65,-3.3) {$m$};
-  \draw[->,verde,line width=0.6pt] (0.95,-2.35) arc (-60:-30:1.1) node[anchor=west,etiq,verde,inner sep=2pt] {$+\theta$};
-  \node[etiq,anchor=south] (ta) at (0,0.35) {(a) Instante inicial};
-\end{tikzpicture}\hspace{8mm}%
+\begin{tikzpicture}[scale=0.92,baseline=(ta.base)]
+  \def\L{3.7}\def\R{0.17}\def\al{28}
+  % soporte con rayado
+  \fill[pattern=north east lines,pattern color=tenue!70] (-1.2,0) rectangle (1.2,0.18);
+  \draw[texto!80,line width=0.7pt] (-1.2,0) -- (1.2,0);
+  % pivotes
+  \coordinate (P1) at (-\R,0); \coordinate (P2) at (\R,0);
+  % referencia vertical y posición de equilibrio de 1
+  \draw[tenue!70,dash pattern=on 2pt off 2pt,line width=0.4pt] (P1) -- ++(0,{-\L-0.55});
+  \draw[tenue!60,dash pattern=on 1.5pt off 1.5pt,line width=0.4pt] ($(P1)+(0,{-\L-\R})$) circle (\R);
+  % hilos
+  \coordinate (B1) at ($(P1)+({-90-\al}:{\L+\R})$);
+  \coordinate (B2) at ($(P2)+(0,{-\L-\R})$);
+  \draw[texto!85,line width=0.55pt] (P1) -- ($(P1)+({-90-\al}:\L)$);
+  \draw[texto!85,line width=0.55pt] (P2) -- ($(P2)+(0,-\L)$);
+  % masas
+  \shade[ball color=fazul] (B1) circle (\R);
+  \shade[ball color=fhielo] (B2) circle (\R);
+  \foreach \P in {P1,P2} \fill[texto] (\P) circle (0.045);
+  % ángulo alfa
+  \draw[foro,line width=0.6pt] ($(P1)+(0,-1.5)$) arc (-90:{-90-\al}:1.5);
+  \node[etiq,foro] at ($(P1)+({-90-\al/2}:1.78)$) {$\alpha$};
+  % longitud l (cota paralela al hilo)
+  \begin{scope}[shift={(P1)},rotate={-\al}]
+    \draw[cota] (-0.34,-0.4) -- (-0.34,-\L);
+    \node[etiq,fill=fondo,inner sep=1.5pt] at (-0.34,{-\L/2}) {$l$};
+  \end{scope}
+  % sentido positivo
+  \draw[fturq,line width=0.55pt,-{Stealth[length=4.5pt]}] ($(P2)+(-70:1.7)$) arc (-70:-50:1.7)
+    node[anchor=south west,etiq,fturq,inner sep=1pt] {$\theta>0$};
+  % etiquetas
+  \node[etiq,fazul,anchor=east,inner sep=4pt] at ($(B1)+(-\R,0)$) {$m$};
+  \node[etiq,fhielo,anchor=west,inner sep=4pt] at ($(B2)+(\R,0)$) {$m$};
+  \node[peq,anchor=north,inner sep=4pt] at ($(P1)+(0,{-\L-2*\R})$) {equilibrio};
+  \node[etiq,anchor=south] (ta) at (0,0.5) {(a) Montaje en $t=0$};
+\end{tikzpicture}\hspace{6mm}%
 \begin{tikzpicture}[baseline=(tb.base)]
-\begin{axis}[oscuro,width=8.0cm,height=5.6cm,
-  xmin=0,xmax=4.712,ymin=-1.08,ymax=1.0,
+\begin{axis}[oscuro,width=8.6cm,height=6.0cm,
+  xmin=0,xmax=4.712,ymin=-1.12,ymax=1.0,
   xtick={0,1.5708,3.1416,4.712},xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
   ytick={-1,0,0.25,0.75},yticklabels={$-1$,$0$,$\frac{1-e}{2}$,$\frac{1+e}{2}$},
-  xlabel={$\omega t$},ylabel={$\theta/\alpha$},legend pos=south east]
-  \addplot[cian,domain=0:1.5708,samples=60] {-cos(deg(x))};
+  xlabel={$\omega t$},ylabel={$\theta/\alpha$},clip=false,
+  legend style={at={(0.97,0.06)},anchor=south east},legend cell align=left]
+  \fill[fprof,opacity=0.18] (axis cs:0,-1.12) rectangle (axis cs:1.5708,1.0);
+  \draw[foro!70,dash pattern=on 1pt off 2pt,line width=0.4pt] (axis cs:1.5708,0.25) -- (axis cs:4.712,0.25);
+  \draw[foro!70,dash pattern=on 1pt off 2pt,line width=0.4pt] (axis cs:1.5708,0.75) -- (axis cs:4.712,0.75);
+  \addplot[fazul,line width=1.15pt,domain=0:1.5708,samples=60] {-cos(deg(x))};
   \addlegendentry{$\theta_{1}$}
-  \addplot[rosa,domain=0:1.5708] {0};
+  \addplot[fhielo,line width=1.15pt,domain=0:1.5708] {0};
   \addlegendentry{$\theta_{2}$}
-  \addplot[cian,domain=1.5708:4.712,samples=80] {0.25*sin(deg(x-1.5708))};
-  \addplot[rosa,domain=1.5708:4.712,samples=80] {0.75*sin(deg(x-1.5708))};
-  \draw[aux] (axis cs:1.5708,-1.08) -- (axis cs:1.5708,1.0);
-  \draw[aux] (axis cs:4.712,-1.08) -- (axis cs:4.712,1.0);
+  \addplot[fazul,line width=1.15pt,domain=1.5708:4.712,samples=80,forget plot] {0.25*sin(deg(x-1.5708))};
+  \addplot[fhielo,line width=1.15pt,domain=1.5708:4.712,samples=80,forget plot] {0.75*sin(deg(x-1.5708))};
+  \draw[tenue!80,dash pattern=on 2pt off 2pt,line width=0.4pt] (axis cs:1.5708,-1.12) -- (axis cs:1.5708,1.0);
+  \draw[tenue!80,dash pattern=on 2pt off 2pt,line width=0.4pt] (axis cs:4.712,-1.12) -- (axis cs:4.712,1.0);
+  \node[punto,fill=foro,inner sep=1.2pt] at (axis cs:1.5708,0) {};
+  \node[peq,anchor=south] at (axis cs:1.5708,1.0) {1.\textsuperscript{er} choque};
+  \node[peq,anchor=south] at (axis cs:4.712,1.0) {2.\textsuperscript{o} choque};
+  \node[peq,align=center,anchor=center] at (axis cs:0.78,0.55) {antes del\\choque};
 \end{axis}
-\node[etiq,anchor=south] (tb) at (3.2,4.75) {(b) $\theta_{i}(t)$ con $e=0{,}5$};
+\node[etiq,anchor=south] (tb) at (3.4,5.25) {(b) $\theta_{i}(t)$ con $e=0{,}5$};
 \end{tikzpicture}
 \caption{\Cref{prob:6}. (a) Montaje: el péndulo izquierdo se suelta desde
-$\theta_{1}=-\alpha$. (b) Evolución (ángulos pequeños): tras el choque en $\omega t=\pi/2$
-(discontinua) ambos oscilan en fase con amplitudes $\frac{1\mp e}{2}\alpha$ y vuelven a
-chocar en $\omega t=3\pi/2$.}
+$\theta_{1}=-\alpha$; el derecho está en reposo en la vertical. (b) Evolución en la aproximación de
+ángulos pequeños: tras el primer choque, en $\omega t=\pi/2$, ambos oscilan en fase con
+amplitudes $\frac{1\mp e}{2}\alpha$ (punteadas) y vuelven a chocar en $\omega t=3\pi/2$.}
 \label{fig:cuna}
 \end{figure}
 % ---------------------------------------------------------------------
