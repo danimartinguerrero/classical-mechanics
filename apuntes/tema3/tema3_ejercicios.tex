@@ -1,0 +1,277 @@
+% =====================================================================
+%  Mecánica I · Tema 3 — Ejercicios propuestos resueltos paso a paso
+%  Compilar:  latexmk -lualatex tema3_ejercicios.tex
+% =====================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{estilo-oscuro}
+\usetikzlibrary{babel}
+
+\renewcommand{\cabeceraimpar}{Tema 3 · Ejercicios paso a paso}
+\renewcommand{\cabecerapar}{Mecánica I}
+\hypersetup{pdftitle={Tema 3. Ejercicios resueltos paso a paso},
+  pdfauthor={Daniel Martín Guerrero},pdfsubject={Mecánica I}}
+
+\newcommand{\cm}{_{\mathrm{CM}}}
+\newcommand{\lab}{\textup{\textsc{lab}}}
+\newcommand{\scm}{\textup{\textsc{cm}}}
+\newcommand{\ok}{\textcolor{verde}{$\checkmark$}}
+\newcommand{\metodo}[1]{{\color{tenue}\small\sffamily #1}\par\nopagebreak}
+
+\titleformat{\section}
+  {\needspace{7\baselineskip}\normalfont\large\bfseries\color{violeta}}
+  {\thesection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{3.6ex plus 1ex}{1.6ex}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5ex}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+{\Large\bfseries El problema de dos cuerpos. Colisiones\par}
+\vspace{1.2mm}
+{\small\color{tenue}Mecánica I · Tema 3 · \textsc{Ejercicios propuestos resueltos paso a paso}\par}
+\vspace{2mm}
+{\color{regla}\rule{0.35\textwidth}{0.4pt}}
+\end{center}
+
+Ocho ejercicios nuevos, distintos de los del seminario, ordenados por método (A: frontal por el
+CM; B: Landau; C: oblicuo; D: rebotes). Se toma $g=9{,}8$\,m/s$^{2}$. Antes de mirar la
+resolución, intenta identificar el método y el primer paso.
+
+% =====================================================================
+\section{Dos cuerpos}
+% =====================================================================
+
+\begin{problema}{1}[Dos bloques y un muelle]
+Dos bloques, $m_{1}=2$\,kg y $m_{2}=3$\,kg, están unidos por un muelle de constante $k=300$\,N/m
+y longitud natural $\ell_{0}$, en reposo sobre una mesa lisa. Un golpe da a $m_{1}$ una velocidad
+$v_{0}=5$\,m/s dirigida hacia $m_{2}$. Hallar (a) la velocidad del CM, (b) la compresión
+máxima del muelle y (c) el periodo de oscilación.
+\end{problema}
+\metodo{Dos cuerpos: CM libre + partícula de masa $\mu$ con el muelle.}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Masa reducida}: $\mu=\dfrac{m_{1}m_{2}}{m_{1}+m_{2}}=\dfrac{6}{5}=1{,}2$\,kg.
+  \item \emph{CM} (sin fuerzas exteriores horizontales):
+        $V\cm=\dfrac{m_{1}v_{0}}{M}=\dfrac{2\cdot5}{5}=\resultado{2\text{ m/s}}$, constante.
+  \item \emph{Reparto de la energía} (König), con $v_{12}=v_{0}$ al principio:
+        \[
+          K=\tfrac12m_{1}v_{0}^{2}=25\text{ J}=\underbrace{\tfrac12MV\cm^{2}}_{10\text{ J}}+\underbrace{\tfrac12\mu v_{12}^{2}}_{15\text{ J}} .
+        \] Sólo los 15\,J del movimiento relativo pueden ir al muelle.
+  \item \emph{Compresión máxima}: cuando $v_{12}=0$ (ambos a $V\cm$), toda la energía relativa es elástica:
+        \[
+          \tfrac12\mu v_{0}^{2}=\tfrac12kx_{\max}^{2}\ \Longrightarrow\ x_{\max}=v_{0}\sqrt{\frac{\mu}{k}}=5\sqrt{\frac{1{,}2}{300}}=\resultado{0{,}32\text{ m}} .
+        \]
+  \item \emph{Oscilación}: la ecuación relativa es $\mu\ddot x=-kx$, luego
+        \[
+          \omega=\sqrt{k/\mu}=15{,}8\text{ rad/s},\qquad \resultado{T=2\pi\sqrt{\mu/k}=0{,}40\text{ s}} .
+        \]
+\end{enumerate}
+Error típico: usar $\tfrac12m_{1}v_{0}^{2}=\tfrac12kx^{2}$, que da $x=0{,}41$\,m. Olvida que el CM se lleva 10\,J que no pueden convertirse en energía elástica.
+\end{resolucion}
+
+% =====================================================================
+\section{Choques frontales (método A)}
+% =====================================================================
+
+\begin{problema}{2}[Choque frontal inelástico]
+Una bola de $m_{1}=2$\,kg con $v_{1}=6$\,m/s choca frontalmente con otra de $m_{2}=4$\,kg que se
+mueve en sentido contrario con $3$\,m/s. Si $e=0{,}5$, hallar las velocidades finales y la energía disipada.
+\end{problema}
+\metodo{Método A.}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Signos}: positivo hacia la derecha: $v_{1}=6$, $v_{2}=-3$\,m/s.
+  \item \emph{CM}: $V\cm=\dfrac{2\cdot6+4\cdot(-3)}{6}=0$. El \lab{} ya es el sistema del CM.
+  \item \emph{Choque en el CM}: $u_{1}=6$, $u_{2}=-3$ $\to$ $u_{i}'=-e\,u_{i}$:
+        \[
+          \resultado{v_{1}'=-3\text{ m/s},\qquad v_{2}'=1{,}5\text{ m/s}} .
+        \]
+  \item \emph{Comprobación}: $\vb{P}$: $2(-3)+4(1{,}5)=0$ \ok{}; Huygens--Newton: $v_{1}'-v_{2}'=-4{,}5=-0{,}5\cdot9$ \ok{}.
+  \item \emph{Energía}: $\mu=\frac{8}{6}=\frac43$\,kg, $v_{12}=9$\,m/s:
+        \[
+          Q=\tfrac12\mu(1-e^{2})v_{12}^{2}=\tfrac12\cdot\tfrac43\cdot0{,}75\cdot81=\resultado{40{,}5\text{ J}} .
+        \]
+        Directamente: $K_{i}=36+18=54$\,J y $K_{f}=9+4{,}5=13{,}5$\,J. \ok{}
+\end{enumerate}
+\end{resolucion}
+
+\begin{problema}{3}[Péndulo balístico]
+Una bala de $m=10$\,g se incrusta en un bloque de $M=2$\,kg colgado de un hilo, que sube
+$h=5$\,cm. Hallar la velocidad de la bala y la fracción de energía perdida.
+\end{problema}
+\metodo{Dos fases: choque ($e=0$, conserva $\vb{P}$) + subida (conserva $E$).}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Separar fases}: en el choque el hilo es vertical y no da percusión horizontal, así que se
+        conserva $P_{x}$, pero no $K$. En la subida no hay choque y se conserva $E$, pero no $P$ (actúa la tensión).
+  \item \emph{Subida} (de atrás hacia delante): $\tfrac12(m+M)V^{2}=(m+M)gh\Rightarrow V=\sqrt{2gh}=0{,}99$\,m/s.
+  \item \emph{Choque} completamente inelástico: $mv=(m+M)V$, luego
+        \[
+          v=\frac{m+M}{m}\sqrt{2gh}=201\cdot0{,}99=\resultado{199\text{ m/s}} .
+        \]
+  \item \emph{Energía perdida}: con $v_{2}=0$ y $e=0$, $\dfrac{Q}{K}=\dfrac{M}{m+M}=\resultado{0{,}995}$: se disipa el 99,5\,\%.
+\end{enumerate}
+Error típico: igualar $\tfrac12mv^{2}=(m+M)gh$, que da $v\approx14$\,m/s. Conserva una energía que se disipa en el choque.
+\end{resolucion}
+
+% =====================================================================
+\section{Choques en dos dimensiones (método B)}
+% =====================================================================
+
+\begin{problema}{4}[Protón contra núcleo de helio]
+Un protón ($m$) choca elásticamente con un núcleo de helio ($4m$) en reposo y sale desviado
+$\alpha=90^{\circ}$ en el \lab. Hallar $\theta$, el ángulo de retroceso $\beta$ y la fracción de energía cedida al helio.
+\end{problema}
+\metodo{Método B: dato $\alpha$ $\to$ $\theta$ $\to$ resto.}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Datos}: $\lambda=m_{1}/m_{2}=\tfrac14$. Como $\lambda<1$, el proyectil puede salir a $90^{\circ}$ o más.
+  \item \emph{De $\alpha$ a $\theta$}: $\tan\alpha=\dfrac{\sin\theta}{\lambda+\cos\theta}\to\infty$, luego el denominador se anula:
+        \[
+          \cos\theta=-\lambda=-\tfrac14\ \Longrightarrow\ \resultado{\theta=104{,}5^{\circ}} .
+        \]
+  \item \emph{Retroceso}: $\beta=\dfrac{\pi-\theta}{2}=\resultado{37{,}8^{\circ}}$.
+  \item \emph{Energía cedida}:
+        \[
+          \frac{T_{2}'}{T_{1}}=\frac{4m_{1}m_{2}}{(m_{1}+m_{2})^{2}}\sin^{2}\frac\theta2=\frac{16}{25}\cdot\frac{1-\cos\theta}{2}=\frac{16}{25}\cdot\frac58=\resultado{0{,}40} .
+        \]
+  \item \emph{Comprobación}: $p_{1}'^{2}=q^{2}(1+\lambda^{2}+2\lambda\cos\theta)=\tfrac{15}{16}q^{2}$ y $p_{1}=\tfrac54q$, luego
+        $T_{1}'/T_{1}=\frac{15/16}{25/16}=0{,}60$, y $0{,}60+0{,}40=1$ \ok{}.
+\end{enumerate}
+\end{resolucion}
+
+\begin{problema}{5}[Ángulo máximo de dispersión]
+Una partícula de $m_{1}=3$\,kg con $v_{1}=4$\,m/s choca elásticamente con otra de $m_{2}=1$\,kg en reposo.
+Hallar el máximo ángulo de desviación de $m_{1}$ y las velocidades de ambas en ese caso.
+\end{problema}
+\metodo{Método B con $\lambda>1$: tangente desde $A$ en el diagrama de Landau.}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Datos}: $\lambda=3$, $\mu=\tfrac34$\,kg, $q=\mu v_{1}=3$\,kg\,m/s, $p_{1}=12$\,kg\,m/s.
+  \item \emph{Ángulo máximo}: $A$ es exterior a la circunferencia y $\alpha$ es máximo cuando $AC$ es tangente
+        (\cref{fig:ej5}): $\sin\alpha_{\max}=\dfrac{q}{\lambda q}=\dfrac13\Rightarrow\resultado{\alpha_{\max}=19{,}5^{\circ}}$.
+  \item \emph{Ángulo en el CM}: $\cos\theta=-\dfrac1\lambda=-\dfrac13\Rightarrow\theta=109{,}5^{\circ}$, y $\beta=\dfrac{\pi-\theta}{2}=35{,}3^{\circ}$.
+  \item \emph{Módulos}: el triángulo $AOC$ es rectángulo en $C$:
+        $p_{1}'=\sqrt{(\lambda q)^{2}-q^{2}}=q\sqrt8=8{,}49$; y $p_{2}'=2q\sin\frac\theta2=2\cdot3\sqrt{\tfrac23}=4{,}90$\,kg\,m/s.
+        \[
+          \resultado{v_{1}'=\frac{p_{1}'}{m_{1}}=2{,}83\text{ m/s},\qquad v_{2}'=\frac{p_{2}'}{m_{2}}=4{,}90\text{ m/s}} .
+        \]
+  \item \emph{Comprobación}: $P_{x}$: $8{,}49\cos19{,}5^{\circ}+4{,}90\cos35{,}3^{\circ}=8+4=12$ \ok{};
+        $P_{y}$: $2{,}83-2{,}83=0$ \ok{}; $K$: $12+12=24$\,J \ok{}.
+\end{enumerate}
+\end{resolucion}
+
+% ---------------------------------------------------------------------
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \def\q{1.4}\def\la{3}\def\th{109.47}
+  \coordinate (A) at (0,0); \coordinate (O) at ({\la*\q},0); \coordinate (B) at ({\la*\q+\q},0);
+  \coordinate (C) at ($(O)+(\th:\q)$);
+  \draw[tenue!70,line width=0.5pt] (O) circle (\q);
+  \draw[aux] (A) -- ($(A)!1.45!(C)$);
+  \draw[texto!80,line width=0.6pt] (A) -- (B);
+  \draw[vec,ambar,line width=0.7pt] (O) -- (C);
+  \draw[vec,cian] (A) -- (C);
+  \draw[vec,rosa] (C) -- (B);
+  \foreach \P in {A,O,B} \node[punto,inner sep=1.1pt] at (\P) {};
+  \node[etiq,anchor=north east,inner sep=2pt] at (A) {$A$};
+  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
+  \node[etiq,anchor=north west,inner sep=2pt] at (B) {$B$};
+  \node[etiq,anchor=south east,inner sep=2pt] at (C) {$C$};
+  \node[etiq,cian,anchor=south east,inner sep=2pt] at ($(A)!0.55!(C)$) {$\vb{p}_{1}'$};
+  \node[etiq,rosa,anchor=south west,inner sep=2pt] at ($(C)!0.55!(B)$) {$\vb{p}_{2}'$};
+  \pic[draw=tenue,line width=0.45pt,angle radius=0.2cm] {right angle=A--C--O};
+  \pic[draw=cian,line width=0.5pt,angle radius=1.4cm] {angle=B--A--C};
+  \node[etiq,cian,anchor=west,inner sep=2pt] at (9:1.45) {$\alpha_{\max}$};
+  \pic[draw=ambar,line width=0.5pt,angle radius=0.36cm,angle eccentricity=1.8,pic text={$\theta$},pic text options={ambar,font=\small}] {angle=B--O--C};
+  \draw[tenue,line width=0.45pt,|-|] ($(A)+(0,-1.7)$) -- ($(O)+(0,-1.7)$) node[midway,anchor=north,peq] {$\lambda q=9$};
+  \draw[tenue,line width=0.45pt,|-|] ($(O)+(0,-1.7)$) -- ($(B)+(0,-1.7)$) node[midway,anchor=north,peq] {$q=3$};
+\end{tikzpicture}
+\caption{Ejercicio 5. Con $\lambda=3$ el punto $A$ queda fuera de la circunferencia; la
+desviación máxima corresponde a $AC$ tangente ($\vb{p}_{1}'\perp\vb{q}_{1}'$).}
+\label{fig:ej5}
+\end{figure}
+% ---------------------------------------------------------------------
+
+% =====================================================================
+\section{Choque oblicuo (método C)}
+% =====================================================================
+
+\begin{problema}{6}[Billar con $e=0{,}8$]
+Una bola de billar lisa de radio $R$ con $v=2$\,m/s golpea a otra idéntica en reposo con
+parámetro de impacto $b=R$. Si $e=0{,}8$, hallar las velocidades y ángulos de salida y la
+fracción de energía perdida.
+\end{problema}
+\metodo{Método C: descomponer en $\uv{n}$ (línea de centros) y $\uv{t}$.}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Geometría}: $d=2R$, $\sin\varphi=b/d=\tfrac12\Rightarrow\varphi=30^{\circ}$;
+        $\uv{n}=(\cos30^{\circ},-\sin30^{\circ})$, $\uv{t}=(\sin30^{\circ},\cos30^{\circ})$.
+  \item \emph{Descomponer}: $v_{1n}=2\cos30^{\circ}=1{,}732$, $v_{1t}=2\sin30^{\circ}=1$\,m/s.
+  \item \emph{Normal} (frontal, masas iguales, $v_{2n}=0$): $V_{n}=0{,}866$,
+        \[
+          v_{1n}'=\tfrac{1-e}{2}v_{1n}=0{,}173,\qquad v_{2n}'=\tfrac{1+e}{2}v_{1n}=1{,}559\text{ m/s}.
+        \]
+        \emph{Tangencial}: $v_{1t}'=1$, $v_{2t}'=0$.
+  \item \emph{Blanco}: sale por la línea de centros: $\resultado{v_{2}'=1{,}56\text{ m/s},\ \beta=30^{\circ}}$.
+  \item \emph{Proyectil}: $\vb{v}_{1}'=0{,}173\,\uv{n}+1\,\uv{t}=(0{,}650;\,0{,}779)$\,m/s, luego
+        \[
+          \resultado{v_{1}'=1{,}01\text{ m/s},\qquad \alpha=\arctan\frac{0{,}779}{0{,}650}=50{,}2^{\circ}} .
+        \]
+        Con $e=1$ saldrían a $90^{\circ}$ entre sí; aquí $\alpha+\beta=80{,}2^{\circ}<90^{\circ}$.
+  \item \emph{Energía}: $\dfrac{Q}{T_{1}}=\dfrac{m_{2}(1-e^{2})}{m_{1}+m_{2}}\cos^{2}\varphi=\tfrac12\cdot0{,}36\cdot0{,}75=\resultado{0{,}135}$.
+\end{enumerate}
+\end{resolucion}
+
+% =====================================================================
+\section{Rebotes (método D)}
+% =====================================================================
+
+\begin{problema}{7}[Pelota que bota]
+Una pelota se suelta desde $h=1{,}8$\,m y tras el primer bote sube hasta $1{,}152$\,m. Hallar $e$, la
+fracción de energía perdida en cada bote, el tiempo hasta quedar en reposo y la distancia total recorrida.
+\end{problema}
+\metodo{Método D: alturas en progresión geométrica de razón $e^{2}$.}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Coeficiente}: $v_{n}=\sqrt{2gh_{n}}$ y $v'=e\,v$, luego $e=\sqrt{h_{1}/h}=\sqrt{0{,}64}=\resultado{0{,}80}$.
+  \item \emph{Energía por bote}: $\dfrac{Q}{K}=1-e^{2}=\resultado{0{,}36}$ (el 36\,\% de la energía en cada bote).
+  \item \emph{Tiempo}: caída $t_{0}=\sqrt{2h/g}=0{,}606$\,s; cada vuelo posterior dura $2e^{n}t_{0}$:
+        \[
+          T=t_{0}\Bigl(1+2\sum_{n\ge1}e^{n}\Bigr)=t_{0}\,\frac{1+e}{1-e}=0{,}606\cdot9=\resultado{5{,}45\text{ s}} .
+        \]
+  \item \emph{Distancia}: baja $h$ y luego sube y baja $h_{n}=e^{2n}h$:
+        \[
+          s=h+2h\sum_{n\ge1}e^{2n}=h\,\frac{1+e^{2}}{1-e^{2}}=1{,}8\cdot\frac{1{,}64}{0{,}36}=\resultado{8{,}2\text{ m}} .
+        \]
+\end{enumerate}
+\end{resolucion}
+
+\begin{problema}{8}[Bola que cae de una mesa]
+Una bola sale horizontalmente con $u=3$\,m/s del borde de una mesa de altura $H=1{,}25$\,m y bota
+en el suelo liso con $e=0{,}6$. ¿A qué distancia del pie de la mesa bota por segunda vez? ¿Qué altura alcanza entre ambos botes?
+\end{problema}
+\metodo{Método D: vuelo, bote y vuelo; la componente horizontal no cambia.}
+
+\begin{resolucion}
+\begin{enumerate}
+  \item \emph{Primer vuelo}: $t_{0}=\sqrt{2H/g}=0{,}505$\,s, $x_{1}=ut_{0}=1{,}52$\,m; llega con $v_{y}=gt_{0}=4{,}95$\,m/s.
+  \item \emph{Bote}: $v_{y}'=e\,v_{y}=2{,}97$\,m/s hacia arriba; $v_{x}=u=3$\,m/s no cambia.
+  \item \emph{Segundo vuelo}: dura $t_{1}=2v_{y}'/g=0{,}606$\,s y avanza $ut_{1}=1{,}82$\,m:
+        \[
+          \resultado{x_{2}=x_{1}+ut_{1}=3{,}33\text{ m}} .
+        \]
+  \item \emph{Altura}: $h_{1}=\dfrac{v_{y}'^{2}}{2g}=e^{2}H=\resultado{0{,}45\text{ m}}$.
+\end{enumerate}
+\end{resolucion}
+
+\end{document}
