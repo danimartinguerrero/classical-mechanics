@@ -1,0 +1,228 @@
+% =====================================================================
+%  Mecánica I · Tema 3 — Teoría esencial y métodos de ejercicios
+%  Compilar:  latexmk -lualatex tema3_esencial.tex
+% =====================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage{estilo-oscuro}
+\usetikzlibrary{babel}
+
+\renewcommand{\cabeceraimpar}{Tema 3 · Teoría esencial y métodos}
+\renewcommand{\cabecerapar}{Mecánica I}
+\hypersetup{pdftitle={Tema 3. Teoría esencial y métodos},
+  pdfauthor={Daniel Martín Guerrero},pdfsubject={Mecánica I}}
+
+\newcommand{\cm}{_{\mathrm{CM}}}
+\newcommand{\Rcm}{\vb{R}\cm}
+\newcommand{\Vcm}{\vb{V}\cm}
+\newcommand{\vrel}{\vb{v}_{12}}
+\newcommand{\lab}{\textup{\textsc{lab}}}
+\newcommand{\scm}{\textup{\textsc{cm}}}
+
+\titleformat{\section}
+  {\needspace{7\baselineskip}\normalfont\large\bfseries\color{violeta}}
+  {\thesection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{3.6ex plus 1ex}{1.6ex}
+\newcommand{\ej}[2]{\par\addvspace{1.2ex}\noindent{\color{cian}\bfseries P#1}\ \ {\color{tenue}#2.}\enspace\ignorespaces}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5ex}
+
+\begin{document}
+\thispagestyle{plain}
+\begin{center}
+{\Large\bfseries El problema de dos cuerpos. Colisiones\par}
+\vspace{1.2mm}
+{\small\color{tenue}Mecánica I · Tema 3 · \textsc{Teoría esencial y métodos de los ejercicios}\par}
+\vspace{2mm}
+{\color{regla}\rule{0.35\textwidth}{0.4pt}}
+\end{center}
+
+% =====================================================================
+\section{Dos cuerpos}
+% =====================================================================
+
+$M=m_{1}+m_{2}$, $\vb{r}=\vb{r}_{1}-\vb{r}_{2}$, $\vrel=\vb{v}_{1}-\vb{v}_{2}$ y masa reducida
+\[
+  \resultado{\mu=\frac{m_{1}m_{2}}{m_{1}+m_{2}}}\qquad\Bigl(\tfrac1\mu=\tfrac1{m_{1}}+\tfrac1{m_{2}}\Bigr).
+\]
+\begin{itemize}[leftmargin=1.3em]
+  \item \emph{Desacoplamiento} (sistema aislado, fuerza interna central): $M\ddot{\vb{R}}\cm=\vb{0}$ y $\mu\ddot{\vb{r}}=f(r)\,\uv{r}$.
+        El problema se reduce a una partícula libre de masa $M$ y otra de masa $\mu$ con centro fijo.
+  \item \emph{Vuelta a las partículas}: $\vb{r}_{1}=\Rcm+\frac{\mu}{m_{1}}\vb{r}$, $\vb{r}_{2}=\Rcm-\frac{\mu}{m_{2}}\vb{r}$
+        (el CM divide el segmento en razón $m_{2}:m_{1}$).
+  \item \emph{En el CM}: $\vb{p}_{1}'=\mu\vrel=-\vb{p}_{2}'$, $\vb{P}'=\vb{0}$.
+  \item \emph{König}: $\resultado{K=\tfrac12MV\cm^{2}+\tfrac12\mu v_{12}^{2}}$, $\vb{L}=\Rcm\times M\Vcm+\mu\,\vb{r}\times\vrel$.
+\end{itemize}
+
+% =====================================================================
+\section{Choques: conservación, restitución y energía}
+% =====================================================================
+
+\begin{itemize}[leftmargin=1.3em]
+  \item \emph{Percusión}: $\bm\pi=\lim_{\Delta t\to0}\int\vb{F}\,\dd t=\Delta\vb{p}$. Durante el choque las posiciones no cambian y
+        las fuerzas finitas (peso, rozamiento) no cuentan: $\resultado{\vb{P}_{\text{antes}}=\vb{P}_{\text{después}}}$, salvo que haya
+        percusiones exteriores (suelo, pared, eje fijo).
+  \item \emph{Restitución}: $\pi_{\text{rest}}=e\,\pi_{\text{comp}}$, $0\le e\le1$, equivalente a la regla de Huygens--Newton
+        \[
+          \resultado{v_{1}'-v_{2}'=-e\,(v_{1}-v_{2})}\qquad(\text{componentes sobre la línea de choque}).
+        \]
+        $e=1$: elástico; $e=0$: completamente inelástico (salen juntas).
+  \item \emph{Energía}: $K_{i}=K_{f}+Q$. La del CM, $\tfrac12MV\cm^{2}$, nunca se pierde; sólo está disponible
+        $K_{\text{disp}}=\tfrac12\mu v_{12}^{2}$ y
+        \[
+          \resultado{Q=\tfrac12\,\mu\,(1-e^{2})\,v_{12}^{2}=(1-e^{2})\,K_{\text{disp}}} .
+        \]
+\end{itemize}
+
+\begin{clave}{Método A · choque frontal (por el CM)}
+\begin{enumerate}[leftmargin=1.4em]
+  \item Eje y signos; $V\cm=\dfrac{m_{1}v_{1}+m_{2}v_{2}}{M}$ (no cambia en el choque).
+  \item Al CM: $u_{i}=v_{i}-V\cm$.
+  \item Choque en el CM: $\resultado{u_{i}'=-e\,u_{i}}$ (cada velocidad se invierte y se escala por $e$).
+  \item Al \lab: $\resultado{v_{i}'=V\cm+u_{i}'=(1+e)V\cm-e\,v_{i}}$. Con $v_{2}=0$:
+        $v_{1}'=\dfrac{m_{1}-em_{2}}{M}v_{1}$, $v_{2}'=\dfrac{(1+e)m_{1}}{M}v_{1}$.
+  \item Energía: $Q=\tfrac12\mu(1-e^{2})v_{12}^{2}$; con $v_{2}=0$, $Q/K_{1}=(1-e^{2})\,m_{2}/M$.
+\end{enumerate}
+Evita la ecuación cuadrática de la energía y su solución espuria «no hay choque».
+\end{clave}
+
+\ej{3}{Frontal elástico, $m_{2}=3m_{1}$ en reposo}
+$V\cm=v/4$; $u_{1}=\frac34v$, $u_{2}=-\frac v4$ $\to$ $u_{1}'=-\frac34v$, $u_{2}'=\frac v4$; $\resultado{v_{1}'=-\frac v2,\ v_{2}'=\frac v2}$.
+Si $e=0$: ambas a $v/4$ y $Q=\tfrac12\mu v^{2}=\tfrac34K$ (la energía del CM, $\tfrac14K$, no se pierde).
+
+\ej{4}{Partícula contra varilla libre}
+La varilla se traslada como una partícula $M$ con centro en $L/2$:
+$X\cm(0)=\frac{ML}{2(m+M)}$, $V\cm=\frac{mv_{0}}{m+M}$; con el método,
+$v_{1}'=\frac{m-eM}{m+M}v_{0}$, $v_{2}'=\frac{(1+e)m}{m+M}v_{0}$, $Q=\frac{mM(1-e^{2})}{2(m+M)}v_{0}^{2}$.
+
+\ej{6}{Cuna de Newton}
+Energía hasta la vertical: $v_{0}=2\sqrt{gl}\sin\frac\alpha2\simeq l\omega\alpha$, $\omega=\sqrt{g/l}$. Choque de masas iguales:
+$v_{1,2}'=\frac{1\mp e}{2}v_{0}$; amplitudes $A_{1,2}\simeq\frac{1\mp e}{2}\alpha$ y
+$\theta_{i}(t)=A_{i}\sin\omega(t-t_{c})$, con $t_{c}=\frac{\pi}{2\omega}$.
+
+% =====================================================================
+\section{Sistemas LAB y CM. Diagrama de Landau}
+% =====================================================================
+
+Blanco en reposo, $\lambda=m_{1}/m_{2}$. En el \lab: $\vb{p}_{1}$, $\vb{p}_{1}'$, $\vb{p}_{2}'$ y ángulos $\alpha$ (difusión) y
+$\beta$ (retroceso). En el \scm: $\vb{q}_{1}=-\vb{q}_{2}$, $\vb{q}_{1}'=-\vb{q}_{2}'$ y un único ángulo $\theta$.
+\begin{itemize}[leftmargin=1.3em]
+  \item \emph{Elástico en el CM}: $\abs{\vb{q}_{i}}=\abs{\vb{q}_{i}'}=q=\mu v_{1}$; el choque sólo gira los momentos.
+  \item \emph{Cambio de sistema}:
+        $\resultado{\Vcm=\frac{\vb{q}_{1}}{m_{2}},\ \ \vb{p}_{1}=(1+\lambda)\vb{q}_{1},\ \ \vb{p}_{1}'=\vb{q}_{1}'+\lambda\vb{q}_{1},\ \ \vb{p}_{2}'=\vb{q}_{1}-\vb{q}_{1}'}$.
+  \item \emph{Landau}: $\overline{AO}=\lambda q$, $\overline{OB}=q$, circunferencia de centro $O$ y radio $q$; $C$ en ella con $\angle BOC=\theta$:
+        \[
+          \resultado{\beta=\frac{\pi-\theta}{2},\qquad p_{2}'=2q\sin\frac\theta2,\qquad \tan\alpha=\frac{\sin\theta}{\lambda+\cos\theta}} .
+        \]
+  \item \emph{Casos}: $\lambda<1$: $\alpha\in[0,\pi]$; \ $\lambda=1$: $\alpha=\frac\theta2$, $\alpha+\beta=\frac\pi2$,
+        $p_{1}'=p_{1}\cos\alpha$; \ $\lambda>1$: $\resultado{\sin\alpha_{\max}=m_{2}/m_{1}}$ (tangente desde $A$).
+  \item \emph{Energía cedida}: $\dfrac{T_{2}'}{T_{1}}=\dfrac{4m_{1}m_{2}}{(m_{1}+m_{2})^{2}}\sin^{2}\dfrac\theta2$.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  \def\q{2.2}\def\la{0.5}\def\th{70}
+  \coordinate (A) at (0,0); \coordinate (O) at ({\la*\q},0); \coordinate (B) at ({\la*\q+\q},0);
+  \coordinate (C) at ($(O)+(\th:\q)$);
+  \draw[tenue!70,line width=0.5pt] (O) circle (\q);
+  \draw[texto!80,line width=0.6pt] (A) -- (B);
+  \draw[vec,ambar,line width=0.7pt] (O) -- (C);
+  \draw[vec,cian] (A) -- (C);
+  \draw[vec,rosa] (C) -- (B);
+  \foreach \P in {A,O,B} \node[punto,inner sep=1.1pt] at (\P) {};
+  \node[etiq,anchor=north east,inner sep=2pt] at (A) {$A$};
+  \node[etiq,anchor=north,inner sep=3pt] at (O) {$O$};
+  \node[etiq,anchor=north west,inner sep=2pt] at (B) {$B$};
+  \node[etiq,anchor=south,inner sep=3pt] at (C) {$C$};
+  \node[etiq,cian,anchor=south east,inner sep=2pt] at ($(A)!0.55!(C)$) {$\vb{p}_{1}'$};
+  \node[etiq,rosa,anchor=south west,inner sep=2pt] at ($(C)!0.45!(B)$) {$\vb{p}_{2}'$};
+  \node[etiq,ambar,anchor=west,inner sep=3pt] at ($(O)!0.62!(C)$) {$\vb{q}_{1}'$};
+  \pic[draw=cian,line width=0.5pt,angle radius=0.55cm,angle eccentricity=1.45,pic text={$\alpha$},pic text options={cian,font=\small}] {angle=B--A--C};
+  \pic[draw=ambar,line width=0.5pt,angle radius=0.42cm,angle eccentricity=1.6,pic text={$\theta$},pic text options={ambar,font=\small}] {angle=B--O--C};
+  \pic[draw=rosa,line width=0.5pt,angle radius=0.55cm,angle eccentricity=1.45,pic text={$\beta$},pic text options={rosa,font=\small}] {angle=C--B--A};
+  \node[peq,anchor=north,align=center] at ($(O)+(0,-2.3)$) {$\overline{AB}=\vb{p}_{1}$,\ \ $\overline{AO}=\lambda q$,\ \ $\overline{OB}=q$};
+\end{tikzpicture}
+\end{center}
+% ---------------------------------------------------------------------
+
+\begin{clave}{Método B · choque bidimensional con un ángulo dado}
+\begin{enumerate}[leftmargin=1.4em]
+  \item Siempre se da un ángulo ($\alpha$, $\beta$ o $\theta$): el \lab{} tiene 3 ecuaciones y 4 incógnitas.
+  \item Pasar a $\theta$: $\beta=\frac{\pi-\theta}2$ o $\tan\alpha=\frac{\sin\theta}{\lambda+\cos\theta}$.
+  \item Módulos: $q=\mu v_{1}=p_{1}/(1+\lambda)$; $p_{2}'=2q\sin\frac\theta2$; $p_{1}'$ por el teorema del coseno en $\triangle AOC$.
+  \item Con masas iguales: triángulo rectángulo $ACB$, $p_{1}'=p_{1}\cos\alpha$, $p_{2}'=p_{1}\cos\beta$.
+\end{enumerate}
+\end{clave}
+
+\ej{8}{Detector, $m_{1}=m_{2}$, elástico}
+Pierde un tercio, así que $p_{1}'=\frac23p_{1}=p_{1}\cos\alpha$:
+\[
+  \resultado{\alpha=\arccos\tfrac23\simeq48{,}2^{\circ}}\qquad(\theta=2\alpha,\ \beta=41{,}8^{\circ}).
+\]
+
+\ej{9}{Landau inelástico}
+En el CM sigue $\vb{P}'=\vb{0}$; la energía da $q'=e\,q$ con $e^{2}=1-Q/K_{\text{disp}}$. Mismos $A$, $O$, $B$; $C$ sobre la
+circunferencia de radio $eq$: $\tan\alpha=\frac{e\sin\theta}{\lambda+e\cos\theta}$, $\tan\beta=\frac{e\sin\theta}{1-e\cos\theta}$; con masas
+iguales $\alpha+\beta<90^{\circ}$; si $e=0$, $C=O$.
+
+% =====================================================================
+\section{Choques oblicuos}
+% =====================================================================
+
+Parámetro de impacto $b$: distancia entre la recta del proyectil y el centro del blanco. Esferas lisas de
+radios $R_{1}$, $R_{2}$: la línea de centros forma con la incidencia el ángulo $\sin\varphi=b/(R_{1}+R_{2})$; la
+percusión va según esa línea ($\uv{n}$).
+
+\begin{clave}{Método C · choque oblicuo}
+\begin{enumerate}[leftmargin=1.4em]
+  \item Base $\uv{n}=(\cos\varphi,-\sin\varphi)$, $\uv{t}=(\sin\varphi,\cos\varphi)$; descomponer las velocidades.
+  \item Normal: choque frontal con $e$ (método A). Tangencial: \emph{se conserva}.
+  \item Recomponer y calcular ángulos con $\tan=v_{y}/v_{x}$. El blanco en reposo sale por la línea de centros: $\beta=\varphi$.
+  \item $Q=\tfrac12\mu(1-e^{2})(\vrel\cdot\uv{n})^{2}$: sólo se pierde energía del movimiento normal.
+\end{enumerate}
+\end{clave}
+
+\ej{2}{Ángulo de difusión}
+$v_{1n}'=\frac{m_{1}-em_{2}}{M}v_{1}\cos\varphi$, $v_{1t}'=v_{1}\sin\varphi$; el blanco sale con $\beta=\varphi$ y
+\[
+  \resultado{\tan\alpha=\frac{(1+e)\,m_{2}\sin\varphi\cos\varphi}{m_{1}+m_{2}\sin^{2}\varphi-e\,m_{2}\cos^{2}\varphi}} .
+\]
+
+\ej{5}{Energía liberada}
+Sólo cuenta la velocidad relativa normal, $v_{12,n}=v_{1}\cos\varphi$; con $d=R_{1}+R_{2}$,
+\[
+  \resultado{\frac{Q}{T_{1}}=\frac{m_{2}(1-e^{2})}{m_{1}+m_{2}}\Bigl(1-\frac{b^{2}}{d^{2}}\Bigr)} .
+\]
+
+% =====================================================================
+\section{Rebotes contra el suelo}
+% =====================================================================
+
+Plano fijo liso (límite $m_{2}\to\infty$): $\resultado{v_{n}'=-e\,v_{n},\ \ v_{t}'=v_{t}}$. Bote vertical desde $h$:
+$h_{n}=e^{2n}h$, de donde $e=\sqrt{h_{n+1}/h_{n}}$.
+
+\begin{clave}{Método D · rebotes}
+\begin{enumerate}[leftmargin=1.4em]
+  \item Separar \emph{vuelo} (cinemática o energía) y \emph{bote} instantáneo.
+  \item En el bote, invertir y multiplicar por $e$ sólo la componente vertical; la horizontal se conserva.
+  \item Encadenar vuelos. Si el dato está al final (altura máxima, punto de recogida), resolver \emph{hacia atrás}.
+  \item Con rozamiento $kv^{2}$: $m\dot v=mv\,\od{v}{s}=\frac m2\od{(v^{2})}{s}$, EDO lineal en $w=v^{2}$.
+\end{enumerate}
+\end{clave}
+
+\ej{1}{Caída con $F=kv^{2}$, $e=1$}
+Bajada: $\frac m2 w'=mg-kw$ $\Rightarrow$ $v=\sqrt{\frac{mg}k}\sqrt{1-\e^{-2ks/m}}$. Subida: $\frac m2w'=-(mg+kw)$ $\Rightarrow$
+$H=\frac{m}{2k}\ln\bigl(2-\e^{-2kh/m}\bigr)<h$.
+
+\ej{7}{Escalera}
+Sube $h$ tras cada bote ($v_{\uparrow}=\sqrt{2gh}$) y cae $2h$ hasta el siguiente escalón ($v_{\downarrow}=2\sqrt{gh}$):
+$e=v_{\uparrow}/v_{\downarrow}=\resultado{1/\sqrt2}$.
+
+\ej{10}{Mate tras un bote}
+Hacia atrás: $v_{\uparrow}=\sqrt{2gH}$, $v_{\downarrow}=v_{\uparrow}/e$, $v_{0y}=\sqrt{v_{\downarrow}^{2}-2gh_{0}}=7{,}26$\,m/s;
+$t_{1}=\frac{v_{\downarrow}-v_{0y}}{g}$, $t_{2}=\frac{v_{\uparrow}}{g}$, $v_{x}=\frac{D}{t_{1}+t_{2}}=2{,}94$\,m/s, luego
+\[
+  \resultado{v_{0}=\sqrt{v_{x}^{2}+v_{0y}^{2}}\simeq7{,}8\text{ m/s},\quad 68^{\circ}\text{ bajo la horizontal}} .
+\]
+
+\end{document}
