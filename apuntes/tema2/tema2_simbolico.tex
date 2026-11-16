@@ -169,8 +169,24 @@
   S=\sa\vb{r}_{\alpha}\cdot\vb{p}_{\alpha},\qquad \dot S=2T+\sa\vb{r}_{\alpha}\cdot\vb{F}_{\alpha},\qquad
   \prom{\dot S}=\frac{S(\tau)-S(0)}{\tau}\to0\\
   \resultado{\prom{T}=-\tfrac12\Bigl\langle\sa\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}\Bigr\rangle}\\
-  V(\lambda\vb{r})=\lambda^{n}V\ \Rightarrow\ \od{}{\lambda}V(\lambda\vb{r})\Big|_{1}=\vb{r}\cdot\grad V=nV\ \Longrightarrow\
-  \resultado{2\prom{T}=n\prom{V}},\quad \prom{T}=\tfrac{n}{n+2}E
+\end{gather}
+
+\paso{Euler (espacio de configuración).}
+\begin{gather}
+  g(\lambda)=V(\lambda\vb{r}_{1},\dots,\lambda\vb{r}_{N}),\quad \od{(\lambda\vb{r}_{\alpha})}{\lambda}=\vb{r}_{\alpha}
+  \ \Longrightarrow\ g'(\lambda)=\sa\grad_{\alpha}V(\lambda\vb{r})\cdot\vb{r}_{\alpha}\\
+  g(\lambda)=\lambda^{n}V(\vb{r})\ \Longrightarrow\ g'(\lambda)=n\lambda^{n-1}V(\vb{r})
+  \ \xrightarrow{\ \lambda=1\ }\ \resultado{\vb{r}\cdot\grad V\defeq\sa\vb{r}_{\alpha}\cdot\grad_{\alpha}V=nV}\\
+  \lambda\ \text{genérico}\times\lambda:\ (\lambda\vb{r})\cdot\grad V(\lambda\vb{r})=n\lambda^{n}V(\vb{r})=nV(\lambda\vb{r})\quad(\text{mismo resultado en }\vb{r}'=\lambda\vb{r})\\
+  V=kr^{n}:\ V(\lambda\vb{r})=k(\lambda r)^{n}=\lambda^{n}V;\qquad V=\sab k\,r_{\alpha\beta}^{n}:\ \abs{\lambda\vb{r}_{\alpha}-\lambda\vb{r}_{\beta}}=\lambda r_{\alpha\beta}
+\end{gather}
+
+\paso{Promedios.}
+\begin{gather}
+  \prom{T}=\tfrac12\Bigl\langle\sa\vb{r}_{\alpha}\cdot\grad_{\alpha}V\Bigr\rangle=\tfrac n2\prom{V}\ \ \text{(a)},\qquad
+  E=\prom{T}+\prom{V}\ \ \text{(b)}\\
+  2\bigl(E-\prom{V}\bigr)=n\prom{V}\ \Longrightarrow\ \resultado{\prom{V}=\tfrac{2}{n+2}E,\quad \prom{T}=\tfrac{n}{n+2}E}\\
+  n=2:\ \prom{T}=\prom{V}=\tfrac E2;\qquad n=-1:\ \prom{T}=-E,\ \prom{V}=2E\ \Rightarrow\ E<0
 \end{gather}
 
 \paso{Pappus--Guldin.}

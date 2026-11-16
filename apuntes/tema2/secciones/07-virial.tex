@@ -46,37 +46,102 @@ Separando $\vb{F}_{\alpha}=\vb{F}_{\alpha}\ext+\sum_{\beta}\vb{F}_{\alpha\beta}$
 \end{equation}
 \end{observacion}
 
+\begin{notacion}[Espacio de configuración]
+\label{not:configuracion}
+Se agrupan las $N$ posiciones en un vector de $3N$ componentes, con su gradiente
+(\cref{sec:energia}):
+\begin{equation}
+  \vb{r}\equiv(\vb{r}_{1},\dots,\vb{r}_{N}),\qquad \grad\equiv(\grad_{1},\dots,\grad_{N}),\qquad
+  \vb{r}\cdot\grad V\defeq\sa\vb{r}_{\alpha}\cdot\grad_{\alpha}V .
+\end{equation}
+El sumatorio sigue ahí, oculto en el producto escalar; con $N=1$ la expresión es literal.
+\end{notacion}
+
 \begin{lema}[Euler, funciones homogéneas]
 \label{lem:euler}
-Si $V(\lambda\vb{r})=\lambda^{n}V(\vb{r})$ para todo $\lambda>0$, entonces $\vb{r}\cdot\grad V=nV$.
+Si $V(\lambda\vb{r}_{1},\dots,\lambda\vb{r}_{N})=\lambda^{n}V(\vb{r}_{1},\dots,\vb{r}_{N})$ para todo $\lambda>0$
+($V$ homogénea de grado $n$), entonces
+\begin{equation}
+  \resultado{\vb{r}\cdot\grad V=\sa\vb{r}_{\alpha}\cdot\grad_{\alpha}V=nV} .
+  \label{eq:euler}
+\end{equation}
 \end{lema}
 
 \begin{proof}
-Se deriva respecto de $\lambda$ y se evalúa en $\lambda=1$:
-$\od{}{\lambda}V(\lambda\vb{r})\big|_{\lambda=1}=\vb{r}\cdot\grad V$ por la regla de la
-cadena, y $\od{}{\lambda}\lambda^{n}V\big|_{\lambda=1}=nV$.
+Se fija $\vb{r}$ y se estudia $V$ a lo largo del rayo que sale del origen y pasa por $\vb{r}$.
+\begin{enumerate}
+  \item \emph{Función de una variable}:
+  $g(\lambda)\defeq V\bigl(\vb{s}_{1}(\lambda),\dots,\vb{s}_{N}(\lambda)\bigr)$, con
+  $\vb{s}_{\alpha}(\lambda)=\lambda\vb{r}_{\alpha}$ y $\od{\vb{s}_{\alpha}}{\lambda}=\vb{r}_{\alpha}$ (constante).
+  \item \emph{Regla de la cadena} (como $\dot V=\sum\grad_{\alpha}V\cdot\vb{v}_{\alpha}$, con $\lambda$ en lugar de $t$):
+  \[
+    g'(\lambda)=\sa\grad_{\alpha}V(\lambda\vb{r})\cdot\od{\vb{s}_{\alpha}}{\lambda}
+    =\sa\Bigl[\pd{V}{x_{\alpha}}(\lambda\vb{r})\,x_{\alpha}+\pd{V}{y_{\alpha}}(\lambda\vb{r})\,y_{\alpha}+\pd{V}{z_{\alpha}}(\lambda\vb{r})\,z_{\alpha}\Bigr],
+  \]
+  con el gradiente evaluado en $\lambda\vb{r}$, no en $\vb{r}$.
+  \item \emph{Hipótesis}: $g(\lambda)=\lambda^{n}V(\vb{r})$, con $V(\vb{r})$ constante respecto de $\lambda$, luego
+  $g'(\lambda)=n\lambda^{n-1}V(\vb{r})$.
+  \item \emph{Igualando}: $\sa\vb{r}_{\alpha}\cdot\grad_{\alpha}V(\lambda\vb{r})=n\lambda^{n-1}V(\vb{r})$. En $\lambda=1$ ambos lados
+  se evalúan en el mismo punto $\vb{r}$ y $\lambda^{n-1}=1$: queda \eqref{eq:euler}.\qedhere
+\end{enumerate}
 \end{proof}
+
+\begin{observacion}[Por qué $\lambda=1$]
+Para $\lambda$ genérico la igualdad del paso 4 es correcta pero mezcla dos puntos
+($\grad V$ en $\lambda\vb{r}$, $V$ en $\vb{r}$). Multiplicándola por $\lambda$ y usando otra vez la homogeneidad,
+\[
+  (\lambda\vb{r})\cdot\grad V(\lambda\vb{r})=n\lambda^{n}V(\vb{r})=nV(\lambda\vb{r}),
+\]
+que es \eqref{eq:euler} en el punto $\vb{r}'=\lambda\vb{r}$: no se pierde nada, $\lambda=1$ es sólo el atajo.
+Interpretación: $\vb{r}\cdot\grad V$ es la derivada de $V$ al \emph{estirar} el punto a lo largo de su
+propio rayo, y estirar por $\lambda$ multiplica $V$ por $\lambda^{n}$.
+\end{observacion}
+
+\begin{ejemplo}
+$V=x^{2}+y^{2}$: $V(\lambda\vb{r})=\lambda^{2}V(\vb{r})$, y directamente
+$\vb{r}\cdot\grad V=x(2x)+y(2y)=2V$, es decir, $n=2$.
+\end{ejemplo}
 
 \begin{corolario}[Potencial homogéneo]
 \label{cor:virial-potencia}
-Si $\vb{F}=-\grad V$ con $V$ homogéneo de grado $n$ (por ejemplo, $V=k\,r^{n}$),
+Si todas las fuerzas derivan de un potencial total $V$ homogéneo de grado $n$ (hipótesis),
 \begin{equation}
   \resultado{2\prom{T}=n\prom{V}},
-  \qquad
-  \prom{T}=\frac{n}{n+2}\,E,\qquad \prom{V}=\frac{2}{n+2}\,E .
+  \qquad \prom{T}=\frac{n}{n+2}\,E,\qquad \prom{V}=\frac{2}{n+2}\,E .
   \label{eq:virial-n}
 \end{equation}
 \begin{itemize}
   \item Oscilador armónico ($n=2$): $\prom{T}=\prom{V}=E/2$.
-  \item Gravedad y Coulomb ($n=-1$): $2\prom{T}=-\prom{V}$, y $E=-\prom{T}<0$.
+  \item Gravedad y Coulomb ($n=-1$): $\prom{T}=-E$, $\prom{V}=2E$; como $\prom{T}>0$, $E<0$.
 \end{itemize}
 \end{corolario}
 
 \begin{proof}
-Por \eqref{eq:virial} y el \cref{lem:euler},
-$\prom{T}=\tfrac12\prom{\vb{r}\cdot\grad V}=\tfrac n2\prom{V}$. Con $E=\prom{T}+\prom{V}$, constante,
-se despejan ambos promedios.
+\begin{enumerate}
+  \item \emph{Virial}: con $\vb{F}_{\alpha}=-\grad_{\alpha}V$ en \eqref{eq:virial} y el \cref{lem:euler},
+  \[
+    \prom{T}=-\frac12\Bigl\langle\sa\vb{r}_{\alpha}\cdot\vb{F}_{\alpha}\Bigr\rangle
+    =\frac12\Bigl\langle\sa\vb{r}_{\alpha}\cdot\grad_{\alpha}V\Bigr\rangle=\frac n2\prom{V}
+    \quad\Longrightarrow\quad 2\prom{T}=n\prom{V}. \tag{a}
+  \]
+  \item \emph{Energía}: $E=T+V$ es constante y el promedio es lineal (es una integral):
+  $E=\prom{E}=\prom{T}+\prom{V}$. \hfill(b)
+  \item \emph{Despejar}: con $\prom{T}=E-\prom{V}$ en (a),
+  \[
+    2\bigl(E-\prom{V}\bigr)=n\prom{V}\ \Longrightarrow\ 2E=(n+2)\prom{V}\ \Longrightarrow\ \prom{V}=\frac{2}{n+2}E,
+    \qquad \prom{T}=\Bigl(1-\frac{2}{n+2}\Bigr)E=\frac{n}{n+2}E .
+  \]
+  Los coeficientes suman $1$, como exige (b).\qedhere
+\end{enumerate}
 \end{proof}
+
+\begin{observacion}[Comprobar la homogeneidad]
+$V=k\,r^{n}$ es homogéneo de grado $n$: para $\lambda>0$, $\abs{\lambda\vb{r}}=\lambda r$ y
+$V(\lambda\vb{r})=k(\lambda r)^{n}=\lambda^{n}V(\vb{r})$ (con $\lambda<0$ sería $\abs\lambda r$). Directamente,
+$\vb{r}\cdot\grad V=r\,\od{V}{r}=nkr^{n}=nV$. Para un sistema con $V=\sab k\,r_{\alpha\beta}^{n}$, escalar todas las
+posiciones escala cada distancia, $\abs{\lambda\vb{r}_{\alpha}-\lambda\vb{r}_{\beta}}=\lambda r_{\alpha\beta}$, luego cada término y la
+suma se multiplican por $\lambda^{n}$. El grado puede ser negativo: con $n=-1$, alejar al doble divide $V$ entre dos.
+\end{observacion}
 
 \subsection{Aplicación: materia oscura}
 
